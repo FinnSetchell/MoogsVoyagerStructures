@@ -13,7 +13,7 @@ realmsNotifications:true
 reducedDebugInfo:false
 showSubtitles:false
 touchscreen:false
-fullscreen:false
+fullscreen:true
 bobView:true
 toggleCrouch:false
 toggleSprint:false
