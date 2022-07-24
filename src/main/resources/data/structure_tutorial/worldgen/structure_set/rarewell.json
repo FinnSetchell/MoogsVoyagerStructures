@@ -1,0 +1,19 @@
+{
+
+  "structures": [
+    {
+      "structure": "structure_tutorial:rarewell",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 9090763546,
+
+    "spacing": 19,
+
+    "separation": 7,
+
+    "type": "minecraft:random_spread"
+  }
+}

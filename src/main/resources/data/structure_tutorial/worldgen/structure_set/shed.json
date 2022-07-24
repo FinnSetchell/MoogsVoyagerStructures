@@ -1,0 +1,19 @@
+{
+
+  "structures": [
+    {
+      "structure": "structure_tutorial:shed",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 2738594756,
+
+    "spacing": 19,
+
+    "separation": 7,
+
+    "type": "minecraft:random_spread"
+  }
+}

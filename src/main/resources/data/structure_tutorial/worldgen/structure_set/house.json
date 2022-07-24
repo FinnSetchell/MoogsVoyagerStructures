@@ -1,0 +1,19 @@
+{
+
+  "structures": [
+    {
+      "structure": "structure_tutorial:house",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 9086785344,
+
+    "spacing": 19,
+
+    "separation": 7,
+
+    "type": "minecraft:random_spread"
+  }
+}
