@@ -1,5 +1,5 @@
 {
-  "name": "repurposed_structures:well/start_pool",
+  "name": "repurposed_structures:duck/start_pool",
 
   "fallback": "minecraft:empty",
 
@@ -9,7 +9,7 @@
       "weight": 1,
       "element": {
 
-        "location": "structure_tutorial:well",
+        "location": "structure_tutorial:duck",
 
         "processors": "minecraft:empty",
 

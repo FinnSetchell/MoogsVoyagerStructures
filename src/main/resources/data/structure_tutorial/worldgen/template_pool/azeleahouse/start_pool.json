@@ -1,5 +1,5 @@
 {
-  "name": "repurposed_structures:deepslatehouse/start_pool",
+  "name": "repurposed_structures:azeleahouse/start_pool",
 
   "fallback": "minecraft:empty",
 
@@ -9,7 +9,7 @@
       "weight": 1,
       "element": {
 
-        "location": "structure_tutorial:deepslatehouse",
+        "location": "structure_tutorial:azeleahouse",
 
         "processors": "minecraft:empty",
 

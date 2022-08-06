@@ -17,5 +17,6 @@
     // If true, land will be add around the bottom of the structure. (Based on the starting piece's y value)
   "adapt_noise": true,
 
-  "spawn_overrides": {}
+  "spawn_overrides": {
+  }
 }

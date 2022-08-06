@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "structure_tutorial:ruinedbeacon",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 1467985132,
+
+    "spacing": 19,
+
+    "separation": 7,
+
+    "type": "minecraft:random_spread"
+  }
+}

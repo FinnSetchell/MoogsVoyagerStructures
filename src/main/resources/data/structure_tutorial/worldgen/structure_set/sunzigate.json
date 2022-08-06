@@ -1,13 +1,13 @@
 {
   "structures": [
     {
-      "structure": "structure_tutorial:barn",
+      "structure": "structure_tutorial:sunzigate",
       "weight": 1
     }
   ],
   "placement": {
 
-    "salt": 1694748360,
+    "salt": 1465987512,
 
     "spacing": 19,
 
