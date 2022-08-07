@@ -1,0 +1,18 @@
+{
+
+  "type": "minecraft:village",
+
+  "config": {
+
+    "start_pool": "structure_tutorial:calcitehouse/start_pool",
+
+    "size": 1
+  },
+
+  "biomes": "#structure_tutorial:has_structure/calcitehouse_biomes",
+
+  "adapt_noise": true,
+
+  "spawn_overrides": {
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "structure_tutorial:warpedhouse",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 1384756384,
+
+    "spacing": 19,
+
+    "separation": 7,
+
+    "type": "minecraft:random_spread"
+  }
+}

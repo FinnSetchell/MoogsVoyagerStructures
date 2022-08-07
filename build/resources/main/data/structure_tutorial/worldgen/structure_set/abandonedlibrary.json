@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "structure_tutorial:abandonedlibrary",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 1545400943,
+
+    "spacing": 19,
+
+    "separation": 7,
+
+    "type": "minecraft:random_spread"
+  }
+}

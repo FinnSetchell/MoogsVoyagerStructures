@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "structure_tutorial:well",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 1363547283,
+
+    "spacing": 19,
+
+    "separation": 7,
+
+    "type": "minecraft:random_spread"
+  }
+}

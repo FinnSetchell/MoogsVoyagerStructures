@@ -1,0 +1,18 @@
+{
+
+  "type": "minecraft:village",
+
+  "config": {
+
+    "start_pool": "structure_tutorial:jungletower/start_pool",
+
+    "size": 3
+  },
+
+  "biomes": "#structure_tutorial:has_structure/jungletower_biomes",
+
+  "adapt_noise": true,
+
+  "spawn_overrides": {
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "structure_tutorial:sunzigate",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 1465987512,
+
+    "spacing": 19,
+
+    "separation": 7,
+
+    "type": "minecraft:random_spread"
+  }
+}

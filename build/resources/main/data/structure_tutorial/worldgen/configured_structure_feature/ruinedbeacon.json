@@ -1,0 +1,18 @@
+{
+
+  "type": "minecraft:village",
+
+  "config": {
+
+    "start_pool": "structure_tutorial:ruinedbeacon/start_pool",
+
+    "size": 1
+  },
+
+  "biomes": "#structure_tutorial:has_structure/ruinedbeacon_biomes",
+
+  "adapt_noise": true,
+
+  "spawn_overrides": {
+  }
+}

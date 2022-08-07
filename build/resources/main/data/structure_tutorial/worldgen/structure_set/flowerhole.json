@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "structure_tutorial:flowerhole",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 1988736527,
+
+    "spacing": 19,
+
+    "separation": 7,
+
+    "type": "minecraft:random_spread"
+  }
+}
