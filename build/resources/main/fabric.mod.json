@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "mvs",
-  "version": "2.1.2",
+  "version": "2.1.3",
 
   "name": "Vanilla Structure Mod",
   "description": "A mod that adds more structures using vanilla blocks!",
@@ -13,7 +13,7 @@
   },
 
   "license": "MIT License",
-  "icon": " ",
+  "icon": "assets/mvs/icon.png",
 
   "environment": "*",
   "entrypoints": {
