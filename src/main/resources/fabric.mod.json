@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "id": "structure_tutorial",
+  "id": "mvs",
   "version": "${version}",
 
-  "name": "Structure Tutorial Mod",
-  "description": "A working example on how to make structures in Minecraft!",
+  "name": "Vanilla Structure Mod",
+  "description": "A mod that adds more structures using vanilla blocks!",
   "authors": [
-    "TelepathicGrunt"
+    "FinnDog"
   ],
   "contact": {
-    "homepage": "https://github.com/TelepathicGrunt/StructureTutorialMod/tree/1.17.x-Fabric-Jigsaw"
+    "homepage": "https://github.com/FinnSetchell/MoogsVanillaStructuresV2"
   },
 
   "license": "MIT License",
@@ -18,11 +18,11 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.telepathicgrunt.structure_tutorial.StructureTutorialMain"
+      "com.finndog.mvs.StructureMain"
     ]
   },
   "mixins": [
-    "structure_tutorial.mixins.json"
+    "mvs.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.13.3",

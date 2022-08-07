@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:warpedhouse",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 1384756384,
+
+    "spacing": 143,
+
+    "separation": 85,
+
+    "type": "minecraft:random_spread"
+  }
+}

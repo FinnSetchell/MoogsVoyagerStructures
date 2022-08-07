@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:house",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 1748392845,
+
+    "spacing": 123,
+
+    "separation": 87,
+
+    "type": "minecraft:random_spread"
+  }
+}

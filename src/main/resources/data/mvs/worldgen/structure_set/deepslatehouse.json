@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:deepslatehouse",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 1749284756,
+
+    "spacing": 140,
+
+    "separation": 86,
+
+    "type": "minecraft:random_spread"
+  }
+}

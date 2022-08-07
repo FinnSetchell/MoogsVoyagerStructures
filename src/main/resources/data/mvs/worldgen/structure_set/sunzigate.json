@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:sunzigate",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 1465987512,
+
+    "spacing": 116,
+
+    "separation": 83,
+
+    "type": "minecraft:random_spread"
+  }
+}

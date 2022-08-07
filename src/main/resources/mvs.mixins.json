@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.finndog.mvs.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "StructureFeatureAccessor"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

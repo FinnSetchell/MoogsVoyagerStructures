@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:well",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 1363547283,
+
+    "spacing": 88,
+
+    "separation": 46,
+
+    "type": "minecraft:random_spread"
+  }
+}

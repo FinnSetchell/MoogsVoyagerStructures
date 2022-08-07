@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:jungletower",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 146558913,
+
+    "spacing": 354,
+
+    "separation": 245,
+
+    "type": "minecraft:random_spread"
+  }
+}
