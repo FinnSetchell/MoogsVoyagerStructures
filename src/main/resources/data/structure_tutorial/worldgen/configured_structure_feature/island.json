@@ -9,7 +9,7 @@
     "size": 1
   },
 
-  "biomes": "#structure_tutorial:has_structure/island_biomes",
+  "biomes": "#structure_tutorial:has_structure/ocean_biomes",
 
   "adapt_noise": true,
 

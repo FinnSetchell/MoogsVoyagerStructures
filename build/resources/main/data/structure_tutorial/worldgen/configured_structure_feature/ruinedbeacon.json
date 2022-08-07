@@ -9,7 +9,7 @@
     "size": 1
   },
 
-  "biomes": "#structure_tutorial:has_structure/ruinedbeacon_biomes",
+  "biomes": "#structure_tutorial:has_structure/overworld_biomes",
 
   "adapt_noise": true,
 

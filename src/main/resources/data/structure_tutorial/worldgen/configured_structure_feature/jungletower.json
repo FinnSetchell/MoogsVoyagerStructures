@@ -9,7 +9,7 @@
     "size": 3
   },
 
-  "biomes": "#structure_tutorial:has_structure/jungletower_biomes",
+  "biomes": "#structure_tutorial:has_structure/jungle_biomes",
 
   "adapt_noise": true,
 
