@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:mushroomstatue",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 138487392,
+
+    "spacing": 179,
+
+    "separation": 132,
+
+    "type": "minecraft:random_spread"
+  }
+}

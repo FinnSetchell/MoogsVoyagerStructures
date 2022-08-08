@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:netherdevil",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 1494830823,
+
+    "spacing": 367,
+
+    "separation": 167,
+
+    "type": "minecraft:random_spread"
+  }
+}
