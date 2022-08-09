@@ -1,17 +1,17 @@
 {
   "structures": [
     {
-      "structure": "mvs:smallcopperwell",
+      "structure": "mvs:beachbar",
       "weight": 1
     }
   ],
   "placement": {
 
-    "salt": 1348459547,
+    "salt": 1116584978,
 
-    "spacing": 152,
+    "spacing": 165,
 
-    "separation": 146,
+    "separation": 145,
 
     "type": "minecraft:random_spread"
   }

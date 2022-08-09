@@ -9,7 +9,7 @@
     "size": 1
   },
 
-  "biomes": "#mvs:has_structure/overworld_biomes",
+  "biomes": "#mvs:has_structure/taiga_biomes",
 
   "adapt_noise": true,
 

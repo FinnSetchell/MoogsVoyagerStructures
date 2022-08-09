@@ -1,5 +1,5 @@
-[01:59:39] [main/INFO] (FabricLoader/GameProvider) Loading Minecraft 1.18.2 with Fabric Loader 0.13.3
-[01:59:39] [main/INFO] (FabricLoader) Loading 48 mods:
+[13:17:55] [main/INFO] (FabricLoader/GameProvider) Loading Minecraft 1.18.2 with Fabric Loader 0.13.3
+[13:17:55] [main/INFO] (FabricLoader) Loading 48 mods:
 	- command_structures 2.0.0+1.18.2
 	- fabric 0.47.8+1.18.2
 	- fabric-api-base 0.4.3+d7c144a8d2
@@ -47,14 +47,14 @@
 	- fabricloader 0.13.3
 	- java 17
 	- minecraft 1.18.2
-	- mvs 2.1.3
-[01:59:39] [main/INFO] (FabricLoader/Mixin) SpongePowered MIXIN Subsystem Version=0.8.5 Source=file:/C:/Users/finn/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.11.2+mixin.0.8.5/f4ae569d559b5e3244b67321945261d83ff7ad8e/sponge-mixin-0.11.2+mixin.0.8.5.jar Service=Knot/Fabric Env=CLIENT
-[01:59:40] [main/INFO] (FabricLoader/Mixin) Loaded Fabric development mappings for mixin remapper!
-[01:59:40] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_16
-[01:59:40] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_17
-[01:59:45] [main/WARN] (FabricLoader/Mixin) @Inject(@At("INVOKE")) Shift.BY=3 on fabric-lifecycle-events-v1.mixins.json:client.WorldChunkMixin::handler$zeg000$onLoadBlockEntity exceeds the maximum allowed value: 0. Increase the value of maxShiftBy to suppress this warning.
-[01:59:49] [Render thread/INFO] (Minecraft) Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
-[01:59:51] [Render thread/ERROR] (Minecraft) Failed to verify authentication
+	- mvs 2.2.3
+[13:17:56] [main/INFO] (FabricLoader/Mixin) SpongePowered MIXIN Subsystem Version=0.8.5 Source=file:/C:/Users/finn/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.11.2+mixin.0.8.5/f4ae569d559b5e3244b67321945261d83ff7ad8e/sponge-mixin-0.11.2+mixin.0.8.5.jar Service=Knot/Fabric Env=CLIENT
+[13:17:56] [main/INFO] (FabricLoader/Mixin) Loaded Fabric development mappings for mixin remapper!
+[13:17:56] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_16
+[13:17:56] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_17
+[13:18:05] [main/WARN] (FabricLoader/Mixin) @Inject(@At("INVOKE")) Shift.BY=3 on fabric-lifecycle-events-v1.mixins.json:client.WorldChunkMixin::handler$zbh000$onLoadBlockEntity exceeds the maximum allowed value: 0. Increase the value of maxShiftBy to suppress this warning.
+[13:18:09] [Render thread/INFO] (Minecraft) Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[13:18:11] [Render thread/ERROR] (Minecraft) Failed to verify authentication
 com.mojang.authlib.exceptions.InvalidCredentialsException: Status: 401
 	at com.mojang.authlib.exceptions.MinecraftClientHttpException.toAuthenticationException(MinecraftClientHttpException.java:56) ~[authlib-3.3.39.jar:?]
 	at com.mojang.authlib.yggdrasil.YggdrasilUserApiService.fetchProperties(YggdrasilUserApiService.java:132) ~[authlib-3.3.39.jar:?]
@@ -76,152 +76,31 @@ Caused by: com.mojang.authlib.exceptions.MinecraftClientHttpException: Status: 4
 	at com.mojang.authlib.minecraft.client.MinecraftClient.get(MinecraftClient.java:48) ~[authlib-3.3.39.jar:?]
 	at com.mojang.authlib.yggdrasil.YggdrasilUserApiService.fetchProperties(YggdrasilUserApiService.java:113) ~[authlib-3.3.39.jar:?]
 	... 13 more
-[01:59:51] [Render thread/INFO] (Minecraft) Setting user: Player6
-[01:59:52] [Render thread/INFO] (Indigo) [Indigo] Registering Indigo renderer!
-[01:59:52] [Render thread/INFO] (Minecraft) Backend library: LWJGL version 3.2.2 build 10
-[01:59:59] [Render thread/INFO] (Minecraft) Narrator library for x64 successfully loaded
-[02:00:00] [Render thread/INFO] (Minecraft) Reloading ResourceManager: Default, Fabric Mods (Fabric Biome API (v1), Fabric Resource Conditions API (v1), Fabric Screen API (v1), Fabric Renderer API (v1), Fabric Mining Level API (v1), Fabric Models (v0), Fabric Crash Report Info (v1), Fabric Data Generation API (v1), Fabric API Lookup API (v1), Fabric Resource Loader (v0), Fabric Key Binding API (v1), Fabric Events Lifecycle (v0), Fabric Key Bindings (v0), Fabric Object Builder API (v1), Fabric Networking API (v1), Fabric Command API (v1), Fabric Registry Sync (v0), Fabric Item Groups (v0), Fabric Lifecycle Events (v1), Fabric Rendering Fluids (v1), Fabric API, Fabric Networking (v0), Fabric Content Registries (v0), Fabric Entity Events (v1), Fabric Containers (v0), Fabric Rendering Data Attachment (v1), Fabric API Base, Fabric Commands (v0), Fabric Renderer - Indigo, Fabric Rendering (v0), Fabric BlockRenderLayer Registration (v1), Fabric Transfer API (v1), Fabric Game Rule API (v1), Fabric Renderer Registries (v1), Fabric Textures (v0), Fabric Game Test API (v1), Fabric Particles (v1), Fabric Item API (v1), Fabric Dimensions API (v1), Fabric Loot Tables (v1), Fabric Rendering (v1), Vanilla Structure Mod, Fabric Screen Handler API (v1), Fabric Events Interaction (v0), Fabric Loader)
-[02:00:01] [Realms Notification Availability checker #1/INFO] (Minecraft) Could not authorize you against Realms server: Invalid session id
-[02:00:07] [Render thread/INFO] (Minecraft) OpenAL initialized on device OpenAL Soft on Speakers (Realtek(R) Audio)
-[02:00:07] [Render thread/INFO] (Minecraft) Sound engine started
-[02:00:07] [Render thread/INFO] (Minecraft) Created: 1024x1024x4 minecraft:textures/atlas/blocks.png-atlas
-[02:00:08] [Render thread/INFO] (Minecraft) Created: 256x128x4 minecraft:textures/atlas/signs.png-atlas
-[02:00:08] [Render thread/INFO] (Minecraft) Created: 1024x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
-[02:00:08] [Render thread/INFO] (Minecraft) Created: 1024x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
-[02:00:08] [Render thread/INFO] (Minecraft) Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
-[02:00:08] [Render thread/INFO] (Minecraft) Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
-[02:00:08] [Render thread/INFO] (Minecraft) Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
-[02:00:14] [Render thread/INFO] (Minecraft) Created: 256x256x0 minecraft:textures/atlas/particles.png-atlas
-[02:00:14] [Render thread/INFO] (Minecraft) Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
-[02:00:14] [Render thread/INFO] (Minecraft) Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
-[02:00:41] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
-[02:00:41] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
-[02:00:41] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
-[02:00:41] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
-[02:00:41] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
-[02:00:42] [Render thread/INFO] (Minecraft) Loaded 7 recipes
-[02:00:43] [Render thread/INFO] (Minecraft) Loaded 1141 advancements
-[02:00:59] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
-[02:00:59] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
-[02:00:59] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
-[02:00:59] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
-[02:00:59] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
-[02:00:59] [Render thread/INFO] (Minecraft) Loaded 7 recipes
-[02:00:59] [Render thread/INFO] (Minecraft) Loaded 1141 advancements
-[02:01:00] [Render thread/INFO] (Minecraft) Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
-[02:01:00] [Render thread/INFO] (BiomeModificationImpl) Applied 0 biome modifications to 0 of 61 new biomes in 2.800 ms
-[02:01:00] [Server thread/INFO] (Minecraft) Starting integrated minecraft server version 1.18.2
-[02:01:00] [Server thread/INFO] (Minecraft) Generating keypair
-[02:01:08] [Server thread/INFO] (Minecraft) Preparing start region for dimension minecraft:overworld
-[02:01:09] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[02:01:09] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[02:01:11] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[02:01:11] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[02:01:11] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[02:01:11] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[02:01:11] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[02:01:12] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[02:01:12] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[02:01:13] [Render thread/INFO] (Minecraft) Preparing spawn area: 0%
-[02:01:13] [Worker-Main-19/WARN] (Minecraft) Empty or non-existent pool: minecraft:mvs/side_pool
-[02:01:13] [Render thread/INFO] (Minecraft) Preparing spawn area: 1%
-[02:01:14] [Render thread/INFO] (Minecraft) Preparing spawn area: 2%
-[02:01:14] [Render thread/INFO] (Minecraft) Preparing spawn area: 4%
-[02:01:15] [Render thread/INFO] (Minecraft) Preparing spawn area: 4%
-[02:01:15] [Render thread/INFO] (Minecraft) Preparing spawn area: 6%
-[02:01:16] [Render thread/INFO] (Minecraft) Preparing spawn area: 8%
-[02:01:16] [Render thread/INFO] (Minecraft) Preparing spawn area: 9%
-[02:01:17] [Render thread/INFO] (Minecraft) Preparing spawn area: 10%
-[02:01:17] [Render thread/INFO] (Minecraft) Preparing spawn area: 11%
-[02:01:18] [Render thread/INFO] (Minecraft) Preparing spawn area: 15%
-[02:01:18] [Render thread/INFO] (Minecraft) Preparing spawn area: 15%
-[02:01:19] [Render thread/INFO] (Minecraft) Preparing spawn area: 16%
-[02:01:19] [Render thread/INFO] (Minecraft) Preparing spawn area: 18%
-[02:01:20] [Render thread/INFO] (Minecraft) Preparing spawn area: 20%
-[02:01:20] [Render thread/INFO] (Minecraft) Preparing spawn area: 22%
-[02:01:21] [Render thread/INFO] (Minecraft) Preparing spawn area: 24%
-[02:01:21] [Render thread/INFO] (Minecraft) Preparing spawn area: 25%
-[02:01:22] [Render thread/INFO] (Minecraft) Preparing spawn area: 30%
-[02:01:22] [Render thread/INFO] (Minecraft) Preparing spawn area: 32%
-[02:01:23] [Render thread/INFO] (Minecraft) Preparing spawn area: 35%
-[02:01:23] [Render thread/INFO] (Minecraft) Preparing spawn area: 37%
-[02:01:24] [Render thread/INFO] (Minecraft) Preparing spawn area: 41%
-[02:01:24] [Render thread/INFO] (Minecraft) Preparing spawn area: 43%
-[02:01:25] [Render thread/INFO] (Minecraft) Preparing spawn area: 45%
-[02:01:25] [Render thread/INFO] (Minecraft) Preparing spawn area: 46%
-[02:01:26] [Render thread/INFO] (Minecraft) Preparing spawn area: 51%
-[02:01:26] [Render thread/INFO] (Minecraft) Preparing spawn area: 54%
-[02:01:27] [Render thread/INFO] (Minecraft) Preparing spawn area: 56%
-[02:01:27] [Render thread/INFO] (Minecraft) Preparing spawn area: 58%
-[02:01:28] [Render thread/INFO] (Minecraft) Preparing spawn area: 60%
-[02:01:28] [Render thread/INFO] (Minecraft) Preparing spawn area: 62%
-[02:01:29] [Render thread/INFO] (Minecraft) Preparing spawn area: 64%
-[02:01:29] [Render thread/INFO] (Minecraft) Preparing spawn area: 67%
-[02:01:30] [Render thread/INFO] (Minecraft) Preparing spawn area: 69%
-[02:01:30] [Render thread/INFO] (Minecraft) Preparing spawn area: 71%
-[02:01:31] [Render thread/INFO] (Minecraft) Preparing spawn area: 74%
-[02:01:31] [Render thread/INFO] (Minecraft) Preparing spawn area: 76%
-[02:01:32] [Render thread/INFO] (Minecraft) Preparing spawn area: 78%
-[02:01:32] [Render thread/INFO] (Minecraft) Preparing spawn area: 82%
-[02:01:33] [Render thread/INFO] (Minecraft) Preparing spawn area: 83%
-[02:01:33] [Render thread/INFO] (Minecraft) Preparing spawn area: 86%
-[02:01:34] [Render thread/INFO] (Minecraft) Preparing spawn area: 87%
-[02:01:34] [Render thread/INFO] (Minecraft) Preparing spawn area: 90%
-[02:01:35] [Render thread/INFO] (Minecraft) Preparing spawn area: 94%
-[02:01:35] [Render thread/INFO] (Minecraft) Preparing spawn area: 97%
-[02:01:36] [Render thread/INFO] (Minecraft) Time elapsed: 27450 ms
-[02:01:36] [Server thread/INFO] (Minecraft) Changing view distance to 8, from 10
-[02:01:36] [Server thread/INFO] (Minecraft) Changing simulation distance to 12, from 0
-[02:01:37] [Server thread/INFO] (Minecraft) Player6[local:E:bdf80cd8] logged in with entity id 299 at (-129.5, 104.0, 69.5)
-[02:01:37] [Server thread/INFO] (Minecraft) Player6 joined the game
-[02:01:38] [Render thread/INFO] (Minecraft) Loaded 0 advancements
-[02:01:40] [Server thread/INFO] (Minecraft) Saving and pausing game...
-[02:01:40] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[02:01:40] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[02:01:40] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[02:01:53] [Worker-Main-12/WARN] (Minecraft) Couldn't look up profile properties for com.mojang.authlib.GameProfile@7175ab4d[id=6e946422-0041-3048-9c85-48e4f886211a,name=Player6,properties={},legacy=false]
-com.mojang.authlib.exceptions.AuthenticationUnavailableException: Cannot contact authentication server
-	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:126) ~[authlib-3.3.39.jar:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:100) ~[authlib-3.3.39.jar:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillGameProfile(YggdrasilMinecraftSessionService.java:194) ~[authlib-3.3.39.jar:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:68) ~[authlib-3.3.39.jar:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:65) ~[authlib-3.3.39.jar:?]
-	at com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(LocalCache.java:3533) ~[guava-31.0.1-jre.jar:?]
-	at com.google.common.cache.LocalCache$Segment.loadSync(LocalCache.java:2282) ~[guava-31.0.1-jre.jar:?]
-	at com.google.common.cache.LocalCache$Segment.lockedGetOrLoad(LocalCache.java:2159) ~[guava-31.0.1-jre.jar:?]
-	at com.google.common.cache.LocalCache$Segment.get(LocalCache.java:2049) ~[guava-31.0.1-jre.jar:?]
-	at com.google.common.cache.LocalCache.get(LocalCache.java:3966) ~[guava-31.0.1-jre.jar:?]
-	at com.google.common.cache.LocalCache.getOrLoad(LocalCache.java:3989) ~[guava-31.0.1-jre.jar:?]
-	at com.google.common.cache.LocalCache$LocalLoadingCache.get(LocalCache.java:4950) ~[guava-31.0.1-jre.jar:?]
-	at com.google.common.cache.LocalCache$LocalLoadingCache.getUnchecked(LocalCache.java:4956) ~[guava-31.0.1-jre.jar:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillProfileProperties(YggdrasilMinecraftSessionService.java:184) ~[authlib-3.3.39.jar:?]
-	at net.minecraft.client.MinecraftClient.getSessionProperties(MinecraftClient.java:2231) ~[minecraft-project-@-mapped.jar:?]
-	at net.minecraft.client.texture.PlayerSkinProvider.method_4653(PlayerSkinProvider.java:104) ~[minecraft-project-@-mapped.jar:?]
-	at java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1395) [?:?]
-	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373) [?:?]
-	at java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182) [?:?]
-	at java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655) [?:?]
-	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622) [?:?]
-	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) [?:?]
-Caused by: java.net.SocketTimeoutException: Read timed out
-	at sun.nio.ch.NioSocketImpl.timedRead(NioSocketImpl.java:283) ~[?:?]
-	at sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:309) ~[?:?]
-	at sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:350) ~[?:?]
-	at sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:803) ~[?:?]
-	at java.net.Socket$SocketInputStream.read(Socket.java:966) ~[?:?]
-	at sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:478) ~[?:?]
-	at sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:472) ~[?:?]
-	at sun.security.ssl.SSLSocketInputRecord.bytesInCompletePacket(SSLSocketInputRecord.java:70) ~[?:?]
-	at sun.security.ssl.SSLSocketImpl.readApplicationRecord(SSLSocketImpl.java:1460) ~[?:?]
-	at sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:1064) ~[?:?]
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:244) ~[?:?]
-	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284) ~[?:?]
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:343) ~[?:?]
-	at sun.net.www.http.HttpClient.parseHTTPHeader(HttpClient.java:791) ~[?:?]
-	at sun.net.www.http.HttpClient.parseHTTP(HttpClient.java:726) ~[?:?]
-	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1688) ~[?:?]
-	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1589) ~[?:?]
-	at sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:224) ~[?:?]
-	at com.mojang.authlib.HttpAuthenticationService.performGetRequest(HttpAuthenticationService.java:140) ~[authlib-3.3.39.jar:?]
-	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:105) ~[authlib-3.3.39.jar:?]
-	... 21 more
+[13:18:11] [Render thread/INFO] (Minecraft) Setting user: Player113
+[13:18:12] [Render thread/INFO] (Indigo) [Indigo] Registering Indigo renderer!
+[13:18:12] [Render thread/INFO] (Minecraft) Backend library: LWJGL version 3.2.2 build 10
+[13:18:21] [Render thread/INFO] (Minecraft) Narrator library for x64 successfully loaded
+[13:18:22] [Render thread/INFO] (Minecraft) Reloading ResourceManager: Default, Fabric Mods (Fabric Rendering Data Attachment (v1), Fabric Mining Level API (v1), Fabric Networking API (v1), Fabric Screen Handler API (v1), Fabric Lifecycle Events (v1), Fabric Renderer Registries (v1), Fabric Events Interaction (v0), Fabric Resource Conditions API (v1), Fabric Renderer API (v1), Fabric Key Bindings (v0), Fabric Resource Loader (v0), Vanilla Structure Mod, Fabric Crash Report Info (v1), Fabric Events Lifecycle (v0), Fabric Models (v0), Fabric Renderer - Indigo, Fabric Rendering (v0), Fabric BlockRenderLayer Registration (v1), Fabric Data Generation API (v1), Fabric Registry Sync (v0), Fabric Item API (v1), Fabric Textures (v0), Fabric Item Groups (v0), Fabric Content Registries (v0), Fabric Commands (v0), Fabric API, Fabric Rendering Fluids (v1), Fabric Key Binding API (v1), Fabric Object Builder API (v1), Fabric Loot Tables (v1), Fabric Biome API (v1), Fabric Transfer API (v1), Fabric Screen API (v1), Fabric Game Test API (v1), Fabric Dimensions API (v1), Fabric Loader, Fabric API Lookup API (v1), Fabric Command API (v1), Fabric Particles (v1), Fabric Containers (v0), Fabric Entity Events (v1), Fabric Networking (v0), Fabric API Base, Fabric Rendering (v1), Fabric Game Rule API (v1))
+[13:18:23] [Realms Notification Availability checker #1/INFO] (Minecraft) Could not authorize you against Realms server: Invalid session id
+[13:18:28] [Render thread/INFO] (Minecraft) OpenAL initialized on device OpenAL Soft on Speakers (Realtek(R) Audio)
+[13:18:28] [Render thread/INFO] (Minecraft) Sound engine started
+[13:18:28] [Render thread/INFO] (Minecraft) Created: 1024x1024x4 minecraft:textures/atlas/blocks.png-atlas
+[13:18:29] [Render thread/INFO] (Minecraft) Created: 256x128x4 minecraft:textures/atlas/signs.png-atlas
+[13:18:29] [Render thread/INFO] (Minecraft) Created: 1024x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[13:18:29] [Render thread/INFO] (Minecraft) Created: 1024x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[13:18:29] [Render thread/INFO] (Minecraft) Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[13:18:29] [Render thread/INFO] (Minecraft) Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[13:18:29] [Render thread/INFO] (Minecraft) Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[13:18:34] [Render thread/INFO] (Minecraft) Created: 256x256x0 minecraft:textures/atlas/particles.png-atlas
+[13:18:35] [Render thread/INFO] (Minecraft) Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
+[13:18:35] [Render thread/INFO] (Minecraft) Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[13:27:09] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[13:27:09] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[13:27:09] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[13:27:09] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[13:27:09] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[13:27:10] [Render thread/INFO] (Minecraft) Loaded 7 recipes
+[13:27:10] [Render thread/INFO] (Minecraft) Loaded 1141 advancements
+[14:25:07] [Render thread/INFO] (Minecraft) Deleting level New World (4)
+[14:25:07] [Render thread/INFO] (Minecraft) Attempt 1...
+[14:25:08] [Render thread/INFO] (Minecraft) Stopping!

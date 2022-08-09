@@ -1,17 +1,17 @@
 {
   "structures": [
     {
-      "structure": "mvs:smallcopperwell",
+      "structure": "mvs:campsite",
       "weight": 1
     }
   ],
   "placement": {
 
-    "salt": 1348459547,
+    "salt": 1611245865,
 
-    "spacing": 152,
+    "spacing": 189,
 
-    "separation": 146,
+    "separation": 123,
 
     "type": "minecraft:random_spread"
   }
