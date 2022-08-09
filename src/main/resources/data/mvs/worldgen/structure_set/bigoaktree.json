@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:bigoaktree",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 1224587950,
+
+    "spacing": 185,
+
+    "separation": 106,
+
+    "type": "minecraft:random_spread"
+  }
+}

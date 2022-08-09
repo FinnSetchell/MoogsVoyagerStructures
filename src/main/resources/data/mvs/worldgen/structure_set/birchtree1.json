@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:birchtree1",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 1665489732,
+
+    "spacing": 10,
+
+    "separation": 5,
+
+    "type": "minecraft:random_spread"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:basaltstatue",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 1326559846,
+
+    "spacing": 178,
+
+    "separation": 45,
+
+    "type": "minecraft:random_spread"
+  }
+}
