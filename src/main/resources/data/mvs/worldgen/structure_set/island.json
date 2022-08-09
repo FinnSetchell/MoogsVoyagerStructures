@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:island",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 154784685,
+
+    "spacing": 134,
+
+    "separation": 92,
+
+    "type": "minecraft:random_spread"
+  }
+}

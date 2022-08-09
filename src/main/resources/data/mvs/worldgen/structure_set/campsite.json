@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:campsite",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 1611245865,
+
+    "spacing": 189,
+
+    "separation": 123,
+
+    "type": "minecraft:random_spread"
+  }
+}

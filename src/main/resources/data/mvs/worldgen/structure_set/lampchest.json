@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:lampchest",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 165741352,
+
+    "spacing": 198,
+
+    "separation": 146,
+
+    "type": "minecraft:random_spread"
+  }
+}

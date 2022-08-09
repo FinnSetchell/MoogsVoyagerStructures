@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:tallhouse",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 1741852963,
+
+    "spacing": 152,
+
+    "separation": 88,
+
+    "type": "minecraft:random_spread"
+  }
+}
