@@ -1,8 +1,11 @@
 package com.finndog.mvs;
 
+import com.finndog.mvs.structures.Floatingislands;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
+import org.apache.commons.lang3.function.FailableLongBinaryOperator;
 
 public class MVSStructures {
 
@@ -20,5 +23,6 @@ public class MVSStructures {
      * Registers the base structure itself and sets what its path is. In this case,
      * this base structure will have the resourcelocation of structure_tutorial:sky_structures.
      */
+    public static final RegistryObject<StructureFeature<?>> FLOATING_ISLANDS = DEFERRED_REGISTRY_STRUCTURE.register("floatingislands", Floatingislands::new);
 
 }

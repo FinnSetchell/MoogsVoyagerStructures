@@ -35,6 +35,8 @@ authors="FinnDog" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
 This is a mod that adds lots of awesome vanilla style structures to the game
+Discord: https://discord.com/invite/6VCTUawBz6
+Curseforge: https://www.curseforge.com/minecraft/mc-mods/moogs-voyager-structures
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.MVS]] #optional
