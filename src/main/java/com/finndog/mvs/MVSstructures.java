@@ -1,6 +1,6 @@
 package com.finndog.mvs;
 
-public class STStructures {
+public class MVSstructures {
 
     /**
     /**
