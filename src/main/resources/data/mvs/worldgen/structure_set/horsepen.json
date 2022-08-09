@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:horsepen",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 1664865920,
+
+    "spacing": 205,
+
+    "separation": 178,
+
+    "type": "minecraft:random_spread"
+  }
+}
