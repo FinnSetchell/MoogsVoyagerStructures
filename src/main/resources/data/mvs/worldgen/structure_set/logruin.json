@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:logruin",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "salt": 1054879454,
+
+    "spacing": 264,
+
+    "separation": 126,
+
+    "type": "minecraft:random_spread"
+  }
+}

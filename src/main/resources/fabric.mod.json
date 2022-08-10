@@ -18,7 +18,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.finndog.mvs.StructureMain"
+      "com.finndog.mvs.MVSMain"
     ]
   },
   "mixins": [
