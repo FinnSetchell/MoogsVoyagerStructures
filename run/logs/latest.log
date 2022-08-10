@@ -1,5 +1,5 @@
-[18:13:07] [main/INFO] (FabricLoader/GameProvider) Loading Minecraft 1.18.2 with Fabric Loader 0.13.3
-[18:13:07] [main/INFO] (FabricLoader) Loading 48 mods:
+[10:52:50] [main/INFO] (FabricLoader/GameProvider) Loading Minecraft 1.18.2 with Fabric Loader 0.13.3
+[10:52:50] [main/INFO] (FabricLoader) Loading 48 mods:
 	- command_structures 2.0.0+1.18.2
 	- fabric 0.47.8+1.18.2
 	- fabric-api-base 0.4.3+d7c144a8d2
@@ -47,14 +47,14 @@
 	- fabricloader 0.13.3
 	- java 17
 	- minecraft 1.18.2
-	- mvs 2.2.3
-[18:13:07] [main/INFO] (FabricLoader/Mixin) SpongePowered MIXIN Subsystem Version=0.8.5 Source=file:/C:/Users/finn/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.11.2+mixin.0.8.5/f4ae569d559b5e3244b67321945261d83ff7ad8e/sponge-mixin-0.11.2+mixin.0.8.5.jar Service=Knot/Fabric Env=CLIENT
-[18:13:08] [main/INFO] (FabricLoader/Mixin) Loaded Fabric development mappings for mixin remapper!
-[18:13:08] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_16
-[18:13:08] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_17
-[18:13:13] [main/WARN] (FabricLoader/Mixin) @Inject(@At("INVOKE")) Shift.BY=3 on fabric-lifecycle-events-v1.mixins.json:client.WorldChunkMixin::handler$zbn000$onLoadBlockEntity exceeds the maximum allowed value: 0. Increase the value of maxShiftBy to suppress this warning.
-[18:13:17] [Render thread/INFO] (Minecraft) Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
-[18:13:18] [Render thread/ERROR] (Minecraft) Failed to verify authentication
+	- mvs 2.2.4
+[10:52:51] [main/INFO] (FabricLoader/Mixin) SpongePowered MIXIN Subsystem Version=0.8.5 Source=file:/C:/Users/finn/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.11.2+mixin.0.8.5/f4ae569d559b5e3244b67321945261d83ff7ad8e/sponge-mixin-0.11.2+mixin.0.8.5.jar Service=Knot/Fabric Env=CLIENT
+[10:52:51] [main/INFO] (FabricLoader/Mixin) Loaded Fabric development mappings for mixin remapper!
+[10:52:51] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_16
+[10:52:51] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_17
+[10:52:56] [main/WARN] (FabricLoader/Mixin) @Inject(@At("INVOKE")) Shift.BY=3 on fabric-lifecycle-events-v1.mixins.json:client.WorldChunkMixin::handler$zzp000$onLoadBlockEntity exceeds the maximum allowed value: 0. Increase the value of maxShiftBy to suppress this warning.
+[10:52:58] [Render thread/INFO] (Minecraft) Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[10:52:59] [Render thread/ERROR] (Minecraft) Failed to verify authentication
 com.mojang.authlib.exceptions.InvalidCredentialsException: Status: 401
 	at com.mojang.authlib.exceptions.MinecraftClientHttpException.toAuthenticationException(MinecraftClientHttpException.java:56) ~[authlib-3.3.39.jar:?]
 	at com.mojang.authlib.yggdrasil.YggdrasilUserApiService.fetchProperties(YggdrasilUserApiService.java:132) ~[authlib-3.3.39.jar:?]
@@ -76,4 +76,4 @@ Caused by: com.mojang.authlib.exceptions.MinecraftClientHttpException: Status: 4
 	at com.mojang.authlib.minecraft.client.MinecraftClient.get(MinecraftClient.java:48) ~[authlib-3.3.39.jar:?]
 	at com.mojang.authlib.yggdrasil.YggdrasilUserApiService.fetchProperties(YggdrasilUserApiService.java:113) ~[authlib-3.3.39.jar:?]
 	... 13 more
-[18:13:18] [Render thread/INFO] (Minecraft) Setting user: Player492
+[10:52:59] [Render thread/INFO] (Minecraft) Setting user: Player226
