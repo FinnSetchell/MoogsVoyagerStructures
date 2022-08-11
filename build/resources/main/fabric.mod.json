@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "mvs",
-  "version": "2.2.4",
+  "version": "2.5.7",
 
   "name": "Vanilla Structure Mod",
   "description": "A mod that adds more structures using vanilla blocks!",
@@ -12,7 +12,7 @@
     "homepage": "https://github.com/FinnSetchell/MoogsVanillaStructuresV2"
   },
 
-  "license": "MIT License",
+  "license": "All Rights Reserved",
   "icon": "assets/mvs/icon.png",
 
   "environment": "*",
@@ -25,8 +25,12 @@
     "mvs.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.13.3",
-    "minecraft": "~1.18.2",
-    "fabric": ">=0.47.8"
+    "fabricloader": ">=0.14.9",
+    "fabric": "*",
+    "minecraft": "~1.19.2",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
   }
 }
