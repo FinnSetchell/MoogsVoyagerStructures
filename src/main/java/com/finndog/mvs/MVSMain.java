@@ -19,4 +19,3 @@ public class MVSMain implements ModInitializer {
         MVSStructures.registerStructureFeatures();
     }
 }
-
