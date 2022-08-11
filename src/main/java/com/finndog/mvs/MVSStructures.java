@@ -1,6 +1,5 @@
 package com.finndog.mvs;
 
-import com.finndog.mvs.structures.FloatingIslands;
 import com.finndog.mvs.structures.SkyStructures;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;

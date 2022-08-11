@@ -1,5 +1,6 @@
 package com.finndog.mvs.structures;
 
+import com.finndog.mvs.MVSStructures;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.structure.pool.StructurePool;
@@ -138,6 +139,6 @@ public class SkyStructures extends Structure {
 
     @Override
     public StructureType<?> getType() {
-        return STStructures.SKY_STRUCTURES; // Helps the game know how to turn this structure back to json to save to chunks
+        return MVSStructures.SKY_STRUCTURES; // Helps the game know how to turn this structure back to json to save to chunks
     }
 }

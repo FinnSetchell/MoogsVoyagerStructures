@@ -1,8 +1,8 @@
 {
 
-  "type": "mvs:SkyStructure",
+  "type": "mvs:sky_structures",
 
-  "start_pool": "mvs:floatingislands/start_pool",
+  "start_pool": "mvs:floatingislands",
 
   "size": 1,
 
@@ -12,14 +12,11 @@
 
   "step": "surface_structures",
 
-  "terrain_adaptation": "beard_thin",
   "start_height": {
-    "absolute": 0
+    "absolute": 60
   },
 
   "project_start_to_heightmap": "WORLD_SURFACE_WG",
-
-  "use_expansion_hack": false,
 
   "spawn_overrides": {
   }
