@@ -1,16 +1,17 @@
 plugins {
-	id 'fabric-loom' version '0.10-SNAPSHOT'
+	id 'fabric-loom' version '0.8-SNAPSHOT'
 	id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
 
 archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
 repositories {
+	// Repo for getting Blame from
 	maven {	url "https://nexus.resourcefulbees.com/repository/maven-public/" }
 }
 
@@ -21,9 +22,9 @@ dependencies {
 
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// I recommend having CommandStructures on in your development environment as it gives
-	// commands for making debugging structures easier. It is super useful!
-	modRuntimeOnly "com.telepathicgrunt:CommandStructures-Fabric:2.0.0+1.18.2"
+	// I recommend having Blame on in your development environment as it can give you more info of what is
+	// broken with your Jigsaw structure. It is super useful!. Just uncomment out this line and refresh gradle.
+	// modImplementation "com.telepathicgrunt:Blame-Fabric:1.16.5-3.0.1-fabric"
 }
 
 processResources {
@@ -35,7 +36,15 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 17
+	it.options.encoding = "UTF-8"
+
+	// Minecraft 1.17 (21w19a) upwards uses Java 16.
+	it.options.release = 16
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+	classifier = "sources"
+	from sourceSets.main.allSource
 }
 
 java {
@@ -48,5 +57,30 @@ java {
 jar {
 	from("LICENSE") {
 		rename { "${it}_${project.archivesBaseName}"}
+	}
+}
+
+
+// Bonus stuff!
+import groovy.json.JsonParserType
+import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+processResources {
+
+	// Will minify the JSON files of your mod when you build the jar.
+	// Helps reduce files size! Minify means it will strip whitespace
+	// and turn the JSON files into 1 liners.
+	doLast {
+		def jsonMinifyStart = System.currentTimeMillis()
+		def jsonMinified = 0
+		def jsonBytesSaved = 0
+		fileTree(dir: outputs.files.asPath, include: '**/*.json').each {
+			File file = it
+			jsonMinified++
+			def oldLength = file.length()
+			file.text = JsonOutput.toJson(new JsonSlurper(type: JsonParserType.LAX).parse(file))
+			jsonBytesSaved += oldLength - file.length()
+		}
+		println('Minified ' + jsonMinified + ' json files. Saved ' + jsonBytesSaved + ' bytes. Took ' + (System.currentTimeMillis() - jsonMinifyStart) + 'ms.')
 	}
 }
