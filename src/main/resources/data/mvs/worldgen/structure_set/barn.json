@@ -1,7 +1,7 @@
 {
   "structures": [
     {
-      "structure": "mvs:stonefountain",
+      "structure": "mvs:barn",
       "weight": 1
     }
   ],
@@ -9,10 +9,10 @@
 
     "type": "minecraft:random_spread",
 
-    "salt": 1449825361,
+    "salt": 1449823097,
 
-    "spacing": 388,
+    "spacing": 348,
 
-    "separation": 146
+    "separation": 306
   }
 }
