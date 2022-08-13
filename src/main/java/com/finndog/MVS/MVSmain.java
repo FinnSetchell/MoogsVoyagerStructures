@@ -82,6 +82,7 @@ public class MVSMain {
          * registrykey. Then that can be fed into the dictionary to get the biome's types.
          */
         event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_RUN_DOWN_HOUSE);
+        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BARN);
     }
 
     /**
@@ -134,6 +135,7 @@ public class MVSMain {
              */
             Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(serverWorld.getChunkSource().generator.getSettings().structureConfig());
             tempMap.putIfAbsent(MVSStructures.RUN_DOWN_HOUSE.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.RUN_DOWN_HOUSE.get()));
+            tempMap.putIfAbsent(MVSStructures.BARN.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.BARN.get()));
             serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
         }
    }
