@@ -1,5 +1,5 @@
 modLoader="javafml" #mandatory
-loaderVersion="[38,)" #mandatory
+loaderVersion="[36,)" #mandatory
 license="All Rights Reserved"
 
 [[mods]] #mandatory
@@ -13,7 +13,16 @@ A mod that adds over 50 structures into the game, all using vanilla blocks
 '''
 
 # makes sure our mod does not be attempted to be ran on older version of Minecraft and explodes
-[[dependencies.structure_tutorial]]
+[[dependencies.examplemod]]
+modId="forge"
+mandatory=true
+versionRange="[36,]"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.examplemod]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.18.2, 1.19)"
+versionRange="[1.16.3, 1.17.0)"
+ordering="NONE"
+side="BOTH"
