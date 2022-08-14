@@ -14,7 +14,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class MVSStructures {
 
@@ -80,6 +79,7 @@ public class MVSStructures {
     public static final RegistryObject<Structure<NoFeatureConfig>> OAKLOGPILE = DEFERRED_REGISTRY_STRUCTURE.register("oaklogpile", () -> (new OakLogPile(NoFeatureConfig.CODEC)));
     public static final RegistryObject<Structure<NoFeatureConfig>> POND = DEFERRED_REGISTRY_STRUCTURE.register("pond", () -> (new Pond(NoFeatureConfig.CODEC)));
     public static final RegistryObject<Structure<NoFeatureConfig>> RAILWAY = DEFERRED_REGISTRY_STRUCTURE.register("railway", () -> (new Railway(NoFeatureConfig.CODEC)));
+    public static final RegistryObject<Structure<NoFeatureConfig>> RAREWELL = DEFERRED_REGISTRY_STRUCTURE.register("rarewell", () -> (new RareWell(NoFeatureConfig.CODEC)));
     public static final RegistryObject<Structure<NoFeatureConfig>> RUINEDBEACON = DEFERRED_REGISTRY_STRUCTURE.register("ruinedbeacon", () -> (new RuinedBeacon(NoFeatureConfig.CODEC)));
     public static final RegistryObject<Structure<NoFeatureConfig>> SHED = DEFERRED_REGISTRY_STRUCTURE.register("shed", () -> (new Shed(NoFeatureConfig.CODEC)));
     public static final RegistryObject<Structure<NoFeatureConfig>> SMALLCOPPERWELL = DEFERRED_REGISTRY_STRUCTURE.register("smallcopperwell", () -> (new SmallCopperWell(NoFeatureConfig.CODEC)));
@@ -105,34 +105,73 @@ public class MVSStructures {
                         5 /* minimum distance apart in chunks between spawn attempts. MUST BE LESS THAN ABOVE VALUE*/,
                         1234567890 /* this modifies the seed of the structure so no two structures always spawn over each-other. Make this large and unique. */),
                 true);
-        setupMapSpacingAndLand(BARN.get(), new StructureSeparationSettings(10, 5, 1465521987), true);
 
-        public static void SetupMapSpacingAndLandLoop() {
-            Random random = new Random();
-            RegistryObject<Structure<NoFeatureConfig>>[] ROStructuresEpic = {BASALTSTATUE, CRYSTAL, DUCK, ISLAND, JUNGLETOWER, RUINEDBEACON, SHED, SUNZIGATE, TALLHOUSE};
-            RegistryObject<Structure<NoFeatureConfig>>[] ROStructuresRare = {ABANDONEDLIBRARY, CASTLERUINS, DEEPSLATEHOUSE, FLOWERHOLE, LAMPCHEST, LOGRUIN, NETHERDEVIL, RAILWAY, STONEPILLARS, STONEFOUNTAIN, TREEMONUMENT, VILLAGERSTATUE};
-            RegistryObject<Structure<NoFeatureConfig>>[] ROStructuresCommon = {AZELEAHOUSE, BARN, BEACHBAR, BIGOAKTREE, CALCITEHOUSE, CAMPSITE, CART, DESERTPUMP, FOXHUT, HORSEPEN, HOUSE, LECTURNGARDEN, MUSHROOMPOND, MUSHROOMSTATUE, POND, SMALLCOPPERWELL, SMALLRUIN,WARPEDHOUSE, WELL};
-            RegistryObject<Structure<NoFeatureConfig>>[] ROStructuresDecoration = {ACACIALOGPILE, BIRCHLOGPILE, BIRCHTREE1, BOULDER, DARKOAKLOGPILE, JUNGLELOGPILE, OAKLOGPILE, SPRUCELOGPILE};
+        setupMapSpacingAndLand(ABANDONEDLIBRARY.get(), new StructureSeparationSettings(432, 400, 1200087698), true);
+        setupMapSpacingAndLand(ACACIALOGPILE.get(), new StructureSeparationSettings(20, 15, 1151645196), true);
+        setupMapSpacingAndLand(AZELEAHOUSE.get(), new StructureSeparationSettings(312, 300, 1468884161), true);
+        setupMapSpacingAndLand(BARN.get(), new StructureSeparationSettings(356, 300, 1617457240), true);
+        setupMapSpacingAndLand(BASALTSTATUE.get(), new StructureSeparationSettings(576, 500, 1433758203), true);
+        setupMapSpacingAndLand(BEACHBAR.get(), new StructureSeparationSettings(330, 300, 1521975094), true);
+        setupMapSpacingAndLand(BIGOAKTREE.get(), new StructureSeparationSettings(354, 300, 1042718276), true);
+        setupMapSpacingAndLand(BIRCHLOGPILE.get(), new StructureSeparationSettings(20, 15, 1828035277), true);
+        setupMapSpacingAndLand(BIRCHTREE1.get(), new StructureSeparationSettings(20, 15, 1570140752), true);
+        setupMapSpacingAndLand(BOULDER.get(), new StructureSeparationSettings(20, 15, 1928671440), true);
+        setupMapSpacingAndLand(CALCITEHOUSE.get(), new StructureSeparationSettings(468, 400, 1654605967), true);
+        setupMapSpacingAndLand(CAMPSITE.get(), new StructureSeparationSettings(475, 400, 1083392187), true);
+        setupMapSpacingAndLand(CART.get(), new StructureSeparationSettings(286, 200, 1350227465), true);
+        setupMapSpacingAndLand(CASTLERUINS.get(), new StructureSeparationSettings(486, 400, 1406487600), true);
+        setupMapSpacingAndLand(CRYSTAL.get(), new StructureSeparationSettings(753, 700, 1069591537), true);
+        setupMapSpacingAndLand(DARKOAKLOGPILE.get(), new StructureSeparationSettings(20, 15, 1477390290), true);
+        setupMapSpacingAndLand(DEEPSLATEHOUSE.get(), new StructureSeparationSettings(453, 400, 1101824932), true);
+        setupMapSpacingAndLand(DESERTPUMP.get(), new StructureSeparationSettings(265, 200, 1764082984), true);
+        setupMapSpacingAndLand(DUCK.get(), new StructureSeparationSettings(753, 700, 1180455323), true);
+        setupMapSpacingAndLand(FLOWERHOLE.get(), new StructureSeparationSettings(453, 400, 1691712183), true);
+        setupMapSpacingAndLand(FOXHUT.get(), new StructureSeparationSettings(345, 300, 1191243014), true);
+        setupMapSpacingAndLand(HORSEPEN.get(), new StructureSeparationSettings(368, 300, 1161310870), true);
+        setupMapSpacingAndLand(HOUSE.get(), new StructureSeparationSettings(486, 400, 1270135683), true);
+        setupMapSpacingAndLand(ISLAND.get(), new StructureSeparationSettings(756, 700, 1692746979), true);
+        setupMapSpacingAndLand(JUNGLELOGPILE.get(), new StructureSeparationSettings(20, 15, 1305346456), true);
+        setupMapSpacingAndLand(JUNGLETOWER.get(), new StructureSeparationSettings(853, 800, 1826133270), true);
+        setupMapSpacingAndLand(LAMPCHEST.get(), new StructureSeparationSettings(542, 500, 1007678700), true);
+        setupMapSpacingAndLand(LECTURNGARDEN.get(), new StructureSeparationSettings(586, 500, 1182400939), true);
+        setupMapSpacingAndLand(LOGRUIN.get(), new StructureSeparationSettings(653, 600, 1202163947), true);
+        setupMapSpacingAndLand(MUSHROOMPOND.get(), new StructureSeparationSettings(453, 400, 1120455147), true);
+        setupMapSpacingAndLand(MUSHROOMSTATUE.get(), new StructureSeparationSettings(540, 500, 1284398602), true);
+        setupMapSpacingAndLand(NETHERDEVIL.get(), new StructureSeparationSettings(402, 400, 1916511145), true);
+        setupMapSpacingAndLand(OAKLOGPILE.get(), new StructureSeparationSettings(20, 15, 1910836253), true);
+        setupMapSpacingAndLand(POND.get(), new StructureSeparationSettings(453, 400, 1232298996), true);
+        setupMapSpacingAndLand(RAILWAY.get(), new StructureSeparationSettings(452, 400, 1718158649), true);
+        setupMapSpacingAndLand(RAREWELL.get(), new StructureSeparationSettings(513, 500, 1964858696), true);
+        setupMapSpacingAndLand(RUINEDBEACON.get(), new StructureSeparationSettings(708, 700, 1744536541), true);
+        setupMapSpacingAndLand(SHED.get(), new StructureSeparationSettings(352, 300, 1999217266), true);
+        setupMapSpacingAndLand(SMALLCOPPERWELL.get(), new StructureSeparationSettings(240, 200, 1765219867), true);
+        setupMapSpacingAndLand(SMALLRUIN.get(), new StructureSeparationSettings(412, 400, 1054312371), true);
+        setupMapSpacingAndLand(SPRUCELOGPILE.get(), new StructureSeparationSettings(20, 15, 1586943428), true);
+        setupMapSpacingAndLand(STONEFOUNTAIN.get(), new StructureSeparationSettings(452, 400, 1258946996), true);
+        setupMapSpacingAndLand(STONEPILLARS.get(), new StructureSeparationSettings(489, 400, 1129902953), true);
+        setupMapSpacingAndLand(SUNZIGATE.get(), new StructureSeparationSettings(700, 700, 1198039688), true);
+        setupMapSpacingAndLand(TALLHOUSE.get(), new StructureSeparationSettings(402, 400, 1708108382), true);
+        setupMapSpacingAndLand(TREEMONUMENT.get(), new StructureSeparationSettings(604, 600, 1513283015), true);
+        setupMapSpacingAndLand(VILLAGERSTATUE.get(), new StructureSeparationSettings(502, 500, 1243810299), true);
+        setupMapSpacingAndLand(WARPEDHOUSE.get(), new StructureSeparationSettings(432, 400, 1450860476), true);
+        setupMapSpacingAndLand(WELL.get(), new StructureSeparationSettings(312, 300, 1023847138), true);
 
-
-            for (int i = 0; i < ROStructuresDecoration.length; i++) {
-                setupMapSpacingAndLand(ROStructuresDecoration[i].get(), new StructureSeparationSettings(random.nextInt(20)+15, 15, 1465521987), true);
-            }
-        }
+//        public static void SetupMapSpacingAndLandLoop() {
+//            Random random = new Random();
+//            RegistryObject<Structure<NoFeatureConfig>>[] ROStructuresEpic = {BASALTSTATUE, CRYSTAL, DUCK, ISLAND, JUNGLETOWER, RUINEDBEACON, SHED, SUNZIGATE, TALLHOUSE};
+//            RegistryObject<Structure<NoFeatureConfig>>[] ROStructuresRare = {ABANDONEDLIBRARY, CASTLERUINS, DEEPSLATEHOUSE, FLOWERHOLE, LAMPCHEST, LOGRUIN, NETHERDEVIL, RAILWAY, STONEPILLARS, STONEFOUNTAIN, TREEMONUMENT, VILLAGERSTATUE};
+//            RegistryObject<Structure<NoFeatureConfig>>[] ROStructuresCommon = {AZELEAHOUSE, BARN, BEACHBAR, BIGOAKTREE, CALCITEHOUSE, CAMPSITE, CART, DESERTPUMP, FOXHUT, HORSEPEN, HOUSE, LECTURNGARDEN, MUSHROOMPOND, MUSHROOMSTATUE, POND, SMALLCOPPERWELL, SMALLRUIN,WARPEDHOUSE, WELL};
+//            RegistryObject<Structure<NoFeatureConfig>>[] ROStructuresDecoration = {ACACIALOGPILE, BIRCHLOGPILE, BIRCHTREE1, BOULDER, DARKOAKLOGPILE, JUNGLELOGPILE, OAKLOGPILE, SPRUCELOGPILE};
+//
+//
+//            for (int i = 0; i < ROStructuresDecoration.length; i++) {
+//                setupMapSpacingAndLand(ROStructuresDecoration[i].get(), new StructureSeparationSettings(random.nextInt(20)+15, 15, random.nextInt(999999999) + 1000000000), true); //need to make sure the salts are never the same
+//            }
+//        }
 
         // Add more structures here and so on
     }
 
-    public static double getSalt() {
-        double[] Salts = {};
-        Random random = new Random();
-        double number = random.nextInt(999999999) + 1000000000;
-
-
-
-
-        return number;
-    }
 
     /**
      * Adds the provided structure to the registry, and adds the separation settings.
