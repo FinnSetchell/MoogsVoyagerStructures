@@ -216,6 +216,5 @@ public class AbandonedLibrary extends Structure<NoFeatureConfig> {
                             this.pieces.get(0).getBoundingBox().y0 + " " +
                             this.pieces.get(0).getBoundingBox().z0);
         }
-
     }
 }
