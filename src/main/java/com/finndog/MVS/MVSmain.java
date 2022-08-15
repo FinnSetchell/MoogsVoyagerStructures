@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 
 @Mod(MVSMain.MODID)
 public class MVSMain {
-
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "mvs";
 
