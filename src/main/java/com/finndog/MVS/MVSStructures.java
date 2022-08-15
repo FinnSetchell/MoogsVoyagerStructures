@@ -137,7 +137,7 @@ public class MVSStructures {
         setupMapSpacingAndLand(LOGRUIN.get(), new StructureSeparationSettings(653, 600, 1202163947), true);
         setupMapSpacingAndLand(MUSHROOMPOND.get(), new StructureSeparationSettings(453, 400, 1120455147), true);
         setupMapSpacingAndLand(MUSHROOMSTATUE.get(), new StructureSeparationSettings(540, 500, 1284398602), true);
-        setupMapSpacingAndLand(NETHERDEVIL.get(), new StructureSeparationSettings(402, 400, 1916511145), true);
+        setupMapSpacingAndLand(NETHERDEVIL.get(), new StructureSeparationSettings(482, 400, 1916511145), true);
         setupMapSpacingAndLand(OAKLOGPILE.get(), new StructureSeparationSettings(20, 15, 1910836253), true);
         setupMapSpacingAndLand(POND.get(), new StructureSeparationSettings(453, 400, 1232298996), true);
         setupMapSpacingAndLand(RAILWAY.get(), new StructureSeparationSettings(452, 400, 1718158649), true);
@@ -150,9 +150,9 @@ public class MVSStructures {
         setupMapSpacingAndLand(STONEFOUNTAIN.get(), new StructureSeparationSettings(452, 400, 1258946996), true);
         setupMapSpacingAndLand(STONEPILLARS.get(), new StructureSeparationSettings(489, 400, 1129902953), true);
         setupMapSpacingAndLand(SUNZIGATE.get(), new StructureSeparationSettings(700, 700, 1198039688), true);
-        setupMapSpacingAndLand(TALLHOUSE.get(), new StructureSeparationSettings(402, 400, 1708108382), true);
-        setupMapSpacingAndLand(TREEMONUMENT.get(), new StructureSeparationSettings(604, 600, 1513283015), true);
-        setupMapSpacingAndLand(VILLAGERSTATUE.get(), new StructureSeparationSettings(502, 500, 1243810299), true);
+        setupMapSpacingAndLand(TALLHOUSE.get(), new StructureSeparationSettings(472, 400, 1708108382), true);
+        setupMapSpacingAndLand(TREEMONUMENT.get(), new StructureSeparationSettings(634, 600, 1513283015), true);
+        setupMapSpacingAndLand(VILLAGERSTATUE.get(), new StructureSeparationSettings(592, 500, 1243810299), true);
         setupMapSpacingAndLand(WARPEDHOUSE.get(), new StructureSeparationSettings(432, 400, 1450860476), true);
         setupMapSpacingAndLand(WELL.get(), new StructureSeparationSettings(312, 300, 1023847138), true);
 
