@@ -104,7 +104,7 @@ public class MVSStructures {
         setupMapSpacingAndLand(ABANDONEDLIBRARY.get(), new StructureSeparationSettings(432, 400, 1200087698), true);
         setupMapSpacingAndLand(ACACIALOGPILE.get(), new StructureSeparationSettings(20, 15, 1151645196), true);
         setupMapSpacingAndLand(AZELEAHOUSE.get(), new StructureSeparationSettings(312, 300, 1468884161), true);
-        setupMapSpacingAndLand(BARN.get(), new StructureSeparationSettings(356, 300, 1617457240), true);
+        setupMapSpacingAndLand(BARN.get(), new StructureSeparationSettings(5, 1, 1617457240), true);
         setupMapSpacingAndLand(BASALTSTATUE.get(), new StructureSeparationSettings(576, 500, 1433758203), true);
         setupMapSpacingAndLand(BEACHBAR.get(), new StructureSeparationSettings(330, 300, 1521975094), true);
         setupMapSpacingAndLand(BIGOAKTREE.get(), new StructureSeparationSettings(354, 300, 1042718276), true);

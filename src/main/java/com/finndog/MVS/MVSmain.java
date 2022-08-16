@@ -1,15 +1,20 @@
 package com.finndog.mvs;
 
 import com.mojang.serialization.Codec;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.FlatChunkGenerator;
+import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.WorldEvent;
@@ -24,7 +29,10 @@ import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.function.Supplier;
 
 @Mod(MVSMain.MODID)
 public class MVSMain {
@@ -83,11 +91,21 @@ public class MVSMain {
          */
         //event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_RUN_DOWN_HOUSE);
 
+        RegistryKey<Biome> key = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, event.getName());
+        Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
+
+        if(types.contains(BiomeDictionary.Type.PLAINS)) {
+            List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
+
+            structures.add(() -> MVSStructures.BARN.get().configured(IFeatureConfig.NONE));
+            //structures.add(() -> MVSStructures.HOUSE.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
+        }
+
 
         event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_ABANDONEDLIBRARY);
         event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_ACACIALOGPILE);
         event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_AZELEAHOUSE);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BARN);
+        //event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BARN);
         event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BASALTSTATUE);
         event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BEACHBAR);
         event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BIGOAKTREE);
