@@ -42,7 +42,7 @@ public class MVSStructures {
      *   However, users might not know that and think you are to blame for issues that doesn't exist.
      *   So it is best to keep your structure names the same as long as you can instead of changing them frequently.
      */
-    public static final RegistryObject<Structure<NoFeatureConfig>> RUN_DOWN_HOUSE = DEFERRED_REGISTRY_STRUCTURE.register("run_down_house", () -> (new RunDownHouseStructure(NoFeatureConfig.CODEC)));
+    //public static final RegistryObject<Structure<NoFeatureConfig>> RUN_DOWN_HOUSE = DEFERRED_REGISTRY_STRUCTURE.register("run_down_house", () -> (new RunDownHouseStructure(NoFeatureConfig.CODEC)));
 
     public static final RegistryObject<Structure<NoFeatureConfig>> ABANDONEDLIBRARY = DEFERRED_REGISTRY_STRUCTURE.register("abandonedlibrary", () -> (new AbandonedLibrary(NoFeatureConfig.CODEC)));
     public static final RegistryObject<Structure<NoFeatureConfig>> ACACIALOGPILE = DEFERRED_REGISTRY_STRUCTURE.register("acacialogpile", () -> (new AcaciaLogPile(NoFeatureConfig.CODEC)));
@@ -99,12 +99,7 @@ public class MVSStructures {
      * See the comments in below for more details.
      */
     public static void setupStructures() {
-        setupMapSpacingAndLand(
-                RUN_DOWN_HOUSE.get(), /* The instance of the structure */
-                new StructureSeparationSettings(10 /* average distance apart in chunks between spawn attempts */,
-                        5 /* minimum distance apart in chunks between spawn attempts. MUST BE LESS THAN ABOVE VALUE*/,
-                        1234567890 /* this modifies the seed of the structure so no two structures always spawn over each-other. Make this large and unique. */),
-                true);
+    //setupMapSpacingAndLand(RUN_DOWN_HOUSE.get(), /* The instance of the structure */new StructureSeparationSettings(10 /* average distance apart in chunks between spawn attempts */,5 /* minimum distance apart in chunks between spawn attempts. MUST BE LESS THAN ABOVE VALUE*/,1234567890 /* this modifies the seed of the structure so no two structures always spawn over each-other. Make this large and unique. */),
 
         setupMapSpacingAndLand(ABANDONEDLIBRARY.get(), new StructureSeparationSettings(432, 400, 1200087698), true);
         setupMapSpacingAndLand(ACACIALOGPILE.get(), new StructureSeparationSettings(20, 15, 1151645196), true);
@@ -149,7 +144,7 @@ public class MVSStructures {
         setupMapSpacingAndLand(SPRUCELOGPILE.get(), new StructureSeparationSettings(20, 15, 1586943428), true);
         setupMapSpacingAndLand(STONEFOUNTAIN.get(), new StructureSeparationSettings(452, 400, 1258946996), true);
         setupMapSpacingAndLand(STONEPILLARS.get(), new StructureSeparationSettings(489, 400, 1129902953), true);
-        setupMapSpacingAndLand(SUNZIGATE.get(), new StructureSeparationSettings(700, 700, 1198039688), true);
+        setupMapSpacingAndLand(SUNZIGATE.get(), new StructureSeparationSettings(746, 700, 1198039688), true);
         setupMapSpacingAndLand(TALLHOUSE.get(), new StructureSeparationSettings(472, 400, 1708108382), true);
         setupMapSpacingAndLand(TREEMONUMENT.get(), new StructureSeparationSettings(634, 600, 1513283015), true);
         setupMapSpacingAndLand(VILLAGERSTATUE.get(), new StructureSeparationSettings(592, 500, 1243810299), true);
@@ -170,7 +165,7 @@ public class MVSStructures {
 //        }
 
         // Add more structures here and so on
-    }
+    };
 
 
     /**

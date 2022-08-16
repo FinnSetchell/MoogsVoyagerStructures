@@ -11,7 +11,7 @@ public class MVSConfiguredStructures {
     /**
      * Static instance of our structure so we can reference it and add it to biomes easily.
      */
-    public static StructureFeature<?, ?> CONFIGURED_RUN_DOWN_HOUSE = MVSStructures.RUN_DOWN_HOUSE.get().configured(IFeatureConfig.NONE);
+    //public static StructureFeature<?, ?> CONFIGURED_RUN_DOWN_HOUSE = MVSStructures.RUN_DOWN_HOUSE.get().configured(IFeatureConfig.NONE);
     public static StructureFeature<?, ?> CONFIGURED_ABANDONEDLIBRARY = MVSStructures.ABANDONEDLIBRARY.get().configured(IFeatureConfig.NONE);
     public static StructureFeature<?, ?> CONFIGURED_ACACIALOGPILE = MVSStructures.ACACIALOGPILE.get().configured(IFeatureConfig.NONE);
     public static StructureFeature<?, ?> CONFIGURED_AZELEAHOUSE = MVSStructures.AZELEAHOUSE.get().configured(IFeatureConfig.NONE);
@@ -71,7 +71,7 @@ public class MVSConfiguredStructures {
      */
     public static void registerConfiguredStructures() {
         Registry<StructureFeature<?, ?>> registry = WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE;
-        Registry.register(registry, new ResourceLocation(MVSMain.MODID, "configured_run_down_house"), CONFIGURED_RUN_DOWN_HOUSE);
+        //Registry.register(registry, new ResourceLocation(MVSMain.MODID, "configured_run_down_house"), CONFIGURED_RUN_DOWN_HOUSE);
 
         Registry.register(registry, new ResourceLocation(MVSMain.MODID, "configured_abandonedlibrary"), CONFIGURED_ABANDONEDLIBRARY);
         Registry.register(registry, new ResourceLocation(MVSMain.MODID, "configured_acacialogpile"), CONFIGURED_ACACIALOGPILE);
@@ -138,7 +138,7 @@ public class MVSConfiguredStructures {
         *
         * Requires AccessTransformer ( see resources/META-INF/accesstransformer.cfg )
         */
-        FlatGenerationSettings.STRUCTURE_FEATURES.put(MVSStructures.RUN_DOWN_HOUSE.get(), CONFIGURED_RUN_DOWN_HOUSE);
+        //.STRUCTURE_FEATURES.put(MVSStructures.RUN_DOWN_HOUSE.get(), CONFIGURED_RUN_DOWN_HOUSE);
 
         FlatGenerationSettings.STRUCTURE_FEATURES.put(MVSStructures.ABANDONEDLIBRARY.get(), CONFIGURED_ABANDONEDLIBRARY);
         FlatGenerationSettings.STRUCTURE_FEATURES.put(MVSStructures.ACACIALOGPILE.get(), CONFIGURED_ACACIALOGPILE);

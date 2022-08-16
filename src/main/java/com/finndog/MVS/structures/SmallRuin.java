@@ -4,7 +4,6 @@ import com.finndog.mvs.MVSMain;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
@@ -76,19 +75,12 @@ public class SmallRuin extends Structure<NoFeatureConfig> {
      *         have to manually implement spawning for them. Stick with Forge's Default form
      *         as it is easier to use that.
      */
-    private static final List<MobSpawnInfo.Spawners> STRUCTURE_MONSTERS = ImmutableList.of(
-            new MobSpawnInfo.Spawners(EntityType.ILLUSIONER, 100, 4, 9),
-            new MobSpawnInfo.Spawners(EntityType.VINDICATOR, 100, 4, 9)
-    );
+    private static final List<MobSpawnInfo.Spawners> STRUCTURE_MONSTERS = ImmutableList.of();
     @Override
     public List<MobSpawnInfo.Spawners> getDefaultSpawnList() {
         return STRUCTURE_MONSTERS;
     }
-
-    private static final List<MobSpawnInfo.Spawners> STRUCTURE_CREATURES = ImmutableList.of(
-            new MobSpawnInfo.Spawners(EntityType.SHEEP, 30, 10, 15),
-            new MobSpawnInfo.Spawners(EntityType.RABBIT, 100, 1, 2)
-    );
+    private static final List<MobSpawnInfo.Spawners> STRUCTURE_CREATURES = ImmutableList.of();
     @Override
     public List<MobSpawnInfo.Spawners> getDefaultCreatureSpawnList() {
         return STRUCTURE_CREATURES;

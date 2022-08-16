@@ -81,7 +81,8 @@ public class MVSMain {
          * RegistryKey.getOrCreateKey(Registry.BIOME_KEY, event.getName()) to get the biome's
          * registrykey. Then that can be fed into the dictionary to get the biome's types.
          */
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_RUN_DOWN_HOUSE);
+        //event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_RUN_DOWN_HOUSE);
+
 
         event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_ABANDONEDLIBRARY);
         event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_ACACIALOGPILE);
@@ -183,7 +184,7 @@ public class MVSMain {
              * And if you want to do dimension blacklisting, you need to remove the spacing entry entirely from the map below to prevent generation safely.
              */
             Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(serverWorld.getChunkSource().generator.getSettings().structureConfig());
-            tempMap.putIfAbsent(MVSStructures.RUN_DOWN_HOUSE.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.RUN_DOWN_HOUSE.get()));
+            //tempMap.putIfAbsent(MVSStructures.RUN_DOWN_HOUSE.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.RUN_DOWN_HOUSE.get()));
 
             tempMap.putIfAbsent(MVSStructures.ABANDONEDLIBRARY.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.ABANDONEDLIBRARY.get()));
             tempMap.putIfAbsent(MVSStructures.ACACIALOGPILE.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.ACACIALOGPILE.get()));
