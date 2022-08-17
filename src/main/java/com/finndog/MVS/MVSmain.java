@@ -1,25 +1,26 @@
 package com.finndog.mvs;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.FlatChunkGenerator;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.feature.structure.StructureFeatures;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -29,10 +30,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.function.Supplier;
 
 @Mod(MVSMain.MODID)
 public class MVSMain {
@@ -91,15 +89,64 @@ public class MVSMain {
          */
         //event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_RUN_DOWN_HOUSE);
 
-        RegistryKey<Biome> key = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, event.getName());
-        Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
+//        RegistryKey<Biome> key = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, event.getName());
+//        //RegistryKey<Biome> key = RegistryKey.createRegistryKey(Registry.BIOME_KEY, event.getName());
+//
+//        Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
+//
+//        if(types.contains(BiomeDictionary.Type.PLAINS)) {
+//            List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
+//
+//            //structures.add(() -> MVSStructures.BARN.get().configured(IFeatureConfig.NONE));
+//            structures.add(() -> MVSStructures.BARN.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
+//        }
 
-        if(types.contains(BiomeDictionary.Type.PLAINS)) {
-            List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
+        @SubscribeEvent(priority = EventPriority.HIGH)
+        public static void addFeaturesToBiomes(final BiomeLoadingEvent event){
+            if(event.getCategory() == Biome.Category.NETHER){
+                event.getGeneration().getStructures().add(() -> ModConfiguredStructures.CONFIGURED_NETHER_FORTRESS);
+                event.getGeneration().getStructures().removeIf((supplier) -> supplier.get().feature == StructureFeatures.NETHER_BRIDGE.feature);
+                if(isBiome(event, Biomes.SOUL_SAND_VALLEY.location())) {
+                    event.getGeneration().getStructures().add(() -> ModConfiguredStructures.CONFIGURED_CATACOMB);
+                    event.getGeneration().getFeatures(GenerationStage.Decoration.UNDERGROUND_DECORATION).add(() -> ModConfiguredFeatures.SOUL_STONE_BLOBS);
+                }
+                else if(isBiome(event, Biomes.CRIMSON_FOREST.location()))
+                    event.getGeneration().getStructures().add(() -> ModConfiguredStructures.CONFIGURED_PIGLIN_MANOR);
+                else if(isBiome(event, Biomes.WARPED_FOREST.location()))
+                    event.getGeneration().getStructures().add(() -> ModConfiguredStructures.CONFIGURED_CITADEL);
 
-            structures.add(() -> MVSStructures.BARN.get().configured(IFeatureConfig.NONE));
-            //structures.add(() -> MVSStructures.HOUSE.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
+                if(isBiome(event, Biomes.BASALT_DELTAS.location()))
+                    event.getGeneration().getStructures().add(() -> StructureFeatures.BASTION_REMNANT);
+
+                if(isLoaded("biomesoplenty")){
+                    if (isBiome(event, "biomesoplenty:crystalline_chasm")
+                            || isBiome(event, "biomesoplenty:undergrowth")
+                            || isBiome(event, "biomesoplenty:visceral_heap"))
+                        ;// Nether Fortress Only
+                    else if(isBiome(event, "biomesoplenty:withered_abyss"))
+                        event.getGeneration().getStructures().add(() -> ModConfiguredStructures.CONFIGURED_CATACOMB);
+                }
+
+                if(isLoaded("infernalexp")){
+                    if (isBiome(event, "infernalexp:glowstone_canyon"))
+                        ;// Nether Fortress Only
+                }
+
+                if(isLoaded("byg")){
+                    if (isBiome(event, "byg:waiting_garth"))
+                        event.getGeneration().getStructures().add(() -> ModConfiguredStructures.CONFIGURED_CATACOMB);
+                    else if(isBiome(event, "byg:crimson_gardens"))
+                        event.getGeneration().getStructures().add(() -> ModConfiguredStructures.CONFIGURED_PIGLIN_MANOR);
+                    else if(isBiome(event, "byg:glowstone_gardens"))
+                        event.getGeneration().getStructures().add(() -> ModConfiguredStructures.CONFIGURED_CITADEL);
+                }
+
+            }
         }
+
+        private static boolean isLoaded(String MODID){ return ModList.get().isLoaded(MODID); }
+        private static boolean isBiome(final BiomeLoadingEvent event, String key){ return event.getName().toString().equals(key); }
+        private static boolean isBiome(final BiomeLoadingEvent event, ResourceLocation location){ return event.getName().equals(location); }
 
 
         event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_ABANDONEDLIBRARY);
