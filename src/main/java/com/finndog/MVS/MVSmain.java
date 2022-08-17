@@ -8,9 +8,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.FlatChunkGenerator;
-import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.StructureFeatures;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraft.world.server.ServerWorld;
@@ -37,6 +35,10 @@ public class MVSMain {
 
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "mvs";
+
+    private static boolean isLoaded(String modid){ return ModList.get().isLoaded(modid); }
+    private static boolean isBiome(final BiomeLoadingEvent event, String key){ return event.getName().toString().equals(key); }
+    private static boolean isBiome(final BiomeLoadingEvent event, ResourceLocation location){ return event.getName().equals(location); }
 
     public MVSMain() {
         // For registration and init stuff.
@@ -77,128 +79,115 @@ public class MVSMain {
      *
      * Here, we will use this to add our structure to all biomes.
      */
+
+
+    @SubscribeEvent(priority = EventPriority.HIGH)
     public void biomeModification(final BiomeLoadingEvent event) {
-        /*
-         * Add our structure to all biomes including other modded biomes.
-         * You can skip or add only to certain biomes based on stuff like biome category,
-         * temperature, scale, precipitation, mod id, etc. All kinds of options!
-         *
-         * You can even use the BiomeDictionary as well! To use BiomeDictionary, do
-         * RegistryKey.getOrCreateKey(Registry.BIOME_KEY, event.getName()) to get the biome's
-         * registrykey. Then that can be fed into the dictionary to get the biome's types.
-         */
-        //event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_RUN_DOWN_HOUSE);
 
-//        RegistryKey<Biome> key = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, event.getName());
-//        //RegistryKey<Biome> key = RegistryKey.createRegistryKey(Registry.BIOME_KEY, event.getName());
-//
-//        Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(key);
-//
-//        if(types.contains(BiomeDictionary.Type.PLAINS)) {
-//            List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
-//
-//            //structures.add(() -> MVSStructures.BARN.get().configured(IFeatureConfig.NONE));
-//            structures.add(() -> MVSStructures.BARN.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
-//        }
-
-        @SubscribeEvent(priority = EventPriority.HIGH)
-        public static void addFeaturesToBiomes(final BiomeLoadingEvent event){
-            if(event.getCategory() == Biome.Category.NETHER){
-                event.getGeneration().getStructures().add(() -> ModConfiguredStructures.CONFIGURED_NETHER_FORTRESS);
-                event.getGeneration().getStructures().removeIf((supplier) -> supplier.get().feature == StructureFeatures.NETHER_BRIDGE.feature);
-                if(isBiome(event, Biomes.SOUL_SAND_VALLEY.location())) {
-                    event.getGeneration().getStructures().add(() -> ModConfiguredStructures.CONFIGURED_CATACOMB);
-                    event.getGeneration().getFeatures(GenerationStage.Decoration.UNDERGROUND_DECORATION).add(() -> ModConfiguredFeatures.SOUL_STONE_BLOBS);
-                }
-                else if(isBiome(event, Biomes.CRIMSON_FOREST.location()))
-                    event.getGeneration().getStructures().add(() -> ModConfiguredStructures.CONFIGURED_PIGLIN_MANOR);
-                else if(isBiome(event, Biomes.WARPED_FOREST.location()))
-                    event.getGeneration().getStructures().add(() -> ModConfiguredStructures.CONFIGURED_CITADEL);
-
-                if(isBiome(event, Biomes.BASALT_DELTAS.location()))
-                    event.getGeneration().getStructures().add(() -> StructureFeatures.BASTION_REMNANT);
-
-                if(isLoaded("biomesoplenty")){
-                    if (isBiome(event, "biomesoplenty:crystalline_chasm")
-                            || isBiome(event, "biomesoplenty:undergrowth")
-                            || isBiome(event, "biomesoplenty:visceral_heap"))
-                        ;// Nether Fortress Only
-                    else if(isBiome(event, "biomesoplenty:withered_abyss"))
-                        event.getGeneration().getStructures().add(() -> ModConfiguredStructures.CONFIGURED_CATACOMB);
-                }
-
-                if(isLoaded("infernalexp")){
-                    if (isBiome(event, "infernalexp:glowstone_canyon"))
-                        ;// Nether Fortress Only
-                }
-
-                if(isLoaded("byg")){
-                    if (isBiome(event, "byg:waiting_garth"))
-                        event.getGeneration().getStructures().add(() -> ModConfiguredStructures.CONFIGURED_CATACOMB);
-                    else if(isBiome(event, "byg:crimson_gardens"))
-                        event.getGeneration().getStructures().add(() -> ModConfiguredStructures.CONFIGURED_PIGLIN_MANOR);
-                    else if(isBiome(event, "byg:glowstone_gardens"))
-                        event.getGeneration().getStructures().add(() -> ModConfiguredStructures.CONFIGURED_CITADEL);
-                }
-
+        if (event.getCategory() != Biome.Category.NETHER && event.getCategory() != Biome.Category.THEEND) {
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_ABANDONEDLIBRARY);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_AZELEAHOUSE);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BARN);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_CALCITEHOUSE);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_CAMPSITE);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_CART);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_CASTLERUINS);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_DEEPSLATEHOUSE);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_DUCK);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_HORSEPEN);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_HOUSE);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_LAMPCHEST);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_MUSHROOMPOND);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_POND);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_RAILWAY);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_RUINEDBEACON);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_SHED);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_SMALLCOPPERWELL);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_SMALLRUIN);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_STONEFOUNTAIN);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_SUNZIGATE);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_TALLHOUSE);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_VILLAGERSTATUE);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_WARPEDHOUSE);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_WELL);
+            if (event.getCategory() == Biome.Category.SAVANNA) {
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_ACACIALOGPILE);
+            }
+            if (event.getCategory() == Biome.Category.BEACH) {
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BEACHBAR);
+            }
+            if (isBiome(event, Biomes.BIRCH_FOREST.location())) {
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BIRCHLOGPILE);
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BIRCHTREE1);
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_CRYSTAL);
+            }
+            if (isBiome(event, Biomes.DARK_FOREST.location())) {
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_DARKOAKLOGPILE);
+            }
+            if (event.getCategory() == Biome.Category.DESERT) {
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_DESERTPUMP);
+            }
+            if (isBiome(event, Biomes.FLOWER_FOREST.location())) {
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_FLOWERHOLE);
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_RAREWELL);
+            }
+            if (event.getCategory() == Biome.Category.JUNGLE) {
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_JUNGLELOGPILE);
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_JUNGLETOWER);
+            }
+            if (isBiome(event, Biomes.MUSHROOM_FIELDS.location())) {
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_MUSHROOMSTATUE);
+            }
+            if (event.getCategory() == Biome.Category.FOREST) {
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_LOGRUIN);
+            }
+            if (event.getCategory() == Biome.Category.OCEAN) {
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_ISLAND);
+            }
+            if (event.getCategory() == Biome.Category.FOREST || event.getCategory() == Biome.Category.PLAINS) {
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BIGOAKTREE);
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_TREEMONUMENT);
+            }
+            if (event.getCategory() == Biome.Category.TAIGA) {
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BOULDER);
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_FOXHUT);
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_LECTURNGARDEN);
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_SPRUCELOGPILE);
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_STONEPILLARS);
+            }
+            if (isBiome(event, Biomes.FOREST.location())) {
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_OAKLOGPILE);
             }
         }
+        if (event.getCategory() == Biome.Category.NETHER) {
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BASALTSTATUE);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_NETHERDEVIL);
+        }
+        if (event.getCategory() == Biome.Category.THEEND) {
 
-        private static boolean isLoaded(String MODID){ return ModList.get().isLoaded(MODID); }
-        private static boolean isBiome(final BiomeLoadingEvent event, String key){ return event.getName().toString().equals(key); }
-        private static boolean isBiome(final BiomeLoadingEvent event, ResourceLocation location){ return event.getName().equals(location); }
+        }
+        if (isLoaded("biomesoplenty")) {
+            if (isBiome(event, "biomesoplenty:crystalline_chasm")
+                    || isBiome(event, "biomesoplenty:undergrowth")
+                    || isBiome(event, "biomesoplenty:visceral_heap"))
+                ;// Nether Fortress Only
+            else if (isBiome(event, "biomesoplenty:withered_abyss"))
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_WELL);
+        }
+
+        if (isLoaded("byg")) {
+            if (isBiome(event, "byg:waiting_garth"))
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_WELL);
+            else if (isBiome(event, "byg:crimson_gardens"))
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_WELL);
+            else if (isBiome(event, "byg:glowstone_gardens"))
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_WELL);
+        }
 
 
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_ABANDONEDLIBRARY);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_ACACIALOGPILE);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_AZELEAHOUSE);
-        //event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BARN);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BASALTSTATUE);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BEACHBAR);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BIGOAKTREE);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BIRCHLOGPILE);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BIRCHTREE1);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BOULDER);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_CALCITEHOUSE);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_CAMPSITE);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_CART);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_CASTLERUINS);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_CRYSTAL);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_DARKOAKLOGPILE);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_DEEPSLATEHOUSE);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_DESERTPUMP);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_DUCK);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_FLOWERHOLE);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_FOXHUT);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_HORSEPEN);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_HOUSE);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_ISLAND);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_JUNGLELOGPILE);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_JUNGLETOWER);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_LAMPCHEST);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_LECTURNGARDEN);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_LOGRUIN);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_MUSHROOMPOND);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_MUSHROOMSTATUE);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_NETHERDEVIL);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_OAKLOGPILE);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_POND);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_RAILWAY);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_RAREWELL);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_RUINEDBEACON);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_SHED);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_SMALLCOPPERWELL);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_SMALLRUIN);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_SPRUCELOGPILE);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_STONEFOUNTAIN);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_STONEPILLARS);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_SUNZIGATE);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_TALLHOUSE);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_TREEMONUMENT);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_VILLAGERSTATUE);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_WARPEDHOUSE);
-        event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_WELL);
     }
+
+
 
     /**
      * Will go into the world's chunkgenerator and manually add our structure spacing.
