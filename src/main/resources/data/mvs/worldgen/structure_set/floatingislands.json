@@ -16,11 +16,11 @@
     "salt": 1224466880,
 
       // The average distance apart in chunks for spawn attempts
-    "spacing": 348,
+    "spacing": 600,
 
       // Minimum distance apart in chunks for spawn attempts
       // MUST ALWAYS BE SMALLER THAN spacing ABOVE
-    "separation": 286,
+    "separation": 580,
 
     // Prevent spawning near Ocean Monuments
     "exclusion_zone": {

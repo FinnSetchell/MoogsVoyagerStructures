@@ -1,7 +1,7 @@
 {
   "structures": [
     {
-      "structure": "mvs:basaltstatue",
+      "structure": "mvs:smallswamphouse",
       "weight": 1
     }
   ],
@@ -9,10 +9,10 @@
 
     "type": "minecraft:random_spread",
 
-    "salt": 1326559846,
+    "salt": 1987546132,
 
-    "spacing": 278,
+    "spacing": 432,
 
-    "separation": 145
+    "separation": 400
   }
 }
