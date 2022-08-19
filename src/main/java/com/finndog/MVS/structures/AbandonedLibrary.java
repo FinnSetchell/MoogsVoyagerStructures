@@ -165,7 +165,7 @@ public class AbandonedLibrary extends Structure<NoFeatureConfig> {
              * Make sure to set the final boolean in JigsawManager.addPieces to false so
              * that the structure spawns at blockpos's y value instead of placing the structure on the Bedrock roof!
              */
-            //IBlockReader blockReader = chunkGenerator.getBaseColumn(blockpos.getX(), blockpos.getZ());
+            //IBlockReader blockReader = chunkGenerator.getBaseColumn(BlockPos.getX(), BlockPos.getZ());
 
             // All a structure has to do is call this method to turn it into a jigsaw based structure!
             JigsawManager.addPieces(
