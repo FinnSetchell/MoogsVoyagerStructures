@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:smallswamphouse",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1987546132,
+
+    "spacing": 432,
+
+    "separation": 400
+  }
+}
