@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:lavapool",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1963741582,
+
+    "spacing": 654,
+
+    "separation": 600
+  }
+}
