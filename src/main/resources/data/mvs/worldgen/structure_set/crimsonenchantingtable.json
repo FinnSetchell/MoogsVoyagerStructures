@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:crimsonenchantingtable",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1985423105,
+
+    "spacing": 568,
+
+    "separation": 500
+  }
+}
