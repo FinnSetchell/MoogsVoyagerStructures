@@ -110,6 +110,7 @@ public class MVSMain {
             event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_VILLAGERSTATUE);
             event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_WARPEDHOUSE);
             event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_WELL);
+            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_FLOATINGISLANDS);
             if (event.getCategory() == Biome.Category.SAVANNA) {
                 event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_ACACIALOGPILE);
             }
@@ -119,7 +120,10 @@ public class MVSMain {
             if (isBiome(event, Biomes.BIRCH_FOREST.location())) {
                 event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BIRCHLOGPILE);
                 event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BIRCHTREE1);
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BIRCHTREE2);
                 event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_CRYSTAL);
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BEEDOME);
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_STONEBEE);
             }
             if (isBiome(event, Biomes.DARK_FOREST.location())) {
                 event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_DARKOAKLOGPILE);
@@ -158,32 +162,43 @@ public class MVSMain {
             if (isBiome(event, Biomes.FOREST.location())) {
                 event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_OAKLOGPILE);
             }
+            if (isBiome(event, Biomes.SWAMP.location())) {
+                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_SMALLSWAMPHOUSE);
+            }
         }
         if (event.getCategory() == Biome.Category.NETHER) {
-            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BASALTSTATUE);
-            event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_NETHERDEVIL);
+            if (isBiome(event, Biomes.BASALT_DELTAS.location())) {
+                //event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_BASALTSTATUE);
+            }
+            if (isBiome(event, Biomes.NETHER_WASTES.location())) {
+                //event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_NETHERDEVIL);
+                //event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_LAVAPOOL);
+            }
+            if (isBiome(event, Biomes.CRIMSON_FOREST.location())) {
+                //event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_CRIMSONENCHANTINGTABLE);
+            }
         }
         if (event.getCategory() == Biome.Category.THEEND) {
 
         }
-        if (isLoaded("biomesoplenty")) {
-            if (isBiome(event, "biomesoplenty:crystalline_chasm")
-                    || isBiome(event, "biomesoplenty:undergrowth")
-                    || isBiome(event, "biomesoplenty:visceral_heap"))
-                ;// Nether Fortress Only
-            else if (isBiome(event, "biomesoplenty:withered_abyss"))
-                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_WELL);
-        }
-
-        if (isLoaded("byg")) {
-            if (isBiome(event, "byg:waiting_garth"))
-                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_WELL);
-            else if (isBiome(event, "byg:crimson_gardens"))
-                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_WELL);
-            else if (isBiome(event, "byg:glowstone_gardens"))
-                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_WELL);
-        }
-
+/**        if (isLoaded("biomesoplenty")) {
+*            if (isBiome(event, "biomesoplenty:crystalline_chasm")
+*                    || isBiome(event, "biomesoplenty:undergrowth")
+*                    || isBiome(event, "biomesoplenty:visceral_heap"))
+*                ;// Nether Fortress Only
+*            else if (isBiome(event, "biomesoplenty:withered_abyss"))
+*                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_WELL);
+*        }
+*
+*        if (isLoaded("byg")) {
+*            if (isBiome(event, "byg:waiting_garth"))
+*                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_WELL);
+*            else if (isBiome(event, "byg:crimson_gardens"))
+*                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_WELL);
+*            else if (isBiome(event, "byg:glowstone_gardens"))
+*                event.getGeneration().getStructures().add(() -> MVSConfiguredStructures.CONFIGURED_WELL);
+*        }
+*/
 
     }
 
@@ -246,19 +261,23 @@ public class MVSMain {
             tempMap.putIfAbsent(MVSStructures.BARN.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.BARN.get()));
             tempMap.putIfAbsent(MVSStructures.BASALTSTATUE.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.BASALTSTATUE.get()));
             tempMap.putIfAbsent(MVSStructures.BEACHBAR.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.BEACHBAR.get()));
+            tempMap.putIfAbsent(MVSStructures.BEEDOME.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.BEEDOME.get()));
             tempMap.putIfAbsent(MVSStructures.BIGOAKTREE.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.BIGOAKTREE.get()));
             tempMap.putIfAbsent(MVSStructures.BIRCHLOGPILE.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.BIRCHLOGPILE.get()));
             tempMap.putIfAbsent(MVSStructures.BIRCHTREE1.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.BIRCHTREE1.get()));
+            tempMap.putIfAbsent(MVSStructures.BIRCHTREE2.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.BIRCHTREE2.get()));
             tempMap.putIfAbsent(MVSStructures.BOULDER.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.BOULDER.get()));
             tempMap.putIfAbsent(MVSStructures.CALCITEHOUSE.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.CALCITEHOUSE.get()));
             tempMap.putIfAbsent(MVSStructures.CAMPSITE.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.CAMPSITE.get()));
             tempMap.putIfAbsent(MVSStructures.CART.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.CART.get()));
             tempMap.putIfAbsent(MVSStructures.CASTLERUINS.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.CASTLERUINS.get()));
+            tempMap.putIfAbsent(MVSStructures.CRIMSONENCHANTINGTABLE.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.CRIMSONENCHANTINGTABLE.get()));
             tempMap.putIfAbsent(MVSStructures.CRYSTAL.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.CRYSTAL.get()));
             tempMap.putIfAbsent(MVSStructures.DARKOAKLOGPILE.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.DARKOAKLOGPILE.get()));
             tempMap.putIfAbsent(MVSStructures.DEEPSLATEHOUSE.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.DEEPSLATEHOUSE.get()));
             tempMap.putIfAbsent(MVSStructures.DESERTPUMP.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.DESERTPUMP.get()));
             tempMap.putIfAbsent(MVSStructures.DUCK.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.DUCK.get()));
+            tempMap.putIfAbsent(MVSStructures.FLOATINGISLANDS.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.FLOATINGISLANDS.get()));
             tempMap.putIfAbsent(MVSStructures.FLOWERHOLE.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.FLOWERHOLE.get()));
             tempMap.putIfAbsent(MVSStructures.FOXHUT.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.FOXHUT.get()));
             tempMap.putIfAbsent(MVSStructures.HORSEPEN.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.HORSEPEN.get()));
@@ -267,6 +286,7 @@ public class MVSMain {
             tempMap.putIfAbsent(MVSStructures.JUNGLELOGPILE.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.JUNGLELOGPILE.get()));
             tempMap.putIfAbsent(MVSStructures.JUNGLETOWER.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.JUNGLETOWER.get()));
             tempMap.putIfAbsent(MVSStructures.LAMPCHEST.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.LAMPCHEST.get()));
+            tempMap.putIfAbsent(MVSStructures.LAVAPOOL.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.LAVAPOOL.get()));
             tempMap.putIfAbsent(MVSStructures.LECTURNGARDEN.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.LECTURNGARDEN.get()));
             tempMap.putIfAbsent(MVSStructures.LOGRUIN.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.LOGRUIN.get()));
             tempMap.putIfAbsent(MVSStructures.MUSHROOMPOND.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.MUSHROOMPOND.get()));
@@ -280,7 +300,9 @@ public class MVSMain {
             tempMap.putIfAbsent(MVSStructures.SHED.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.SHED.get()));
             tempMap.putIfAbsent(MVSStructures.SMALLCOPPERWELL.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.SMALLCOPPERWELL.get()));
             tempMap.putIfAbsent(MVSStructures.SMALLRUIN.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.SMALLRUIN.get()));
+            tempMap.putIfAbsent(MVSStructures.SMALLSWAMPHOUSE.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.SMALLSWAMPHOUSE.get()));
             tempMap.putIfAbsent(MVSStructures.SPRUCELOGPILE.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.SPRUCELOGPILE.get()));
+            tempMap.putIfAbsent(MVSStructures.STONEBEE.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.STONEBEE.get()));
             tempMap.putIfAbsent(MVSStructures.STONEFOUNTAIN.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.STONEFOUNTAIN.get()));
             tempMap.putIfAbsent(MVSStructures.STONEPILLARS.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.STONEPILLARS.get()));
             tempMap.putIfAbsent(MVSStructures.SUNZIGATE.get(), DimensionStructuresSettings.DEFAULTS.get(MVSStructures.SUNZIGATE.get()));
