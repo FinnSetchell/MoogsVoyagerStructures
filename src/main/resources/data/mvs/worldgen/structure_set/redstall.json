@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:redstall",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1325548686,
+
+    "spacing": 623,
+
+    "separation": 600
+  }
+}

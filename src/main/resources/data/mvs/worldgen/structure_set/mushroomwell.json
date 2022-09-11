@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:mushroomwell",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1032365798,
+
+    "spacing": 430,
+
+    "separation": 400
+  }
+}

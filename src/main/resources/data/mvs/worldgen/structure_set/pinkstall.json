@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:pinkstall",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1747729854,
+
+    "spacing": 678,
+
+    "separation": 600
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:deserthouse",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1003998246,
+
+    "spacing": 575,
+
+    "separation": 500
+  }
+}

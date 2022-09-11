@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:desertwell",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1776611334,
+
+    "spacing": 432,
+
+    "separation": 400
+  }
+}

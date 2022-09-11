@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:birchwell",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1109855762,
+
+    "spacing": 446,
+
+    "separation": 400
+  }
+}

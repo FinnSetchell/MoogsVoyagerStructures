@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:firecamp",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1336448795,
+
+    "spacing": 452,
+
+    "separation": 400
+  }
+}

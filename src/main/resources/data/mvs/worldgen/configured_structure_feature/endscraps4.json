@@ -1,0 +1,18 @@
+{
+
+  "type": "minecraft:village",
+
+  "config": {
+
+    "start_pool": "mvs:endscraps4/start_pool",
+
+    "size": 1
+  },
+
+  "biomes": "#mvs:has_structure/end_biomes",
+
+  "adapt_noise": true,
+
+  "spawn_overrides": {
+  }
+}

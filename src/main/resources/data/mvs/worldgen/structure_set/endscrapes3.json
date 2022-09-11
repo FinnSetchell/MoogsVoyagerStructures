@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:endscraps3",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1003787502,
+
+    "spacing": 94,
+
+    "separation": 90
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:largecart2",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1098095254,
+
+    "spacing": 605,
+
+    "separation": 600
+  }
+}

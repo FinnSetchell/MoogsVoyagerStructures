@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:smallship",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1320325487,
+
+    "spacing": 532,
+
+    "separation": 500
+  }
+}
