@@ -1,36 +1,34 @@
-package com.finndog.mvs.structures;
+package com.finndog.mvs.world.structures;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.finndog.mvs.world.structures.configs.MVSGenericConfig;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.NoiseColumn;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.CheckerboardColumnBiomeSource;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
-import net.minecraft.world.level.levelgen.structure.BuiltinStructureSets;
 import net.minecraft.world.level.levelgen.structure.PoolElementStructurePiece;
 import net.minecraft.world.level.levelgen.structure.PostPlacementProcessor;
+import net.minecraft.world.level.levelgen.structure.StructureSet;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGenerator;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier;
 import net.minecraft.world.level.levelgen.structure.pools.JigsawPlacement;
-import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
 import java.util.Optional;
 
-public class SkyStructures extends StructureFeature<JigsawConfiguration> {
+import static com.finndog.mvs.world.structures.SkyStructures.CODEC;
 
-    // A custom codec that changes the size limit for our code_structure_sky_fan.json's config to not be capped at 7.
-    // With this, we can have a structure with a size limit up to 30 if we want to have extremely long branches of pieces in the structure.
-    public static final Codec<JigsawConfiguration> CODEC = RecordCodecBuilder.create((codec) -> {
-        return codec.group(
-                StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(JigsawConfiguration::startPool),
-                Codec.intRange(0, 10).fieldOf("size").forGetter(JigsawConfiguration::maxDepth)
-        ).apply(codec, JigsawConfiguration::new);
-    });
+public class GenericJigsawStructure extends StructureFeature<JigsawConfiguration> {
 
-    public SkyStructures() {
+    public GenericJigsawStructure() {
         // Create the pieces layout of the structure and give it to the game
-        super(CODEC, SkyStructures::createPiecesGenerator, PostPlacementProcessor.NONE);
+        super(CODEC, GenericJigsawStructure::createPiecesGenerator, PostPlacementProcessor.NONE);
     }
 
     /**
@@ -71,30 +69,74 @@ public class SkyStructures extends StructureFeature<JigsawConfiguration> {
      * Use the biome tags for where to spawn the structure and users can datapack
      * it to spawn in specific biomes that aren't in the dimension they don't like if they wish.
      */
-    private static boolean isFeatureChunk(PieceGeneratorSupplier.Context<JigsawConfiguration> context) {
-        // Grabs the chunk position we are at
-        ChunkPos chunkpos = context.chunkPos();
+    private static boolean isGenericFeatureChunk(PieceGeneratorSupplier.Context<JigsawConfiguration> context, MVSGenericConfig config) {
+        ChunkPos chunkPos = context.chunkPos();
 
-        // Checks to make sure our structure does not spawn within 10 chunks of an Ocean Monument
-        // to demonstrate how this method is good for checking extra conditions for spawning
-        return !context.chunkGenerator().hasFeatureChunkInRange(BuiltinStructureSets.OCEAN_MONUMENTS, context.seed(), chunkpos.x, chunkpos.z, 10);
+        if (!(context.biomeSource() instanceof CheckerboardColumnBiomeSource)) {
+            for (int curChunkX = chunkPos.x - config.biomeRadius; curChunkX <= chunkPos.x + config.biomeRadius; curChunkX++) {
+                for (int curChunkZ = chunkPos.z - config.biomeRadius; curChunkZ <= chunkPos.z + config.biomeRadius; curChunkZ++) {
+                    int yValue = config.doNotUseHeightmap ? config.setFixedYSpawn : config.setFixedYSpawn + context.chunkGenerator().getFirstFreeHeight(curChunkX << 4, curChunkZ << 4, Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor());
+                    Holder<Biome> biome = context.biomeSource().getNoiseBiome(curChunkX << 2, yValue >> 2, curChunkZ << 2, context.chunkGenerator().climateSampler());
+                    if (!context.validBiome().test(biome)) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        if (config.cannotSpawnInLiquid) {
+            BlockPos centerOfChunk = chunkPos.getMiddleBlockPosition(0);
+            int landHeight = context.chunkGenerator().getFirstOccupiedHeight(centerOfChunk.getX(), centerOfChunk.getZ(), Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor());
+            NoiseColumn columnOfBlocks = context.chunkGenerator().getBaseColumn(centerOfChunk.getX(), centerOfChunk.getZ(), context.heightAccessor());
+            BlockState topBlock = columnOfBlocks.getBlock(centerOfChunk.getY() + landHeight);
+
+            if(!topBlock.getFluidState().isEmpty()) {
+                return false;
+            }
+        }
+
+        //cannot be near other specified structure
+        for (ResourceKey<StructureSet> structureSetToAvoid : config.structureSetToAvoid) {
+            if (context.chunkGenerator().hasFeatureChunkInRange(structureSetToAvoid, context.seed(), chunkPos.x, chunkPos.z, config.structureAvoidRadius)) {
+                return false;
+            }
+        }
+
+        if (config.allowedTerrainHeightRange != -1) {
+            int maxTerrainHeight = Integer.MIN_VALUE;
+            int minTerrainHeight = Integer.MAX_VALUE;
+
+            for (int curChunkX = chunkPos.x - config.terrainHeightCheckRadius; curChunkX <= chunkPos.x + config.terrainHeightCheckRadius; curChunkX++) {
+                for (int curChunkZ = chunkPos.z - config.terrainHeightCheckRadius; curChunkZ <= chunkPos.z + config.terrainHeightCheckRadius; curChunkZ++) {
+                    int height = context.chunkGenerator().getBaseHeight((curChunkX << 4) + 7, (curChunkZ << 4) + 7, Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor());
+                    maxTerrainHeight = Math.max(maxTerrainHeight, height);
+                    minTerrainHeight = Math.min(minTerrainHeight, height);
+
+                    if (minTerrainHeight < config.minYAllowed) {
+                        return false;
+                    }
+                }
+            }
+
+            if(maxTerrainHeight - minTerrainHeight > config.allowedTerrainHeightRange) {
+                return false;
+            }
+        }
+
+        return true;
+        //return !context.chunkGenerator().hasFeatureChunkInRange(BuiltinStructureSets.OCEAN_MONUMENTS, context.seed(), chunkPos.x, chunkPos.z, 10);
     }
 
     public static Optional<PieceGenerator<JigsawConfiguration>> createPiecesGenerator(PieceGeneratorSupplier.Context<JigsawConfiguration> context) {
 
         // Check if the spot is valid for our structure. This is just as another method for cleanness.
         // Returning an empty optional tells the game to skip this spot as it will not generate the structure.
-        if (!SkyStructures.isFeatureChunk(context)) {
+        if (!GenericJigsawStructure.isGenericFeatureChunk(context, null)) {
             return Optional.empty();
         }
 
         // Turns the chunk coordinates into actual coordinates we can use. (Gets center of that chunk)
         BlockPos blockpos = context.chunkPos().getMiddleBlockPosition(0);
-
-        // Set's our spawning blockpos's y offset to be 60 blocks up.
-        // Since we are going to have heightmap/terrain height spawning set to true further down, this will make it so we spawn 60 blocks above terrain.
-        // If we wanted to spawn on ocean floor, we would set heightmap/terrain height spawning to false and the grab the y value of the terrain with OCEAN_FLOOR_WG heightmap.
-        blockpos = blockpos.above(60);
 
         Optional<PieceGenerator<JigsawConfiguration>> structurePiecesGenerator =
                 JigsawPlacement.addPieces(

@@ -1,4 +1,4 @@
-package com.finndog.mvs.structures.configs;
+package com.finndog.mvs.world.structures.configs;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
