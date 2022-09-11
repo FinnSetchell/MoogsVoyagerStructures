@@ -1,6 +1,8 @@
 package com.finndog.mvs;
 
+import com.finndog.mvs.structures.GenericJigsawStructure;
 import com.finndog.mvs.structures.SkyStructures;
+import com.finndog.mvs.structures.YLevelDownOne;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -23,5 +25,7 @@ public class MVSStructures {
      * this base structure will have the resourcelocation of structure_tutorial:sky_structures.
      */
     public static final RegistryObject<StructureFeature<?>> SKY_STRUCTURES = DEFERRED_REGISTRY_STRUCTURE.register("sky_structures", SkyStructures::new);
+    public static final RegistryObject<StructureFeature<?>> YLEVEL_DOWN_ONE = DEFERRED_REGISTRY_STRUCTURE.register("ylevel_down_one", YLevelDownOne::new);
+    public static final RegistryObject<StructureFeature<?>> GENERIC_JIGSAW_STRUCTURE = DEFERRED_REGISTRY_STRUCTURE.register("generic_jigsaw_structure", GenericJigsawStructure::new);
 
 }

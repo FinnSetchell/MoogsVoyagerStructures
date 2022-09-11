@@ -17,7 +17,8 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
 import java.util.Optional;
 
-public class SkyStructures extends StructureFeature<JigsawConfiguration> {
+public class YLevelDownOne extends StructureFeature<JigsawConfiguration> {
+
 
     // A custom codec that changes the size limit for our code_structure_sky_fan.json's config to not be capped at 7.
     // With this, we can have a structure with a size limit up to 30 if we want to have extremely long branches of pieces in the structure.
@@ -28,9 +29,9 @@ public class SkyStructures extends StructureFeature<JigsawConfiguration> {
         ).apply(codec, JigsawConfiguration::new);
     });
 
-    public SkyStructures() {
+    public YLevelDownOne() {
         // Create the pieces layout of the structure and give it to the game
-        super(CODEC, SkyStructures::createPiecesGenerator, PostPlacementProcessor.NONE);
+        super(CODEC, YLevelDownOne::createPiecesGenerator, PostPlacementProcessor.NONE);
     }
 
     /**
@@ -84,7 +85,7 @@ public class SkyStructures extends StructureFeature<JigsawConfiguration> {
 
         // Check if the spot is valid for our structure. This is just as another method for cleanness.
         // Returning an empty optional tells the game to skip this spot as it will not generate the structure.
-        if (!SkyStructures.isFeatureChunk(context)) {
+        if (!YLevelDownOne.isFeatureChunk(context)) {
             return Optional.empty();
         }
 
@@ -94,7 +95,7 @@ public class SkyStructures extends StructureFeature<JigsawConfiguration> {
         // Set's our spawning blockpos's y offset to be 60 blocks up.
         // Since we are going to have heightmap/terrain height spawning set to true further down, this will make it so we spawn 60 blocks above terrain.
         // If we wanted to spawn on ocean floor, we would set heightmap/terrain height spawning to false and the grab the y value of the terrain with OCEAN_FLOOR_WG heightmap.
-        blockpos = blockpos.above(60);
+        blockpos = blockpos.below();
 
         Optional<PieceGenerator<JigsawConfiguration>> structurePiecesGenerator =
                 JigsawPlacement.addPieces(
