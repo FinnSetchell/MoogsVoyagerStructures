@@ -24,13 +24,13 @@ public class SkyStructures extends StructureFeature<JigsawConfiguration> {
     public static final Codec<JigsawConfiguration> CODEC = RecordCodecBuilder.create((codec) -> {
         return codec.group(
                 StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(JigsawConfiguration::startPool),
-                Codec.intRange(0, 10).fieldOf("size").forGetter(JigsawConfiguration::maxDepth)
+                Codec.intRange(0, 30).fieldOf("size").forGetter(JigsawConfiguration::maxDepth)
         ).apply(codec, JigsawConfiguration::new);
     });
 
     public SkyStructures() {
         // Create the pieces layout of the structure and give it to the game
-        super(CODEC, GenericJigsawStructure::createPiecesGenerator, PostPlacementProcessor.NONE);
+        super(CODEC, SkyStructures::createPiecesGenerator, PostPlacementProcessor.NONE);
     }
 
     /**
