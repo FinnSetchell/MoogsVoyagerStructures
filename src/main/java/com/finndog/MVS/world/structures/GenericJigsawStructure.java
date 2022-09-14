@@ -4,7 +4,6 @@ import com.finndog.mvs.utils.GeneralUtils;
 import com.finndog.mvs.world.structures.configs.MVSGenericConfig;
 import com.finndog.mvs.world.structures.pieces.PieceLimitedJigsawManager;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
@@ -17,22 +16,25 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
+import net.minecraft.world.level.levelgen.structure.PostPlacementProcessor;
 import net.minecraft.world.level.levelgen.structure.StructureSet;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGenerator;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier;
-import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
 import java.util.Optional;
 
-public class GenericJigsawStructure extends StructureFeature<JigsawConfiguration>  {
+public class GenericJigsawStructure extends StructureFeature<MVSGenericConfig>  {
 
-    public static final Codec<JigsawConfiguration> CODEC = RecordCodecBuilder.create((codec) -> {
+    /*public static final Codec<MVSGenericConfig> CODEC = RecordCodecBuilder.create((codec) -> {
         return codec.group(
-                StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(JigsawConfiguration::startPool),
-                Codec.intRange(0, 30).fieldOf("size").forGetter(JigsawConfiguration::maxDepth)
-        ).apply(codec, JigsawConfiguration::new);
-    });
+                StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(MVSGenericConfig::startPool),
+                Codec.intRange(0, 30).fieldOf("size").forGetter(MVSGenericConfig::maxDepth)
+        ).apply(codec, MVSGenericConfig::new);
+    });*/
 
+    public GenericJigsawStructure(Codec<MVSGenericConfig> codec) {
+        super(codec, GenericJigsawStructure::generateGenericPieces, PostPlacementProcessor.NONE);
+    }
 
     /**auto generated replacing commented code below
      *
@@ -42,7 +44,7 @@ public class GenericJigsawStructure extends StructureFeature<JigsawConfiguration
      *     }
      *
     **/
-    public GenericJigsawStructure(Codec<JigsawConfiguration> p_197165_, PieceGeneratorSupplier<JigsawConfiguration> p_197166_) {
+    public GenericJigsawStructure(Codec<MVSGenericConfig> p_197165_, PieceGeneratorSupplier<MVSGenericConfig> p_197166_) {
         super(p_197165_, p_197166_);
     }
 
@@ -143,8 +145,8 @@ public class GenericJigsawStructure extends StructureFeature<JigsawConfiguration
         //return !context.chunkGenerator().hasFeatureChunkInRange(BuiltinStructureSets.OCEAN_MONUMENTS, context.seed(), chunkPos.x, chunkPos.z, 10);
     }
 
-    public static <CC extends MVSGenericConfig> Optional<PieceGenerator<CC>> generateGenericPieces(PieceGeneratorSupplier.Context<CC> context) {
-        CC config = context.config();
+    public static  Optional<PieceGenerator<MVSGenericConfig>> generateGenericPieces(PieceGeneratorSupplier.Context<MVSGenericConfig> context) {
+        MVSGenericConfig config = context.config();
         BlockPos blockpos = new BlockPos(context.chunkPos().getMinBlockX(), config.setFixedYSpawn, context.chunkPos().getMinBlockZ());
         return PieceLimitedJigsawManager.assembleJigsawStructure(
                 context,

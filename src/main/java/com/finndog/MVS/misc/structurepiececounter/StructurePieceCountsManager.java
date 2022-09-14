@@ -1,10 +1,10 @@
 package com.finndog.mvs.misc.structurepiececounter;
 
+import com.finndog.mvs.MVSMain;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
-import com.finndog.mvs.MVSMain;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -12,8 +12,10 @@ import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
-import java.util.function.Supplier;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class StructurePieceCountsManager extends SimpleJsonResourceReloadListener {
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().setLenient().disableHtmlEscaping().excludeFieldsWithoutExposeAnnotation().create();
@@ -33,15 +35,15 @@ public class StructurePieceCountsManager extends SimpleJsonResourceReloadListene
             if(entry.alwaysSpawnThisMany != null && entry.neverSpawnMoreThanThisMany != null && entry.alwaysSpawnThisMany > entry.neverSpawnMoreThanThisMany) {
                 throw new Exception("Moogs Voyager Structures Error: Found " + entry.nbtPieceName + " entry has alwaysSpawnThisMany greater than neverSpawnMoreThanThisMany which is invalid.");
             }
-            if(entry.condition != null) {
-                Optional<Supplier<Boolean>> optionalSupplier = JSONConditionsRegistry.RS_JSON_CONDITIONS_REGISTRY.getOptional(new ResourceLocation(entry.condition));
-                optionalSupplier.ifPresentOrElse(condition -> {
-                    if(!condition.get()) {
-                        piecesSpawnCounts.remove(entry);
-                    }
-                },
-                () -> MVSMain.LOGGER.error("Moogs Voyager Structures Error: Found {} entry has a condition that does not exist. Extra info: {}", entry.nbtPieceName, fileIdentifier));
-            }
+//            if(entry.condition != null) {
+//                Optional<Supplier<Boolean>> optionalSupplier = JSONConditionsRegistry.RS_JSON_CONDITIONS_REGISTRY.getOptional(new ResourceLocation(entry.condition));
+//                optionalSupplier.ifPresentOrElse(condition -> {
+//                    if(!condition.get()) {
+//                        piecesSpawnCounts.remove(entry);
+//                    }
+//                },
+//                () -> MVSMain.LOGGER.error("Moogs Voyager Structures Error: Found {} entry has a condition that does not exist. Extra info: {}", entry.nbtPieceName, fileIdentifier));
+//            }
         }
         return piecesSpawnCounts;
     }
