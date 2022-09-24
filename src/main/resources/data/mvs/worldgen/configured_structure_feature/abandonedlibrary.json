@@ -1,14 +1,19 @@
 {
 
-  "type": "minecraft:village",
+  "type": "mvs:generic_jigsaw_structure",
 
   "config": {
-
     "start_pool": "mvs:abandonedlibrary/start_pool",
+    "size": 1,
 
-    "size": 1
-
-
+    "cannot_spawn_in_liquid": true,
+    "terrain_height_radius_check": 2,
+    "allowed_terrain_height_range": 22,
+    "valid_biome_radius_check": 3,
+    "structure_set_avoid_radius_check": 6,
+    "structure_set_to_avoid": [
+      "mvs:abandonedlibrary"
+    ]
   },
 
   "biomes": "#mvs:has_structure/overworld_biomes",

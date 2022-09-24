@@ -29,6 +29,9 @@ public class MVSStructures {
      */
     public static final RegistryObject<StructureFeature<?>> SKY_STRUCTURES = DEFERRED_REGISTRY_STRUCTURE.register("sky_structures", SkyStructures::new);
     public static final RegistryObject<StructureFeature<?>> YLEVEL_DOWN_ONE = DEFERRED_REGISTRY_STRUCTURE.register("ylevel_down_one", YLevelDownOne::new);
-    //public static RegistryObject<StructureFeature<?>> GENERIC_JIGSAW_STRUCTURE = STRUCTURE_FEATURES.register("generic_jigsaw_structure", () -> new GenericJigsawStructure());
-    public static RegistryObject<StructureFeature<?>> GENERIC_UNDERGROUND_JIGSAW_STRUCTURE = STRUCTURE_FEATURES.register("generic_jigsaw_structure", () -> new GenericJigsawStructure(MVSGenericConfig.CODEC));
+    public static RegistryObject<StructureFeature<?>> GENERIC_JIGSAW_STRUCTURE = STRUCTURE_FEATURES.register("generic_jigsaw_structure", () -> new GenericJigsawStructure(MVSGenericConfig.CODEC));
+
+
+
+
 }
