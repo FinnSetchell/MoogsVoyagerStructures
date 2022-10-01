@@ -1,3 +1,8 @@
+/**
+ * A huge thanks to TelepathicGrunt for much of the source code, partially from:
+ * https://github.com/TelepathicGrunt/RepurposedStructures and
+ * https://github.com/TelepathicGrunt/StructureTutorialMod*/
+
 package com.finndog.mvs;
 
 import com.finndog.mvs.misc.structurepiececounter.StructurePieceCountsManager;

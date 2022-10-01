@@ -1,3 +1,7 @@
+/**
+ * A huge thanks to TelepathicGrunt for much of the source code, partially from:
+ * https://github.com/TelepathicGrunt/RepurposedStructures and
+ * https://github.com/TelepathicGrunt/StructureTutorialMod*/
 package com.finndog.mvs;
 
 import com.finndog.mvs.world.structures.GenericJigsawStructure;
@@ -30,7 +34,6 @@ public class MVSStructures {
     public static final RegistryObject<StructureFeature<?>> SKY_STRUCTURES = DEFERRED_REGISTRY_STRUCTURE.register("sky_structures", SkyStructures::new);
     public static final RegistryObject<StructureFeature<?>> YLEVEL_DOWN_ONE = DEFERRED_REGISTRY_STRUCTURE.register("ylevel_down_one", YLevelDownOne::new);
     public static RegistryObject<StructureFeature<?>> GENERIC_JIGSAW_STRUCTURE = STRUCTURE_FEATURES.register("generic_jigsaw_structure", () -> new GenericJigsawStructure(MVSGenericConfig.CODEC));
-
 
 
 
