@@ -13,7 +13,6 @@ public class MVSMain {
     public static final String MODID = "mvs";
 
     public static StructurePieceCountsManager structurePieceCountsManager = new StructurePieceCountsManager();
-
     public MVSMain() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MVSStructures.DEFERRED_REGISTRY_STRUCTURE.register(modEventBus);
