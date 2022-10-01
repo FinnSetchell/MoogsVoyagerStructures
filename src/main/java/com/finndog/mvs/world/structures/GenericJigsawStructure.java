@@ -23,6 +23,7 @@ import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplie
 
 import java.util.Optional;
 
+/**NEED TO RENAME SO COMPATIBLE WITH REPURPOSED_STRUCTURES!!*/
 public class GenericJigsawStructure extends StructureFeature<MVSGenericConfig>  {
 
     /*public static final Codec<MVSGenericConfig> CODEC = RecordCodecBuilder.create((codec) -> {
