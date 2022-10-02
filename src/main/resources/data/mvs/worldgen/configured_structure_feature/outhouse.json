@@ -1,6 +1,6 @@
 {
 
-  "type": "minecraft:village",
+  "type": "mvs:mvs_generic_jigsaw_structure",
 
   "config": {
 

@@ -1,6 +1,6 @@
 {
   // The base structure class to use for the behavior of the structure. (Like extra terrain checks and such)
-  "type": "minecraft:village",
+  "type": "mvs:mvs_small_jigsaw_structure",
 
   "config": {
     // the path to the template pool json file to use

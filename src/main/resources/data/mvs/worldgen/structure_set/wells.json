@@ -1,6 +1,22 @@
 {
   "structures": [
     {
+      "structure": "mvs:well",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:smallwell",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:rarewell",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:smallcopperwell",
+      "weight": 1
+    },
+    {
       "structure": "mvs:acaciawell",
       "weight": 1
     },
@@ -49,10 +65,10 @@
 
     "type": "minecraft:random_spread",
 
-    "salt": 1335798430,
+    "salt": 1545400943,
 
-    "spacing": 462,
+    "spacing": 17,
 
-    "separation": 400
+    "separation": 5
   }
 }

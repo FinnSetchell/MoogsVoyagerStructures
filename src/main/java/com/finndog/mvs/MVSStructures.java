@@ -4,10 +4,9 @@
  * https://github.com/TelepathicGrunt/StructureTutorialMod*/
 package com.finndog.mvs;
 
-import com.finndog.mvs.world.structures.GenericJigsawStructure;
+import com.finndog.mvs.world.structures.MVSGenericJigsawStructure;
 import com.finndog.mvs.world.structures.SkyStructures;
 import com.finndog.mvs.world.structures.YLevelDownOne;
-import com.finndog.mvs.world.structures.configs.MVSGenericConfig;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -33,8 +32,10 @@ public class MVSStructures {
      */
     public static final RegistryObject<StructureFeature<?>> SKY_STRUCTURES = DEFERRED_REGISTRY_STRUCTURE.register("sky_structures", SkyStructures::new);
     public static final RegistryObject<StructureFeature<?>> YLEVEL_DOWN_ONE = DEFERRED_REGISTRY_STRUCTURE.register("ylevel_down_one", YLevelDownOne::new);
-    //public static RegistryObject<StructureFeature<?>> GENERIC_JIGSAW_STRUCTURE = STRUCTURE_FEATURES.register("generic_jigsaw_structure", () -> new GenericJigsawStructure(MVSGenericConfig.CODEC));
-    public static RegistryObject<StructureFeature<?>> GENERIC_JIGSAW_STRUCTURE = DEFERRED_REGISTRY_STRUCTURE.register("generic_jigsaw_structure", () -> new GenericJigsawStructure(MVSGenericConfig.CODEC));
+    public static final RegistryObject<StructureFeature<?>> MVS_GENERIC_JIGSAW_STRUCTURE = DEFERRED_REGISTRY_STRUCTURE.register("mvs_generic_jigsaw_structure", MVSGenericJigsawStructure::new);
+    public static final RegistryObject<StructureFeature<?>> MVS_SMALL_JIGSAW_STRUCTURE = DEFERRED_REGISTRY_STRUCTURE.register("mvs_small_jigsaw_structure", MVSGenericJigsawStructure::new);
+
+    //public static final RegistryObject<StructureFeature<?>> GENERIC_JIGSAW_STRUCTURE = DEFERRED_REGISTRY_STRUCTURE.register("generic_jigsaw_structure", () -> new GenericJigsawStructure(MVSGenericConfig.CODEC));
 
 
 
