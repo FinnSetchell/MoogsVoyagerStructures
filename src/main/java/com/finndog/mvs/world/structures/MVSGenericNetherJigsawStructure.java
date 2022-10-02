@@ -21,21 +21,19 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
 import java.util.Optional;
 
-public class YLevelDownOne extends StructureFeature<JigsawConfiguration> {
-
-
+public class MVSGenericNetherJigsawStructure extends StructureFeature<JigsawConfiguration> {
     // A custom codec that changes the size limit for our code_structure_sky_fan.json's config to not be capped at 7.
     // With this, we can have a structure with a size limit up to 30 if we want to have extremely long branches of pieces in the structure.
     public static final Codec<JigsawConfiguration> CODEC = RecordCodecBuilder.create((codec) -> {
         return codec.group(
                 StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(JigsawConfiguration::startPool),
-                Codec.intRange(0, 10).fieldOf("size").forGetter(JigsawConfiguration::maxDepth)
+                Codec.intRange(0, 30).fieldOf("size").forGetter(JigsawConfiguration::maxDepth)
         ).apply(codec, JigsawConfiguration::new);
     });
 
-    public YLevelDownOne() {
+    public MVSGenericNetherJigsawStructure() {
         // Create the pieces layout of the structure and give it to the game
-        super(CODEC, YLevelDownOne::createPiecesGenerator, PostPlacementProcessor.NONE);
+        super(CODEC, MVSGenericNetherJigsawStructure::createPiecesGenerator, PostPlacementProcessor.NONE);
     }
 
     /**
@@ -51,31 +49,52 @@ public class YLevelDownOne extends StructureFeature<JigsawConfiguration> {
     }
 
     /*
-     * This is where extra checks can be done to determine if the structure can spawn here.
-     * This only needs to be overridden if you're adding additional spawn conditions.
-     *
-     * Fun fact, if you set your structure separation/spacing to be 0/1, you can use
-     * isFeatureChunk to return true only if certain chunk coordinates are passed in
-     * which allows you to spawn structures only at certain coordinates in the world.
-     *
-     * Basically, this method is used for determining if the land is at a suitable height,
-     * if certain other structures are too close or not, or some other restrictive condition.
-     *
-     * For example, Pillager Outposts added a check to make sure it cannot spawn within 10 chunk of a Village.
-     * (Bedrock Edition seems to not have the same check)
-     *
-     * If you are doing Nether structures, you'll probably want to spawn your structure on top of ledges.
-     * Best way to do that is to use getBaseColumn to grab a column of blocks at the structure's x/z position.
-     * Then loop through it and look for land with air above it and set blockpos's Y value to it.
-     * Make sure to set the final boolean in JigsawPlacement.addPieces to false so
-     * that the structure spawns at blockpos's y value instead of placing the structure on the Bedrock roof!
-     *
-     * Also, please for the love of god, do not do dimension checking here.
-     * If you do and another mod's dimension is trying to spawn your structure,
-     * the locate command will make minecraft hang forever and break the game.
-     * Use the biome tags for where to spawn the structure and users can datapack
-     * it to spawn in specific biomes that aren't in the dimension they don't like if they wish.
-     */
+    public static boolean isStructureInDistance(PieceGeneratorSupplier.Context<JigsawConfiguration> context, List<ResourceKey<StructureSet>> structures) {
+        ChunkPos chunkpos = context.chunkPos();
+        int structureAvoidRadius = 5;
+        List<ResourceKey<StructureSet>> structureSetToAvoid = new ArrayList<>();
+
+
+        if (structureAvoidRadius == 0) {
+            return false;
+        }
+
+        for (ResourceKey<StructureSet> structureSetToAvoid : structureSetToAvoid) {
+            if (context.chunkGenerator().hasFeatureChunkInRange(structureSetToAvoid, context.seed(), chunkpos.x, chunkpos.z, structureAvoidRadius)) {
+                return false;
+            }
+        }
+
+        return false;
+    }*/
+
+
+    public static BlockPos findLedge(PieceGeneratorSupplier.Context<JigsawConfiguration> context) {
+        //look for ledge between y110 and y32
+        ChunkPos chunkpos = context.chunkPos();
+
+        BlockPos centerOfChunk = chunkpos.getMiddleBlockPosition(0);
+        int landHeight = context.chunkGenerator().getFirstOccupiedHeight(centerOfChunk.getX(), centerOfChunk.getZ(), Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor());
+        NoiseColumn columnOfBlocks = context.chunkGenerator().getBaseColumn(centerOfChunk.getX(), centerOfChunk.getZ(), context.heightAccessor());
+        BlockState currentBlock;
+        BlockState nextBlock = columnOfBlocks.getBlock(centerOfChunk.getY()+ 32);
+        BlockPos newY = new  BlockPos(centerOfChunk.getX(),32,centerOfChunk.getZ());
+
+
+        for (int x = 33; x >= 110; x++) {
+            currentBlock = nextBlock;
+            nextBlock = columnOfBlocks.getBlock(centerOfChunk.getY()+ x);
+
+            if(!currentBlock.isAir()) {
+                if(nextBlock.isAir()) {
+                    newY = new BlockPos(centerOfChunk.getX(), x, centerOfChunk.getZ());
+                }
+            }
+        }
+        return newY;
+    }
+
+
     public static boolean isOnWater(PieceGeneratorSupplier.Context<JigsawConfiguration> context) {
         ChunkPos chunkpos = context.chunkPos();
 
@@ -125,17 +144,12 @@ public class YLevelDownOne extends StructureFeature<JigsawConfiguration> {
 
     public static Optional<PieceGenerator<JigsawConfiguration>> createPiecesGenerator(PieceGeneratorSupplier.Context<JigsawConfiguration> context) {
 
-        if (!isFeatureChunk(context)) {return Optional.empty();}
-        if (!isAllowedTerrainHeightChange(context, Pair.of(3, 3))) {return Optional.empty();}
+        if (!MVSGenericNetherJigsawStructure.isFeatureChunk(context)) {return Optional.empty();}
+        if (!isAllowedTerrainHeightChange(context, Pair.of(10, 10))) {return Optional.empty();}
         if (isOnWater(context)) {return Optional.empty();}
 
-        // Turns the chunk coordinates into actual coordinates we can use. (Gets center of that chunk)
-        BlockPos blockpos = context.chunkPos().getMiddleBlockPosition(0);
 
-        // Set's our spawning blockpos's y offset to be 60 blocks up.
-        // Since we are going to have heightmap/terrain height spawning set to true further down, this will make it so we spawn 60 blocks above terrain.
-        // If we wanted to spawn on ocean floor, we would set heightmap/terrain height spawning to false and the grab the y value of the terrain with OCEAN_FLOOR_WG heightmap.
-        blockpos = blockpos.below();
+        BlockPos blockpos = findLedge(context);
 
         Optional<PieceGenerator<JigsawConfiguration>> structurePiecesGenerator =
                 JigsawPlacement.addPieces(
@@ -144,7 +158,7 @@ public class YLevelDownOne extends StructureFeature<JigsawConfiguration> {
                         blockpos, // Position of the structure. Y value is ignored if last parameter is set to true.
                         false,  // Special boundary adjustments for villages. It's... hard to explain. Keep this false and make your pieces not be partially intersecting.
                         // Either not intersecting or fully contained will make children pieces spawn just fine. It's easier that way.
-                        true // Adds the terrain height's y value to the passed in blockpos's y value. (This uses WORLD_SURFACE_WG heightmap which stops at top water too)
+                        false // Adds the terrain height's y value to the passed in blockpos's y value. (This uses WORLD_SURFACE_WG heightmap which stops at top water too)
                         // Here, blockpos's y value is 60 which means the structure spawn 60 blocks above terrain height.
                         // Set this to false for structure to be place only at the passed in blockpos's Y value instead.
                         // Definitely keep this false when placing structures in the nether as otherwise, heightmap placing will put the structure on the Bedrock roof.
