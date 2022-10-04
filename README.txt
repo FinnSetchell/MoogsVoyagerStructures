@@ -1,46 +1,55 @@
+# Moog's Vanilla Structures (Fabric)
 
-Source installation information for modders
--------------------------------------------
-This code follows the Minecraft Forge installation methodology. It will apply
-some small patches to the vanilla MCP source code, giving you and it access 
-to some of the data and functions you need to build a successful mod.
+[![Discord](https://img.shields.io/discord/869218732650688543?label=Discord&style=for-the-badge)](https://discord.com/invite/6VCTUawBz6) [![](https://img.shields.io/badge/My-projects-orange?style=for-the-badge&logo=curseforge)](https://www.curseforge.com/members/finn3253/projects)
+&nbsp;
 
-Note also that the patches are built against "un-renamed" MCP source code (aka
-SRG Names) - this means that you will not be able to read them directly against
-normal code.
+**Overview**
+------------
+Please comment any ideas you may have to improve this mod.
 
-Setup Process:
-==============================
+&nbsp;
 
-Step 1: Open your command-line and browse to the folder where you extracted the zip file.
+**Forge version** might come in the future, idk. If anyone wants to convert it then just ask me :)
+&nbsp;
 
-Step 2: You're left with a choice.
-If you prefer to use Eclipse:
-1. Run the following command: `gradlew genEclipseRuns` (`./gradlew genEclipseRuns` if you are on Mac/Linux)
-2. Open Eclipse, Import > Existing Gradle Project > Select Folder 
-   or run `gradlew eclipse` to generate the project.
+This mod adds a bunch of vanilla style structures into the game. They all use vanilla blocks and entities for those who prefer the vanilla look. It also means it works nicely in modpacks because it doesn't fill your game up with a tonne of useless blocks.
+&nbsp;
 
-If you prefer to use IntelliJ:
-1. Open IDEA, and import project.
-2. Select your build.gradle file and have it import.
-3. Run the following command: `gradlew genIntellijRuns` (`./gradlew genIntellijRuns` if you are on Mac/Linux)
-4. Refresh the Gradle Project in IDEA if required.
+<img src="https://imgur.com/fOVdNQj.png">
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can 
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+&nbsp;
+&nbsp;
+**HOW TO USE:**
+---------------
 
-Mapping Names:
-=============================
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license, if you do not agree with it you can change your mapping names to other crowdsourced names in your 
-build.gradle. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/MinecraftForge/MCPConfig/blob/master/Mojang.md
+1. simply download the version you need
+2. then add it to your mods folder
+It does not require any settings to be changed for it and should work with most mods (let me know if you get compatibility issues)
+&nbsp;
 
-Additional Resources: 
-=========================
-Community Documentation: http://mcforge.readthedocs.io/en/latest/gettingstarted/  
-LexManos' Install Video: https://www.youtube.com/watch?v=8VEdtQLuLO0  
-Forge Forum: https://forums.minecraftforge.net/  
-Forge Discord: https://discord.gg/UvedJ9m  
+**Support Me:**
+-----------------
+&nbsp;
+
+## adfoc.us links
+
+If you want to help support me, please follow the following **advertised download links**:
+
+1.18: http://adfoc.us/76338584766179
+&nbsp;
+
+
+
+**Modpacks/Showcase Videos:**
+-----------------
+
+##If you have any modpacks/videos using this mod that you want featured here, then message me on discord!
+&nbsp;
+
+&nbsp;
+
+**Please consider leaving some sort of feedback, any issues or suggestions for what you want in the next version.**
+
+**The best and fastest way to get replies is to join our [discord channel](https://discord.gg/S5nffJbuvA)!**
+
+[![](https://i.imgur.com/sfAmR3Y.png)](https://discord.gg/S5nffJbuvA)

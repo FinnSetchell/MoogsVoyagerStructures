@@ -1,0 +1,206 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:abandonedlibrary",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:azeleahouse",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:barn",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:beachbar",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:beedome",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:bigoaktree",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:bluestall",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:calcitehouse",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:campsite",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:cart",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:castleruins",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:deepslatehouse",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:deserthouse",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:desertpump",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:desertwell",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:firecamp",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:floatingislands",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:flowerhole",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:foxhut",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:horsepen",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:house",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:island",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:lampchest",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:largecart1",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:largecart2",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:largefloatingisland",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:largemushroom",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:lecturngarden",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:logruin",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:mushroompond",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:mushroomstatue",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:orangestall",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:outhouse",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:pinkstall",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:pond",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:railway",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:redstall",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:shed",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:smallruin",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:smallship",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:smallswamphouse",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:stonebee",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:stonefountain",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:stonepillars",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:sunzigate",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:tallhouse",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:villagerstatue",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:warpedhouse",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1545400943,
+
+    "spacing": 30,
+
+    "separation": 20
+  }
+}

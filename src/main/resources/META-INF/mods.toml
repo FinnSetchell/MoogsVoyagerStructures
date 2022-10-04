@@ -1,7 +1,7 @@
 
 modLoader="javafml"
-loaderVersion="[38,)"
-license="All rights reserved"
+loaderVersion="[43,)"
+license="MIT"
 
 [[mods]]
 modId="mvs"

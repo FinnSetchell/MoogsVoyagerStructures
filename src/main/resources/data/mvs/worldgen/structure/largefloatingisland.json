@@ -1,0 +1,18 @@
+{
+
+  "type": "mvs:sky_structures",
+
+  "config": {
+
+    "start_pool": "mvs:largefloatingisland/start_pool",
+
+    "size": 1
+  },
+
+  "biomes": "#mvs:has_structure/overworld_biomes",
+
+  "adapt_noise": false,
+
+  "spawn_overrides": {
+  }
+}
