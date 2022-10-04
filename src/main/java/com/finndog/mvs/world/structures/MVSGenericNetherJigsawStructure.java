@@ -19,7 +19,10 @@ import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplie
 import net.minecraft.world.level.levelgen.structure.pools.JigsawPlacement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 public class MVSGenericNetherJigsawStructure extends StructureFeature<JigsawConfiguration> {
     // A custom codec that changes the size limit for our code_structure_sky_fan.json's config to not be capped at 7.
@@ -67,6 +70,44 @@ public class MVSGenericNetherJigsawStructure extends StructureFeature<JigsawConf
 
         return false;
     }*/
+
+    /**
+     * Looks for suitable y levels to place a structure then randomly picks one if multiple are found.
+     *
+     * @return Will return an empty {@link java.util.Optional} if no suitable y level has been found
+     */
+//    public static Optional<Integer> getSuitableNetherYLevel(PieceGeneratorSupplier.Context<?> context, BlockPos pos) {
+//        NoiseColumn column = context.chunkGenerator().getBaseColumn(pos.getX(), pos.getZ(), context.heightAccessor());
+//        List<Integer> suitableYLevels = new ArrayList<>();
+//
+//        for (int y = 127; y >= 32; y--) {
+//            if (column.getBlock(y - 1).canOcclude() && column.getBlock(y).isAir() && column.getBlock(y + 4).isAir() && column.getBlock(y + 8).isAir()) {
+//                suitableYLevels.add(y);
+//            }
+//        }
+//
+////        if (suitableYLevels.isEmpty())
+////            return Optional.empty();
+//
+//        return Optional.of(suitableYLevels.get(new Random(context.seed()).nextInt(suitableYLevels.size())));
+//    }
+
+    public static int getSuitableNetherYLevel(PieceGeneratorSupplier.Context<?> context, BlockPos pos) {
+        NoiseColumn column = context.chunkGenerator().getBaseColumn(pos.getX(), pos.getZ(), context.heightAccessor());
+        List<Integer> suitableYLevels = new ArrayList<>();
+
+        for (int y = 127; y >= 32; y--) {
+            if (column.getBlock(y - 1).canOcclude() && column.getBlock(y).isAir() && column.getBlock(y + 4).isAir() && column.getBlock(y + 8).isAir()) {
+                suitableYLevels.add(y);
+            }
+        }
+
+        if (suitableYLevels.isEmpty()) {return 0;}
+
+        int yLevel = suitableYLevels.get(new Random(context.seed()).nextInt(suitableYLevels.size()));
+        return yLevel;
+    }
+
 
 
     public static BlockPos findLedge(PieceGeneratorSupplier.Context<JigsawConfiguration> context) {
@@ -144,12 +185,21 @@ public class MVSGenericNetherJigsawStructure extends StructureFeature<JigsawConf
 
     public static Optional<PieceGenerator<JigsawConfiguration>> createPiecesGenerator(PieceGeneratorSupplier.Context<JigsawConfiguration> context) {
 
-        if (!MVSGenericNetherJigsawStructure.isFeatureChunk(context)) {return Optional.empty();}
+        if (!isFeatureChunk(context)) {return Optional.empty();}
         if (!isAllowedTerrainHeightChange(context, Pair.of(10, 10))) {return Optional.empty();}
         if (isOnWater(context)) {return Optional.empty();}
+        //Optional<Integer> yLevel = getSuitableNetherYLevel(context, context.chunkPos().getMiddleBlockPosition(0));
+//        if (yLevel.isEmpty()) {return Optional.empty();}
+        int yLevel = getSuitableNetherYLevel(context, context.chunkPos().getMiddleBlockPosition(0));
+        if (yLevel == 0) {
+            return Optional.empty();
+        }
 
+        BlockPos pos = context.chunkPos().getMiddleBlockPosition(yLevel);
 
-        BlockPos blockpos = findLedge(context);
+        BlockPos blockpos = context.chunkPos().getMiddleBlockPosition(yLevel);
+
+//        BlockPos blockpos = new BlockPos(context.chunkPos().x, findLedge(context), context.chunkPos().z);
 
         Optional<PieceGenerator<JigsawConfiguration>> structurePiecesGenerator =
                 JigsawPlacement.addPieces(

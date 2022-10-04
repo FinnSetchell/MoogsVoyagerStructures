@@ -57,6 +57,10 @@
       "weight": 1
     },
     {
+      "structure": "mvs:desertwell",
+      "weight": 1
+    },
+    {
       "structure": "mvs:firecamp",
       "weight": 1
     },
