@@ -30,5 +30,6 @@ public class MVSStructures {
     public static final RegistryObject<StructureType<MVSGenericNetherJigsawStructure>> MVS_GENERIC_JIGSAW_STRUCTURE = DEFERRED_REGISTRY_STRUCTURE.register("mvs_generic_jigsaw_structure", () -> () -> MVSGenericNetherJigsawStructure.CODEC);
     public static final RegistryObject<StructureType<MVSGenericSmallJigsawStructure>> MVS_GENERIC_SMALL_JIGSAW_STRUCTURE = DEFERRED_REGISTRY_STRUCTURE.register("mvs_generic_small_jigsaw_structure", () -> () -> MVSGenericSmallJigsawStructure.CODEC);
     public static final RegistryObject<StructureType<MVSGenericNetherJigsawStructure>> MVS_GENERIC_NETHER_JIGSAW_STRUCTURE = DEFERRED_REGISTRY_STRUCTURE.register("mvs_generic_nether_jigsaw_structure", () -> () -> MVSGenericNetherJigsawStructure.CODEC);
+    public static final RegistryObject<StructureType<MVSGenericOceanJigsawStructure>> MVS_GENERIC_OCEAN_JIGSAW_STRUCTURE = DEFERRED_REGISTRY_STRUCTURE.register("mvs_generic_ocean_jigsaw_structure", () -> () -> MVSGenericOceanJigsawStructure.CODEC);
 
 }

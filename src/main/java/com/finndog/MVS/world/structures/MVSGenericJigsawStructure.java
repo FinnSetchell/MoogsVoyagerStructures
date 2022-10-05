@@ -22,15 +22,15 @@ public class MVSGenericJigsawStructure extends Structure {
 
     // A custom codec that changes the size limit for our code_structure_sky_fan.json's config to not be capped at 7.
     // With this, we can have a structure with a size limit up to 30 if we want to have extremely long branches of pieces in the structure.
-    public static final Codec<MVSGenericNetherJigsawStructure> CODEC = RecordCodecBuilder.<MVSGenericNetherJigsawStructure>mapCodec(instance ->
-            instance.group(MVSGenericNetherJigsawStructure.settingsCodec(instance),
+    public static final Codec<MVSGenericJigsawStructure> CODEC = RecordCodecBuilder.<MVSGenericJigsawStructure>mapCodec(instance ->
+            instance.group(MVSGenericJigsawStructure.settingsCodec(instance),
                     StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
                     ResourceLocation.CODEC.optionalFieldOf("start_jigsaw_name").forGetter(structure -> structure.startJigsawName),
                     Codec.intRange(0, 30).fieldOf("size").forGetter(structure -> structure.size),
                     HeightProvider.CODEC.fieldOf("start_height").forGetter(structure -> structure.startHeight),
                     Heightmap.Types.CODEC.optionalFieldOf("project_start_to_heightmap").forGetter(structure -> structure.projectStartToHeightmap),
                     Codec.intRange(1, 128).fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter)
-            ).apply(instance, MVSGenericNetherJigsawStructure::new)).codec();
+            ).apply(instance, MVSGenericJigsawStructure::new)).codec();
 
     private final Holder<StructureTemplatePool> startPool;
     private final Optional<ResourceLocation> startJigsawName;
@@ -89,9 +89,8 @@ public class MVSGenericJigsawStructure extends Structure {
 
         // Check if the spot is valid for our structure. This is just as another method for cleanness.
         // Returning an empty optional tells the game to skip this spot as it will not generate the structure.
-        if (!StructureUtils.extraSpawningChecks(context)) {
-            return Optional.empty();
-        }
+        if (!StructureUtils.extraSpawningChecks(context)) {return Optional.empty();}
+        if (StructureUtils.isFeatureChunk(context, 10)) {return Optional.empty();}
 
         // Set's our spawning blockpos's y offset to be 60 blocks up.
         // Since we are going to have heightmap/terrain height spawning set to true further down, this will make it so we spawn 60 blocks above terrain.
