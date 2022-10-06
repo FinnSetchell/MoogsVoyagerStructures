@@ -22,5 +22,7 @@
   "use_expansion_hack": false,
 
   "spawn_overrides": {
-  }
+  },
+
+  "spawn_in_liquid": true
 }
