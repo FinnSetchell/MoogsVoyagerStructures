@@ -26,7 +26,7 @@ public class MVSGenericNetherJigsawStructure extends Structure {
                     Codec.intRange(0, 30).fieldOf("size").forGetter(structure -> structure.size),
                     HeightProvider.CODEC.fieldOf("start_height").forGetter(structure -> structure.startHeight),
                     Heightmap.Types.CODEC.optionalFieldOf("project_start_to_heightmap").forGetter(structure -> structure.projectStartToHeightmap),
-                    Codec.intRange(1, 128).fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter),
+                    Codec.intRange(1, 128).fieldOf("max_distance_from_center").orElse(10).forGetter(structure -> structure.maxDistanceFromCenter),
                     Codec.BOOL.fieldOf("spawn_in_liquid").orElse(false).forGetter(structure -> structure.spawnInLiquid)
             ).apply(instance, MVSGenericNetherJigsawStructure::new)).codec();
 
@@ -36,7 +36,7 @@ public class MVSGenericNetherJigsawStructure extends Structure {
     private final HeightProvider startHeight;
     private final Optional<Heightmap.Types> projectStartToHeightmap;
     private final int maxDistanceFromCenter;
-    public final boolean spawnInLiquid;
+    private final boolean spawnInLiquid;
 
 
     public MVSGenericNetherJigsawStructure(Structure.StructureSettings config,
@@ -63,11 +63,16 @@ public class MVSGenericNetherJigsawStructure extends Structure {
     public Optional<Structure.GenerationStub> findGenerationPoint(Structure.GenerationContext context) {
         // Turns the chunk coordinates into actual coordinates we can use. (Gets corner of that chunk)
         ChunkPos chunkPos = context.chunkPos();
-        int startY = StructureUtils.getSuitableNetherYLevel(context);
-        BlockPos blockPos = new BlockPos(chunkPos.getMinBlockX(), startY, chunkPos.getMinBlockZ());
+        BlockPos blockPos;
+        if (StructureUtils.getSuitableNetherYLevel(context) != 0) {
+            int startY = StructureUtils.getSuitableNetherYLevel(context);
+            blockPos = new BlockPos(chunkPos.getMinBlockX(), startY, chunkPos.getMinBlockZ());
+        } else {
+            return Optional.empty();
+        }
 
-        if (!StructureUtils.onLiquid(context, this.spawnInLiquid)) {return Optional.empty();}
-        if (StructureUtils.isFeatureChunk(context, 10)) {return Optional.empty();}
+        //if (!StructureUtils.onLiquid(context, this.spawnInLiquid)) {return Optional.empty();}
+        //if (StructureUtils.isFeatureChunk(context, 10)) {return Optional.empty();}
 
 
         Optional<Structure.GenerationStub> structurePiecesGenerator =

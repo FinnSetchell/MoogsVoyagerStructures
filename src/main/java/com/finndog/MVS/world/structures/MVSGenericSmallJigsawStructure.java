@@ -1,7 +1,6 @@
 package com.finndog.mvs.world.structures;
 
 import com.finndog.mvs.MVSStructures;
-import com.finndog.mvs.utils.StructureUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -27,7 +26,7 @@ public class MVSGenericSmallJigsawStructure extends Structure {
                     Codec.intRange(0, 30).fieldOf("size").forGetter(structure -> structure.size),
                     HeightProvider.CODEC.fieldOf("start_height").forGetter(structure -> structure.startHeight),
                     Heightmap.Types.CODEC.optionalFieldOf("project_start_to_heightmap").forGetter(structure -> structure.projectStartToHeightmap),
-                    Codec.intRange(1, 128).fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter),
+                    Codec.intRange(1, 128).fieldOf("max_distance_from_center").orElse(10).forGetter(structure -> structure.maxDistanceFromCenter),
                     Codec.BOOL.fieldOf("spawn_in_liquid").orElse(false).forGetter(structure -> structure.spawnInLiquid)
             ).apply(instance, MVSGenericSmallJigsawStructure::new)).codec();
 
@@ -37,7 +36,7 @@ public class MVSGenericSmallJigsawStructure extends Structure {
     private final HeightProvider startHeight;
     private final Optional<Heightmap.Types> projectStartToHeightmap;
     private final int maxDistanceFromCenter;
-    public final boolean spawnInLiquid;
+    private final boolean spawnInLiquid;
 
 
     public MVSGenericSmallJigsawStructure(Structure.StructureSettings config,
@@ -61,8 +60,8 @@ public class MVSGenericSmallJigsawStructure extends Structure {
     @Override
     public Optional<Structure.GenerationStub> findGenerationPoint(Structure.GenerationContext context) {
 
-        if (!StructureUtils.onLiquid(context, this.spawnInLiquid)) {return Optional.empty();}
-        if (StructureUtils.isFeatureChunk(context, 10)) {return Optional.empty();}
+        //if (!StructureUtils.onLiquid(context, this.spawnInLiquid)) {return Optional.empty();}
+        //if (StructureUtils.isFeatureChunk(context, 10)) {return Optional.empty();}
 
 
         int startY = this.startHeight.sample(context.random(), new WorldGenerationContext(context.chunkGenerator(), context.heightAccessor()));

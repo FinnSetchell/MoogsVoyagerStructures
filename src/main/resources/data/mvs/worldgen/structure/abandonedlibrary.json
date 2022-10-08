@@ -6,8 +6,6 @@
 
   "size": 1,
 
-  "max_distance_from_center": 128,
-
   "biomes": "#mvs:has_structure/overworld_biomes",
 
   "step": "surface_structures",
@@ -23,5 +21,7 @@
   "use_expansion_hack": false,
 
   "spawn_overrides": {
-  }
+  },
+
+  "spawn_in_liquid": false
 }

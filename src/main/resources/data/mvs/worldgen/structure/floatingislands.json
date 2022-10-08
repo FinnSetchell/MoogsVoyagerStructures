@@ -6,18 +6,21 @@
 
   "size": 1,
 
-  "max_distance_from_center": 128,
-
   "biomes": "#mvs:has_structure/overworld_biomes",
 
   "step": "surface_structures",
 
+  "terrain_adaptation": "none",
   "start_height": {
     "absolute": 60
   },
 
   "project_start_to_heightmap": "WORLD_SURFACE_WG",
 
+  "use_expansion_hack": false,
+
   "spawn_overrides": {
-  }
+  },
+
+  "spawn_in_liquid": false
 }
