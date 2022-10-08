@@ -23,5 +23,9 @@
   "spawn_overrides": {
   },
 
-  "spawn_in_liquid": false
+  "spawn_in_liquid": false,
+
+  "radius": 7,
+
+  "allowedTerrainHeightChange": 3
 }

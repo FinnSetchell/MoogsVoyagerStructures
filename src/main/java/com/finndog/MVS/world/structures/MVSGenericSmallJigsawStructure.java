@@ -1,6 +1,7 @@
 package com.finndog.mvs.world.structures;
 
 import com.finndog.mvs.MVSStructures;
+import com.finndog.mvs.utils.StructureUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -60,7 +61,7 @@ public class MVSGenericSmallJigsawStructure extends Structure {
     @Override
     public Optional<Structure.GenerationStub> findGenerationPoint(Structure.GenerationContext context) {
 
-        //if (!StructureUtils.onLiquid(context, this.spawnInLiquid)) {return Optional.empty();}
+        if (!StructureUtils.onLiquid(context, this.spawnInLiquid)) {return Optional.empty();}
         //if (StructureUtils.isFeatureChunk(context, 10)) {return Optional.empty();}
 
 

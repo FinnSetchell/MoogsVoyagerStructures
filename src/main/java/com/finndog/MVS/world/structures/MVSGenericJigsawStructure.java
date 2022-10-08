@@ -1,6 +1,7 @@
 package com.finndog.mvs.world.structures;
 
 import com.finndog.mvs.MVSStructures;
+import com.finndog.mvs.utils.StructureUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -27,7 +28,9 @@ public class MVSGenericJigsawStructure extends Structure {
                 HeightProvider.CODEC.fieldOf("start_height").forGetter(structure -> structure.startHeight),
                 Heightmap.Types.CODEC.optionalFieldOf("project_start_to_heightmap").forGetter(structure -> structure.projectStartToHeightmap),
                 Codec.intRange(1, 128).fieldOf("max_distance_from_center").orElse(10).forGetter(structure -> structure.maxDistanceFromCenter),
-                Codec.BOOL.fieldOf("spawn_in_liquid").orElse(false).forGetter(structure -> structure.spawnInLiquid)
+                Codec.BOOL.fieldOf("spawn_in_liquid").orElse(false).forGetter(structure -> structure.spawnInLiquid),
+                Codec.intRange(3, 32).fieldOf("radius").orElse(5).forGetter(structure -> structure.radius),
+                Codec.intRange(1,32).fieldOf("allowedTerrainHeightRange").orElse(3).forGetter(structure -> structure.allowedTerrainHeightRange)
                 ).apply(instance, MVSGenericJigsawStructure::new)).codec();
 
     private final Holder<StructureTemplatePool> startPool;
@@ -37,11 +40,8 @@ public class MVSGenericJigsawStructure extends Structure {
     private final Optional<Heightmap.Types> projectStartToHeightmap;
     private final int maxDistanceFromCenter;
     private final boolean spawnInLiquid;
-
-    private HeightProvider getStartHeight() {
-        return startHeight;
-    }
-
+    private final int radius;
+    private final int allowedTerrainHeightRange;
     public MVSGenericJigsawStructure(Structure.StructureSettings config,
                                      Holder<StructureTemplatePool> startPool,
                                      Optional<ResourceLocation> startJigsawName,
@@ -49,7 +49,9 @@ public class MVSGenericJigsawStructure extends Structure {
                                      HeightProvider startHeight,
                                      Optional<Heightmap.Types> projectStartToHeightmap,
                                      int maxDistanceFromCenter,
-                                     boolean spawnInLiquid)
+                                     boolean spawnInLiquid,
+                                     int radius,
+                                     int allowedTerrainHeightRange)
     {
         super(config);
         this.startPool = startPool;
@@ -59,6 +61,8 @@ public class MVSGenericJigsawStructure extends Structure {
         this.projectStartToHeightmap = projectStartToHeightmap;
         this.maxDistanceFromCenter = maxDistanceFromCenter;
         this.spawnInLiquid = spawnInLiquid;
+        this.radius = radius;
+        this.allowedTerrainHeightRange = allowedTerrainHeightRange;
     }
 
     private static boolean extraSpawningChecks(Structure.GenerationContext context) {
@@ -76,7 +80,8 @@ public class MVSGenericJigsawStructure extends Structure {
     }
     @Override
     public Optional<Structure.GenerationStub> findGenerationPoint(Structure.GenerationContext context) {
-        //if (StructureUtils.onLiquid(context, this.spawnInLiquid)) {return Optional.empty();}
+        if (!StructureUtils.onLiquid(context, spawnInLiquid)) {return Optional.empty();}
+        if (StructureUtils.isAllowedTerrainHeightChange(context, radius, allowedTerrainHeightRange)) {return Optional.empty();}
         //if (StructureUtils.isFeatureChunk(context, 10)) {return Optional.empty();}
         if (!extraSpawningChecks(context)) {
             return Optional.empty();

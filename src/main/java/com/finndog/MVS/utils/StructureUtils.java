@@ -14,6 +14,24 @@ import java.util.Random;
 
 public class StructureUtils {
 
+    public static boolean isAllowedTerrainHeightChange(Structure.GenerationContext context, int radius, int allowedTerrainHeightRange) {
+        ChunkPos chunkPos = context.chunkPos();
+        BlockPos centerOfChunk = chunkPos.getMiddleBlockPosition(0);
+        int[] outerHeights = new int[4];
+
+        outerHeights[0] = centerOfChunk.getX() + radius;
+        outerHeights[1] = centerOfChunk.getX() - radius;
+        outerHeights[2] = centerOfChunk.getZ() + radius;
+        outerHeights[3] = centerOfChunk.getZ() - radius;
+
+        int minHeight = Math.min(Math.min(outerHeights[0], outerHeights[1]), Math.min(outerHeights[2], outerHeights[3]));
+        int maxHeight = Math.max(Math.max(outerHeights[0], outerHeights[1]), Math.max(outerHeights[2], outerHeights[3]));
+
+        if (Math.abs(maxHeight - minHeight) <= allowedTerrainHeightRange) {
+            return true;
+        }
+        return false;
+    }
     public static boolean onLiquid(Structure.GenerationContext context, boolean spawnInLiquid) {
         ChunkPos chunkPos = context.chunkPos();
         BlockPos centerOfChunk = chunkPos.getMiddleBlockPosition(0);
@@ -21,15 +39,17 @@ public class StructureUtils {
         NoiseColumn columnOfBlocks = context.chunkGenerator().getBaseColumn(centerOfChunk.getX(), centerOfChunk.getZ(), context.heightAccessor(), context.randomState());
         BlockState topBlock = columnOfBlocks.getBlock(centerOfChunk.getY() + landHeight);
 
-        if (spawnInLiquid) {
-            if(!topBlock.getFluidState().isEmpty()) {
-                return true;
+        if (spawnInLiquid) { //if we want it to spawn in liquid
+            if(!topBlock.getFluidState().isEmpty()) { //if top block liquid
+                return true; //spawn
+            } else { //if top block not liquid
+                return false; //dont spawn
             }
+        } //else
+        if(topBlock.getFluidState().isEmpty()) {  //if not liquid
+            return true; //spawn
         }
-        if(topBlock.getFluidState().isEmpty()) {
-            return true;
-        }
-        return false;
+        return false; //otherwise dont spawn
     }
     public static boolean isFeatureChunk(Structure.GenerationContext context, int distance) {
         ChunkPos chunkpos = context.chunkPos();
@@ -63,7 +83,8 @@ public class StructureUtils {
 
         if (suitableYLevels.isEmpty()) {return 0;}
 
-        int yLevel = suitableYLevels.get(new Random(context.seed()).nextInt(suitableYLevels.size()));
-        return yLevel;
+        return suitableYLevels.get(new Random().nextInt(suitableYLevels.size()));
     }
+
+
 }
