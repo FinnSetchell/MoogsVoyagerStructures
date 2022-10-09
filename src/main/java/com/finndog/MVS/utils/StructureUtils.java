@@ -1,12 +1,17 @@
 package com.finndog.mvs.utils;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.StructureSets;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.NoiseColumn;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.RandomState;
 import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.StructureSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,23 +19,46 @@ import java.util.Random;
 
 public class StructureUtils {
 
-    public static boolean isAllowedTerrainHeightChange(Structure.GenerationContext context, int radius, int allowedTerrainHeightRange) {
-        ChunkPos chunkPos = context.chunkPos();
-        BlockPos centerOfChunk = chunkPos.getMiddleBlockPosition(0);
-        int[] outerHeights = new int[4];
+    public static boolean isAllowedTerrainHeightChange(Structure.GenerationContext context, int size, int allowedTerrainHeightRange) {
+        ChunkPos pos = context.chunkPos();
+        int[] cornerHeights = getCornerHeights(context, pos.getMinBlockX(), size, pos.getMinBlockZ(), size);
 
-        outerHeights[0] = centerOfChunk.getX() + radius;
-        outerHeights[1] = centerOfChunk.getX() - radius;
-        outerHeights[2] = centerOfChunk.getZ() + radius;
-        outerHeights[3] = centerOfChunk.getZ() - radius;
+        int minHeight = Math.min(Math.min(cornerHeights[0], cornerHeights[1]), Math.min(cornerHeights[2], cornerHeights[3]));
+        int maxHeight = Math.max(Math.max(cornerHeights[0], cornerHeights[1]), Math.max(cornerHeights[2], cornerHeights[3]));
 
-        int minHeight = Math.min(Math.min(outerHeights[0], outerHeights[1]), Math.min(outerHeights[2], outerHeights[3]));
-        int maxHeight = Math.max(Math.max(outerHeights[0], outerHeights[1]), Math.max(outerHeights[2], outerHeights[3]));
+        return Math.abs(maxHeight - minHeight) <= allowedTerrainHeightRange;
+    }
 
-        if (Math.abs(maxHeight - minHeight) <= allowedTerrainHeightRange) {
-            return true;
-        }
-        return false;
+    public static int[] getCornerHeights(Structure.GenerationContext context, int middleBlockX, int xSize, int middleBlockZ, int zSize) {
+        ChunkGenerator generator = context.chunkGenerator();
+        LevelHeightAccessor heightAccessor = context.heightAccessor();
+        RandomState randomState = context.randomState();
+
+        return new int[]{
+                generator.getFirstOccupiedHeight(
+                        middleBlockX,
+                        middleBlockZ,
+                        Heightmap.Types.WORLD_SURFACE_WG,
+                        heightAccessor,
+                        randomState),
+                generator.getFirstOccupiedHeight(
+                        middleBlockX,
+                        middleBlockZ + zSize,
+                        Heightmap.Types.WORLD_SURFACE_WG,
+                        heightAccessor,
+                        randomState),
+                generator.getFirstOccupiedHeight(
+                        middleBlockX + xSize,
+                        middleBlockZ,
+                        Heightmap.Types.WORLD_SURFACE_WG,
+                        heightAccessor,
+                        randomState),
+                generator.getFirstOccupiedHeight(
+                        middleBlockX + xSize,
+                        middleBlockZ + zSize,
+                        Heightmap.Types.WORLD_SURFACE_WG,
+                        heightAccessor,
+                        randomState)};
     }
     public static boolean onLiquid(Structure.GenerationContext context, boolean spawnInLiquid) {
         ChunkPos chunkPos = context.chunkPos();
@@ -39,18 +67,37 @@ public class StructureUtils {
         NoiseColumn columnOfBlocks = context.chunkGenerator().getBaseColumn(centerOfChunk.getX(), centerOfChunk.getZ(), context.heightAccessor(), context.randomState());
         BlockState topBlock = columnOfBlocks.getBlock(centerOfChunk.getY() + landHeight);
 
-        if (spawnInLiquid) { //if we want it to spawn in liquid
-            if(!topBlock.getFluidState().isEmpty()) { //if top block liquid
-                return true; //spawn
-            } else { //if top block not liquid
-                return false; //dont spawn
+        if (spawnInLiquid) {
+            if(!topBlock.getFluidState().isEmpty()) {
+                return true;
+            } else {
+                return false;
             }
         } //else
-        if(topBlock.getFluidState().isEmpty()) {  //if not liquid
-            return true; //spawn
+        if(topBlock.getFluidState().isEmpty()) {
+            return true;
         }
-        return false; //otherwise dont spawn
+        return false;
     }
+    public static boolean isStructureInDistance(Structure.GenerationContext context, List<Holder<StructureSet>> structures, int minStructureDistance) {
+        ChunkGenerator generator = context.chunkGenerator();
+        RandomState randomState = context.randomState();
+        long seed = context.seed();
+        ChunkPos chunkPos = context.chunkPos();
+
+        if (minStructureDistance == 0) {
+            return false;
+        }
+
+        for (Holder<StructureSet> structure : structures) {
+            if (generator.hasStructureChunkInRange(structure, randomState, seed, chunkPos.x, chunkPos.z, minStructureDistance)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static boolean isFeatureChunk(Structure.GenerationContext context, int distance) {
         ChunkPos chunkpos = context.chunkPos();
 
@@ -85,6 +132,5 @@ public class StructureUtils {
 
         return suitableYLevels.get(new Random().nextInt(suitableYLevels.size()));
     }
-
 
 }

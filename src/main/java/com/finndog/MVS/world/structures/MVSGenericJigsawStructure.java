@@ -29,8 +29,8 @@ public class MVSGenericJigsawStructure extends Structure {
                 Heightmap.Types.CODEC.optionalFieldOf("project_start_to_heightmap").forGetter(structure -> structure.projectStartToHeightmap),
                 Codec.intRange(1, 128).fieldOf("max_distance_from_center").orElse(10).forGetter(structure -> structure.maxDistanceFromCenter),
                 Codec.BOOL.fieldOf("spawn_in_liquid").orElse(false).forGetter(structure -> structure.spawnInLiquid),
-                Codec.intRange(3, 32).fieldOf("radius").orElse(5).forGetter(structure -> structure.radius),
-                Codec.intRange(1,32).fieldOf("allowedTerrainHeightRange").orElse(3).forGetter(structure -> structure.allowedTerrainHeightRange)
+                Codec.intRange(1, 32).fieldOf("radius").orElse(15).forGetter(structure -> structure.radius),
+                Codec.intRange(1,16).fieldOf("allowed_terrain_height_range").orElse(2).forGetter(structure -> structure.allowedTerrainHeightRange)
                 ).apply(instance, MVSGenericJigsawStructure::new)).codec();
 
     private final Holder<StructureTemplatePool> startPool;
@@ -51,8 +51,7 @@ public class MVSGenericJigsawStructure extends Structure {
                                      int maxDistanceFromCenter,
                                      boolean spawnInLiquid,
                                      int radius,
-                                     int allowedTerrainHeightRange)
-    {
+                                     int allowedTerrainHeightRange) {
         super(config);
         this.startPool = startPool;
         this.startJigsawName = startJigsawName;
@@ -65,28 +64,29 @@ public class MVSGenericJigsawStructure extends Structure {
         this.allowedTerrainHeightRange = allowedTerrainHeightRange;
     }
 
-    private static boolean extraSpawningChecks(Structure.GenerationContext context) {
-        // Grabs the chunk position we are at
-        ChunkPos chunkpos = context.chunkPos();
 
-        // Checks to make sure our structure does not spawn above land that's higher than y = 150
-        // to demonstrate how this method is good for checking extra conditions for spawning
-        return context.chunkGenerator().getFirstOccupiedHeight(
-                chunkpos.getMinBlockX(),
-                chunkpos.getMinBlockZ(),
-                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                context.heightAccessor(),
-                context.randomState()) < 150;
-    }
     @Override
     public Optional<Structure.GenerationStub> findGenerationPoint(Structure.GenerationContext context) {
-        if (!StructureUtils.onLiquid(context, spawnInLiquid)) {return Optional.empty();}
-        if (StructureUtils.isAllowedTerrainHeightChange(context, radius, allowedTerrainHeightRange)) {return Optional.empty();}
-        //if (StructureUtils.isFeatureChunk(context, 10)) {return Optional.empty();}
-        if (!extraSpawningChecks(context)) {
-            return Optional.empty();
-        }
+//        int minStructureDistance = 10;
+//        List<Holder<StructureSet>> structures_to_avoid = new ArrayList<>() {{
+//            add(StructureSets.VILLAGES);
+//            add(StructureSets.PILLAGER_OUTPOSTS);
+//            add(StructureSets.OCEAN_MONUMENTS);
+//            add(StructureSets.DESERT_PYRAMIDS);
+//            add(StructureSets.END_CITIES);
+//            add(StructureSets.IGLOOS);
+//            add(StructureSets.JUNGLE_TEMPLES);
+//            add(StructureSets.RUINED_PORTALS);
+//            add(StructureSets.SHIPWRECKS);
+//            add(StructureSets.SWAMP_HUTS);
+//            add(StructureSets.WOODLAND_MANSIONS);
+//            add(StructureSets.OCEAN_RUINS);
+//            add(StructureSets.NETHER_FOSSILS);
+//        }};
 
+        if (!StructureUtils.onLiquid(context, spawnInLiquid)) {return Optional.empty();}
+        if (!StructureUtils.isAllowedTerrainHeightChange(context, radius, allowedTerrainHeightRange)) {return Optional.empty();}
+//        if (StructureUtils.isStructureInDistance(context, structures_to_avoid, minStructureDistance)) {return Optional.empty();}
 
         // Set's our spawning blockpos's y offset to be 60 blocks up.
         // Since we are going to have heightmap/terrain height spawning set to true further down, this will make it so we spawn 60 blocks above terrain.

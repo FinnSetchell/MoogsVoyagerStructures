@@ -1,6 +1,6 @@
 {
 
-  "type": "mvs:mvs_generic_small_jigsaw_structure",
+  "type": "mvs:mvs_generic_jigsaw_structure",
 
   "start_pool": "mvs:smallcopperwell/start_pool",
 
@@ -22,5 +22,9 @@
   "spawn_overrides": {
   },
 
-  "spawn_in_liquid": false
+  "spawn_in_liquid": false,
+
+  "radius": 3,
+
+  "allowedTerrainHeightChange": 3
 }
