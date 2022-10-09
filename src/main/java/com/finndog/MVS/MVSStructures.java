@@ -23,7 +23,4 @@ public class MVSStructures {
      * this base structure will have the resourcelocation of structure_tutorial:sky_structures.
      */
     public static final RegistryObject<StructureType<MVSGenericJigsawStructure>> MVS_GENERIC_JIGSAW_STRUCTURE = DEFERRED_REGISTRY_STRUCTURE.register("mvs_generic_jigsaw_structure", () -> () -> MVSGenericJigsawStructure.CODEC);
-    public static final RegistryObject<StructureType<MVSGenericSmallJigsawStructure>> MVS_GENERIC_SMALL_JIGSAW_STRUCTURE = DEFERRED_REGISTRY_STRUCTURE.register("mvs_generic_small_jigsaw_structure", () -> () -> MVSGenericSmallJigsawStructure.CODEC);
-    public static final RegistryObject<StructureType<MVSGenericNetherJigsawStructure>> MVS_GENERIC_NETHER_JIGSAW_STRUCTURE = DEFERRED_REGISTRY_STRUCTURE.register("mvs_generic_nether_jigsaw_structure", () -> () -> MVSGenericNetherJigsawStructure.CODEC);
-    public static final RegistryObject<StructureType<MVSSkyStructure>> MVS_SKY_STRUCTURE = DEFERRED_REGISTRY_STRUCTURE.register("mvs_sky_structure", () -> () -> MVSSkyStructure.CODEC);
-}
+    public static final RegistryObject<StructureType<MVSGenericNetherJigsawStructure>> MVS_GENERIC_NETHER_JIGSAW_STRUCTURE = DEFERRED_REGISTRY_STRUCTURE.register("mvs_generic_nether_jigsaw_structure", () -> () -> MVSGenericNetherJigsawStructure.CODEC);}

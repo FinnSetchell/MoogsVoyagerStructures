@@ -64,15 +64,14 @@ public class MVSGenericNetherJigsawStructure extends Structure {
         // Turns the chunk coordinates into actual coordinates we can use. (Gets corner of that chunk)
         ChunkPos chunkPos = context.chunkPos();
         BlockPos blockPos;
-        if (StructureUtils.getSuitableNetherYLevel(context) != 0) {
+        if (StructureUtils.getSuitableNetherYLevel(context) == 0) {
+            return Optional.empty();
+        } else {
             int startY = StructureUtils.getSuitableNetherYLevel(context);
             blockPos = new BlockPos(chunkPos.getMinBlockX(), startY, chunkPos.getMinBlockZ());
-        } else {
-            return Optional.empty();
         }
 
-        //if (!StructureUtils.onLiquid(context, this.spawnInLiquid)) {return Optional.empty();}
-        //if (StructureUtils.isFeatureChunk(context, 10)) {return Optional.empty();}
+        if (!StructureUtils.onLiquid(context, spawnInLiquid)) {return Optional.empty();}
 
 
         Optional<Structure.GenerationStub> structurePiecesGenerator =
