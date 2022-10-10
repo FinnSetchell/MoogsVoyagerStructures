@@ -4,7 +4,7 @@
 
   "start_pool": "mvs:lavapool/start_pool",
 
-  "size": 2,
+  "size": 1,
 
   "biomes": "#mvs:has_structure/nether_wastes_biomes",
 
