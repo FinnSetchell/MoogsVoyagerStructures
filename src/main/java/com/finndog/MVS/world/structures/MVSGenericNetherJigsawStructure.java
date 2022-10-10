@@ -7,7 +7,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -62,15 +61,9 @@ public class MVSGenericNetherJigsawStructure extends Structure {
     @Override
     public Optional<Structure.GenerationStub> findGenerationPoint(Structure.GenerationContext context) {
         // Turns the chunk coordinates into actual coordinates we can use. (Gets corner of that chunk)
-        ChunkPos chunkPos = context.chunkPos();
-        BlockPos blockPos;
-        if (StructureUtils.getSuitableNetherYLevel(context) == 0) {
-            return Optional.empty();
-        } else {
-            int startY = StructureUtils.getSuitableNetherYLevel(context);
-            blockPos = new BlockPos(chunkPos.getMinBlockX(), startY, chunkPos.getMinBlockZ());
-        }
-
+        Optional<Integer> yLevel = StructureUtils.getSuitableNetherYLevel(context, context.chunkPos().getMiddleBlockPosition(0));
+        if (yLevel.isEmpty()) {return Optional.empty();}
+        BlockPos blockPos = context.chunkPos().getMiddleBlockPosition(yLevel.get());
         if (!StructureUtils.onLiquid(context, spawnInLiquid)) {return Optional.empty();}
 
 

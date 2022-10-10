@@ -2,23 +2,19 @@
   "structures": [
     {
       "structure": "mvs:basaltstatue",
-      "weight": 1
+      "weight": 3
     },
     {
       "structure": "mvs:crimsonenchantingtable",
-      "weight": 1
-    },
-    {
-      "structure": "mvs:lavapool",
-      "weight": 1
+      "weight": 2
     },
     {
       "structure": "mvs:netherdevil",
-      "weight": 1
+      "weight": 3
     },
     {
       "structure": "mvs:netherwell",
-      "weight": 1
+      "weight": 3
     }
   ],
   "placement": {

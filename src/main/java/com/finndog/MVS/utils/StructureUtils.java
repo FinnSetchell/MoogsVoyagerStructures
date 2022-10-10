@@ -15,6 +15,7 @@ import net.minecraft.world.level.levelgen.structure.StructureSet;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 public class StructureUtils {
@@ -117,20 +118,20 @@ public class StructureUtils {
         return false;
     }
 
-    public static int getSuitableNetherYLevel(Structure.GenerationContext context) {
-        ChunkPos chunkPos = context.chunkPos();
-        NoiseColumn column = context.chunkGenerator().getBaseColumn(chunkPos.x, chunkPos.z, context.heightAccessor(), context.randomState());
+    public static Optional<Integer> getSuitableNetherYLevel(Structure.GenerationContext context, BlockPos pos) {
+        NoiseColumn column = context.chunkGenerator().getBaseColumn(pos.getX(), pos.getZ(), context.heightAccessor(), context.randomState());
         List<Integer> suitableYLevels = new ArrayList<>();
 
-        for (int y = 127; y >= 32; y--) {
-            if (column.getBlock(y - 1).canOcclude() && column.getBlock(y).isAir() && column.getBlock(y + 4).isAir() && column.getBlock(y + 8).isAir()) {
+        for (int y = 127; y > context.chunkGenerator().getSeaLevel(); y--) {
+            if (column.getBlock(y - 1).canOcclude() && column.getBlock(y).isAir() && column.getBlock(y + 4).isAir()) {
                 suitableYLevels.add(y);
             }
         }
 
-        if (suitableYLevels.isEmpty()) {return 0;}
+        if (suitableYLevels.isEmpty())
+            return Optional.empty();
 
-        return suitableYLevels.get(new Random().nextInt(suitableYLevels.size()));
+        return Optional.of(suitableYLevels.get(new Random(context.seed()).nextInt(suitableYLevels.size())));
     }
 
 }
