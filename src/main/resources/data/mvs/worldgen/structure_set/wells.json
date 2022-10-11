@@ -1,0 +1,70 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:well",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:smallwell",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:rarewell",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:smallcopperwell",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:acaciawell",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:darkoakwell",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:birchwell",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:endwell",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:junglewell",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:mushroomwell",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:oakwell",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:rockywell",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:snowywell",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:sprucewell",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1545400943,
+
+    "spacing": 30,
+
+    "separation": 25
+  }
+}

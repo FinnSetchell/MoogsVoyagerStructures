@@ -1,0 +1,42 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:acacialogpile",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:birchlogpile",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:darkoaklogpile",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:junglelogpile",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:oaklogpile",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:smalloaklog",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:sprucelogpile",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1449851357,
+
+    "spacing": 25,
+
+    "separation": 15
+  }
+}

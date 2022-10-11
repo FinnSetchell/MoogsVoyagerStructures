@@ -1,12 +1,10 @@
 {
 
-  "type": "minecraft:jigsaw",
+  "type": "mvs:mvs_generic_jigsaw_structure",
 
   "start_pool": "mvs:foxhut/start_pool",
 
   "size": 1,
-
-  "max_distance_from_center": 80,
 
   "biomes": "#mvs:has_structure/taiga_biomes",
 
@@ -22,5 +20,11 @@
   "use_expansion_hack": false,
 
   "spawn_overrides": {
-  }
+  },
+
+  "spawn_in_liquid": false,
+
+  "radius": 3,
+
+  "allowedTerrainHeightChange": 3
 }

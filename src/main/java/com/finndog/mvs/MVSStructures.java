@@ -1,6 +1,8 @@
 package com.finndog.mvs;
 
-import com.finndog.mvs.structures.SkyStructures;
+import com.finndog.mvs.world.structures.MVSGenericJigsawStructure;
+import com.finndog.mvs.world.structures.MVSGenericNetherJigsawStructure;
+import com.finndog.mvs.world.structures.SkyStructures;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.structure.StructureType;
@@ -8,6 +10,9 @@ import net.minecraft.world.gen.structure.StructureType;
 public class MVSStructures {
 
     public static StructureType<SkyStructures> SKY_STRUCTURES;
+    public static StructureType<MVSGenericJigsawStructure> MVS_GENERIC_JIGSAW_STRUCTURE;
+    public static StructureType<MVSGenericNetherJigsawStructure> MVS_GENERIC_NETHER_JIGSAW_STRUCTURE;
+
 
     /**
      * Registers the structure itself and sets what its path is. In this case, the
@@ -18,5 +23,7 @@ public class MVSStructures {
      */
     public static void registerStructureFeatures() {
         SKY_STRUCTURES = Registry.register(Registry.STRUCTURE_TYPE, new Identifier(MVSMain.MODID, "sky_structures"), () -> SkyStructures.CODEC);
+        MVS_GENERIC_JIGSAW_STRUCTURE = Registry.register(Registry.STRUCTURE_TYPE, new Identifier(MVSMain.MODID, "mvs_generic_jigsaw_structure"), () -> MVSGenericJigsawStructure.CODEC);
+        MVS_GENERIC_NETHER_JIGSAW_STRUCTURE = Registry.register(Registry.STRUCTURE_TYPE, new Identifier(MVSMain.MODID, "mvs_generic_nether_jigsaw_structure"), () -> MVSGenericNetherJigsawStructure.CODEC);
     }
 }
