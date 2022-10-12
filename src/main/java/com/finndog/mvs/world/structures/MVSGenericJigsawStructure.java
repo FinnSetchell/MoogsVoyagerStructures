@@ -1,24 +1,19 @@
 package com.finndog.mvs.world.structures;
 
-import com.finndog.mvs.MVSMain;
-import com.finndog.mvs.MVSStructures;
 import com.finndog.mvs.structures.FloatingIslands;
 import com.finndog.mvs.utils.StructureUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.structure.*;
+import net.minecraft.structure.PoolStructurePiece;
+import net.minecraft.structure.PostPlacementProcessor;
+import net.minecraft.structure.StructureGeneratorFactory;
+import net.minecraft.structure.StructurePiecesGenerator;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.structure.pool.StructurePoolBasedGenerator;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.registry.RegistryEntry;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.gen.HeightContext;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.StructurePoolFeatureConfig;
-import net.minecraft.world.gen.heightprovider.HeightProvider;
-import org.apache.logging.log4j.Level;
 
 import java.util.Optional;
 

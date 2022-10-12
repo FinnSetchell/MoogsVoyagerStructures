@@ -4,7 +4,7 @@
 
   "config": {
 
-    "start_pool": "mvs:basaltstatue/start_pool",
+    "start_pool": "mvs:crimsonenchantingtable/start_pool",
 
     "size": 1
   },

@@ -1,7 +1,6 @@
 package com.finndog.mvs.world.structures;
 
 import com.finndog.mvs.structures.FloatingIslands;
-import com.finndog.mvs.utils.StructureUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.structure.PoolStructurePiece;
@@ -11,12 +10,13 @@ import net.minecraft.structure.StructurePiecesGenerator;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.structure.pool.StructurePoolBasedGenerator;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.StructurePoolFeatureConfig;
 
 import java.util.Optional;
 
-public class MVSGenericNetherJigsawStructure extends StructureFeature<StructurePoolFeatureConfig> {
+public class MVSInsetStructure extends StructureFeature<StructurePoolFeatureConfig> {
 
     public static final Codec<StructurePoolFeatureConfig> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
@@ -26,19 +26,22 @@ public class MVSGenericNetherJigsawStructure extends StructureFeature<StructureP
                     .apply(instance, StructurePoolFeatureConfig::new)
     );
 
-    public MVSGenericNetherJigsawStructure() {
+    public MVSInsetStructure() {
         // Create the pieces layout of the structure and give it to the game
         super(CODEC, FloatingIslands::createPiecesGenerator, PostPlacementProcessor.EMPTY);
     }
 
 
+
     public static Optional<StructurePiecesGenerator<StructurePoolFeatureConfig>> createPiecesGenerator(StructureGeneratorFactory.Context<StructurePoolFeatureConfig> context) {
+
+        // Set's our spawning blockpos's y offset to be 60 blocks up.
+        // Since we are going to have heightmap/terrain height spawning set to true further down, this will make it so we spawn 60 blocks above terrain.
+        // If we wanted to spawn on ocean floor, we would set heightmap/terrain height spawning to false and the grab the y value of the terrain with OCEAN_FLOOR_WG heightmap.
         // Turns the chunk coordinates into actual coordinates we can use. (Gets corner of that chunk)
-        boolean spawnInLiquid = false;
-        Optional<Integer> yLevel = StructureUtils.getSuitableNetherYLevel(context, context.chunkPos().getCenterAtY(0));
-        if (yLevel.isEmpty()) {return Optional.empty();}
-        BlockPos blockPos = context.chunkPos().getCenterAtY(yLevel.get());
-        if (!StructureUtils.onLiquid(context, spawnInLiquid)) {return Optional.empty();}
+        ChunkPos chunkPos = context.chunkPos();
+        BlockPos blockPos = context.chunkPos().getCenterAtY(0);
+        blockPos = blockPos.down();
 
 
         Optional<StructurePiecesGenerator<StructurePoolFeatureConfig>> structurePiecesGenerator =
@@ -48,7 +51,7 @@ public class MVSGenericNetherJigsawStructure extends StructureFeature<StructureP
                         blockPos, // Position of the structure. Y value is ignored if last parameter is set to true.
                         false,  // Special boundary adjustments for villages. It's... hard to explain. Keep this false and make your pieces not be partially intersecting.
                         // Either not intersecting or fully contained will make children pieces spawn just fine. It's easier that way.
-                        false // Adds the terrain height's y value to the passed in blockpos's y value. (This uses WORLD_SURFACE_WG heightmap which stops at top water too)
+                        true // Adds the terrain height's y value to the passed in blockpos's y value. (This uses WORLD_SURFACE_WG heightmap which stops at top water too)
                         // Here, blockpos's y value is 60 which means the structure spawn 60 blocks above terrain height.
                         // Set this to false for structure to be place only at the passed in blockpos's Y value instead.
                         // Definitely keep this false when placing structures in the nether as otherwise, heightmap placing will put the structure on the Bedrock roof.

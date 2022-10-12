@@ -4,7 +4,7 @@
 
   "config": {
     // the path to the template pool json file to use
-    "start_pool": "mvs:floatingislands",
+    "start_pool": "mvs:balloon/start_pool",
 
     // This is how many pieces away from the starting piece a piece of the structure can spawn
     // Think of it like the length of the branch of the structure
@@ -19,6 +19,7 @@
 
   // What mobs can spawn over time in the structure.
   // Make sure you add the mob to the right category (monster, creature, etc)
+
   "spawn_overrides": {
   }
 }
