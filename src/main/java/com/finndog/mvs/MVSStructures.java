@@ -2,9 +2,7 @@ package com.finndog.mvs;
 
 import com.finndog.mvs.mixin.StructureFeatureAccessor;
 import com.finndog.mvs.structures.FloatingIslands;
-import com.finndog.mvs.structures.FloatingIslands;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import com.finndog.mvs.world.structures.*;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.StructureFeature;
 
@@ -19,10 +17,16 @@ public class MVSStructures {
      * use them too directly from the registries. It great for mod/datapacks compatibility.
      */
     public static StructureFeature<?> FLOATING_ISLANDS = new FloatingIslands();
+    public static StructureFeature<?> MVS_GENERIC_JIGSAW_STRUCTURE = new MVSGenericJigsawStructure();
+    public static StructureFeature<?> MVS_GENERIC_NETHER_JIGSAW_STRUCTURE = new MVSGenericNetherJigsawStructure();
+
 
     public static void registerStructureFeatures() {
         // The generation step for when to generate the structure. there are 10 stages you can pick from!
         // This surface structure stage places the structure before plants and ores are generated.
         StructureFeatureAccessor.callRegister(MVSMain.MODID + ":floatingislands", FLOATING_ISLANDS, GenerationStep.Feature.SURFACE_STRUCTURES);
+        StructureFeatureAccessor.callRegister(MVSMain.MODID + ":mvs_generic_jigsaw_structure", MVS_GENERIC_JIGSAW_STRUCTURE, GenerationStep.Feature.SURFACE_STRUCTURES);
+        StructureFeatureAccessor.callRegister(MVSMain.MODID + ":mvs_generic_nether_jigsaw_structure", MVS_GENERIC_NETHER_JIGSAW_STRUCTURE,  GenerationStep.Feature.SURFACE_STRUCTURES);
+
     }
 }
