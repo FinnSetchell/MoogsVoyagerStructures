@@ -1,0 +1,38 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:crystal",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:duck",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:jungletower",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:memorial",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:ruinedbeacon",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:treemonument",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1135795642,
+
+    "spacing": 102,
+
+    "separation": 40
+  }
+}

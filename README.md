@@ -24,8 +24,8 @@ This mod adds a bunch of vanilla style structures into the game. They all use va
 
 1. simply download the version you need
 2. then add it to your mods folder
-It does not require any settings to be changed for it and should work with most mods (let me know if you get compatibility issues)
-&nbsp;
+   It does not require any settings to be changed for it and should work with most mods (let me know if you get compatibility issues)
+   &nbsp;
 
 **Support Me:**
 -----------------

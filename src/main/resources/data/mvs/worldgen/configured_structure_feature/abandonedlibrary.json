@@ -1,11 +1,9 @@
 {
 
-  "type": "minecraft:village",
+  "type": "mvs:mvs_generic_jigsaw_structure",
 
   "config": {
-
     "start_pool": "mvs:abandonedlibrary/start_pool",
-
     "size": 1
   },
 
