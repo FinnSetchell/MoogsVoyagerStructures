@@ -1,6 +1,5 @@
 package com.finndog.mvs.world.structures;
 
-import com.finndog.mvs.structures.FloatingIslands;
 import com.finndog.mvs.utils.StructureUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -11,7 +10,6 @@ import net.minecraft.structure.StructurePiecesGenerator;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.structure.pool.StructurePoolBasedGenerator;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.StructurePoolFeatureConfig;
 
@@ -19,6 +17,8 @@ import java.util.Optional;
 
 public class MVSGenericJigsawStructure extends StructureFeature<StructurePoolFeatureConfig> {
 
+    // A custom codec that changes the size limit for our code_structure_sky_fan.json's config to not be capped at 7.
+    // With this, we can have a structure with a size limit up to 30 if we want to have extremely long branches of pieces in the structure.
     public static final Codec<StructurePoolFeatureConfig> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
                             StructurePool.REGISTRY_CODEC.fieldOf("start_pool").forGetter(StructurePoolFeatureConfig::getStartPool),
@@ -29,7 +29,7 @@ public class MVSGenericJigsawStructure extends StructureFeature<StructurePoolFea
 
     public MVSGenericJigsawStructure() {
         // Create the pieces layout of the structure and give it to the game
-        super(CODEC, FloatingIslands::createPiecesGenerator, PostPlacementProcessor.EMPTY);
+        super(CODEC, MVSGenericJigsawStructure::createPiecesGenerator, PostPlacementProcessor.EMPTY);
     }
 
 
@@ -52,7 +52,6 @@ public class MVSGenericJigsawStructure extends StructureFeature<StructurePoolFea
         // Since we are going to have heightmap/terrain height spawning set to true further down, this will make it so we spawn 60 blocks above terrain.
         // If we wanted to spawn on ocean floor, we would set heightmap/terrain height spawning to false and the grab the y value of the terrain with OCEAN_FLOOR_WG heightmap.
         // Turns the chunk coordinates into actual coordinates we can use. (Gets corner of that chunk)
-        ChunkPos chunkPos = context.chunkPos();
         BlockPos blockPos = context.chunkPos().getCenterAtY(0);
 
         Optional<StructurePiecesGenerator<StructurePoolFeatureConfig>> structurePiecesGenerator =

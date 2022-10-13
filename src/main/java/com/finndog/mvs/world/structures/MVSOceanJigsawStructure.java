@@ -1,6 +1,5 @@
 package com.finndog.mvs.world.structures;
 
-import com.finndog.mvs.structures.FloatingIslands;
 import com.finndog.mvs.utils.StructureUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -29,7 +28,7 @@ public class MVSOceanJigsawStructure extends StructureFeature<StructurePoolFeatu
 
     public MVSOceanJigsawStructure() {
         // Create the pieces layout of the structure and give it to the game
-        super(CODEC, FloatingIslands::createPiecesGenerator, PostPlacementProcessor.EMPTY);
+        super(CODEC, MVSOceanJigsawStructure::createPiecesGenerator, PostPlacementProcessor.EMPTY);
     }
 
 

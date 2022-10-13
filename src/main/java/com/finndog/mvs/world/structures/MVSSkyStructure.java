@@ -1,6 +1,5 @@
 package com.finndog.mvs.world.structures;
 
-import com.finndog.mvs.structures.FloatingIslands;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.structure.PoolStructurePiece;
@@ -28,7 +27,7 @@ public class MVSSkyStructure extends StructureFeature<StructurePoolFeatureConfig
 
     public MVSSkyStructure() {
         // Create the pieces layout of the structure and give it to the game
-        super(CODEC, FloatingIslands::createPiecesGenerator, PostPlacementProcessor.EMPTY);
+        super(CODEC, MVSSkyStructure::createPiecesGenerator, PostPlacementProcessor.EMPTY);
     }
 
 
