@@ -1,0 +1,76 @@
+{
+  "minecraft:recipes/misc/firework_rocket_simple": {
+    "criteria": {
+      "has_gunpowder": "2022-10-13 17:13:02 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/tnt": {
+    "criteria": {
+      "has_gunpowder": "2022-10-13 17:13:02 +0100"
+    },
+    "done": true
+  },
+  "minecraft:adventure/root": {
+    "criteria": {
+      "killed_something": "2022-10-13 17:13:02 +0100"
+    },
+    "done": true
+  },
+  "minecraft:nether/root": {
+    "criteria": {
+      "entered_nether": "2022-10-13 17:12:14 +0100"
+    },
+    "done": true
+  },
+  "minecraft:adventure/kill_a_mob": {
+    "criteria": {
+      "minecraft:ghast": "2022-10-13 17:13:02 +0100"
+    },
+    "done": true
+  },
+  "minecraft:adventure/kill_all_mobs": {
+    "criteria": {
+      "minecraft:ghast": "2022-10-13 17:13:02 +0100"
+    },
+    "done": false
+  },
+  "minecraft:end/root": {
+    "criteria": {
+      "entered_end": "2022-10-13 17:11:24 +0100"
+    },
+    "done": true
+  },
+  "minecraft:story/enter_the_nether": {
+    "criteria": {
+      "entered_nether": "2022-10-13 17:12:14 +0100"
+    },
+    "done": true
+  },
+  "minecraft:nether/explore_nether": {
+    "criteria": {
+      "minecraft:nether_wastes": "2022-10-13 17:12:44 +0100",
+      "minecraft:warped_forest": "2022-10-13 17:12:15 +0100",
+      "minecraft:basalt_deltas": "2022-10-13 17:12:26 +0100"
+    },
+    "done": false
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:birch_forest": "2022-10-13 17:09:53 +0100",
+      "minecraft:dark_forest": "2022-10-13 17:10:17 +0100",
+      "minecraft:sparse_jungle": "2022-10-13 17:10:57 +0100",
+      "minecraft:forest": "2022-10-13 17:07:24 +0100",
+      "minecraft:jungle": "2022-10-13 17:09:23 +0100",
+      "minecraft:plains": "2022-10-13 17:09:06 +0100"
+    },
+    "done": false
+  },
+  "minecraft:story/enter_the_end": {
+    "criteria": {
+      "entered_end": "2022-10-13 17:11:24 +0100"
+    },
+    "done": true
+  },
+  "DataVersion": 2975
+}
