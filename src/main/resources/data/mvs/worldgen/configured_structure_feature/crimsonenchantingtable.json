@@ -9,7 +9,7 @@
     "size": 1
   },
 
-  "biomes": "#mvs:has_structure/nether_biomes",
+  "biomes": "#mvs:has_structure/crimson_biomes",
 
   "adapt_noise": true,
 
