@@ -1,6 +1,7 @@
-package com.finndog.mvs.structures;
+package com.finndog.mvs.world.structures;
 
 import com.finndog.mvs.MVSMain;
+import com.finndog.mvs.utils.StructureUtils;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
@@ -23,12 +24,13 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.jigsaw.JigsawManager;
 import net.minecraft.world.gen.feature.structure.*;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import org.apache.logging.log4j.Level;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-public class AbandonedLibrary extends Structure<NoFeatureConfig> {
-    public AbandonedLibrary(Codec<NoFeatureConfig> codec) {
+public class CommonOverworldStructures extends Structure<NoFeatureConfig> {
+    public CommonOverworldStructures(Codec<NoFeatureConfig> codec) {
         super(codec);
     }
 
@@ -118,21 +120,14 @@ public class AbandonedLibrary extends Structure<NoFeatureConfig> {
     @Override
     protected boolean isFeatureChunk(ChunkGenerator chunkGenerator, BiomeProvider biomeSource, long seed, SharedSeedRandom chunkRandom, int chunkX, int chunkZ, Biome biome, ChunkPos chunkPos, NoFeatureConfig featureConfig) {
         BlockPos centerOfChunk = new BlockPos(chunkX * 16, 0, chunkZ * 16);
-
-        // Grab height of land. Will stop at first non-air block.
         int landHeight = chunkGenerator.getFirstOccupiedHeight(centerOfChunk.getX(), centerOfChunk.getZ(), Heightmap.Type.WORLD_SURFACE_WG);
-
-        // Grabs column of blocks at given position. In overworld, this column will be made of stone, water, and air.
-        // In nether, it will be netherrack, lava, and air. End will only be endstone and air. It depends on what block
-        // the chunk generator will place for that dimension.
         IBlockReader columnOfBlocks = chunkGenerator.getBaseColumn(centerOfChunk.getX(), centerOfChunk.getZ());
-
-        // Combine the column of blocks with land height and you get the top block itself which you can test.
         BlockState topBlock = columnOfBlocks.getBlockState(centerOfChunk.above(landHeight));
 
-        // Now we test to make sure our structure is not spawning on water or other fluids.
-        // You can do height check instead too to make it spawn at high elevations.
-        return topBlock.getFluidState().isEmpty(); //landHeight > 100;
+
+        if (StructureUtils.onLiquid(topBlock, columnOfBlocks)) {return false;}
+        if (StructureUtils.isAllowedTerrainHeightChange(chunkGenerator, 12, 3, centerOfChunk)) {return false;}
+        return true;
     }
 
     /**
@@ -167,6 +162,15 @@ public class AbandonedLibrary extends Structure<NoFeatureConfig> {
              */
             //IBlockReader blockReader = chunkGenerator.getBaseColumn(BlockPos.getX(), BlockPos.getZ());
 
+
+            List<String> startPool = new ArrayList<>();
+            startPool.add("abandonedlibrary/start_pool");
+            startPool.add("acacialogpile/start_pool");
+            startPool.add("acaciawell/start_pool");
+
+            String randomStartPool = startPool.get(new Random().nextInt(startPool.size()));
+
+
             // All a structure has to do is call this method to turn it into a jigsaw based structure!
             JigsawManager.addPieces(
                     dynamicRegistryManager,
@@ -178,7 +182,7 @@ public class AbandonedLibrary extends Structure<NoFeatureConfig> {
                             // "resources/data/structure_tutorial/worldgen/template_pool/run_down_house/start_pool.json"
                             // This is why your pool files must be in "data/<modid>/worldgen/template_pool/<the path to the pool here>"
                             // because the game automatically will check in worldgen/template_pool for the pools.
-                            .get(new ResourceLocation(MVSMain.MODID, "abandonedlibrary/start_pool")),
+                            .get(new ResourceLocation(MVSMain.MODID, randomStartPool)),
 
                             // How many pieces outward from center can a recursive jigsaw structure spawn.
                             // Our structure is only 1 piece outward and isn't recursive so any value of 1 or more doesn't change anything.
@@ -223,13 +227,6 @@ public class AbandonedLibrary extends Structure<NoFeatureConfig> {
 
             // Sets the bounds of the structure once you are finished.
             this.calculateBoundingBox();
-
-            // I use to debug and quickly find out if the structure is spawning or not and where it is.
-            // This is returning the coordinates of the center starting piece.
-            MVSMain.LOGGER.log(Level.DEBUG, "AbandonedLibrary at " +
-                            this.pieces.get(0).getBoundingBox().x0 + " " +
-                            this.pieces.get(0).getBoundingBox().y0 + " " +
-                            this.pieces.get(0).getBoundingBox().z0);
         }
     }
 }

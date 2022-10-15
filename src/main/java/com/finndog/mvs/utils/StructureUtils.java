@@ -1,17 +1,10 @@
 package com.finndog.mvs.utils;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.core.Holder;
-import net.minecraft.data.worldgen.StructureSets;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.level.LevelHeightAccessor;
-import net.minecraft.world.level.NoiseColumn;
-import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.RandomState;
-import net.minecraft.world.level.levelgen.structure.Structure;
-import net.minecraft.world.level.levelgen.structure.StructureSet;
+import net.minecraft.world.gen.Heightmap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +13,8 @@ import java.util.Random;
 
 public class StructureUtils {
 
-    public static boolean isAllowedTerrainHeightChange(Structure.GenerationContext context, int size, int allowedTerrainHeightRange) {
-        ChunkPos pos = context.chunkPos();
-        int[] cornerHeights = getCornerHeights(context, pos.getMinBlockX(), size, pos.getMinBlockZ(), size);
+    public static boolean isAllowedTerrainHeightChange(ChunkGenerator chunkGenerator, int size, int allowedTerrainHeightRange, BlockPos pos) {
+        int[] cornerHeights = getCornerHeights(chunkGenerator, pos.getX(), size, pos.getZ(), size);
 
         int minHeight = Math.min(Math.min(cornerHeights[0], cornerHeights[1]), Math.min(cornerHeights[2], cornerHeights[3]));
         int maxHeight = Math.max(Math.max(cornerHeights[0], cornerHeights[1]), Math.max(cornerHeights[2], cornerHeights[3]));
@@ -30,100 +22,58 @@ public class StructureUtils {
         return Math.abs(maxHeight - minHeight) <= allowedTerrainHeightRange;
     }
 
-    public static int[] getCornerHeights(Structure.GenerationContext context, int middleBlockX, int xSize, int middleBlockZ, int zSize) {
-        ChunkGenerator generator = context.chunkGenerator();
-        LevelHeightAccessor heightAccessor = context.heightAccessor();
-        RandomState randomState = context.randomState();
+    public static int[] getCornerHeights(ChunkGenerator chunkGenerator, int middleBlockX, int xSize, int middleBlockZ, int zSize) {
 
         return new int[]{
-                generator.getFirstOccupiedHeight(
+                chunkGenerator.getFirstOccupiedHeight(
                         middleBlockX,
                         middleBlockZ,
-                        Heightmap.Types.WORLD_SURFACE_WG,
-                        heightAccessor,
-                        randomState),
-                generator.getFirstOccupiedHeight(
+                        Heightmap.Type.WORLD_SURFACE_WG),
+                chunkGenerator.getFirstOccupiedHeight(
                         middleBlockX,
                         middleBlockZ + zSize,
-                        Heightmap.Types.WORLD_SURFACE_WG,
-                        heightAccessor,
-                        randomState),
-                generator.getFirstOccupiedHeight(
+                        Heightmap.Type.WORLD_SURFACE_WG),
+                chunkGenerator.getFirstOccupiedHeight(
                         middleBlockX + xSize,
                         middleBlockZ,
-                        Heightmap.Types.WORLD_SURFACE_WG,
-                        heightAccessor,
-                        randomState),
-                generator.getFirstOccupiedHeight(
+                        Heightmap.Type.WORLD_SURFACE_WG),
+                chunkGenerator.getFirstOccupiedHeight(
                         middleBlockX + xSize,
                         middleBlockZ + zSize,
-                        Heightmap.Types.WORLD_SURFACE_WG,
-                        heightAccessor,
-                        randomState)};
+                        Heightmap.Type.WORLD_SURFACE_WG)};
     }
-    public static boolean onLiquid(Structure.GenerationContext context, boolean spawnInLiquid) {
-        ChunkPos chunkPos = context.chunkPos();
-        BlockPos centerOfChunk = chunkPos.getMiddleBlockPosition(0);
-        int landHeight = context.chunkGenerator().getFirstOccupiedHeight(centerOfChunk.getX(), centerOfChunk.getZ(), Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor(), context.randomState());
-        NoiseColumn columnOfBlocks = context.chunkGenerator().getBaseColumn(centerOfChunk.getX(), centerOfChunk.getZ(), context.heightAccessor(), context.randomState());
-        BlockState topBlock = columnOfBlocks.getBlock(centerOfChunk.getY() + landHeight);
-
-        if (spawnInLiquid) {
-            if(!topBlock.getFluidState().isEmpty()) {
-                return true;
-            } else {
-                return false;
-            }
-        } //else
-        if(topBlock.getFluidState().isEmpty()) {
-            return true;
-        }
-        return false;
-    }
-    public static boolean isStructureInDistance(Structure.GenerationContext context, List<Holder<StructureSet>> structures, int minStructureDistance) {
-        ChunkGenerator generator = context.chunkGenerator();
-        RandomState randomState = context.randomState();
-        long seed = context.seed();
-        ChunkPos chunkPos = context.chunkPos();
-
-        if (minStructureDistance == 0) {
-            return false;
-        }
-
-        for (Holder<StructureSet> structure : structures) {
-            if (generator.hasStructureChunkInRange(structure, randomState, seed, chunkPos.x, chunkPos.z, minStructureDistance)) {
-                return true;
-            }
-        }
-
-        return false;
+    public static boolean onLiquid(BlockState topBlock, IBlockReader columnOfBlocks) {
+        return topBlock.getFluidState().isEmpty();
     }
 
-    public static boolean isFeatureChunk(Structure.GenerationContext context, int distance) {
-        ChunkPos chunkpos = context.chunkPos();
+//    public static boolean isStructureInDistance(Structure.GenerationContext context, List<Holder<StructureSet>> structures, int minStructureDistance) {
+//        ChunkGenerator generator = context.chunkGenerator();
+//        RandomState randomState = context.randomState();
+//        long seed = context.seed();
+//        ChunkPos chunkPos = context.chunkPos();
+//
+//        if (minStructureDistance == 0) {
+//            return false;
+//        }
+//
+//        for (Holder<StructureSet> structure : structures) {
+//            if (generator.hasStructureChunkInRange(structure, randomState, seed, chunkPos.x, chunkPos.z, minStructureDistance)) {
+//                return true;
+//            }
+//        }
+//
+//        return false;
+//    }
 
-        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.VILLAGES, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.PILLAGER_OUTPOSTS, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.OCEAN_MONUMENTS, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.DESERT_PYRAMIDS, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.END_CITIES, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.IGLOOS, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.JUNGLE_TEMPLES, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.RUINED_PORTALS, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.SHIPWRECKS, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.SWAMP_HUTS, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.WOODLAND_MANSIONS, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.OCEAN_RUINS, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.NETHER_FOSSILS, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-        return false;
-    }
-
-    public static Optional<Integer> getSuitableNetherYLevel(Structure.GenerationContext context, BlockPos pos) {
-        NoiseColumn column = context.chunkGenerator().getBaseColumn(pos.getX(), pos.getZ(), context.heightAccessor(), context.randomState());
+    public static Optional<Integer> getSuitableNetherYLevel(ChunkGenerator chunkGenerator, BlockPos pos, IBlockReader column, long seed) {
         List<Integer> suitableYLevels = new ArrayList<>();
 
-        for (int y = 127; y > context.chunkGenerator().getSeaLevel(); y--) {
-            if (column.getBlock(y - 1).canOcclude() && column.getBlock(y).isAir() && column.getBlock(y + 4).isAir()) {
+        for (int y = 127; y > chunkGenerator.getSeaLevel(); y--) {
+            BlockPos block = new BlockPos(pos.getX(), y-1, pos.getZ());
+            BlockPos air = new BlockPos(pos.getX(), y, pos.getZ());
+            BlockPos topAir = new BlockPos(pos.getX(), y+4, pos.getZ());
+
+            if (column.getBlockState(block).canOcclude() && column.getBlockState(air).isAir() && column.getBlockState(topAir).isAir()) {
                 suitableYLevels.add(y);
             }
         }
@@ -131,7 +81,6 @@ public class StructureUtils {
         if (suitableYLevels.isEmpty())
             return Optional.empty();
 
-        return Optional.of(suitableYLevels.get(new Random(context.seed()).nextInt(suitableYLevels.size())));
+        return Optional.of(suitableYLevels.get(new Random(seed).nextInt(suitableYLevels.size())));
     }
-
 }
