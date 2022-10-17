@@ -65,10 +65,6 @@
       "weight": 1
     },
     {
-      "structure": "mvs:floatingislands",
-      "weight": 1
-    },
-    {
       "structure": "mvs:flowerhole",
       "weight": 1
     },
@@ -98,10 +94,6 @@
     },
     {
       "structure": "mvs:largecart2",
-      "weight": 1
-    },
-    {
-      "structure": "mvs:largefloatingisland",
       "weight": 1
     },
     {
@@ -199,8 +191,8 @@
 
     "salt": 1545400943,
 
-    "spacing": 30,
+    "spacing": 45,
 
-    "separation": 20
+    "separation": 30
   }
 }
