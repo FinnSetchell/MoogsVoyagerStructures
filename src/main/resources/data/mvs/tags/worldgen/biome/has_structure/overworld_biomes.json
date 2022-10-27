@@ -10,6 +10,8 @@
     "minecraft:savanna",
     "minecraft:plains",
     "minecraft:sunflower_plains",
-    "minecraft:snowy_plains"
+    "minecraft:snowy_plains",
+    "#forge:is_plateau",
+    "#forge:is_plains"
   ]
 }

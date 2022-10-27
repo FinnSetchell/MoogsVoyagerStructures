@@ -5,6 +5,8 @@
   "values": [
     "minecraft:snowy_taiga",
     "minecraft:snowy_slopes",
-    "minecraft:snowy_beach"
+    "minecraft:snowy_beach",
+    "#forge:is_snowy",
+    "#forge:is_cold/overworld"
   ]
 }
