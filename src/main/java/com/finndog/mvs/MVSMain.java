@@ -18,6 +18,6 @@ public class MVSMain {
 
     public MVSMain() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        MVSStructures.DEFERRED_REGISTRY_STRUCTURE.register(modEventBus);
+        com.finndog.mvs.MVSStructures.DEFERRED_REGISTRY_STRUCTURE.register(modEventBus);
     }
 }
