@@ -3,6 +3,22 @@
 
   "_comment": " This biome tag can specify the biome directly. Or specify another biome tag by starting with # ",
   "values": [
-    "minecraft:savanna"
+    "minecraft:savanna",
+    {
+      "id": "#forge:is_sparse",
+      "required": false
+    },
+    {
+      "id": "#forge:is_hot",
+      "required": false
+    },
+    {
+      "id": "#forge:is_dry",
+      "required": false
+    },
+    {
+      "id": "#forge:is_plateau",
+      "required": false
+    }
   ]
 }
