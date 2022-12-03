@@ -127,7 +127,7 @@ public class YLevelDownOne extends StructureFeature<JigsawConfiguration> {
 
         if (!isFeatureChunk(context)) {return Optional.empty();}
         if (!isAllowedTerrainHeightChange(context, Pair.of(3, 3))) {return Optional.empty();}
-        if (isOnWater(context)) {return Optional.empty();}
+        if (!isOnWater(context)) {return Optional.empty();}
 
         // Turns the chunk coordinates into actual coordinates we can use. (Gets center of that chunk)
         BlockPos blockpos = context.chunkPos().getMiddleBlockPosition(0);

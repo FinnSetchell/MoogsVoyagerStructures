@@ -142,7 +142,7 @@ jar {
         attributes([
                 "Specification-Title": "Moog's Voyager Structures",
                 "Specification-Vendor": "finndog",
-                "Specification-Version": "3.0.4",
+                "Specification-Version": "3.0.7",
                 "Implementation-Title": project.name,
                 "Implementation-Version": project.version,
                 "Implementation-Vendor" :"finndog",
