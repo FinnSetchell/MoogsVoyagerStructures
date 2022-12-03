@@ -3,6 +3,42 @@
 
   "_comment": " This biome tag can specify the biome directly. Or specify another biome tag by starting with # ",
   "values": [
-    "minecraft:savanna"
+    "minecraft:savanna",
+    {
+      "id": "#forge:is_sparse/overworld",
+      "required": false
+    },
+    {
+      "id": "#forge:is_hot/overworld",
+      "required": false
+    },
+    {
+      "id": "#forge:is_dry/overworld",
+      "required": false
+    },
+    {
+      "id": "#forge:is_plateau",
+      "required": false
+    },
+    {
+      "id": "byg:baobab_savanna",
+      "required": false
+    },
+    {
+      "id": "byg:mojave_desert",
+      "required": false
+    },
+    {
+      "id": "byg:atacama_desert",
+      "required": false
+    },
+    {
+      "id": "byg:red_rock_valley",
+      "required": false
+    },
+    {
+      "id": "byg:araucaria_savanna",
+      "required": false
+    }
   ]
 }
