@@ -1,6 +1,6 @@
 {
 
-  "type": "minecraft:village",
+  "type": "mvs:mvs_generic_nether_jigsaw_structure",
 
   "config": {
 
@@ -9,7 +9,7 @@
     "size": 1
   },
 
-  "biomes": "#mvs:has_structure/overworld_biomes",
+  "biomes": "#mvs:has_structure/nether_biomes",
 
   "adapt_noise": true,
 

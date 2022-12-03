@@ -1,0 +1,30 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:basaltstatue",
+      "weight": 3
+    },
+    {
+      "structure": "mvs:crimsonenchantingtable",
+      "weight": 2
+    },
+    {
+      "structure": "mvs:netherdevil",
+      "weight": 3
+    },
+    {
+      "structure": "mvs:netherwell",
+      "weight": 3
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1135795642,
+
+    "spacing": 56,
+
+    "separation": 40
+  }
+}

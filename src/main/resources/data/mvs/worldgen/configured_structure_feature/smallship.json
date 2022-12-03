@@ -1,0 +1,18 @@
+{
+
+  "type": "mvs:mvs_inset_structure",
+
+  "config": {
+
+    "start_pool": "mvs:smallship/start_pool",
+
+    "size": 1
+  },
+
+  "biomes": "#mvs:has_structure/ocean_biomes",
+
+  "adapt_noise": false,
+
+  "spawn_overrides": {
+  }
+}

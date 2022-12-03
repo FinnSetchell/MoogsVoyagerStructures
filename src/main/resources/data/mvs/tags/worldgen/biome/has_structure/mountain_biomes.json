@@ -1,0 +1,20 @@
+{
+  "replace": false,
+
+  "_comment": " This biome tag can specify the biome directly. Or specify another biome tag by starting with # ",
+  "values": [
+    "#minecraft:is_mountain",
+    {
+      "id": "#forge:is_slope",
+      "required": false
+    },
+    {
+      "id": "#forge:is_peak",
+      "required": false
+    },
+    {
+      "id": "#forge:is_mountain",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+
+  "type": "mvs:mvs_small_jigsaw_structure",
+
+  "config": {
+
+    "start_pool": "mvs:snowywell/start_pool",
+
+    "size": 1
+  },
+
+  "biomes": "#mvs:has_structure/snowy_biomes",
+
+  "adapt_noise": true,
+
+  "spawn_overrides": {
+  }
+}

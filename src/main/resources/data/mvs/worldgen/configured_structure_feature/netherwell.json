@@ -1,0 +1,18 @@
+{
+
+  "type": "mvs:mvs_generic_nether_jigsaw_structure",
+
+  "config": {
+
+    "start_pool": "mvs:netherwell/start_pool",
+
+    "size": 1
+  },
+
+  "biomes": "#mvs:has_structure/nether_biomes",
+
+  "adapt_noise": true,
+
+  "spawn_overrides": {
+  }
+}
