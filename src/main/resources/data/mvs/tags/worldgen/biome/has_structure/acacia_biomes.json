@@ -19,6 +19,26 @@
     {
       "id": "#forge:is_plateau",
       "required": false
+    },
+    {
+      "id": "byg:baobab_savanna",
+      "required": false
+    },
+    {
+      "id": "byg:mojave_desert",
+      "required": false
+    },
+    {
+      "id": "byg:atacama_desert",
+      "required": false
+    },
+    {
+      "id": "byg:red_rock_valley",
+      "required": false
+    },
+    {
+      "id": "byg:araucaria_savanna",
+      "required": false
     }
   ]
 }

@@ -11,6 +11,10 @@
     {
       "id": "#forge:is_cold",
       "required": false
+    },
+    {
+      "id": "byg:canadian_shield",
+      "required": false
     }
   ]
 }

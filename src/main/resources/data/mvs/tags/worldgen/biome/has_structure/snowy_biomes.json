@@ -11,6 +11,26 @@
     {
       "id": "#forge:is_wasteland",
       "required": false
+    },
+    {
+      "id": "byg:frosted_taiga",
+      "required": false
+    },
+    {
+      "id": "byg:frosted_coniferous_forest",
+      "required": false
+    },
+    {
+      "id": "byg:alps",
+      "required": false
+    },
+    {
+      "id": "byg:snowy_deciduous_forest",
+      "required": false
+    },
+    {
+      "id": "byg:snowy_evergreen_taiga",
+      "required": false
     }
   ]
 }

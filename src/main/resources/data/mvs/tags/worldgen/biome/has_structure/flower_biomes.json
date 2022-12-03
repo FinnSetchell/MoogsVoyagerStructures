@@ -9,6 +9,18 @@
       "required": false
     },
     {
+      "id": "byg:allium_fields",
+      "required": false
+    },
+    {
+      "id": "byg:amaranth_fields",
+      "required": false
+    },
+    {
+      "id": "byg:rose_fields",
+      "required": false
+    },
+    {
       "id": "biomesoplenty:lavender_field",
       "required": false
     },

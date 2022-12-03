@@ -7,6 +7,14 @@
     {
       "id": "#forge:is_lush",
       "required": false
+    },
+    {
+      "id": "byg:guiana_shield",
+      "required": false
+    },
+    {
+      "id": "byg:jacaranda_forest",
+      "required": false
     }
   ]
 }

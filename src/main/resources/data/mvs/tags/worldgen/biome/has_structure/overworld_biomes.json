@@ -43,6 +43,18 @@
       "required": false
     },
     {
+      "id": "byg:firecracker_shrubland",
+      "required": false
+    },
+    {
+      "id": "byg:autumnal_valley",
+      "required": false
+    },
+    {
+      "id": "byg:rose_fields",
+      "required": false
+    },
+    {
       "id": "#biomesoplenty:is_savanna",
       "required": false
     },

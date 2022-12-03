@@ -5,6 +5,22 @@
   "values": [
     "minecraft:forest",
     {
+      "id": "byg:firecracker_shrubland",
+      "required": false
+    },
+    {
+      "id": "byg:allium_fields",
+      "required": false
+    },
+    {
+      "id": "byg:red_oak_forest",
+      "required": false
+    },
+    {
+      "id": "byg:autumnal_forest",
+      "required": false
+    },
+    {
       "id": "biomesoplenty:orchard",
       "required": false
     }
