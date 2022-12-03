@@ -13,7 +13,7 @@
       "required": false
     },
     {
-      "id": "#forge:is_dense",
+      "id": "#forge:is_dense/overworld",
       "required": false
     },
     {

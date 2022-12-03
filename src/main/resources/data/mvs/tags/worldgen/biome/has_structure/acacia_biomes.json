@@ -5,15 +5,15 @@
   "values": [
     "minecraft:savanna",
     {
-      "id": "#forge:is_sparse",
+      "id": "#forge:is_sparse/overworld",
       "required": false
     },
     {
-      "id": "#forge:is_hot",
+      "id": "#forge:is_hot/overworld",
       "required": false
     },
     {
-      "id": "#forge:is_dry",
+      "id": "#forge:is_dry/overworld",
       "required": false
     },
     {
