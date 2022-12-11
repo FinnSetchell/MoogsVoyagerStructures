@@ -67,7 +67,7 @@ dependencies {
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
-
+    implementation fg.deobf("com.yungnickyoung.minecraft.yungsapi:YungsApi:${yungsApiVersion}")
     // I recommend having Blame on in your development environment as it can give you more info of what is
     // broken with your Jigsaw structure. It is super useful!. Just uncomment out this line and refresh gradle.
     // runtimeOnly fg.deobf("com.telepathicgrunt:Blame:1.16.5-3.0.1-forge")
