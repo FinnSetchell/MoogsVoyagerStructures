@@ -3,12 +3,12 @@ package com.finndog.mvs.world.structures;
 import com.finndog.mvs.MVSStructures;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.structure.pool.StructurePoolBasedGenerator;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.HeightContext;
 import net.minecraft.world.gen.heightprovider.HeightProvider;
@@ -81,6 +81,7 @@ public class SkyStructures extends Structure {
      * Use the biome tags for where to spawn the structure and users can datapack
      * it to spawn in specific biomes that aren't in the dimension they don't like if they wish.
      */
+
     private static boolean extraSpawningChecks(Structure.Context context) {
         // Grabs the chunk position we are at
         ChunkPos chunkpos = context.chunkPos();
