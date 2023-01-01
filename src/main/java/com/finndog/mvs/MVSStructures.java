@@ -6,6 +6,7 @@ package com.finndog.mvs;
 
 import com.finndog.mvs.world.structures.*;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
@@ -15,7 +16,7 @@ public class MVSStructures {
      * We are using the Deferred Registry system to register our structure as this is the preferred way on Forge.
      * This will handle registering the base structure for us at the correct time so we don't have to handle it ourselves.
      */
-    public static final DeferredRegister<StructureType<?>> DEFERRED_REGISTRY_STRUCTURE = DeferredRegister.create(Registry.STRUCTURE_TYPE_REGISTRY, MVSMain.MODID);
+    public static final DeferredRegister<StructureType<?>> DEFERRED_REGISTRY_STRUCTURE = DeferredRegister.create(Registries.STRUCTURE_TYPE, MVSMain.MODID);
 
 
     /**
