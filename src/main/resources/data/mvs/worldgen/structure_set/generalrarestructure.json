@@ -1,8 +1,12 @@
 {
   "structures": [
     {
+      "structure": "mvs:balloon",
+      "weight": 5
+    },
+    {
       "structure": "mvs:crystal",
-      "weight": 1
+      "weight": 2
     },
     {
       "structure": "mvs:duck",
@@ -10,7 +14,7 @@
     },
     {
       "structure": "mvs:jungletower",
-      "weight": 1
+      "weight": 2
     },
     {
       "structure": "mvs:memorial",
@@ -18,11 +22,11 @@
     },
     {
       "structure": "mvs:ruinedbeacon",
-      "weight": 1
+      "weight": 6
     },
     {
       "structure": "mvs:treemonument",
-      "weight": 1
+      "weight": 7
     }
   ],
   "placement": {
@@ -31,8 +35,8 @@
 
     "salt": 1135795642,
 
-    "spacing": 21,
+    "spacing": 26,
 
-    "separation": 17
+    "separation": 22
   }
 }

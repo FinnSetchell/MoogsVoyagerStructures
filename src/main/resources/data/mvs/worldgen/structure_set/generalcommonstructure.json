@@ -9,10 +9,6 @@
       "weight": 1
     },
     {
-      "structure": "mvs:balloon",
-      "weight": 1
-    },
-    {
       "structure": "mvs:barn",
       "weight": 1
     },
@@ -203,8 +199,8 @@
 
     "salt": 1545400943,
 
-    "spacing": 7,
+    "spacing": 12,
 
-    "separation": 5
+    "separation": 10
   }
 }
