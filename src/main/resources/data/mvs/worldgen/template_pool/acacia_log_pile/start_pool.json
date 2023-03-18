@@ -1,5 +1,5 @@
 {
-  "name": "mvs:acacialogpile/start_pool",
+  "name": "mvs:acacia_log_pile/start_pool",
 
   "fallback": "minecraft:empty",
 
@@ -9,7 +9,7 @@
       "weight": 1,
       "element": {
 
-        "location": "mvs:acacialogpile",
+        "location": "mvs:acacia_log_pile",
 
         "processors": "minecraft:empty",
 
