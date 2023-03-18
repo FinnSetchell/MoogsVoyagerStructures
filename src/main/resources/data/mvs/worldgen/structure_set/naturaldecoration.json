@@ -3,14 +3,6 @@
     {
       "structure": "mvs:boulder",
       "weight": 1
-    },
-    {
-      "structure": "mvs:birchtree1",
-      "weight": 1
-    },
-    {
-      "structure": "mvs:birchtree2",
-      "weight": 1
     }
   ],
   "placement": {

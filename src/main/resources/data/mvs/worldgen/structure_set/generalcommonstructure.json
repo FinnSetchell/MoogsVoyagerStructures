@@ -1,15 +1,7 @@
 {
   "structures": [
     {
-      "structure": "mvs:abandonedlibrary",
-      "weight": 1
-    },
-    {
       "structure": "mvs:azeleahouse",
-      "weight": 1
-    },
-    {
-      "structure": "mvs:balloon",
       "weight": 1
     },
     {
@@ -30,10 +22,6 @@
     },
     {
       "structure": "mvs:bluestall",
-      "weight": 1
-    },
-    {
-      "structure": "mvs:calcitehouse",
       "weight": 1
     },
     {
@@ -90,10 +78,6 @@
     },
     {
       "structure": "mvs:house",
-      "weight": 1
-    },
-    {
-      "structure": "mvs:island",
       "weight": 1
     },
     {

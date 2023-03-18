@@ -1,10 +1,6 @@
 {
   "structures": [
     {
-      "structure": "mvs:basaltstatue",
-      "weight": 3
-    },
-    {
       "structure": "mvs:crimsonenchantingtable",
       "weight": 2
     },
