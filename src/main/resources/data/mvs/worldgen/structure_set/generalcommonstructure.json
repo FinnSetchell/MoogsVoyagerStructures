@@ -45,6 +45,10 @@
       "weight": 1
     },
     {
+      "structure": "mvs:cartographer_tower",
+      "weight": 1
+    },
+    {
       "structure": "mvs:castleruins",
       "weight": 1
     },
@@ -203,8 +207,8 @@
 
     "salt": 1545400943,
 
-    "spacing": 32,
+    "spacing": 40,
 
-    "separation": 20
+    "separation": 36
   }
 }
