@@ -1,5 +1,5 @@
 {
-  "name": "temp",
+  "name": "top",
   "fallback": "minecraft:empty",
   "elements": [
     {
@@ -7,7 +7,7 @@
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
-        "location": "mvs:cartographer_tower/base",
+        "location": "mvs:jungle_tower/top",
         "processors": "minecraft:empty"
       }
     }

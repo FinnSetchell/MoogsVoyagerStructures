@@ -2,9 +2,9 @@
 
   "type": "mvs:mvs_generic_jigsaw_structure",
 
-  "start_pool": "mvs:cartographer_tower/temp",
+  "start_pool": "mvs:cartographer_tower/base",
 
-  "size": 1,
+  "size": 2,
 
   "biomes": "#mvs:has_structure/overworld_biomes",
 
