@@ -42,6 +42,7 @@ public class MVSGenericJigsawStructure extends Structure {
     private final boolean spawnInLiquid;
     private final int radius;
     private final int allowedTerrainHeightRange;
+
     public MVSGenericJigsawStructure(Structure.StructureSettings config,
                                      Holder<StructureTemplatePool> startPool,
                                      Optional<ResourceLocation> startJigsawName,
@@ -67,30 +68,12 @@ public class MVSGenericJigsawStructure extends Structure {
 
     @Override
     public Optional<Structure.GenerationStub> findGenerationPoint(Structure.GenerationContext context) {
-//        int minStructureDistance = 10;
-//        List<Holder<StructureSet>> structures_to_avoid = new ArrayList<>() {{
-//            add(StructureSets.VILLAGES);
-//            add(StructureSets.PILLAGER_OUTPOSTS);
-//            add(StructureSets.OCEAN_MONUMENTS);
-//            add(StructureSets.DESERT_PYRAMIDS);
-//            add(StructureSets.END_CITIES);
-//            add(StructureSets.IGLOOS);
-//            add(StructureSets.JUNGLE_TEMPLES);
-//            add(StructureSets.RUINED_PORTALS);
-//            add(StructureSets.SHIPWRECKS);
-//            add(StructureSets.SWAMP_HUTS);
-//            add(StructureSets.WOODLAND_MANSIONS);
-//            add(StructureSets.OCEAN_RUINS);
-//            add(StructureSets.NETHER_FOSSILS);
-//        }};
+
 
         if (!StructureUtils.onLiquid(context, spawnInLiquid)) {return Optional.empty();}
         if (!StructureUtils.isAllowedTerrainHeightChange(context, radius, allowedTerrainHeightRange)) {return Optional.empty();}
 //        if (StructureUtils.isStructureInDistance(context, structures_to_avoid, minStructureDistance)) {return Optional.empty();}
 
-        // Set's our spawning blockpos's y offset to be 60 blocks up.
-        // Since we are going to have heightmap/terrain height spawning set to true further down, this will make it so we spawn 60 blocks above terrain.
-        // If we wanted to spawn on ocean floor, we would set heightmap/terrain height spawning to false and the grab the y value of the terrain with OCEAN_FLOOR_WG heightmap.
         int startY = this.startHeight.sample(context.random(), new WorldGenerationContext(context.chunkGenerator(), context.heightAccessor()));
 
         // Turns the chunk coordinates into actual coordinates we can use. (Gets corner of that chunk)

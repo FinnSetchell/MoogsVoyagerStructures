@@ -1,6 +1,10 @@
 {
   "structures": [
     {
+      "structure": "mvs:cathedral",
+      "weight": 1
+    },
+    {
       "structure": "mvs:crystal",
       "weight": 1
     },
