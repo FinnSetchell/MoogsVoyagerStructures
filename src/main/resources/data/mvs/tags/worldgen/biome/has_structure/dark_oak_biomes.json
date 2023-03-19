@@ -5,10 +5,6 @@
   "values": [
     "minecraft:dark_forest",
     {
-      "id": "#forge:is_spooky",
-      "required": false
-    },
-    {
       "id": "biomesoplenty:ominous_woods",
       "required": false
     },

@@ -5,10 +5,6 @@
   "values": [
     "minecraft:mushroom_fields",
     {
-      "id": "#forge:is_mushroom",
-      "required": false
-    },
-    {
       "id": "biomesoplenty:fungal_field",
       "required": false
     },

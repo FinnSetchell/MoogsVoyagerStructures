@@ -9,10 +9,6 @@
       "required": false
     },
     {
-      "id": "#forge:is_sandy",
-      "required": false
-    },
-    {
       "id": "byg:mojave_desert",
       "required": false
     },
