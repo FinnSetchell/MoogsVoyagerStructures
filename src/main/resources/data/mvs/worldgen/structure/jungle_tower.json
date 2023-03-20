@@ -2,7 +2,7 @@
 
   "type": "mvs:jigsaw",
 
-  "start_pool": "mvs:other/jungle_tower/temp",
+  "start_pool": "mvs:jungle_tower/temp",
 
   "size": 4,
 

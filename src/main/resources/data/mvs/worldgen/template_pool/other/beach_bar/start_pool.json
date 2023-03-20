@@ -9,7 +9,7 @@
       "weight": 1,
       "element": {
 
-        "location": "mvs:beachbar",
+        "location": "mvs:beach_bar",
 
         "processors": "minecraft:empty",
 
