@@ -9,7 +9,7 @@
       "weight": 1
     },
     {
-      "structure": "mvs:duck",
+      "structure": "mvs:other_decoration/duck",
       "weight": 1
     },
     {
@@ -21,11 +21,15 @@
       "weight": 1
     },
     {
-      "structure": "mvs:ruinedbeacon",
+      "structure": "mvs:well/rare_well",
       "weight": 1
     },
     {
-      "structure": "mvs:treemonument",
+      "structure": "mvs:ruins/ruined_beacon",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:ruins/tree_monument",
       "weight": 1
     }
   ],

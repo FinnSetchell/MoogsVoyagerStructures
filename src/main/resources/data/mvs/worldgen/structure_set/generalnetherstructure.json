@@ -1,17 +1,21 @@
 {
   "structures": [
     {
-      "structure": "mvs:crimsonenchantingtable",
+      "structure": "mvs:other_decoration/crimson_enchanting_table",
       "weight": 2
     },
     {
-      "structure": "mvs:netherdevil",
-      "weight": 3
+      "structure": "mvs:lava_pool",
+      "weight": 1
     },
     {
-      "structure": "mvs:netherwell",
-      "weight": 3
-    }
+      "structure": "mvs:other_decoration/nether_devil",
+      "weight": 8
+    }//,
+//    {   // DISABLED BECAUSE DOESNT WORK AND CANT FIGURE IT OUT (if you do pls DM me lol)
+//      "structure": "mvs:nether_well",
+//      "weight": 7
+//    }
   ],
   "placement": {
 

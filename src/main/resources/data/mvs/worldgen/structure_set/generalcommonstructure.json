@@ -1,35 +1,39 @@
 {
   "structures": [
     {
-      "structure": "mvs:azeleahouse",
+      "structure": "mvs:houses/azelea_house",
       "weight": 1
     },
     {
-      "structure": "mvs:barn",
+      "structure": "mvs:houses/barn",
       "weight": 1
     },
     {
-      "structure": "mvs:beachbar",
+      "structure": "mvs:beach_bar",
       "weight": 1
     },
     {
-      "structure": "mvs:beedome",
+      "structure": "mvs:other_decoration/bee_dome",
       "weight": 1
     },
     {
-      "structure": "mvs:bigoaktree",
+      "structure": "mvs:nature/big_oak_tree",
       "weight": 1
     },
     {
-      "structure": "mvs:bluestall",
+      "structure": "mvs:stall/blue_stall",
       "weight": 1
     },
     {
-      "structure": "mvs:campsite",
+      "structure": "mvs:nature/boulder",
       "weight": 1
     },
     {
-      "structure": "mvs:cart",
+      "structure": "mvs:other_decoration/campsite",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:carts/cart",
       "weight": 1
     },
     {
@@ -37,95 +41,95 @@
       "weight": 1
     },
     {
-      "structure": "mvs:castleruins",
+      "structure": "mvs:ruins/castle_ruins",
       "weight": 1
     },
     {
-      "structure": "mvs:deepslatehouse",
+      "structure": "mvs:houses/deepslate_house",
       "weight": 1
     },
     {
-      "structure": "mvs:deserthouse",
+      "structure": "mvs:houses/desert_house",
       "weight": 1
     },
     {
-      "structure": "mvs:desertpump",
+      "structure": "mvs:other_decoration/desert_pump",
       "weight": 1
     },
     {
-      "structure": "mvs:desertwell",
+      "structure": "mvs:other_decoration/fire_camp",
       "weight": 1
     },
     {
-      "structure": "mvs:firecamp",
+      "structure": "mvs:nature/floating_islands",
       "weight": 1
     },
     {
-      "structure": "mvs:floatingislands",
+      "structure": "mvs:houses/flower_hole",
       "weight": 1
     },
     {
-      "structure": "mvs:flowerhole",
+      "structure": "mvs:other_decoration/fox_hut",
       "weight": 1
     },
     {
-      "structure": "mvs:foxhut",
+      "structure": "mvs:gallows",
       "weight": 1
     },
     {
-      "structure": "mvs:horsepen",
+      "structure": "mvs:horse_pen",
       "weight": 1
     },
     {
-      "structure": "mvs:house",
+      "structure": "mvs:houses/house",
       "weight": 1
     },
     {
-      "structure": "mvs:lampchest",
+      "structure": "mvs:other_decoration/lamp_chest",
       "weight": 1
     },
     {
-      "structure": "mvs:largecart1",
+      "structure": "mvs:carts/large_cart_1",
       "weight": 1
     },
     {
-      "structure": "mvs:largecart2",
+      "structure": "mvs:carts/large_cart_2",
       "weight": 1
     },
     {
-      "structure": "mvs:largefloatingisland",
+      "structure": "mvs:houses/large_floating_island",
       "weight": 1
     },
     {
-      "structure": "mvs:largemushroom",
+      "structure": "mvs:nature/large_mushroom",
       "weight": 1
     },
     {
-      "structure": "mvs:lecturngarden",
+      "structure": "mvs:other_decoration/lecturn_garden",
       "weight": 1
     },
     {
-      "structure": "mvs:logruin",
+      "structure": "mvs:ruins/log_ruin",
       "weight": 1
     },
     {
-      "structure": "mvs:mushroompond",
+      "structure": "mvs:nature/mushroom_pond",
       "weight": 1
     },
     {
-      "structure": "mvs:mushroomstatue",
+      "structure": "mvs:other_decoration/mushroom_statue",
       "weight": 1
     },
     {
-      "structure": "mvs:orangestall",
+      "structure": "mvs:stall/orange_stall",
       "weight": 1
     },
     {
-      "structure": "mvs:outhouse",
+      "structure": "mvs:out_house",
       "weight": 1
     },
     {
-      "structure": "mvs:pinkstall",
+      "structure": "mvs:stall/pink_stall",
       "weight": 1
     },
     {
@@ -137,7 +141,7 @@
       "weight": 1
     },
     {
-      "structure": "mvs:redstall",
+      "structure": "mvs:stall/red_stall",
       "weight": 1
     },
     {
@@ -145,43 +149,47 @@
       "weight": 1
     },
     {
-      "structure": "mvs:smallruin",
+      "structure": "mvs:ruins/small_ruin",
       "weight": 1
     },
     {
-      "structure": "mvs:smallship",
+      "structure": "mvs:small_ship",
       "weight": 1
     },
     {
-      "structure": "mvs:smallswamphouse",
+      "structure": "mvs:houses/small_swamp_house",
       "weight": 1
     },
     {
-      "structure": "mvs:stonebee",
+      "structure": "mvs:ruins/statue_ruins",
       "weight": 1
     },
     {
-      "structure": "mvs:stonefountain",
+      "structure": "mvs:other_decoration/stone_bee",
       "weight": 1
     },
     {
-      "structure": "mvs:stonepillars",
+      "structure": "mvs:stone_fountain",
       "weight": 1
     },
     {
-      "structure": "mvs:sunzigate",
+      "structure": "mvs:ruins/stone_pillars",
       "weight": 1
     },
     {
-      "structure": "mvs:tallhouse",
+      "structure": "mvs:sunzi_gate",
       "weight": 1
     },
     {
-      "structure": "mvs:villagerstatue",
+      "structure": "mvs:houses/tall_house",
       "weight": 1
     },
     {
-      "structure": "mvs:warpedhouse",
+      "structure": "mvs:other_decoration/villager_statue",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:houses/warped_house",
       "weight": 1
     }
   ],

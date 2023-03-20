@@ -1,19 +1,19 @@
 {
   "structures": [
     {
-      "structure": "mvs:endscraps1",
+      "structure": "mvs:other_decoration/end_scraps/end_scraps_1",
       "weight": 1
     },
     {
-      "structure": "mvs:endscraps2",
+      "structure": "mvs:other_decoration/end_scraps/end_scraps_2",
       "weight": 1
     },
     {
-      "structure": "mvs:endscraps3",
+      "structure": "mvs:other_decoration/end_scraps/end_scraps_3",
       "weight": 1
     },
     {
-      "structure": "mvs:endscraps4",
+      "structure": "mvs:other_decoration/end_scraps/end_scraps_4",
       "weight": 1
     }
   ],

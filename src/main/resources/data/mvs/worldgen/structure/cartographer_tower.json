@@ -2,7 +2,7 @@
 
   "type": "mvs:jigsaw",
 
-  "start_pool": "mvs:cartographer_tower/temp",
+  "start_pool": "mvs:other/cartographer_tower/temp",
 
   "size": 2,
 

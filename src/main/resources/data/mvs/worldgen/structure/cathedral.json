@@ -2,7 +2,7 @@
 
   "type": "mvs:jigsaw",
 
-  "start_pool": "mvs:cathedral/temp",
+  "start_pool": "mvs:other/cathedral/temp",
 
   "size": 25,
 
