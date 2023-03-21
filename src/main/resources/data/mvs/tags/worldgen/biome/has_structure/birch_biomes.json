@@ -5,18 +5,6 @@
   "values": [
     "minecraft:birch_forest",
     {
-      "id": "#forge:is_rare",
-      "required": false
-    },
-    {
-      "id": "#forge:is_lush",
-      "required": false
-    },
-    {
-      "id": "#forge:is_dense/overworld",
-      "required": false
-    },
-    {
       "id": "byg:seasonal_birch_forest",
       "required": false
     },

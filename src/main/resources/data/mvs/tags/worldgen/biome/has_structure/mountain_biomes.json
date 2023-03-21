@@ -5,14 +5,6 @@
   "values": [
     "#minecraft:is_mountain",
     {
-      "id": "#forge:is_slope",
-      "required": false
-    },
-    {
-      "id": "#forge:is_peak",
-      "required": false
-    },
-    {
       "id": "#forge:is_mountain",
       "required": false
     }
