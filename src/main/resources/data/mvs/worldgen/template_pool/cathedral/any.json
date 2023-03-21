@@ -3,190 +3,190 @@
   "fallback": "mvs:cathedral/blocker",
   "elements": [
     {
-      "weight": 4,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "projection": "rigid",
-        "location": "mvs:cathedral/corridors/corridor_1",
-        "processors": "minecraft:empty"
-      }
-    },
-    {
-      "weight": 8,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "projection": "rigid",
-        "location": "mvs:cathedral/corridors/corridor_2",
-        "processors": "minecraft:empty"
-      }
-    },
-    {
-      "weight": 8,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "projection": "rigid",
-        "location": "mvs:cathedral/corridors/corridor_3",
-        "processors": "minecraft:empty"
-      }
-    },
-    {
       "weight": 3,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
-        "location": "mvs:cathedral/corridors/corridor_4",
-        "processors": "minecraft:empty"
+        "location": "mvs:cathedral/corridors/corridor_1",
+        "processors": "mvs:cathedral"
       }
     },
     {
       "weight": 7,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "mvs:cathedral/corridors/corridor_2",
+        "processors": "mvs:cathedral"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "mvs:cathedral/corridors/corridor_3",
+        "processors": "mvs:cathedral"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "projection": "rigid",
+        "location": "mvs:cathedral/corridors/corridor_4",
+        "processors": "mvs:cathedral"
+      }
+    },
+    {
+      "weight": 6,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "mvs:cathedral/corridors/corridor_5",
-        "processors": "minecraft:empty"
+        "processors": "mvs:cathedral"
       }
     },
     {
-      "weight": 8,
+      "weight": 7,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "mvs:cathedral/corridors/corridor_6",
-        "processors": "minecraft:empty"
+        "processors": "mvs:cathedral"
       }
     },
     {
-      "weight": 8,
+      "weight": 7,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "mvs:cathedral/corridors/corridor_7",
-        "processors": "minecraft:empty"
+        "processors": "mvs:cathedral"
       }
     },
 
 
 
     {
-      "weight": 7,
+      "weight": 10,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "mvs:cathedral/special/corner_1",
-        "processors": "minecraft:empty"
+        "processors": "mvs:cathedral"
       }
     },
     {
-      "weight": 7,
+      "weight": 10,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "mvs:cathedral/special/corner_2",
-        "processors": "minecraft:empty"
+        "processors": "mvs:cathedral"
       }
     },
     {
-      "weight": 6,
+      "weight": 9,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "mvs:cathedral/special/corner_3",
-        "processors": "minecraft:empty"
+        "processors": "mvs:cathedral"
       }
     },
     {
-      "weight": 6,
+      "weight": 9,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "mvs:cathedral/special/corner_4",
-        "processors": "minecraft:empty"
+        "processors": "mvs:cathedral"
       }
     },
 
 
     {
-      "weight": 4,
+      "weight": 8,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "mvs:cathedral/special/dead_end_1",
-        "processors": "minecraft:empty"
+        "processors": "mvs:cathedral"
       }
     },
     {
-      "weight": 4,
+      "weight": 6,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "mvs:cathedral/special/dead_end_2",
-        "processors": "minecraft:empty"
+        "processors": "mvs:cathedral"
       }
     },
     {
-      "weight": 6,
+      "weight": 8,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "mvs:cathedral/special/dead_end_3",
-        "processors": "minecraft:empty"
+        "processors": "mvs:cathedral"
       }
     },
 
     {
-      "weight": 8,
+      "weight": 17,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "mvs:cathedral/special/staircase_1",
-        "processors": "minecraft:empty"
+        "processors": "mvs:cathedral"
       }
     },
     {
-      "weight": 7,
+      "weight": 16,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "mvs:cathedral/special/staircase_2",
-        "processors": "minecraft:empty"
+        "processors": "mvs:cathedral"
       }
     },
     {
-      "weight": 8,
+      "weight": 17,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "mvs:cathedral/special/staircase_3",
-        "processors": "minecraft:empty"
+        "processors": "mvs:cathedral"
       }
     },
 
     {
-      "weight": 6,
+      "weight": 11,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "mvs:cathedral/special/three_way_1",
-        "processors": "minecraft:empty"
+        "processors": "mvs:cathedral"
       }
     },
     {
-      "weight": 7,
+      "weight": 13,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "mvs:cathedral/special/three_way_2",
-        "processors": "minecraft:empty"
+        "processors": "mvs:cathedral"
       }
     },
     {
-      "weight": 7,
+      "weight": 13,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "mvs:cathedral/special/three_way_3",
-        "processors": "minecraft:empty"
+        "processors": "mvs:cathedral"
       }
     }
   ]

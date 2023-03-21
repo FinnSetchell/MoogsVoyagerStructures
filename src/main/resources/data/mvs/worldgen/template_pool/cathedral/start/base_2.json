@@ -8,7 +8,7 @@
         "element_type": "minecraft:single_pool_element",
         "projection": "rigid",
         "location": "mvs:cathedral/base/bottom",
-        "processors": "minecraft:empty"
+        "processors": "mvs:cathedral"
       }
     }
   ]
