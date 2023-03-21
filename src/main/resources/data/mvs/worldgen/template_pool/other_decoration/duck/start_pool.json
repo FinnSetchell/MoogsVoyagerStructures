@@ -11,7 +11,7 @@
 
         "location": "mvs:other_decoration/duck",
 
-        "processors": "minecraft:empty",
+        "processors": "mvs:stone_to_diamond",
 
         "projection": "rigid",
 

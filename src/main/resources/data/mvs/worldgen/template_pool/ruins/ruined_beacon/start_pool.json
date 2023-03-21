@@ -11,7 +11,7 @@
 
         "location": "mvs:ruins/ruined_beacon",
 
-        "processors": "minecraft:empty",
+        "processors": "mvs:tuff_to_iron",
 
         "projection": "rigid",
 
