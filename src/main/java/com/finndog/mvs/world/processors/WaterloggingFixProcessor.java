@@ -21,19 +21,19 @@ public class WaterloggingFixProcessor extends StructureProcessor {
 
     @Override
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader levelReader, BlockPos pos, BlockPos pos2, StructureTemplate.StructureBlockInfo infoIn1, StructureTemplate.StructureBlockInfo infoIn2, StructurePlaceSettings settings) {
-//        if(!infoIn2.state.getFluidState().isEmpty()) {
-//            if(levelReader instanceof WorldGenRegion worldGenRegion && !worldGenRegion.getCenter().equals(new ChunkPos(infoIn2.pos))) {
-//                return infoIn2;
-//            }
-//
-//            ChunkAccess chunk = levelReader.getChunk(infoIn2.pos);
-//            int minY = chunk.getMinBuildHeight();
-//            int maxY = chunk.getMaxBuildHeight();
-//            int currentY = infoIn2.pos.getY();
-//            if(currentY >= minY && currentY <= maxY) {
-//                ((LevelAccessor) levelReader).scheduleTick(infoIn2.pos, infoIn2.state.getBlock(), 0);
-//            }
-//        }
+        if(!infoIn2.state.getFluidState().isEmpty()) {
+            if(levelReader instanceof WorldGenRegion worldGenRegion && !worldGenRegion.getCenter().equals(new ChunkPos(infoIn2.pos))) {
+                return infoIn2;
+            }
+
+            ChunkAccess chunk = levelReader.getChunk(infoIn2.pos);
+            int minY = chunk.getMinBuildHeight();
+            int maxY = chunk.getMaxBuildHeight();
+            int currentY = infoIn2.pos.getY();
+            if(currentY >= minY && currentY <= maxY) {
+                ((LevelAccessor) levelReader).scheduleTick(infoIn2.pos, infoIn2.state.getBlock(), 0);
+            }
+        }
         return infoIn2;
     }
 
