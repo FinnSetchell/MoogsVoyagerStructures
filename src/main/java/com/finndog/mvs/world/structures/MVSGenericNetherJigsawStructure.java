@@ -26,7 +26,8 @@ public class MVSGenericNetherJigsawStructure extends Structure {
                     HeightProvider.CODEC.fieldOf("start_height").forGetter(structure -> structure.startHeight),
                     Heightmap.Type.CODEC.optionalFieldOf("project_start_to_heightmap").forGetter(structure -> structure.projectStartToHeightmap),
                     Codec.intRange(1, 128).fieldOf("max_distance_from_center").orElse(10).forGetter(structure -> structure.maxDistanceFromCenter),
-                    Codec.BOOL.fieldOf("spawn_in_liquid").orElse(false).forGetter(structure -> structure.spawnInLiquid)
+                    Codec.BOOL.fieldOf("spawn_in_liquid").orElse(false).forGetter(structure -> structure.spawnInLiquid),
+                    Codec.intRange(1, 32).fieldOf("radius").orElse(15).forGetter(structure -> structure.radius)
             ).apply(instance, MVSGenericNetherJigsawStructure::new)).codec();
 
     private final RegistryEntry<StructurePool> startPool;
@@ -36,6 +37,8 @@ public class MVSGenericNetherJigsawStructure extends Structure {
     private final Optional<Heightmap.Type> projectStartToHeightmap;
     private final int maxDistanceFromCenter;
     private final boolean spawnInLiquid;
+    private final int radius;
+
 
 
     public MVSGenericNetherJigsawStructure(Structure.Config config,
@@ -45,7 +48,8 @@ public class MVSGenericNetherJigsawStructure extends Structure {
                                      HeightProvider startHeight,
                                      Optional<Heightmap.Type> projectStartToHeightmap,
                                      int maxDistanceFromCenter,
-                                     boolean spawnInLiquid)
+                                     boolean spawnInLiquid,
+                                     int radius)
     {
         super(config);
         this.startPool = startPool;
@@ -55,6 +59,7 @@ public class MVSGenericNetherJigsawStructure extends Structure {
         this.projectStartToHeightmap = projectStartToHeightmap;
         this.maxDistanceFromCenter = maxDistanceFromCenter;
         this.spawnInLiquid = spawnInLiquid;
+        this.radius = radius;
     }
 
 
@@ -62,9 +67,13 @@ public class MVSGenericNetherJigsawStructure extends Structure {
     public Optional<Structure.StructurePosition> getStructurePosition(Structure.Context context) {
         // Turns the chunk coordinates into actual coordinates we can use. (Gets corner of that chunk)
         Optional<Integer> yLevel = StructureUtils.getSuitableNetherYLevel(context, context.chunkPos().getCenterAtY(0));
-        if (yLevel.isEmpty()) {return Optional.empty();} //done
+        if (yLevel.isEmpty()) {return Optional.empty();}
         BlockPos blockPos = context.chunkPos().getCenterAtY(yLevel.get());
-        if (!StructureUtils.onLiquid(context, spawnInLiquid)) {return Optional.empty();} //done
+        if (!spawnInLiquid) {
+            if (StructureUtils.onLiquid(context, radius*2)) {
+                return Optional.empty();
+            }
+        }
 
 
         Optional<StructurePosition> structurePiecesGenerator =

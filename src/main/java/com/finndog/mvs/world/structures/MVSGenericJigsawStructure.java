@@ -68,7 +68,11 @@ public class MVSGenericJigsawStructure extends Structure {
     @Override
     public Optional<Structure.StructurePosition> getStructurePosition(Structure.Context context) {
 
-        if (!StructureUtils.onLiquid(context, spawnInLiquid)) {return Optional.empty();}
+        if (!spawnInLiquid) {
+            if (StructureUtils.onLiquid(context, radius*2)) {
+                return Optional.empty();
+            }
+        }
         if (!StructureUtils.isAllowedTerrainHeightChange(context, radius, allowedTerrainHeightRange)) {return Optional.empty();}
 
         // Set's our spawning blockpos's y offset to be 60 blocks up.

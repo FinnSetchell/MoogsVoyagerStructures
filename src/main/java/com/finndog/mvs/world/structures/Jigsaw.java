@@ -1,6 +1,7 @@
 package com.finndog.mvs.world.structures;
 
 import com.finndog.mvs.MVSStructures;
+import com.finndog.mvs.utils.StructureUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -99,11 +100,9 @@ public class Jigsaw extends Structure {
     @Override
     public Optional<Structure.StructurePosition> getStructurePosition(Structure.Context context) {
 
-        // Check if the spot is valid for our structure. This is just as another method for cleanness.
-        // Returning an empty optional tells the game to skip this spot as it will not generate the structure.
-        if (!Jigsaw.extraSpawningChecks(context)) {
-            return Optional.empty();
-        }
+        // Checks if the chunk is on land and if the terrain height is within the allowed range.
+        if (!StructureUtils.onLiquid(context, 10)) {return Optional.empty();}
+        if (!StructureUtils.isAllowedTerrainHeightChange(context, 25, 3)) {return Optional.empty();}
 
         // Set's our spawning blockpos's y offset to be 60 blocks up.
         // Since we are going to have heightmap/terrain height spawning set to true further down, this will make it so we spawn 60 blocks above terrain.
