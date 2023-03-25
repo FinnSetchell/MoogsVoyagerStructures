@@ -24,7 +24,7 @@
         // Processor lists are great for randomizing blocks and making structures appear more natural!
         // Note, this will automatically check into the 'worldgen/processor_list' folder for the json file.
         // The final path would look like 'resources/data/structure_tutorial/worldgen/processor_list/randomize_stonebrick.json'
-        "processors": "minecraft:empty",
+        "processors": "mvs:blue_to_water",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }

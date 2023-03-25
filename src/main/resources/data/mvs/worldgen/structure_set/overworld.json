@@ -132,10 +132,6 @@
       "weight": 20
     },
     {
-      "structure": "mvs:pond",
-      "weight": 20
-    },
-    {
       "structure": "mvs:railway",
       "weight": 20
     },
@@ -211,10 +207,6 @@
     },
     {
       "structure": "mvs:log_pile/oak_log_pile",
-      "weight": 120
-    },
-    {
-      "structure": "mvs:log_pile/small_oak_log",
       "weight": 120
     },
     {
@@ -300,10 +292,6 @@
     {
       "structure": "mvs:jungle_tower",
       "weight": 1
-    },
-    {
-      "structure": "mvs:memorial",
-      "weight": 5
     },
     {
       "structure": "mvs:ruins/ruined_beacon",

@@ -24,7 +24,7 @@
 
   "spawn_in_liquid": false,
 
-  "radius": 8,
+  "radius": 4,
 
-  "allowedTerrainHeightChange": 3
+  "allowedTerrainHeightChange": 2
 }

@@ -9,7 +9,7 @@
       "weight": 1,
       "element": {
 
-        "location": "mvs:stone_fountain_upper",
+        "location": "mvs:stone_fountain",
 
         "processors": "minecraft:empty",
 

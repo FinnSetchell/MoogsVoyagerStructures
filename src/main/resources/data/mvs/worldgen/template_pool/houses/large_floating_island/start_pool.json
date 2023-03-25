@@ -11,7 +11,7 @@
 
         "location": "mvs:houses/large_floating_island",
 
-        "processors": "minecraft:empty",
+        "processors": "mvs:blue_to_water",
 
         "projection": "rigid",
 
