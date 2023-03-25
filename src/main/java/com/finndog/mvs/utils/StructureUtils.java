@@ -22,64 +22,71 @@ public class StructureUtils {
 
     public static boolean isAllowedTerrainHeightChange(Structure.GenerationContext context, int size, int allowedTerrainHeightRange) {
         ChunkPos pos = context.chunkPos();
-        int[] cornerHeights = getCornerHeights(context, pos.getMinBlockX(), size, pos.getMinBlockZ(), size);
+        int prevHeight = getHeight(context, pos.getMinBlockX(), pos.getMinBlockZ());
+        int spacing = Math.max(2, size / 10);
 
-        int minHeight = Math.min(Math.min(cornerHeights[0], cornerHeights[1]), Math.min(cornerHeights[2], cornerHeights[3]));
-        int maxHeight = Math.max(Math.max(cornerHeights[0], cornerHeights[1]), Math.max(cornerHeights[2], cornerHeights[3]));
-
-        return Math.abs(maxHeight - minHeight) <= allowedTerrainHeightRange;
+        for (int x = 1; x < size; x+=spacing) {
+            for (int z = 1; z < size; z+=spacing) {
+                int height = getHeight(context, pos.getMinBlockX() + x, pos.getMinBlockZ() + z);
+                if (Math.abs(height - prevHeight) > allowedTerrainHeightRange) {
+                    return false;
+                }
+                prevHeight = height;
+            }
+        }
+        return true;
     }
 
-    public static int[] getCornerHeights(Structure.GenerationContext context, int middleBlockX, int xSize, int middleBlockZ, int zSize) {
+    public static int getHeight(Structure.GenerationContext context, int x, int z) {
         ChunkGenerator generator = context.chunkGenerator();
         LevelHeightAccessor heightAccessor = context.heightAccessor();
         RandomState randomState = context.randomState();
 
-        return new int[]{
-                generator.getFirstOccupiedHeight(
-                        middleBlockX,
-                        middleBlockZ,
-                        Heightmap.Types.WORLD_SURFACE_WG,
-                        heightAccessor,
-                        randomState),
-                generator.getFirstOccupiedHeight(
-                        middleBlockX,
-                        middleBlockZ + zSize,
-                        Heightmap.Types.WORLD_SURFACE_WG,
-                        heightAccessor,
-                        randomState),
-                generator.getFirstOccupiedHeight(
-                        middleBlockX + xSize,
-                        middleBlockZ,
-                        Heightmap.Types.WORLD_SURFACE_WG,
-                        heightAccessor,
-                        randomState),
-                generator.getFirstOccupiedHeight(
-                        middleBlockX + xSize,
-                        middleBlockZ + zSize,
-                        Heightmap.Types.WORLD_SURFACE_WG,
-                        heightAccessor,
-                        randomState)};
+        return generator.getFirstOccupiedHeight(x, z, Heightmap.Types.WORLD_SURFACE_WG, heightAccessor, randomState);
     }
-    public static boolean onLiquid(Structure.GenerationContext context, boolean spawnInLiquid) {
+
+    // this should check every other top block to see if it contains fluid
+    public static boolean onLiquid(Structure.GenerationContext context, int size) {
+        int spacing = Math.max(2, size / 10);
+
+        for (int x = 1; x < size; x+=spacing) {
+            for (int z = 1; z < size; z+=spacing) {
+                if (isTopBlockWater(context)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean isTopBlockWater(Structure.GenerationContext context) {
         ChunkPos chunkPos = context.chunkPos();
         BlockPos centerOfChunk = chunkPos.getMiddleBlockPosition(0);
         int landHeight = context.chunkGenerator().getFirstOccupiedHeight(centerOfChunk.getX(), centerOfChunk.getZ(), Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor(), context.randomState());
         NoiseColumn columnOfBlocks = context.chunkGenerator().getBaseColumn(centerOfChunk.getX(), centerOfChunk.getZ(), context.heightAccessor(), context.randomState());
         BlockState topBlock = columnOfBlocks.getBlock(centerOfChunk.getY() + landHeight);
-
-        if (spawnInLiquid) {
-            if(!topBlock.getFluidState().isEmpty()) {
-                return true;
-            } else {
-                return false;
-            }
-        } //else
-        if(topBlock.getFluidState().isEmpty()) {
+        if(!topBlock.getFluidState().isEmpty()) {
             return true;
         }
         return false;
     }
+
+    public static Optional<Integer> getSuitableNetherYLevel(Structure.GenerationContext context, BlockPos pos) {
+        NoiseColumn column = context.chunkGenerator().getBaseColumn(pos.getX(), pos.getZ(), context.heightAccessor(), context.randomState());
+        List<Integer> suitableYLevels = new ArrayList<>();
+
+        for (int y = 127; y > context.chunkGenerator().getSeaLevel(); y--) {
+            if (column.getBlock(y - 1).canOcclude() && column.getBlock(y).isAir() && column.getBlock(y + 4).isAir()) {
+                suitableYLevels.add(y);
+            }
+        }
+
+        if (suitableYLevels.isEmpty())
+            return Optional.empty();
+
+        return Optional.of(suitableYLevels.get(new Random(context.seed()).nextInt(suitableYLevels.size())));
+    }
+
 //    public static boolean isStructureInDistance(Structure.GenerationContext context, List<Holder<StructureSet>> structures, int minStructureDistance) {
 //        ChunkGenerator generator = context.chunkGenerator();
 //        RandomState randomState = context.randomState();
@@ -98,40 +105,4 @@ public class StructureUtils {
 //
 //        return false;
 //    }
-//
-//    public static boolean isFeatureChunk(Structure.GenerationContext context, int distance) {
-//        ChunkPos chunkpos = context.chunkPos();
-//
-//        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.VILLAGES, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-//        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.PILLAGER_OUTPOSTS, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-//        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.OCEAN_MONUMENTS, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-//        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.DESERT_PYRAMIDS, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-//        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.END_CITIES, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-//        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.IGLOOS, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-//        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.JUNGLE_TEMPLES, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-//        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.RUINED_PORTALS, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-//        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.SHIPWRECKS, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-//        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.SWAMP_HUTS, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-//        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.WOODLAND_MANSIONS, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-//        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.OCEAN_RUINS, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-//        if (context.chunkGenerator().hasStructureChunkInRange(StructureSets.NETHER_FOSSILS, context.randomState(), context.seed(), chunkpos.x, chunkpos.z, distance)) {return true;}
-//        return false;
-//    }
-
-    public static Optional<Integer> getSuitableNetherYLevel(Structure.GenerationContext context, BlockPos pos) {
-        NoiseColumn column = context.chunkGenerator().getBaseColumn(pos.getX(), pos.getZ(), context.heightAccessor(), context.randomState());
-        List<Integer> suitableYLevels = new ArrayList<>();
-
-        for (int y = 127; y > context.chunkGenerator().getSeaLevel(); y--) {
-            if (column.getBlock(y - 1).canOcclude() && column.getBlock(y).isAir() && column.getBlock(y + 4).isAir()) {
-                suitableYLevels.add(y);
-            }
-        }
-
-        if (suitableYLevels.isEmpty())
-            return Optional.empty();
-
-        return Optional.of(suitableYLevels.get(new Random(context.seed()).nextInt(suitableYLevels.size())));
-    }
-
 }

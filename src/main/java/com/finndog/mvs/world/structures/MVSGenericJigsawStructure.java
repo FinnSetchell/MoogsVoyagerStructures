@@ -69,10 +69,12 @@ public class MVSGenericJigsawStructure extends Structure {
     @Override
     public Optional<Structure.GenerationStub> findGenerationPoint(Structure.GenerationContext context) {
 
-
-        if (!StructureUtils.onLiquid(context, spawnInLiquid)) {return Optional.empty();}
+        if (!spawnInLiquid) {
+            if (StructureUtils.onLiquid(context, radius*2)) {
+                return Optional.empty();
+            }
+        }
         if (!StructureUtils.isAllowedTerrainHeightChange(context, radius, allowedTerrainHeightRange)) {return Optional.empty();}
-//        if (StructureUtils.isStructureInDistance(context, structures_to_avoid, minStructureDistance)) {return Optional.empty();}
 
         int startY = this.startHeight.sample(context.random(), new WorldGenerationContext(context.chunkGenerator(), context.heightAccessor()));
 

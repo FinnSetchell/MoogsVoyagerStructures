@@ -56,8 +56,8 @@ public class Jigsaw extends Structure {
 
     @Override
     public Optional<Structure.GenerationStub> findGenerationPoint(Structure.GenerationContext context) {
-
-        if (!StructureUtils.onLiquid(context, false)) {return Optional.empty();}
+        // Checks if the chunk is on land and if the terrain height is within the allowed range.
+        if (!StructureUtils.onLiquid(context, 10)) {return Optional.empty();}
         if (!StructureUtils.isAllowedTerrainHeightChange(context, 25, 3)) {return Optional.empty();}
 
         // Set's our spawning blockpos's y offset to be 60 blocks up.
