@@ -1,12 +1,11 @@
 {
   "required": true,
+  "minVersion": "0.8",
   "package": "com.finndog.mvs.mixin",
   "compatibilityLevel": "JAVA_17",
-  "refmap": "mvs.refmap.json",
-  "mixins": [
-    "structures.StructureProcessorAccessor"
-  ],
-  "client": [
-  ],
-  "minVersion": "0.8"
+  "mixins": [],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }
