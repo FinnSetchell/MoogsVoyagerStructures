@@ -1,0 +1,315 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:houses/azelea_house",
+      "weight": 29    },
+    {
+      "structure": "mvs:houses/barn",
+      "weight": 38
+    },
+    {
+      "structure": "mvs:beach_bar",
+      "weight": 36
+    },
+    {
+      "structure": "mvs:other_decoration/bee_dome",
+      "weight": 17
+    },
+    {
+      "structure": "mvs:nature/big_oak_tree",
+      "weight": 9
+    },
+    {
+      "structure": "mvs:stall/blue_stall",
+      "weight": 20
+    },
+    {
+      "structure": "mvs:nature/boulder",
+      "weight": 50
+    },
+    {
+      "structure": "mvs:other_decoration/campsite",
+      "weight": 27
+    },
+    {
+      "structure": "mvs:carts/cart",
+      "weight": 25
+    },
+    {
+      "structure": "mvs:cartographer_tower",
+      "weight": 7
+    },
+    {
+      "structure": "mvs:ruins/castle_ruins",
+      "weight": 25
+    },
+    {
+      "structure": "mvs:houses/deepslate_house",
+      "weight": 20
+    },
+    {
+      "structure": "mvs:houses/desert_house",
+      "weight": 45
+    },
+    {
+      "structure": "mvs:other_decoration/desert_pump",
+      "weight": 57
+    },
+    {
+      "structure": "mvs:other_decoration/fire_camp",
+      "weight": 35
+    },
+    {
+      "structure": "mvs:nature/floating_islands",
+      "weight": 35
+    },
+    {
+      "structure": "mvs:houses/flower_hole",
+      "weight": 32
+    },
+    {
+      "structure": "mvs:other_decoration/fox_hut",
+      "weight": 23
+    },
+    {
+      "structure": "mvs:gallows",
+      "weight": 22
+    },
+    {
+      "structure": "mvs:horse_pen",
+      "weight": 32
+    },
+    {
+      "structure": "mvs:houses/house",
+      "weight": 18
+    },
+    {
+      "structure": "mvs:other_decoration/lamp_chest",
+      "weight": 52
+    },
+    {
+      "structure": "mvs:carts/large_cart_1",
+      "weight": 9
+    },
+    {
+      "structure": "mvs:carts/large_cart_2",
+      "weight": 9
+    },
+    {
+      "structure": "mvs:houses/large_floating_island",
+      "weight": 9
+    },
+    {
+      "structure": "mvs:nature/large_mushroom",
+      "weight": 4
+    },
+    {
+      "structure": "mvs:other_decoration/lecturn_garden",
+      "weight": 17
+    },
+    {
+      "structure": "mvs:ruins/log_ruin",
+      "weight": 15
+    },
+    {
+      "structure": "mvs:nature/mushroom_pond",
+      "weight": 30
+    },
+    {
+      "structure": "mvs:other_decoration/mushroom_statue",
+      "weight": 45
+    },
+    {
+      "structure": "mvs:stall/orange_stall",
+      "weight": 20
+    },
+    {
+      "structure": "mvs:out_house",
+      "weight": 35
+    },
+    {
+      "structure": "mvs:stall/pink_stall",
+      "weight": 20
+    },
+    {
+      "structure": "mvs:railway",
+      "weight": 20
+    },
+    {
+      "structure": "mvs:stall/red_stall",
+      "weight": 20
+    },
+    {
+      "structure": "mvs:shed",
+      "weight": 20
+    },
+    {
+      "structure": "mvs:ruins/small_ruin",
+      "weight": 15
+    },
+    {
+      "structure": "mvs:small_ship",
+      "weight": 30
+    },
+    {
+      "structure": "mvs:houses/small_swamp_house",
+      "weight": 20
+    },
+    {
+      "structure": "mvs:ruins/statue_ruins",
+      "weight": 13
+    },
+    {
+      "structure": "mvs:other_decoration/stone_bee",
+      "weight": 10
+    },
+    {
+      "structure": "mvs:stone_fountain",
+      "weight": 20
+    },
+    {
+      "structure": "mvs:ruins/stone_pillars",
+      "weight": 12
+    },
+    {
+      "structure": "mvs:sunzi_gate",
+      "weight": 10
+    },
+    {
+      "structure": "mvs:houses/tall_house",
+      "weight": 30
+    },
+    {
+      "structure": "mvs:other_decoration/villager_statue",
+      "weight": 35
+    },
+    {
+      "structure": "mvs:houses/warped_house",
+      "weight": 35
+    },
+
+    // LOGS
+    {
+      "structure": "mvs:log_pile/acacia_log_pile",
+      "weight": 120
+    },
+    {
+      "structure": "mvs:log_pile/birch_log_pile",
+      "weight": 120
+    },
+    {
+      "structure": "mvs:log_pile/dark_oak_log_pile",
+      "weight": 120
+    },
+    {
+      "structure": "mvs:log_pile/jungle_log_pile",
+      "weight": 120
+    },
+    {
+      "structure": "mvs:log_pile/oak_log_pile",
+      "weight": 120
+    },
+    {
+      "structure": "mvs:log_pile/spruce_log_pile",
+      "weight": 120
+    },
+
+    // WELLS
+    {
+      "structure": "mvs:well/well",
+      "weight": 100
+    },
+    {
+      "structure": "mvs:well/small_well",
+      "weight": 100
+    },
+    {
+      "structure": "mvs:well/rare_well",
+      "weight": 100
+    },
+    {
+      "structure": "mvs:well/small_copper_well",
+      "weight": 100
+    },
+    {
+      "structure": "mvs:well/wells/acacia_well",
+      "weight": 100
+    },
+    {
+      "structure": "mvs:well/wells/dark_oak_well",
+      "weight": 100
+    },
+    {
+      "structure": "mvs:well/wells/birch_well",
+      "weight": 100
+    },
+    {
+      "structure": "mvs:well/wells/end_well",
+      "weight": 100
+    },
+    {
+      "structure": "mvs:well/wells/jungle_well",
+      "weight": 100
+    },
+    {
+      "structure": "mvs:well/wells/mushroom_well",
+      "weight": 100
+    },
+    {
+      "structure": "mvs:well/wells/nether_well",
+      "weight": 100
+    },
+    {
+      "structure": "mvs:well/wells/oak_well",
+      "weight": 100
+    },
+    {
+      "structure": "mvs:well/wells/rocky_well",
+      "weight": 100
+    },
+    {
+      "structure": "mvs:well/wells/snowy_well",
+      "weight": 100
+    },
+    {
+      "structure": "mvs:well/wells/spruce_well",
+      "weight": 100
+    },
+
+    // RARE STRUCTURES
+    {
+      "structure": "mvs:cathedral",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:crystal",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:other_decoration/duck",
+      "weight": 2
+    },
+    {
+      "structure": "mvs:jungle_tower",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:ruins/ruined_beacon",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:ruins/tree_monument",
+      "weight": 2
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1545446946,
+
+    "spacing": 35,
+
+    "separation": 30
+  }
+}

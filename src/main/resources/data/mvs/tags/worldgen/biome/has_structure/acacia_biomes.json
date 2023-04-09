@@ -5,22 +5,6 @@
   "values": [
     "minecraft:savanna",
     {
-      "id": "#forge:is_sparse/overworld",
-      "required": false
-    },
-    {
-      "id": "#forge:is_hot/overworld",
-      "required": false
-    },
-    {
-      "id": "#forge:is_dry/overworld",
-      "required": false
-    },
-    {
-      "id": "#forge:is_plateau",
-      "required": false
-    },
-    {
       "id": "byg:baobab_savanna",
       "required": false
     },

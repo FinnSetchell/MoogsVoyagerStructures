@@ -6,10 +6,6 @@
     "minecraft:forest",
     "minecraft:forest",
     {
-      "id": "#forge:is_plains",
-      "required": false
-    },
-    {
       "id": "biomesoplenty:bamboo_grove",
       "required": false
     },

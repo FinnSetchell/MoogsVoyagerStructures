@@ -20,8 +20,7 @@ public class MVSStructures {
      * configured structures and configured features need to be registered directly to BuiltinRegistries as there
      * is no Deferred Registry system for them.
      */
-    public static final DeferredRegister<StructureFeature<?>> DEFERRED_REGISTRY_STRUCTURE = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, com.finndog.mvs.MVSMain.MODID);
-    //public static final DeferredRegister<StructureFeature<?>> STRUCTURE_FEATURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, com.finndog.mvs.MVSMain.MODID);
+    public static final DeferredRegister<StructureFeature<?>> DEFERRED_REGISTRY_STRUCTURE = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, MVSMain.MODID);
 
 
 
@@ -29,16 +28,9 @@ public class MVSStructures {
      * Registers the base structure itself and sets what its path is. In this case,
      * this base structure will have the resourcelocation of structure_tutorial:sky_structures.
      */
-    public static final RegistryObject<StructureFeature<?>> SKY_STRUCTURES = DEFERRED_REGISTRY_STRUCTURE.register("sky_structures", SkyStructures::new);
-    public static final RegistryObject<StructureFeature<?>> YLEVEL_DOWN_ONE = DEFERRED_REGISTRY_STRUCTURE.register("ylevel_down_one", YLevelDownOne::new);
-    public static final RegistryObject<StructureFeature<?>> YLEVEL_UP_ONE = DEFERRED_REGISTRY_STRUCTURE.register("ylevel_up_one", YLevelUpOne::new);
-
-    public static final RegistryObject<StructureFeature<?>> MVS_GENERIC_JIGSAW_STRUCTURE = DEFERRED_REGISTRY_STRUCTURE.register("mvs_generic_jigsaw_structure", MVSGenericJigsawStructure::new);
-    public static final RegistryObject<StructureFeature<?>> MVS_SMALL_JIGSAW_STRUCTURE = DEFERRED_REGISTRY_STRUCTURE.register("mvs_small_jigsaw_structure", MVSGenericJigsawStructure::new);
+    public static final RegistryObject<StructureFeature<?>> MVS_GENERIC_JIGSAW_STRUCTURE = DEFERRED_REGISTRY_STRUCTURE.register("mvs_generic_jigsaw_structure", Jigsaw::new);
     public static final RegistryObject<StructureFeature<?>> MVS_GENERIC_NETHER_JIGSAW_STRUCTURE = DEFERRED_REGISTRY_STRUCTURE.register("mvs_generic_nether_jigsaw_structure", MVSGenericNetherJigsawStructure::new);
-
-    //public static final RegistryObject<StructureFeature<?>> GENERIC_JIGSAW_STRUCTURE = DEFERRED_REGISTRY_STRUCTURE.register("generic_jigsaw_structure", () -> new GenericJigsawStructure(MVSGenericConfig.CODEC));
-
+    public static final RegistryObject<StructureFeature<?>> JIGSAW = DEFERRED_REGISTRY_STRUCTURE.register("jigsaw", Jigsaw::new);
 
 
 }

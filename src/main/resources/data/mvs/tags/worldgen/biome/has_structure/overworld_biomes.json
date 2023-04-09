@@ -11,38 +11,6 @@
     "minecraft:birch_forest",
     "minecraft:flower_forest",
     {
-      "id": "#forge:is_plains",
-      "required": false
-    },
-    {
-      "id": "#forge:is_cold/overworld",
-      "required": false
-    },
-    {
-      "id": "#forge:is_coniferous",
-      "required": false
-    },
-    {
-      "id": "#forge:is_dense/overworld",
-      "required": false
-    },
-    {
-      "id": "#forge:is_mountain",
-      "required": false
-    },
-    {
-      "id": "#forge:is_plateau",
-      "required": false
-    },
-    {
-      "id": "#forge:is_wasteland",
-      "required": false
-    },
-    {
-      "id": "#forge:is_sparse/overworld",
-      "required": false
-    },
-    {
       "id": "byg:firecracker_shrubland",
       "required": false
     },

@@ -5,15 +5,15 @@
   "values": [
     "#minecraft:is_taiga",
     {
-      "id": "#forge:is_coniferous",
-      "required": false
-    },
-    {
-      "id": "#forge:is_cold/overworld",
-      "required": false
-    },
-    {
       "id": "byg:canadian_shield",
+      "required": false
+    },
+    {
+      "id": "byg:snowy_deciduous_forest",
+      "required": false
+    },
+    {
+      "id": "byg:snowy_evergreen_taiga",
       "required": false
     }
   ]
