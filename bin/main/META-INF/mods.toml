@@ -1,0 +1,19 @@
+modLoader="javafml" #mandatory
+loaderVersion="[38,)" #mandatory
+license="All Rights Reserved"
+
+[[mods]] #mandatory
+modId="mvs" #mandatory
+version="${file.jarVersion}" #mandatory
+displayName="Moog's Voyager Structures" #mandatory
+credits="Special thanks to TelepathicGrunt for helping out!"
+authors="finndog" #optional
+description='''
+A mod that adds over 50 structures into the game, all using vanilla blocks
+'''
+
+# makes sure our mod does not be attempted to be ran on older version of Minecraft and explodes
+[[dependencies.structure_tutorial]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.18.2, 1.19)"
