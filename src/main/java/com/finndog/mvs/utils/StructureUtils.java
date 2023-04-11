@@ -26,7 +26,7 @@ public class StructureUtils {
         NoiseColumn columnOfBlocks = context.chunkGenerator().getBaseColumn(centerOfChunk.getX(), centerOfChunk.getZ(), context.heightAccessor(), context.randomState());
         BlockState topBlock = columnOfBlocks.getBlock(centerOfChunk.getY() + landHeight);
 
-        if (!spawnInLiquid) {
+        if (spawnInLiquid) {
             if (topBlock.getFluidState().isEmpty()) {
                 return false;
             }
