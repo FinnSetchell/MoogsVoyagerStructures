@@ -12,10 +12,6 @@ public class MVSMain implements ModInitializer {
     @Override
     public void onInitialize() {
 
-        /*
-         * We setup and register our structures here.
-         * You should always register your stuff to prevent mod compatibility issue down the line.
-         */
         MVSStructures.registerStructureFeatures();
     }
 }

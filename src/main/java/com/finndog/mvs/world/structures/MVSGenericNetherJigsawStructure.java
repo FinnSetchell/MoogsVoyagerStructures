@@ -65,7 +65,7 @@ public class MVSGenericNetherJigsawStructure extends Structure {
 
     @Override
     public Optional<Structure.StructurePosition> getStructurePosition(Structure.Context context) {
-        // Turns the chunk coordinates into actual coordinates we can use. (Gets corner of that chunk)
+
         Optional<Integer> yLevel = StructureUtils.getSuitableNetherYLevel(context, context.chunkPos().getCenterAtY(0));
         if (yLevel.isEmpty()) {return Optional.empty();}
         BlockPos blockPos = context.chunkPos().getCenterAtY(yLevel.get());
@@ -78,25 +78,21 @@ public class MVSGenericNetherJigsawStructure extends Structure {
 
         Optional<StructurePosition> structurePiecesGenerator =
                 StructurePoolBasedGenerator.generate(
-                        context, // Used for StructurePoolBasedGenerator to get all the proper behaviors done.
-                        this.startPool, // The starting pool to use to create the structure layout from
-                        this.startJigsawName, // Can be used to only spawn from one Jigsaw block. But we don't need to worry about this.
-                        this.size, // How deep a branch of pieces can go away from center piece. (5 means branches cannot be longer than 5 pieces from center piece)
-                        blockPos, // Where to spawn the structure.
-                        false, // "useExpansionHack" This is for legacy villages to generate properly. You should keep this false always.
-                        this.projectStartToHeightmap, // Adds the terrain height's y value to the passed in blockpos's y value. (This uses WORLD_SURFACE_WG heightmap which stops at top water too)
-                        // Here, blockpos's y value is 60 which means the structure spawn 60 blocks above terrain height.
-                        // Set this to false for structure to be place only at the passed in blockpos's Y value instead.
-                        // Definitely keep this false when placing structures in the nether as otherwise, heightmap placing will put the structure on the Bedrock roof.
-                        this.maxDistanceFromCenter); // Maximum limit for how far pieces can spawn from center. You cannot set this bigger than 128 or else pieces gets cutoff.
+                        context,
+                        this.startPool,
+                        this.startJigsawName,
+                        this.size,
+                        blockPos,
+                        false,
+                        this.projectStartToHeightmap,
+                        this.maxDistanceFromCenter);
 
 
-        // Return the pieces generator that is now set up so that the game runs it when it needs to create the layout of structure pieces.
         return structurePiecesGenerator;
     }
 
     @Override
     public StructureType<?> getType() {
-        return MVSStructures.MVS_GENERIC_NETHER_JIGSAW_STRUCTURE; // Helps the game know how to turn this structure back to json to save to chunks
+        return MVSStructures.MVS_GENERIC_NETHER_JIGSAW_STRUCTURE;
     }
 }

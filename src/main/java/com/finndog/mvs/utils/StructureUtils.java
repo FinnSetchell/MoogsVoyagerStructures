@@ -17,6 +17,46 @@ import java.util.Random;
 
 public class StructureUtils {
 
+    public static boolean spawningChecks(Structure.Context context, Optional<Heightmap.Type> projectStartToHeightmap, int radius, int allowedTerrainHeightRange, boolean spawnInLiquid) {
+        ChunkPos chunkPos = context.chunkPos();
+
+        // ON LAND OR FLUID CHECK
+        BlockPos centerOfChunk = chunkPos.getCenterAtY(0);
+        int landHeight = context.chunkGenerator().getHeightInGround(centerOfChunk.getX(), centerOfChunk.getZ(), Heightmap.Type.WORLD_SURFACE_WG, context.world(), context.noiseConfig());
+        VerticalBlockSample columnOfBlocks = context.chunkGenerator().getColumnSample(centerOfChunk.getX(), centerOfChunk.getZ(), context.world(), context.noiseConfig());
+        BlockState topBlock = columnOfBlocks.getState(centerOfChunk.getY() + landHeight);
+
+
+        if (spawnInLiquid) {
+            if (topBlock.getFluidState().isEmpty()) {
+                return false;
+            }
+        } else {
+            if (!topBlock.getFluidState().isEmpty()) {
+                return false;
+            }
+        }
+
+        // TERRAIN HEIGHT CHECK
+        int maxTerrainHeight = Integer.MIN_VALUE;
+        int minTerrainHeight = Integer.MAX_VALUE;
+        int terrainCheckRange = radius*2;
+        for (int curChunkX = chunkPos.x - terrainCheckRange; curChunkX <= chunkPos.x + terrainCheckRange; curChunkX++) {
+            for (int curChunkZ = chunkPos.z - terrainCheckRange; curChunkZ <= chunkPos.z + terrainCheckRange; curChunkZ++) {
+                int height = context.chunkGenerator().getHeightInGround((curChunkX << 4) + 7, (curChunkZ << 4) + 7, projectStartToHeightmap.orElse(Heightmap.Type.WORLD_SURFACE_WG), context.world(), context.noiseConfig());
+                maxTerrainHeight = Math.max(maxTerrainHeight, height);
+                minTerrainHeight = Math.min(minTerrainHeight, height);
+            }
+        }
+
+        if(maxTerrainHeight - minTerrainHeight > allowedTerrainHeightRange) {
+            return false;
+        }
+        return true;
+    }
+
+
+
     public static boolean isAllowedTerrainHeightChange(Structure.Context context, int size, int allowedTerrainHeightRange) {
         ChunkPos pos = context.chunkPos();
         int prevHeight = getHeight(context, pos.getCenterX(), pos.getCenterZ());
@@ -33,7 +73,6 @@ public class StructureUtils {
         }
         return true;
     }
-
     public static int getHeight(Structure.Context context, int x, int z) {
         ChunkGenerator generator = context.chunkGenerator();
         HeightLimitView heightAccessor = context.world();
@@ -41,7 +80,6 @@ public class StructureUtils {
 
         return generator.getHeightInGround(x, z, Heightmap.Type.WORLD_SURFACE_WG, heightAccessor, randomState);
     }
-
     // this should check every other top block to see if it contains fluid
     public static boolean onLiquid(Structure.Context context, int size) {
         int spacing = Math.max(2, size / 10);
@@ -55,7 +93,6 @@ public class StructureUtils {
         }
         return false;
     }
-
     public static boolean isTopBlockWater(Structure.Context context) {
         ChunkPos chunkPos = context.chunkPos();
         BlockPos centerOfChunk = chunkPos.getCenterAtY(0);
