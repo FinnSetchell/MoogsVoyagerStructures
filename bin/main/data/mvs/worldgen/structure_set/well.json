@@ -1,0 +1,66 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:well/well",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:well/small_well",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:well/small_copper_well",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:well/wells/acacia_well",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:well/wells/dark_oak_well",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:well/wells/birch_well",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:well/wells/end_well",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:well/wells/jungle_well",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:well/wells/nether_well",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:well/wells/oak_well",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:well/wells/rocky_well",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:well/wells/snowy_well",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:well/wells/spruce_well",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1985210365,
+
+    "spacing": 35,
+
+    "separation": 30
+  }
+}

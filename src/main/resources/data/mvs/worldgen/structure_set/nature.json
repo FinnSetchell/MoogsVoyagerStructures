@@ -1,0 +1,34 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:nature/big_oak_tree",
+      "weight": 9
+    },
+    {
+      "structure": "mvs:nature/boulder",
+      "weight": 50
+    },
+    {
+      "structure": "mvs:nature/floating_islands",
+      "weight": 35
+    },
+    {
+      "structure": "mvs:nature/large_mushroom",
+      "weight": 4
+    },
+    {
+      "structure": "mvs:nature/mushroom_pond",
+      "weight": 30
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1326498752,
+
+    "spacing": 48,
+
+    "separation": 40
+  }
+}

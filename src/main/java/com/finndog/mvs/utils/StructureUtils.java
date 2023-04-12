@@ -93,6 +93,7 @@ public class StructureUtils {
         }
         return false;
     }
+
     public static boolean isTopBlockWater(Structure.Context context) {
         ChunkPos chunkPos = context.chunkPos();
         BlockPos centerOfChunk = chunkPos.getCenterAtY(0);

@@ -70,7 +70,7 @@ public class MVSGenericJigsawStructure extends Structure {
     @Override
     public Optional<Structure.StructurePosition> getStructurePosition(Structure.Context context) {
 
-        if (spawningChecks(context, projectStartToHeightmap, 6, 1, false)) {return Optional.empty();}
+        if (spawningChecks(context, projectStartToHeightmap, radius, allowedTerrainHeightRange, spawnInLiquid)) {return Optional.empty();}
 
         int startY = this.startHeight.get(context.random(), new HeightContext(context.chunkGenerator(), context.world()));
 

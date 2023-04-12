@@ -1,0 +1,42 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:cathedral",
+      "weight": 5
+    },
+    {
+      "structure": "mvs:crystal",
+      "weight": 2
+    },
+    {
+      "structure": "mvs:other_decoration/duck",
+      "weight": 10
+    },
+    {
+      "structure": "mvs:jungle_tower",
+      "weight": 6
+    },
+    {
+      "structure": "mvs:ruins/ruined_beacon",
+      "weight": 8
+    },
+    {
+      "structure": "mvs:ruins/tree_monument",
+      "weight": 8
+    },
+    {
+      "structure": "mvs:well/rare_well",
+      "weight": 15
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1998403954,
+
+    "spacing": 250,
+
+    "separation": 200
+  }
+}

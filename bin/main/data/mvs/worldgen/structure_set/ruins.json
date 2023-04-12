@@ -1,0 +1,34 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:ruins/castle_ruins",
+      "weight": 25
+    },
+    {
+      "structure": "mvs:ruins/log_ruin",
+      "weight": 15
+    },
+    {
+      "structure": "mvs:ruins/small_ruin",
+      "weight": 15
+    },
+    {
+      "structure": "mvs:ruins/statue_ruins",
+      "weight": 13
+    },
+    {
+      "structure": "mvs:ruins/stone_pillars",
+      "weight": 12
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1022548765,
+
+    "spacing": 168,
+
+    "separation": 152
+  }
+}

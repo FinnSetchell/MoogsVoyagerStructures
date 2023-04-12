@@ -1,0 +1,26 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:other_decoration/mushroom_statue",
+      "weight": 45
+    },
+    {
+      "structure": "mvs:nature/large_mushroom",
+      "weight": 4
+    },
+    {
+      "structure": "mvs:well/wells/mushroom_well",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1659475513,
+
+    "spacing": 48,
+
+    "separation": 40
+  }
+}

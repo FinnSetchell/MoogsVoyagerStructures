@@ -1,0 +1,54 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:houses/azelea_house",
+      "weight": 29
+    },
+    {
+      "structure": "mvs:houses/barn",
+      "weight": 38
+    },
+    {
+      "structure": "mvs:houses/deepslate_house",
+      "weight": 20
+    },
+    {
+      "structure": "mvs:houses/desert_house",
+      "weight": 45
+    },
+    {
+      "structure": "mvs:houses/flower_hole",
+      "weight": 32
+    },
+    {
+      "structure": "mvs:houses/house",
+      "weight": 18
+    },
+    {
+      "structure": "mvs:houses/large_floating_island",
+      "weight": 9
+    },
+    {
+      "structure": "mvs:houses/small_swamp_house",
+      "weight": 20
+    },
+    {
+      "structure": "mvs:houses/tall_house",
+      "weight": 30
+    },
+    {
+      "structure": "mvs:houses/warped_house",
+      "weight": 35
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1985123047,
+
+    "spacing": 126,
+
+    "separation": 112
+  }
+}
