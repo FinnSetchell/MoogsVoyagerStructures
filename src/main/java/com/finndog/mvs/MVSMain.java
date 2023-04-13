@@ -1,5 +1,6 @@
 package com.finndog.mvs;
 
+import com.finndog.mvs.modinit.MVSStructurePlacementType;
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,6 +13,7 @@ public class MVSMain implements ModInitializer {
     @Override
     public void onInitialize() {
 
+        MVSStructurePlacementType.registerStructurePlacementTypes();
         MVSStructures.registerStructureFeatures();
     }
 }

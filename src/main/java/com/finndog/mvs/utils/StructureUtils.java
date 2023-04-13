@@ -1,10 +1,15 @@
 package com.finndog.mvs.utils;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.structure.StructureStart;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.ChunkSectionPos;
+import net.minecraft.util.math.random.ChunkRandom;
 import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.Heightmap;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.VerticalBlockSample;
 import net.minecraft.world.gen.noise.NoiseConfig;
@@ -129,6 +134,8 @@ public class StructureUtils {
 
         return Optional.of(suitableYLevels.get(new Random(context.seed()).nextInt(suitableYLevels.size())));
     }
+
+
 
     //    public static boolean isStructureInDistance(Structure.Context context, List<Holder<StructureSet>> structures, int minStructureDistance) {
 //        ChunkGenerator generator = context.chunkGenerator();
