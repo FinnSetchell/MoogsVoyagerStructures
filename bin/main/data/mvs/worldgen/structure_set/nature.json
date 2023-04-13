@@ -13,13 +13,17 @@
       "weight": 35
     },
     {
+      "structure": "mvs:nature/large_mushroom",
+      "weight": 4
+    },
+    {
       "structure": "mvs:nature/mushroom_pond",
       "weight": 30
     }
   ],
   "placement": {
 
-    "type": "minecraft:random_spread",
+    "type": "mvs:advanced_random_spread",
 
     "salt": 1326498752,
 

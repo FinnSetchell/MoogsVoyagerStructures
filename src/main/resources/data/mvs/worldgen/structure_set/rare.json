@@ -23,15 +23,11 @@
     {
       "structure": "mvs:ruins/tree_monument",
       "weight": 8
-    },
-    {
-      "structure": "mvs:well/rare_well",
-      "weight": 15
     }
   ],
   "placement": {
 
-    "type": "minecraft:random_spread",
+    "type": "mvs:advanced_random_spread",
 
     "salt": 1998403954,
 

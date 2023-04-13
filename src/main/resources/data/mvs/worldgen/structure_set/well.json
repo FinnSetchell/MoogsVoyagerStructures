@@ -2,64 +2,68 @@
   "structures":[
     {
       "structure": "mvs:well/well",
-      "weight": 1
+      "weight": 5
     },
     {
       "structure": "mvs:well/small_well",
-      "weight": 1
+      "weight": 5
     },
     {
       "structure": "mvs:well/small_copper_well",
-      "weight": 1
+      "weight": 5
     },
     {
       "structure": "mvs:well/wells/acacia_well",
-      "weight": 1
+      "weight": 5
     },
     {
       "structure": "mvs:well/wells/dark_oak_well",
-      "weight": 1
+      "weight": 5
+    },
+    {
+      "structure": "mvs:well/wells/desert_well",
+      "weight": 5
     },
     {
       "structure": "mvs:well/wells/birch_well",
-      "weight": 1
+      "weight": 5
     },
     {
       "structure": "mvs:well/wells/end_well",
-      "weight": 1
+      "weight": 5
     },
     {
       "structure": "mvs:well/wells/jungle_well",
-      "weight": 1
+      "weight": 5
     },
     {
       "structure": "mvs:well/wells/mushroom_well",
-      "weight": 1
+      "weight": 5
     },
     {
       "structure": "mvs:well/wells/nether_well",
-      "weight": 1
+      "weight": 5
     },
     {
       "structure": "mvs:well/wells/oak_well",
-      "weight": 1
+      "weight": 5
     },
     {
       "structure": "mvs:well/wells/rocky_well",
-      "weight": 1
+      "weight": 5
     },
     {
       "structure": "mvs:well/wells/snowy_well",
-      "weight": 1
+      "weight": 5
     },
     {
       "structure": "mvs:well/wells/spruce_well",
-      "weight": 1
+      "weight": 5
     }
   ],
   "placement": {
 
-    "type": "minecraft:random_spread",
+    "type": "mvs:advanced_random_spread",
 
     "salt": 1985210365,
 
