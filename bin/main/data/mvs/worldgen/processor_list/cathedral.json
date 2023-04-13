@@ -27,21 +27,42 @@
           }
         },
         {
-          // The block to look for from the nbt file
-          // This has a 50% chance of allowing the found stone bricks block to be replaced
           "input_predicate": {
             "block": "minecraft:blue_wool",
             "probability": 1,
             "predicate_type": "minecraft:random_block_match"
           },
-          // This is always true
-          // Village roads have this part look for water so roads can be replaced with oak planks instead
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
           },
-          // The actual block to place if the above conditions return true
           "output_state": {
             "Name": "minecraft:dirt"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "minecraft:redstone_block",
+            "probability": 0.9,
+            "predicate_type": "minecraft:random_block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "minecraft:structure_void"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "minecraft:lantern",
+            "probability": 0.9,
+            "predicate_type": "minecraft:random_block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "minecraft:air"
           }
         }
       ]

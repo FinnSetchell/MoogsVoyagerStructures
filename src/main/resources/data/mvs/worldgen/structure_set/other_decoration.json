@@ -51,8 +51,13 @@
 
     "salt": 1496523165,
 
-    "spacing": 68,
+    "super_exclusion_zone": {
+      "chunk_count": 8,
+      "other_set": "#mvs:all_overworld"
+    },
 
-    "separation": 60
+    "spacing": 48,
+
+    "separation": 36
   }
 }

@@ -2,15 +2,15 @@
   "structures":[
     {
       "structure": "mvs:other_decoration/mushroom_statue",
-      "weight": 45
+      "weight": 3
     },
     {
       "structure": "mvs:nature/large_mushroom",
-      "weight": 4
+      "weight": 1
     },
     {
       "structure": "mvs:well/wells/mushroom_well",
-      "weight": 1
+      "weight": 5
     }
   ],
   "placement": {
@@ -19,8 +19,14 @@
 
     "salt": 1659475513,
 
-    "spacing": 48,
+    "super_exclusion_zone": {
+      "chunk_count": 4,
+      "other_set": "#mvs:all_overworld"
+    },
 
-    "separation": 40
+    "spacing": 35,
+
+    "separation": 15
+
   }
 }
