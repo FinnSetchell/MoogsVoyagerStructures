@@ -44,11 +44,14 @@ public class AdvancedRandomSpread extends RandomSpreadStructurePlacement {
             Codec.intRange(0, Integer.MAX_VALUE).optionalFieldOf("min_distance_from_world_origin").forGetter(AdvancedRandomSpread::minDistanceFromWorldOrigin)
     ).apply(instance, instance.stable(AdvancedRandomSpread::new)));
 
-
+    private final StructurePlacement.FrequencyReductionMethod frequencyReductionMethod;
+    private final float frequency;
+    private final int salt;
     private final int spacing;
     private final int separation;
     private final SpreadType spreadType;
     private final Optional<Integer> minDistanceFromWorldOrigin;
+    private final Optional<StructurePlacement.ExclusionZone> exclusionZone;
     private final Optional<SuperExclusionZone> superExclusionZone;
 
     public AdvancedRandomSpread(Vec3i locationOffset,
@@ -63,10 +66,14 @@ public class AdvancedRandomSpread extends RandomSpreadStructurePlacement {
                                 Optional<Integer> minDistanceFromWorldOrigin
     ) {
         super(locationOffset, frequencyReductionMethod, frequency, salt, exclusionZone, spacing, separation, spreadType);
+        this.frequencyReductionMethod = frequencyReductionMethod;
+        this.frequency = frequency;
+        this.salt = salt;
         this.spacing = spacing;
         this.separation = separation;
         this.spreadType = spreadType;
         this.minDistanceFromWorldOrigin = minDistanceFromWorldOrigin;
+        this.exclusionZone = exclusionZone;
         this.superExclusionZone = superExclusionZone;
 
         if (spacing <= separation) {

@@ -1,17 +1,10 @@
 {
   "replace": false,
   "values": [
-    "mvs:carts",
     "mvs:houses",
-    "mvs:log_pile",
-    "mvs:mushroom_biome_decoration",
     "mvs:other",
     "mvs:other_decoration",
-    "mvs:rare",
-    "mvs:rare_well",
     "mvs:ruins",
-    "mvs:stall",
-    "mvs:well",
     "minecraft:villages",
     "minecraft:pillager_outposts"
 

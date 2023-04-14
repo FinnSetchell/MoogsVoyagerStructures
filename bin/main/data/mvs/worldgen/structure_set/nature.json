@@ -28,7 +28,7 @@
     "salt": 1326498752,
 
     "super_exclusion_zone": {
-      "chunk_count": 6,
+      "chunk_count": 5,
       "other_set": "#mvs:nature_avoid"
     },
 

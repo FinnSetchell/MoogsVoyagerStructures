@@ -20,6 +20,10 @@
   "placement": {
     "type": "mvs:advanced_random_spread",
     "salt": 1989542367,
+    "super_exclusion_zone": {
+      "chunk_count": 4,
+      "other_set": "#mvs:end_avoid"
+    },
     "spacing": 46,
     "separation": 24
   }

@@ -48,7 +48,7 @@
     "salt": 1985123047,
 
     "super_exclusion_zone": {
-      "chunk_count": 12,
+      "chunk_count": 6,
       "other_set": "#mvs:houses_avoid"
     },
 
