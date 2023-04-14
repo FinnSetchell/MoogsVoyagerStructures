@@ -3,7 +3,6 @@
   "values": [
     "minecraft:end_cities",
     "minecraft:villages",
-    "minecraft:pillager_outposts",
-    "minecraft:shipwreck"
+    "minecraft:pillager_outposts"
   ]
 }

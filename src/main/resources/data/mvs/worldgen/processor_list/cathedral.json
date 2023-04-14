@@ -6,22 +6,16 @@
     {
       "processor_type": "minecraft:rule",
 
-      // The rules for this Rule processor to use
       "rules": [
         {
-          // The block to look for from the nbt file
-          // This has a 50% chance of allowing the found stone bricks block to be replaced
           "input_predicate": {
             "block": "minecraft:crimson_sign",
             "probability": 1,
             "predicate_type": "minecraft:random_block_match"
           },
-          // This is always true
-          // Village roads have this part look for water so roads can be replaced with oak planks instead
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
           },
-          // The actual block to place if the above conditions return true
           "output_state": {
             "Name": "minecraft:air"
           }
@@ -42,20 +36,20 @@
         {
           "input_predicate": {
             "block": "minecraft:redstone_block",
-            "probability": 0.9,
+            "probability": 1,
             "predicate_type": "minecraft:random_block_match"
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
           },
           "output_state": {
-            "Name": "minecraft:structure_void"
+            "Name": "minecraft:stone"
           }
         },
         {
           "input_predicate": {
             "block": "minecraft:lantern",
-            "probability": 0.9,
+            "probability": 1,
             "predicate_type": "minecraft:random_block_match"
           },
           "location_predicate": {

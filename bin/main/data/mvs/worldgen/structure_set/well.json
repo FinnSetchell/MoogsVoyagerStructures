@@ -69,7 +69,7 @@
 
     "super_exclusion_zone": {
       "chunk_count": 2,
-      "other_set": "#mvs:all_overworld"
+      "other_set": "#mvs:well_avoid"
     },
 
     "spacing": 35,

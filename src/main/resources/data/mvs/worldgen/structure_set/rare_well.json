@@ -13,7 +13,7 @@
 
     "super_exclusion_zone": {
       "chunk_count": 7,
-      "other_set": "#mvs:all_overworld"
+      "other_set": "#mvs:rare_well_avoid"
     },
 
     "spacing": 86,

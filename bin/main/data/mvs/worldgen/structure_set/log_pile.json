@@ -33,7 +33,7 @@
 
     "super_exclusion_zone": {
       "chunk_count": 3,
-      "other_set": "#mvs:all_overworld"
+      "other_set": "#mvs:log_pile_avoid"
     },
 
     "spacing": 40,

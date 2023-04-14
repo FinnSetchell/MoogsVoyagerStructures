@@ -49,7 +49,7 @@
 
     "super_exclusion_zone": {
       "chunk_count": 12,
-      "other_set": "#mvs:all_overworld"
+      "other_set": "#mvs:houses_avoid"
     },
 
     "spacing": 92,

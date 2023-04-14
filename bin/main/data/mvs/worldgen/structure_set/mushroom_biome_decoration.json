@@ -21,7 +21,7 @@
 
     "super_exclusion_zone": {
       "chunk_count": 4,
-      "other_set": "#mvs:all_overworld"
+      "other_set": "#mvs:mushroom_biome_decoration_avoid"
     },
 
     "spacing": 35,

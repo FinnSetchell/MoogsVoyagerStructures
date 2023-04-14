@@ -53,7 +53,7 @@
 
     "super_exclusion_zone": {
       "chunk_count": 8,
-      "other_set": "#mvs:all_overworld"
+      "other_set": "#mvs:other_decoration_avoid"
     },
 
     "spacing": 48,

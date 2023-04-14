@@ -13,7 +13,6 @@
     "mvs:ruins",
     "mvs:stall",
     "minecraft:villages",
-    "minecraft:pillager_outposts",
-    "minecraft:shipwreck"
+    "minecraft:pillager_outposts"
   ]
 }
