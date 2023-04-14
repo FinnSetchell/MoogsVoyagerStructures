@@ -23,18 +23,27 @@ import net.minecraft.world.gen.noise.NoiseConfig;
 import java.util.Optional;
 
 public class AdvancedRandomSpread extends RandomSpreadStructurePlacement {
+    // This is a codec for the AdvancedRandomSpread class, which defines a custom structure placement algorithm
     public static final Codec<AdvancedRandomSpread> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+            // vector offset to add to the starting coordinates of each structure instance
             Vec3i.createOffsetCodec(16).optionalFieldOf("locate_offset", Vec3i.ZERO).forGetter(AdvancedRandomSpread::getLocateOffset),
+            // method to reduce the frequency of structures based on biome or chunk properties
             StructurePlacement.FrequencyReductionMethod.CODEC.optionalFieldOf("frequency_reduction_method", StructurePlacement.FrequencyReductionMethod.DEFAULT).forGetter(AdvancedRandomSpread::getFrequencyReductionMethod),
+            // probability of generating a structure in a given chunk
             Codec.floatRange(0.0F, 1.0F).optionalFieldOf("frequency", 1.0F).forGetter(AdvancedRandomSpread::getFrequency),
+            // random number to add to the seed of the structure generator
             Codecs.NONNEGATIVE_INT.fieldOf("salt").forGetter(AdvancedRandomSpread::getSalt),
+            // minimum distance between structures of the same type
             StructurePlacement.ExclusionZone.CODEC.optionalFieldOf("exclusion_zone").forGetter(AdvancedRandomSpread::getExclusionZone),
+            // minimum distance between structures of different types
             SuperExclusionZone.CODEC.optionalFieldOf("super_exclusion_zone").forGetter(AdvancedRandomSpread::superExclusionZone),
             Codec.intRange(0, Integer.MAX_VALUE).fieldOf("spacing").forGetter(AdvancedRandomSpread::getSpacing),
             Codec.intRange(0, Integer.MAX_VALUE).fieldOf("separation").forGetter(AdvancedRandomSpread::getSeparation),
             SpreadType.CODEC.optionalFieldOf("spread_type", SpreadType.LINEAR).forGetter(AdvancedRandomSpread::getSpreadType),
+            // minimum distance from the world origin where structures can spawn
             Codec.intRange(0, Integer.MAX_VALUE).optionalFieldOf("min_distance_from_world_origin").forGetter(AdvancedRandomSpread::minDistanceFromWorldOrigin)
     ).apply(instance, instance.stable(AdvancedRandomSpread::new)));
+
 
     private final int spacing;
     private final int separation;
@@ -94,11 +103,11 @@ public class AdvancedRandomSpread extends RandomSpreadStructurePlacement {
     }
 
     @Override
-    public boolean shouldGenerate(ChunkGenerator chunkGenerator, NoiseConfig noiseConfig, long l, int i, int j) {
-        if (!super.shouldGenerate(chunkGenerator, noiseConfig, l, i, j)) {
+    public boolean shouldGenerate(ChunkGenerator chunkGenerator, NoiseConfig noiseConfig, long seed, int x, int z) {
+        if (!super.shouldGenerate(chunkGenerator, noiseConfig, seed, x, z)) {
             return false;
         }
-        return this.superExclusionZone.isEmpty() || !this.superExclusionZone.get().isPlacementForbidden(chunkGenerator, noiseConfig, l, i, j);
+        return this.superExclusionZone.isEmpty() || !this.superExclusionZone.get().isPlacementForbidden(chunkGenerator, noiseConfig, seed, x, z);
     }
 
     @Override
@@ -119,9 +128,7 @@ public class AdvancedRandomSpread extends RandomSpreadStructurePlacement {
         if (minDistanceFromWorldOrigin.isPresent()) {
             int xBlockPos = x * 16;
             int zBlockPos = z * 16;
-            if((xBlockPos * xBlockPos) + (zBlockPos * zBlockPos) <
-                (minDistanceFromWorldOrigin.get() * minDistanceFromWorldOrigin.get()))
-            {
+            if((xBlockPos * xBlockPos) + (zBlockPos * zBlockPos) < (minDistanceFromWorldOrigin.get() * minDistanceFromWorldOrigin.get())) {
                 return false;
             }
         }
