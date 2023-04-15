@@ -2,8 +2,9 @@ package com.finndog.mvs.modinit;
 
 import com.finndog.mvs.MVSMain;
 import com.finndog.mvs.world.structures.placements.AdvancedRandomSpread;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.chunk.placement.StructurePlacementType;
 
 public final class MVSStructurePlacementType {
@@ -12,7 +13,7 @@ public final class MVSStructurePlacementType {
     public static final StructurePlacementType<AdvancedRandomSpread> ADVANCED_RANDOM_SPREAD = () -> AdvancedRandomSpread.CODEC;
 
     public static void registerStructurePlacementTypes() {
-        Registry.register(Registry.STRUCTURE_PLACEMENT, new Identifier(MVSMain.MODID, "advanced_random_spread"), ADVANCED_RANDOM_SPREAD);
+        Registry.register(Registries.STRUCTURE_PLACEMENT, new Identifier(MVSMain.MODID, "advanced_random_spread"), ADVANCED_RANDOM_SPREAD);
     }
 }
 

@@ -18,7 +18,7 @@
     }
   ],
   "placement": {
-    "type": "mvs:advanced_random_spread",
+    "type": "minecraft:random_spread",
     "salt": 1989542367,
 //    "super_exclusion_zone": {
 //      "chunk_count": 4,
