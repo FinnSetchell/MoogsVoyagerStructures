@@ -1,0 +1,18 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:well/rare_well",
+      "weight": 5
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1985210365,
+
+    "spacing": 86,
+
+    "separation": 80
+  }
+}

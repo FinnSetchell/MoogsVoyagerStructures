@@ -1,0 +1,32 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:stall/blue_stall",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:stall/orange_stall",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:stall/pink_stall",
+      "weight": 1
+    },
+    {
+      "structure": "mvs:stall/red_stall",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1963412587,
+
+    "spacing": 58,
+
+    "separation": 32
+
+//    "min_distance_from_world_origin":  450
+  }
+}

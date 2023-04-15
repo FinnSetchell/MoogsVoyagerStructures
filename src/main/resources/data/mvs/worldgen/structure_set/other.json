@@ -1,0 +1,59 @@
+{
+  "structures": [
+    {
+      "structure": "mvs:beach_bar",
+      "weight": 36
+    },
+    {
+      "structure": "mvs:cartographer_tower",
+      "weight": 2
+    },
+    {
+      "structure": "mvs:gallows",
+      "weight": 22
+    },
+    {
+      "structure": "mvs:horse_pen",
+      "weight": 32
+    },
+    {
+      "structure": "mvs:out_house",
+      "weight": 35
+    },
+    {
+      "structure": "mvs:railway",
+      "weight": 20
+    },
+    {
+      "structure": "mvs:shed",
+      "weight": 20
+    },
+    {
+      "structure": "mvs:small_ship",
+      "weight": 30
+    },
+    {
+      "structure": "mvs:stone_fountain",
+      "weight": 20
+    },
+    {
+      "structure": "mvs:sunzi_gate",
+      "weight": 10
+    }
+  ],
+  "placement": {
+
+    "type": "minecraft:random_spread",
+
+    "salt": 1545446946,
+
+//    "super_exclusion_zone": {
+//      "chunk_count": 5,
+//      "other_set": "#mvs:other_avoid"
+//    },
+
+    "spacing": 52,
+
+    "separation": 36
+  }
+}
