@@ -31,13 +31,15 @@
 
     "salt": 1998403954,
 
-    "super_exclusion_zone": {
-      "chunk_count": 7,
-      "other_set": "#mvs:rare_avoid"
-    },
+//    "super_exclusion_zone": {
+//      "chunk_count": 8,
+//    "other_set": "#mvs:rare_avoid"
+//    },
 
     "spacing": 92,
 
-    "separation": 86
+    "separation": 86,
+
+    "min_distance_from_world_origin":  1250
   }
 }

@@ -47,13 +47,15 @@
 
     "salt": 1985123047,
 
-    "super_exclusion_zone": {
-      "chunk_count": 6,
-      "other_set": "#mvs:houses_avoid"
-    },
+//    "super_exclusion_zone": {
+//      "chunk_count": 6,
+//      "other_set": "#mvs:houses_avoid"
+//    },
 
     "spacing": 92,
 
-    "separation": 76
+    "separation": 76,
+
+    "min_distance_from_world_origin":  850
   }
 }

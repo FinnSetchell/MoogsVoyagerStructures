@@ -31,11 +31,6 @@
 
     "salt": 1054998260,
 
-    "super_exclusion_zone": {
-      "chunk_count": 3,
-      "other_set": "#mvs:log_pile_avoid"
-    },
-
     "spacing": 40,
 
     "separation": 35

@@ -19,11 +19,6 @@
 
     "salt": 1659475513,
 
-    "super_exclusion_zone": {
-      "chunk_count": 4,
-      "other_set": "#mvs:mushroom_biome_decoration_avoid"
-    },
-
     "spacing": 35,
 
     "separation": 15

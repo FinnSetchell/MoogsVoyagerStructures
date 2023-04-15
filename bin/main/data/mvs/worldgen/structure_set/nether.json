@@ -15,8 +15,15 @@
 
     "salt": 1135795642,
 
+//    "super_exclusion_zone": {
+//      "chunk_count": 3,
+//      "other_set": "#mvs:nether_avoid"
+//    },
+
     "spacing": 56,
 
-    "separation": 28
+    "separation": 28,
+
+    "min_distance_from_world_origin":  650
   }
 }

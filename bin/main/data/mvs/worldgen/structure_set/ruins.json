@@ -27,13 +27,15 @@
 
     "salt": 1022548765,
 
-    "super_exclusion_zone": {
-      "chunk_count": 4,
-      "other_set": "#mvs:ruins_avoid"
-    },
+//    "super_exclusion_zone": {
+//      "chunk_count": 4,
+//      "other_set": "#mvs:ruins_avoid"
+//    },
 
     "spacing": 62,
 
-    "separation": 45
+    "separation": 45,
+
+    "min_distance_from_world_origin":  750
   }
 }

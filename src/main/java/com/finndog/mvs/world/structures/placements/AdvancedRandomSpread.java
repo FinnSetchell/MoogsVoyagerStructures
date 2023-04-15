@@ -78,7 +78,7 @@ public class AdvancedRandomSpread extends RandomSpreadStructurePlacement {
 
         if (spacing <= separation) {
             throw new RuntimeException("""
-                Moog's Voyager Structures: Spacing cannot be less or equal to separation.
+                MVS - Moog's Voyager Structures: Spacing cannot be less or equal to separation.
                 Please correct this error as there's no way to spawn this structure properly
                     Spacing: %s
                     Separation: %s.
@@ -135,7 +135,8 @@ public class AdvancedRandomSpread extends RandomSpreadStructurePlacement {
         if (minDistanceFromWorldOrigin.isPresent()) {
             int xBlockPos = x * 16;
             int zBlockPos = z * 16;
-            if((xBlockPos * xBlockPos) + (zBlockPos * zBlockPos) < (minDistanceFromWorldOrigin.get() * minDistanceFromWorldOrigin.get())) {
+            if((xBlockPos * xBlockPos) + (zBlockPos * zBlockPos) < (minDistanceFromWorldOrigin.get() * minDistanceFromWorldOrigin.get()))
+            {
                 return false;
             }
         }

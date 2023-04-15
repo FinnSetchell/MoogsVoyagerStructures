@@ -36,7 +36,7 @@
         {
           "input_predicate": {
             "block": "minecraft:redstone_block",
-            "probability": 1,
+            "probability": 0.9,
             "predicate_type": "minecraft:random_block_match"
           },
           "location_predicate": {
@@ -49,7 +49,7 @@
         {
           "input_predicate": {
             "block": "minecraft:lantern",
-            "probability": 1,
+            "probability": 0.9,
             "predicate_type": "minecraft:random_block_match"
           },
           "location_predicate": {
