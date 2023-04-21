@@ -47,7 +47,7 @@
   ],
   "placement": {
 
-    "type": "minecraft:random_spread",
+    "type": "mvs:advanced_random_spread",
 
     "salt": 1496523165,
 
