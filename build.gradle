@@ -1,55 +1,83 @@
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net' }
-        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
-        jcenter()
         mavenCentral()
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
+
+plugins {
+    id "net.darkhax.curseforgegradle" version "1.0.7"
+}
+
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
 version = "${mod_version}"
 group = 'com.finndog.mvs' // https://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'mvs'
+archivesBaseName = "mvs"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
+sourceSets {
+    api {}
+}
+
 minecraft {
     mappings channel: "official", version: "${mc_version}"
-    //accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
         client {
             workingDirectory project.file('run')
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Needed to make other mods with mixins be able to run in you development environment
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-
-            mods { examplemod { source sourceSets.main } }
+            arg "-mixin.config=" + project.getProperty('modid') + ".mixins.json"
+            mods { mvs { source sourceSets.main } }
         }
 
         server {
             workingDirectory project.file('run')
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Needed to make other mods with mixins be able to run in you development environment
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-
-            mods { examplemod {  source sourceSets.main } }
+            arg "-mixin.config=" + project.getProperty('modid') + ".mixins.json"
+            mods { mvs { source sourceSets.main } }
         }
+
+        data {
+            workingDirectory project.file('run')
+            args '--mod', project.getProperty('modid'), '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            arg "-mixin.config=" + project.getProperty('modid') + ".mixins.json"
+            mods { mvs { source sourceSets.main } }
+        }
+    }
+}
+
+repositories {
+    maven { url "https://nexus.resourcefulbees.com/repository/telepathicgrunt/" }
+    maven { url "https://www.cursemaven.com" }
+    maven { url "https://api.modrinth.com/maven/" }
+    maven {
+        url "https://maven.architectury.dev/"
+    }
+    maven {
+        url "https://maven.shedaniel.me"
+    }
+    maven {
+        // for AutoRegLib
+        name "blamejared"
+        url "https://maven.blamejared.com/"
+    }
+    maven {
+        // for JEI
+        name "progwml6"
+        url "https://dvs1.progwml6.com/files/maven"
+    }
+    maven {
+        url "https://maven.jaackson.me"
     }
 }
 
@@ -58,13 +86,15 @@ dependencies {
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
+
+    runtimeOnly fg.deobf("com.telepathicgrunt:StructureVoidToggle-Forge:4.0.2+1.19")
+    runtimeOnly fg.deobf("com.telepathicgrunt:CommandStructures-Forge:3.1.0+1.19")
+    runtimeOnly fg.deobf("curse.maven:hugestructureblock-474114:3836266")
 }
 
 mixin {
     add sourceSets.main, "mvs.refmap.json"
-
-    config "mvs.mixins.json"
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -75,13 +105,14 @@ jar {
 
     manifest {
         attributes([
-                "Specification-Title": "mvs",
-                "Specification-Vendor": "finndog",
-                "Specification-Version": "1",
-                "Implementation-Title": project.name,
-                "Implementation-Version": project.version,
-                "Implementation-Vendor" :"finndog",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                "Specification-Title"     : "mvs",
+                "Specification-Vendor"    : "finndog",
+                "Specification-Version"   : "1",
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : project.version,
+                "Implementation-Vendor"   : "finndog",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "MixinConfigs"            : "mvs.mixins.json"
         ])
     }
 }
