@@ -16,10 +16,10 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
 import java.util.Optional;
 
-public class MVSGenericNetherJigsawStructure extends Structure {
+public class GenericNetherJigsawStructure extends Structure {
 
-    public static final Codec<MVSGenericNetherJigsawStructure> CODEC = RecordCodecBuilder.<MVSGenericNetherJigsawStructure>mapCodec(instance ->
-            instance.group(MVSGenericNetherJigsawStructure.settingsCodec(instance),
+    public static final Codec<GenericNetherJigsawStructure> CODEC = RecordCodecBuilder.<GenericNetherJigsawStructure>mapCodec(instance ->
+            instance.group(GenericNetherJigsawStructure.settingsCodec(instance),
                     StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
                     ResourceLocation.CODEC.optionalFieldOf("start_jigsaw_name").forGetter(structure -> structure.startJigsawName),
                     Codec.intRange(0, 30).fieldOf("size").forGetter(structure -> structure.size),
@@ -28,7 +28,7 @@ public class MVSGenericNetherJigsawStructure extends Structure {
                     Codec.intRange(1, 128).fieldOf("max_distance_from_center").orElse(10).forGetter(structure -> structure.maxDistanceFromCenter),
                     Codec.BOOL.fieldOf("spawn_in_liquid").orElse(false).forGetter(structure -> structure.spawnInLiquid),
                     Codec.intRange(1, 32).fieldOf("radius").orElse(15).forGetter(structure -> structure.radius)
-                    ).apply(instance, MVSGenericNetherJigsawStructure::new)).codec();
+                    ).apply(instance, GenericNetherJigsawStructure::new)).codec();
 
     private final Holder<StructureTemplatePool> startPool;
     private final Optional<ResourceLocation> startJigsawName;
@@ -40,15 +40,15 @@ public class MVSGenericNetherJigsawStructure extends Structure {
     private final int radius;
 
 
-    public MVSGenericNetherJigsawStructure(Structure.StructureSettings config,
-                                     Holder<StructureTemplatePool> startPool,
-                                     Optional<ResourceLocation> startJigsawName,
-                                     int size,
-                                     HeightProvider startHeight,
-                                     Optional<Heightmap.Types> projectStartToHeightmap,
-                                     int maxDistanceFromCenter,
-                                     boolean spawnInLiquid,
-                                     int radius)
+    public GenericNetherJigsawStructure(Structure.StructureSettings config,
+                                        Holder<StructureTemplatePool> startPool,
+                                        Optional<ResourceLocation> startJigsawName,
+                                        int size,
+                                        HeightProvider startHeight,
+                                        Optional<Heightmap.Types> projectStartToHeightmap,
+                                        int maxDistanceFromCenter,
+                                        boolean spawnInLiquid,
+                                        int radius)
     {
         super(config);
         this.startPool = startPool;

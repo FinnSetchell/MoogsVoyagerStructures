@@ -1,7 +1,6 @@
 package com.finndog.mvs.world.structures;
 
 import com.finndog.mvs.MVSStructures;
-import com.finndog.mvs.utils.StructureUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
