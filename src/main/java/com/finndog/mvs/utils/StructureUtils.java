@@ -36,7 +36,6 @@ public class StructureUtils {
             }
         }
 
-
         // TERRAIN HEIGHT CHECK
         int maxTerrainHeight = Integer.MIN_VALUE;
         int minTerrainHeight = Integer.MAX_VALUE;
