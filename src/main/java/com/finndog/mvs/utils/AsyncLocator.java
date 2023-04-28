@@ -31,7 +31,7 @@ public class AsyncLocator {
                 new ThreadFactory() {
                     private static final AtomicInteger poolNum = new AtomicInteger(1);
                     private final AtomicInteger threadNum = new AtomicInteger(1);
-                    private final String namePrefix = "repurposedstructures-" + poolNum.getAndIncrement() + "-thread-";
+                    private final String namePrefix = "mvs-" + poolNum.getAndIncrement() + "-thread-";
 
                     @Override
                     public Thread newThread(@NotNull Runnable r) {
