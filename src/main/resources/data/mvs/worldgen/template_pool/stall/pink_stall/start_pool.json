@@ -1,6 +1,7 @@
 {
   "name": "mvs:pink_stall/start_pool",
 
+
   "fallback": "minecraft:empty",
 
   "elements": [
