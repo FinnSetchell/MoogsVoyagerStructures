@@ -1,0 +1,23 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:stall/blue_stall",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "mvs:advanced_random_spread",
+
+    "salt": 1368584750,
+
+    //    "super_exclusion_zone": {
+    //      "chunk_count": 5,
+    //      "other_set": "#mvs:other_decoration_avoid"
+    //    },
+
+    "spacing": 12,
+
+    "separation": 8
+  }
+}

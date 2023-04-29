@@ -1,0 +1,23 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:shed",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "mvs:advanced_random_spread",
+
+    "salt": 1323633685,
+
+    //    "super_exclusion_zone": {
+    //      "chunk_count": 5,
+    //      "other_set": "#mvs:other_decoration_avoid"
+    //    },
+
+    "spacing": 16,
+
+    "separation": 12
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:log_pile/acacia_log_pile",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "mvs:advanced_random_spread",
+
+    "salt": 1030025487,
+
+    //    "super_exclusion_zone": {
+    //      "chunk_count": 5,
+    //      "other_set": "#mvs:other_decoration_avoid"
+    //    },
+
+    "spacing": 8,
+
+    "separation": 6
+  }
+}
