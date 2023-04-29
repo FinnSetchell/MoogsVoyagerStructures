@@ -26,5 +26,5 @@
 
   "radius": 8,
 
-  "allowedTerrainHeightChange": 3
+  "allowed_terrain_height_range": 3
 }
