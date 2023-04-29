@@ -130,10 +130,10 @@ public class AdvancedRandomSpread extends RandomSpreadStructurePlacement {
     }
 
     public record SuperExclusionZone(HolderSet<StructureSet> otherSet, int chunkCount) {
-        public static final Codec<SuperExclusionZone> CODEC = RecordCodecBuilder.create(builder -> builder.group(
-                RegistryCodecs.homogeneousList(Registry.STRUCTURE_SET_REGISTRY, StructureSet.DIRECT_CODEC).fieldOf("other_set").forGetter(SuperExclusionZone::otherSet),
-                Codec.intRange(1, 16).fieldOf("chunk_count").forGetter(SuperExclusionZone::chunkCount)
-        ).apply(builder, SuperExclusionZone::new));
+        public static final Codec<AdvancedRandomSpread.SuperExclusionZone> CODEC = RecordCodecBuilder.create(builder -> builder.group(
+                RegistryCodecs.homogeneousList(Registry.STRUCTURE_SET_REGISTRY, StructureSet.DIRECT_CODEC).fieldOf("other_set").forGetter(AdvancedRandomSpread.SuperExclusionZone::otherSet),
+                Codec.intRange(1, 16).fieldOf("chunk_count").forGetter(AdvancedRandomSpread.SuperExclusionZone::chunkCount)
+        ).apply(builder, AdvancedRandomSpread.SuperExclusionZone::new));
 
         boolean isPlacementForbidden(ChunkGenerator chunkGenerator, RandomState randomState, long l, int i, int j) {
             for (Holder<StructureSet> holder : this.otherSet) {

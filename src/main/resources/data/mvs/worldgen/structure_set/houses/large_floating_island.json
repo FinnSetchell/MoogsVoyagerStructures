@@ -11,13 +11,13 @@
 
     "salt": 1548754652,
 
-    //    "super_exclusion_zone": {
-    //      "chunk_count": 5,
-    //      "other_set": "#mvs:other_decoration_avoid"
-    //    },
+    "super_exclusion_zone": {
+      "chunk_count": 5,
+      "other_set": "#mvs:large_floating_island_avoid"
+    },
 
-    "spacing": 18,
+    "spacing": 35,
 
-    "separation": 15
+    "separation": 29
   }
 }

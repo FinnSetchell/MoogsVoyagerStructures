@@ -8,7 +8,11 @@
   "placement": {
     "type": "mvs:advanced_random_spread",
     "salt": 1132875420,
-    "spacing": 15,
-    "separation": 10
+    "super_exclusion_zone": {
+      "chunk_count": 5,
+      "other_set": "#mvs:end_scraps_4_avoid"
+    },
+    "spacing": 20,
+    "separation": 15
   }
 }

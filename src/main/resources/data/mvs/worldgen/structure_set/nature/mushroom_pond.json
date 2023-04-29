@@ -11,12 +11,12 @@
 
     "salt": 1369584325,
 
-    //    "super_exclusion_zone": {
-    //      "chunk_count": 5,
-    //      "other_set": "#mvs:other_decoration_avoid"
-    //    },
+    "super_exclusion_zone": {
+      "chunk_count": 5,
+      "other_set": "#mvs:mushroom_pond_avoid"
+    },
 
-    "spacing": 16,
+    "spacing": 18,
 
     "separation": 12
   }
