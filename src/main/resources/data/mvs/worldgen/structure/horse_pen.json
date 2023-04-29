@@ -3,9 +3,9 @@
   "start_pool": "mvs:other/horse_pen/start_pool",
   "size": 1,
   "project_start_to_heightmap": "WORLD_SURFACE_WG",
-  "spawn_in_liquid": false,
-  "radius": 8,
-  "allowedTerrainHeightChange": 3,
+  "cannot_spawn_in_liquid": true,
+  "terrain_height_radius_check": 8,
+  "allowed_terrain_height_range": 2,
 
   "biomes": "#mvs:has_structure/overworld_biomes",
   "step": "surface_structures",
@@ -13,18 +13,6 @@
   "start_height": {
     "absolute": 0
   },
-  "use_expansion_hack": false,
-  "spawn_overrides": {
-    "creature": {
-      "bounding_box": "full", // Use the bounding box of entire structure instead of individual pieces.
-      "spawns": [
-        {
-          "type": "minecraft:horse",
-          "weight": 1,
-          "minCount": 1,
-          "maxCount": 2
-        }
-      ]
-    }
-  }
+
+  "spawn_overrides": {}
 }

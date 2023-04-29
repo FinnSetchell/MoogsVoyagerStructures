@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "mvs:other_Decoration/end_scraps/end_scraps_1",
-    "mvs:other_Decoration/end_scraps/end_scraps_3",
-    "mvs:other_Decoration/end_scraps/end_scraps_4",
+    "mvs:other_decoration/end_scraps/end_scraps_1",
+    "mvs:other_decoration/end_scraps/end_scraps_3",
+    "mvs:other_decoration/end_scraps/end_scraps_4",
     "mvs:well/wells/end_well"
   ]
 }

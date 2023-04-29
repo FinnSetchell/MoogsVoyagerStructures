@@ -9,7 +9,7 @@
 
     "type": "mvs:advanced_random_spread",
 
-    "salt": 1332525458,
+    "salt": 433252558,
 
     "super_exclusion_zone": {
       "chunk_count": 5,

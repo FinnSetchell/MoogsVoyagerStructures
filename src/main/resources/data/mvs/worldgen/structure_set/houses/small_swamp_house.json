@@ -9,11 +9,11 @@
 
     "type": "mvs:advanced_random_spread",
 
-    "salt": 1322547878,
+    "salt": 622547878,
 
     "super_exclusion_zone": {
-      "chunk_count": 5,
-      "other_set": "#mvs:small_Swamp_house_avoid"
+      "chunk_count": 4,
+      "other_set": "#mvs:small_swamp_house_avoid"
     },
 
     "spacing": 28,

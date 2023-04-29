@@ -9,12 +9,7 @@
 
     "type": "mvs:advanced_random_spread",
 
-    "salt": 1133656854,
-
-    "super_exclusion_zone": {
-      "chunk_count": 5,
-      "other_set": "#mvs:mushroom_statue_avoid"
-    },
+    "salt": 513356854,
 
     "spacing": 24,
 
