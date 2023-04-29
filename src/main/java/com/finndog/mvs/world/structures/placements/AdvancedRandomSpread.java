@@ -57,7 +57,7 @@ public class AdvancedRandomSpread extends RandomSpreadStructurePlacement {
 
         if (spacing <= separation) {
             throw new RuntimeException("""
-                MVS: Spacing cannot be less or equal to separation.
+                IDAS: Spacing cannot be less or equal to separation.
                 Please correct this error as there's no way to spawn this structure properly
                     Spacing: %s
                     Separation: %s.
