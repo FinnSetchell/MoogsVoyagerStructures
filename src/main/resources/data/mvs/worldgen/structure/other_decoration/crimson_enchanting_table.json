@@ -11,6 +11,9 @@
   "step": "surface_structures",
 
   "terrain_adaptation": "beard_thin",
+
+  "land_search_direction": "HIGHEST_LAND",
+
   "start_height": {
     "absolute": 0
   },
