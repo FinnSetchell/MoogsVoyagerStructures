@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -34,9 +35,9 @@ public class StructurePieceCountsManager extends SimpleJsonResourceReloadListene
                 throw new Exception("Error: Found " + entry.nbtPieceName + " entry has alwaysSpawnThisMany greater than neverSpawnMoreThanThisMany which is invalid.");
             }
             if(entry.condition != null) {
-                Optional<Supplier<Boolean>> optionalSupplier = JSONConditionsRegistry.MVS_JSON_CONDITIONS_REGISTRY.getOptional(new ResourceLocation(entry.condition));
+                Optional<Holder<Supplier<Boolean>>> optionalSupplier = JSONConditionsRegistry.MVS_JSON_CONDITIONS_REGISTRY.get().getHolder(new ResourceLocation(entry.condition));
                 optionalSupplier.ifPresentOrElse(condition -> {
-                    if(!condition.get()) {
+                            if(!condition.value().get()) {
                         piecesSpawnCounts.remove(entry);
                     }
                 },

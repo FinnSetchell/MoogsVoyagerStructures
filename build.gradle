@@ -88,9 +88,9 @@ dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 
-    runtimeOnly fg.deobf("com.telepathicgrunt:StructureVoidToggle-Forge:4.0.2+1.19")
-    runtimeOnly fg.deobf("com.telepathicgrunt:CommandStructures-Forge:3.1.0+1.19")
-    runtimeOnly fg.deobf("curse.maven:hugestructureblock-474114:3836266")
+//    runtimeOnly fg.deobf("com.telepathicgrunt:StructureVoidToggle-Forge:4.0.2+1.19")
+//    runtimeOnly fg.deobf("com.telepathicgrunt:CommandStructures-Forge:4.0.0+1.19.3")
+//    runtimeOnly fg.deobf("curse.maven:hugestructureblock-474114:3836266")
 }
 
 mixin {
@@ -107,7 +107,7 @@ jar {
         attributes([
                 "Specification-Title"     : "mvs",
                 "Specification-Vendor"    : "finndog",
-                "Specification-Version"   : "1",
+                "Specification-Version"   : "3.2",
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.version,
                 "Implementation-Vendor"   : "finndog",

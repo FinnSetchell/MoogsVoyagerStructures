@@ -34,8 +34,6 @@ public class MVSMain {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         eventBus.addListener(this::setup);
-        // Classload and create custom registry. Other mods should add to this custom registry in FMLCommonSetupEvent.
-        JSONConditionsRegistry.registerTestJSONCondition();
 
         // Register the setup method for modloading
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
@@ -47,18 +45,18 @@ public class MVSMain {
         forgeBus.addListener((ServerStoppingEvent ignoredEvent) -> AsyncLocator.handleServerStoppingEvent());
 
         modEventBus.addListener(this::setup);
-        MVSPredicates.RULE_TEST.register(modEventBus);
-        MVSPredicates.POS_RULE_TEST.register(modEventBus);
         MVSStructures.STRUCTURE_TYPE.register(modEventBus);
         MVSPlacements.PLACEMENT_MODIFIER.register(modEventBus);
         MVSProcessors.STRUCTURE_PROCESSOR.register(modEventBus);
         MVSStructurePieces.STRUCTURE_PIECE.register(modEventBus);
         MVSStructurePieces.STRUCTURE_POOL_ELEMENT.register(modEventBus);
         MVSStructurePlacementType.STRUCTURE_PLACEMENT_TYPE.register(modEventBus);
+        modEventBus.addListener(JSONConditionsRegistry::createNewRegistry);
     }
 
     public void setup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
+            JSONConditionsRegistry.registerTestJSONCondition();
         });
     }
 

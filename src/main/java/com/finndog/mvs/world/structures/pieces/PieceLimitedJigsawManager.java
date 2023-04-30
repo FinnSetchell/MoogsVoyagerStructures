@@ -9,6 +9,7 @@ import com.finndog.mvs.utils.GeneralUtils;
 import com.google.common.collect.Queues;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.*;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.Pools;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
@@ -36,8 +37,8 @@ import java.util.function.BiConsumer;
 
 
 /**
- * Special thanks to YUNGNICKYOUNG for allowing me to use his piece count limiting jigsaw manager!
- * Some changes were done to make it more usable by multiple structures.
+ * Special thanks to YUNGNICKYOUNG for his piece count limiting jigsaw manager!
+ * Some changes were done to make by TELEPATHICGRUNT to make it more usable by multiple structures.
  * Source: https://github.com/yungnickyoung/YUNGs-Better-Strongholds/blob/fabric-1.16/src/main/java/com/yungnickyoung/minecraft/betterstrongholds/world/jigsaw/JigsawManager.java
  */
 public class PieceLimitedJigsawManager {
@@ -60,7 +61,7 @@ public class PieceLimitedJigsawManager {
             BiConsumer<StructurePiecesBuilder, List<PoolElementStructurePiece>> structureBoundsAdjuster
     ) {
         // Get jigsaw pool registry
-        Registry<StructureTemplatePool> jigsawPoolRegistry = context.registryAccess().ownedRegistryOrThrow(Registry.TEMPLATE_POOL_REGISTRY);
+        Registry<StructureTemplatePool> jigsawPoolRegistry = context.registryAccess().registryOrThrow(Registries.TEMPLATE_POOL);
 
         // Get a random orientation for the starting piece
         WorldgenRandom random = new WorldgenRandom(new LegacyRandomSource(0L));
@@ -128,7 +129,7 @@ public class PieceLimitedJigsawManager {
                                       Please report the issue to MVS's dev with latest.log file if the structure is not cut off by world min/max y build thresholds.
                                             
                                     """,
-                            startPool.getName(), Arrays.toString(currentPieceCounter.entrySet().stream().filter(entry -> entry.getValue() > 0).toArray()), new BlockPos(pieceCenterX, pieceCenterY, pieceCenterZ));
+                            startPool, Arrays.toString(currentPieceCounter.entrySet().stream().filter(entry -> entry.getValue() > 0).toArray()), new BlockPos(pieceCenterX, pieceCenterY, pieceCenterZ));
                     break;
                 }
 
@@ -189,9 +190,7 @@ public class PieceLimitedJigsawManager {
     public static final class Assembler {
         private final Registry<StructureTemplatePool> poolRegistry;
         private final int maxDepth;
-        private final ChunkGenerator chunkGenerator;
-        private final RandomState randomState;
-        private final StructureTemplateManager structureTemplateManager;
+        private final Structure.GenerationContext context;
         private final List<? super PoolElementStructurePiece> structurePieces;
         private final RandomSource random;
         public final Deque<Entry> availablePieces = Queues.newArrayDeque();
@@ -215,9 +214,7 @@ public class PieceLimitedJigsawManager {
         ) {
             this.poolRegistry = poolRegistry;
             this.maxDepth = maxDepth;
-            this.chunkGenerator = context.chunkGenerator();
-            this.randomState = context.randomState();
-            this.structureTemplateManager = context.structureTemplateManager();
+            this.context = context;
             this.structurePieces = structurePieces;
             this.random = random;
             this.maxY = maxY;
@@ -250,7 +247,7 @@ public class PieceLimitedJigsawManager {
             MutableObject<BoxOctree> parentOctree = new MutableObject<>();
 
             // Get list of all jigsaw blocks in this piece
-            List<StructureTemplate.StructureBlockInfo> pieceJigsawBlocks = pieceBlueprint.getShuffledJigsawBlocks(this.structureTemplateManager, piecePos, pieceRotation, this.random);
+            List<StructureTemplate.StructureBlockInfo> pieceJigsawBlocks = pieceBlueprint.getShuffledJigsawBlocks(context.structureTemplateManager(), piecePos, pieceRotation, this.random);
 
             for (StructureTemplate.StructureBlockInfo jigsawBlock : pieceJigsawBlocks) {
                 // Gather jigsaw block information
@@ -269,14 +266,7 @@ public class PieceLimitedJigsawManager {
                 }
 
                 // Get the jigsaw block's fallback pool (which is a part of the pool's JSON)
-                ResourceLocation jigsawBlockFallback = poolOptional.get().getFallback();
-                Optional<StructureTemplatePool> fallbackOptional = this.poolRegistry.getOptional(jigsawBlockFallback);
-
-                // Only continue if the fallback pool is present and valid
-                if (!(fallbackOptional.isPresent() && (fallbackOptional.get().size() != 0 || Objects.equals(jigsawBlockFallback, Pools.EMPTY.location())))) {
-                    MVSMain.LOGGER.warn("MVS: Empty or nonexistent pool: {} which is being called from {}", jigsawBlockFallback, pieceBlueprint instanceof SinglePoolElement ? ((SinglePoolElementAccessor) pieceBlueprint).mvs_getTemplate().left().get() : "not a SinglePoolElement class");
-                    continue;
-                }
+                Holder<StructureTemplatePool> jigsawBlockFallback = poolOptional.get().getFallback();
 
                 // Adjustments for if the target block position is inside the current piece
                 boolean isTargetInsideCurrentPiece = pieceBoundingBox.isInside(jigsawBlockTargetPos);
@@ -303,9 +293,10 @@ public class PieceLimitedJigsawManager {
                 // Process the fallback pieces in the event none of the pool pieces work
                 boolean ignoreBounds = false;
                 if(poolsThatIgnoreBounds != null) {
-                    ignoreBounds = poolsThatIgnoreBounds.contains(jigsawBlockFallback);
+                    ResourceLocation fallBackPoolRL = poolRegistry.getKey(jigsawBlockFallback.value());
+                    ignoreBounds = poolsThatIgnoreBounds.contains(fallBackPoolRL);
                 }
-                this.processList(new ArrayList<>(((StructurePoolAccessor)fallbackOptional.get()).mvs_getRawTemplates()), doBoundaryAdjustments, jigsawBlock, jigsawBlockTargetPos, pieceMinY, jigsawBlockPos, octreeToUse, piece, depth, targetPieceBoundsTop, heightLimitView, ignoreBounds);
+                this.processList(new ArrayList<>(((StructurePoolAccessor)jigsawBlockFallback.value()).mvs_getRawTemplates()), doBoundaryAdjustments, jigsawBlock, jigsawBlockTargetPos, pieceMinY, jigsawBlockPos, octreeToUse, piece, depth, targetPieceBoundsTop, heightLimitView, ignoreBounds);
             }
         }
 
@@ -330,6 +321,7 @@ public class PieceLimitedJigsawManager {
         ) {
             StructureTemplatePool.Projection piecePlacementBehavior = piece.getElement().getProjection();
             boolean isPieceRigid = piecePlacementBehavior == StructureTemplatePool.Projection.RIGID;
+            boolean isPieceOceanFloor = piece.getElement() instanceof LegacyOceanBottomSinglePoolElement;
             int jigsawBlockRelativeY = jigsawBlockPos.getY() - pieceMinY;
             int surfaceHeight = -1; // The y-coordinate of the surface. Only used if isPieceRigid is false.
 
@@ -405,8 +397,8 @@ public class PieceLimitedJigsawManager {
 
                 // Try different rotations to see which sides of the piece are fit to be the receiving end
                 for (Rotation rotation : Rotation.getShuffled(this.random)) {
-                    List<StructureTemplate.StructureBlockInfo> candidateJigsawBlocks = candidatePiece.getShuffledJigsawBlocks(this.structureTemplateManager, BlockPos.ZERO, rotation, this.random);
-                    BoundingBox tempCandidateBoundingBox = candidatePiece.getBoundingBox(this.structureTemplateManager, BlockPos.ZERO, rotation);
+                    List<StructureTemplate.StructureBlockInfo> candidateJigsawBlocks = candidatePiece.getShuffledJigsawBlocks(context.structureTemplateManager(), BlockPos.ZERO, rotation, this.random);
+                    BoundingBox tempCandidateBoundingBox = candidatePiece.getBoundingBox(context.structureTemplateManager(), BlockPos.ZERO, rotation);
 
                     // Some sort of logic for setting the candidateHeightAdjustments var if doBoundaryAdjustments.
                     // Not sure on this - personally, I never enable doBoundaryAdjustments.
@@ -419,9 +411,9 @@ public class PieceLimitedJigsawManager {
                             else {
                                 ResourceLocation candidateTargetPool = new ResourceLocation(pieceCandidateJigsawBlock.nbt.getString("pool"));
                                 Optional<StructureTemplatePool> candidateTargetPoolOptional = this.poolRegistry.getOptional(candidateTargetPool);
-                                Optional<StructureTemplatePool> candidateTargetFallbackOptional = candidateTargetPoolOptional.flatMap((p_242843_1_) -> this.poolRegistry.getOptional(p_242843_1_.getFallback()));
-                                int tallestCandidateTargetPoolPieceHeight = candidateTargetPoolOptional.map((p_242842_1_) -> p_242842_1_.getMaxSize(this.structureTemplateManager)).orElse(0);
-                                int tallestCandidateTargetFallbackPieceHeight = candidateTargetFallbackOptional.map((p_242840_1_) -> p_242840_1_.getMaxSize(this.structureTemplateManager)).orElse(0);
+                                Holder<StructureTemplatePool> candidateTargetFallbackHolder = candidateTargetPoolOptional.get().getFallback();
+                                int tallestCandidateTargetPoolPieceHeight = candidateTargetPoolOptional.map((p_242842_1_) -> p_242842_1_.getMaxSize(context.structureTemplateManager())).orElse(0);
+                                int tallestCandidateTargetFallbackPieceHeight = candidateTargetFallbackHolder.value().getMaxSize(context.structureTemplateManager());
                                 return Math.max(tallestCandidateTargetPoolPieceHeight, tallestCandidateTargetFallbackPieceHeight);
                             }
                         }).max().orElse(0);
@@ -437,11 +429,12 @@ public class PieceLimitedJigsawManager {
                             BlockPos candidateJigsawBlockRelativePos = new BlockPos(jigsawBlockTargetPos.getX() - candidateJigsawBlockPos.getX(), jigsawBlockTargetPos.getY() - candidateJigsawBlockPos.getY(), jigsawBlockTargetPos.getZ() - candidateJigsawBlockPos.getZ());
 
                             // Get the bounding box for the piece, offset by the relative position difference
-                            BoundingBox candidateBoundingBox = candidatePiece.getBoundingBox(this.structureTemplateManager, candidateJigsawBlockRelativePos, rotation);
+                            BoundingBox candidateBoundingBox = candidatePiece.getBoundingBox(context.structureTemplateManager(), candidateJigsawBlockRelativePos, rotation);
 
                             // Determine if candidate is rigid
                             StructureTemplatePool.Projection candidatePlacementBehavior = candidatePiece.getProjection();
                             boolean isCandidateRigid = candidatePlacementBehavior == StructureTemplatePool.Projection.RIGID;
+                            boolean isCandidatePieceOceanFloor = candidatePiece instanceof LegacyOceanBottomSinglePoolElement;
 
                             // Determine how much the candidate jigsaw block is off in the y direction.
                             // This will be needed to offset the candidate piece so that the jigsaw blocks line up properly.
@@ -456,7 +449,7 @@ public class PieceLimitedJigsawManager {
                             }
                             else {
                                 if (surfaceHeight == -1) {
-                                    surfaceHeight = this.chunkGenerator.getFirstFreeHeight(jigsawBlockPos.getX(), jigsawBlockPos.getZ(), Heightmap.Types.WORLD_SURFACE_WG, heightLimitView, randomState);
+                                    surfaceHeight = context.chunkGenerator().getFirstFreeHeight(jigsawBlockPos.getX(), jigsawBlockPos.getZ(), isCandidatePieceOceanFloor || isPieceOceanFloor ? Heightmap.Types.OCEAN_FLOOR_WG : Heightmap.Types.WORLD_SURFACE_WG, heightLimitView, context.randomState());
                                 }
 
                                 adjustedCandidatePieceMinY = surfaceHeight - candidateJigsawBlockRelativeY;
@@ -504,7 +497,7 @@ public class PieceLimitedJigsawManager {
 
                                 // Create new piece
                                 PoolElementStructurePiece newPiece = new PoolElementStructurePiece(
-                                        this.structureTemplateManager,
+                                        context.structureTemplateManager(),
                                         candidatePiece,
                                         adjustedCandidateJigsawBlockRelativePos,
                                         groundLevelDelta,
@@ -522,7 +515,7 @@ public class PieceLimitedJigsawManager {
                                 }
                                 else {
                                     if (surfaceHeight == -1) {
-                                        surfaceHeight = this.chunkGenerator.getFirstFreeHeight(jigsawBlockPos.getX(), jigsawBlockPos.getZ(), Heightmap.Types.WORLD_SURFACE_WG, heightLimitView, randomState);
+                                        surfaceHeight = context.chunkGenerator().getFirstFreeHeight(jigsawBlockPos.getX(), jigsawBlockPos.getZ(), isCandidatePieceOceanFloor || isPieceOceanFloor ? Heightmap.Types.OCEAN_FLOOR_WG : Heightmap.Types.WORLD_SURFACE_WG, heightLimitView, context.randomState());
                                     }
 
                                     candidateJigsawBlockY = surfaceHeight + candidateJigsawYOffsetNeeded / 2;
