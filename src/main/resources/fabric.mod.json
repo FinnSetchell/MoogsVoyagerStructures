@@ -3,16 +3,17 @@
   "id": "mvs",
   "version": "${version}",
 
-  "name": "Vanilla Structure Mod",
-  "description": "A mod that adds more structures using vanilla blocks!",
+  "name": "Moog's Voyager Structures",
+  "description": "80+ structures made with vanilla blocks and entities bringing life to your world! Discover loot, enemies, & villagers along the way!",
   "authors": [
     "FinnDog"
   ],
   "contact": {
-    "homepage": "https://github.com/FinnSetchell/MoogsVanillaStructuresV2"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/moogs-voyager-structures",
+    "issues": "https://github.com/FinnSetchell/MoogsVoyagerStructures/issues"
   },
 
-  "license": "All Rights Reserved",
+  "license": "MIT",
   "icon": "assets/mvs/icon.png",
 
   "environment": "*",
@@ -24,13 +25,11 @@
   "mixins": [
     "mvs.mixins.json"
   ],
+
+  "accessWidener" : "mvs.accesswidener",
   "depends": {
-    "fabricloader": ">=0.14.19",
-    "fabric-api": "*",
-    "minecraft": "~1.19.2",
-    "java": ">=17"
-  },
-  "suggests": {
-    "another-mod": "*"
+    "fabricloader": ">=0.14.7",
+    "minecraft": ">=1.19",
+    "fabric": ">=0.55.3"
   }
 }

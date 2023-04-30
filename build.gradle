@@ -1,6 +1,13 @@
+buildscript {
+	repositories {
+		maven { url "https://plugins.gradle.org/m2/" }
+	}
+	dependencies {
+	}
+}
+
 plugins {
 	id 'fabric-loom' version '0.12-SNAPSHOT'
-	id 'maven-publish'
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -10,39 +17,42 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
+loom {
+	accessWidenerPath = file("src/main/resources/mvs.accesswidener")
+}
+
 repositories {
-	maven {	url "https://nexus.resourcefulbees.com/repository/maven-public/" }
+	maven { url "https://maven.shedaniel.me/" }
+	maven { url "https://www.cursemaven.com" }
+	maven {
+		url 'https://jitpack.io'
+		content {
+			includeGroup 'com.github.llamalad7.mixinextras'
+		}
+	}
 }
 
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	mappings loom.officialMojangMappings()
 
+	include(implementation(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:${project.mixin_extra_version}")))
+
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 }
 
-processResources {
-	inputs.property "version", project.version
-
-	filesMatching("fabric.mod.json") {
-		expand "version": project.version
-	}
-}
+apply from: 'gradle/processresources.gradle'
 
 tasks.withType(JavaCompile).configureEach {
+	it.options.encoding = "UTF-8"
 	it.options.release = 17
 }
 
 java {
-	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-	// if it is present.
-	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 }
 
 jar {
-	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
-	}
+	from "LICENSE"
 }
