@@ -1,0 +1,23 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:log_pile/oak_log_pile",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "mvs:advanced_random_spread",
+
+    "salt": 5989653245,
+
+    "super_exclusion_zone": {
+      "chunk_count": 5,
+      "other_set": "#mvs:oak_log_pile_avoid"
+    },
+
+    "spacing": 8,
+
+    "separation": 6
+  }
+}

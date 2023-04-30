@@ -1,0 +1,23 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:cathedral",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "mvs:advanced_random_spread",
+
+    "salt": 6036854798,
+
+    "super_exclusion_zone": {
+      "chunk_count": 5,
+      "other_set": "#mvs:cathedral_avoid"
+    },
+
+    "spacing": 105,
+
+    "separation": 98
+  }
+}

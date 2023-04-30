@@ -1,0 +1,23 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:ruins/tree_monument",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "mvs:advanced_random_spread",
+
+    "salt": 7989754652,
+
+    "super_exclusion_zone": {
+      "chunk_count": 5,
+      "other_set": "#mvs:tree_monument"
+    },
+
+    "spacing": 75,
+
+    "separation": 65
+  }
+}

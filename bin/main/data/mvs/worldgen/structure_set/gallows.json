@@ -1,0 +1,23 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:gallows",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "mvs:advanced_random_spread",
+
+    "salt": 3489562103,
+
+    "super_exclusion_zone": {
+      "chunk_count": 5,
+      "other_set": "#mvs:gallows_avoid"
+    },
+
+    "spacing": 37,
+
+    "separation": 28
+  }
+}

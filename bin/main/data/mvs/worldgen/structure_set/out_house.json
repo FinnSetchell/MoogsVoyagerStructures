@@ -1,0 +1,23 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:out_house",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "mvs:advanced_random_spread",
+
+    "salt": 7878546525,
+
+    "super_exclusion_zone": {
+      "chunk_count": 5,
+      "other_set": "#mvs:out_house"
+    },
+
+    "0spacing": 38,
+
+    "separation": 30
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:other_decoration/duck",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "mvs:advanced_random_spread",
+
+    "salt": 335587463,
+
+    "spacing": 54,
+
+    "separation": 46
+  }
+}

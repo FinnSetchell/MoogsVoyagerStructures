@@ -1,0 +1,40 @@
+modLoader="javafml"
+loaderVersion="[43,)"
+license="MIT"
+
+[[mods]]
+modId="mvs"
+version="${file.jarVersion}"
+displayName="Moog's Voyager Structures"
+logoFile="icon.png"
+credits="Thanks to telepathicgrunt for the tutorial mod!"
+authors="FinnDog"
+description='''
+This is a mod that adds lots of awesome vanilla style structures to the game
+Discord: https://discord.gg/S5nffJbuvA
+Curseforge: https://www.curseforge.com/minecraft/mc-mods/moogs-voyager-structures
+'''
+
+## A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+#[[dependencies.MVS]] #optional
+#    # the modid of the dependency
+#    modId="forge" #mandatory
+#    # Does this dependency have to exist - if not, ordering below must be specified
+#    mandatory=true #mandatory
+#    # The version range of the dependency
+#    versionRange="[38,)" #mandatory
+#    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+#    ordering="NONE"
+#    # Side this dependency is applied on - BOTH, CLIENT or SERVER
+#    side="BOTH"
+# Here's another dependency
+
+[[dependencies.MVS]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.19.0,1.20)"
+
+[[dependencies.MVS]]
+    modId="forge"
+    mandatory=true
+    versionRange="[41.1.0,)"

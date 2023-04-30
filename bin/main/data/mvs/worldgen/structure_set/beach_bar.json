@@ -1,0 +1,23 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:beach_bar",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "mvs:advanced_random_spread",
+
+    "salt": 2354402687,
+
+    "super_exclusion_zone": {
+      "chunk_count": 5,
+      "other_set": "#mvs:beach_bar_avoid"
+    },
+
+    "spacing": 34,
+
+    "separation": 20
+  }
+}

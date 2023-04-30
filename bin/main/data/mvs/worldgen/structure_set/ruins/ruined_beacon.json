@@ -1,0 +1,23 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:ruins/ruined_beacon",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "mvs:advanced_random_spread",
+
+    "salt": 2998587454,
+
+    "super_exclusion_zone": {
+      "chunk_count": 5,
+      "other_set": "#mvs:ruined_beacon"
+    },
+
+    "spacing": 65,
+
+    "separation": 60
+  }
+}

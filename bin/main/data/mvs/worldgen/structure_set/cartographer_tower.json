@@ -1,0 +1,23 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:cartographer_tower",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "mvs:advanced_random_spread",
+
+    "salt": 3336585433,
+
+    "super_exclusion_zone": {
+      "chunk_count": 5,
+      "other_set": "#mvs:cartographer_tower_avoid"
+    },
+
+    "spacing": 53,
+
+    "separation": 46
+  }
+}

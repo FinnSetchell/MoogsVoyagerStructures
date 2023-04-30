@@ -1,0 +1,23 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:railway",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "mvs:advanced_random_spread",
+
+    "salt": 6140696987,
+
+    "super_exclusion_zone": {
+      "chunk_count": 5,
+      "other_set": "#mvs:railway"
+    },
+
+    "spacing": 36,
+
+    "separation": 27
+  }
+}
