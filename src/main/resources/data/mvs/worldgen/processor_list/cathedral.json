@@ -4,8 +4,10 @@
   "processors": [
     // A single Rule processor for this list.
     {
+      "processor_type": "mvs:waterlogging_fix_processor"
+    },
+    {
       "processor_type": "minecraft:rule",
-
       "rules": [
         {
           "input_predicate": {
@@ -44,6 +46,19 @@
           },
           "output_state": {
             "Name": "minecraft:stone"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "minecraft:redstone_lamp",
+            "probability": 1,
+            "predicate_type": "minecraft:random_block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "minecraft:redstone_lamp"
           }
         },
         {

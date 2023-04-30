@@ -1,8 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "minecraft:end_cities",
-    "minecraft:villages",
-    "minecraft:pillager_outposts"
-  ]
-}
