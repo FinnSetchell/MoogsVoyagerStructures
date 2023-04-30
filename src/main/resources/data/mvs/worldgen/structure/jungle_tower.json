@@ -4,8 +4,8 @@
   "size": 4,
   "project_start_to_heightmap": "WORLD_SURFACE_WG",
   "cannot_spawn_in_liquid": true,
-  "terrain_height_radius_check": 2,
-  "allowed_terrain_height_range": 4,
+  "terrain_height_radius_check": 1,
+  "allowed_terrain_height_range": 7,
   "valid_biome_radius_check": 3,
 
   "biomes": "#mvs:has_structure/jungle_biomes",

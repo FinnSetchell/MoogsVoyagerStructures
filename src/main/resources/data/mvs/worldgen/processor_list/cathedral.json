@@ -50,6 +50,19 @@
         },
         {
           "input_predicate": {
+            "block": "minecraft:redstone_lamp",
+            "probability": 1,
+            "predicate_type": "minecraft:random_block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "minecraft:redstone_lamp"
+          }
+        },
+        {
+          "input_predicate": {
             "block": "minecraft:lantern",
             "probability": 0.9,
             "predicate_type": "minecraft:random_block_match"
