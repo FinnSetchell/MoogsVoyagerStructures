@@ -12,8 +12,8 @@
     "salt": 665569523,
 
     "super_exclusion_zone": {
-      "chunk_count": 4,
-      "other_set": "#mvs:tall_house_avoid"
+      "chunk_count": 3,
+      "other_set": "#mvs:common_avoid"
     },
 
     "spacing": 42,

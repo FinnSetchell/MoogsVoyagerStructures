@@ -12,8 +12,8 @@
     "salt": 622547878,
 
     "super_exclusion_zone": {
-      "chunk_count": 4,
-      "other_set": "#mvs:small_swamp_house_avoid"
+      "chunk_count": 2,
+      "other_set": "#mvs:common_avoid"
     },
 
     "spacing": 28,

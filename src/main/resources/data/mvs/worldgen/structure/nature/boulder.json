@@ -8,8 +8,6 @@
 
   "biomes": "#mvs:has_structure/taiga_biomes",
   "project_start_to_heightmap": "WORLD_SURFACE_WG",
-  "terrain_height_radius_check": 4,
-  "allowed_terrain_height_range": 2,
 
   "step": "surface_structures",
   "terrain_adaptation": "beard_thin",

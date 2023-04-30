@@ -12,8 +12,8 @@
     "salt": 533652584,
 
     "super_exclusion_zone": {
-      "chunk_count": 7,
-      "other_set": "#mvs:jungle_tower_avoid"
+      "chunk_count": 5,
+      "other_set": "#mvs:common_avoid"
     },
 
     "spacing": 86,
