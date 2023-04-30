@@ -1,10 +1,10 @@
 package com.finndog.mvs.world.structures;
 
+import com.finndog.mvs.MVSStructures;
+import com.finndog.mvs.utils.GeneralUtils;
 import com.google.common.collect.Maps;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.finndog.mvs.MVSStructures;
-import com.finndog.mvs.utils.GeneralUtils;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -26,10 +26,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
-public class MVSMVSGenericNetherJigsawStructure extends MVSGenericJigsawStructure {
+public class MVSGenericNetherJigsawStructure extends MVSGenericJigsawStructure {
 
-    public static final Codec<MVSMVSGenericNetherJigsawStructure> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            MVSMVSGenericNetherJigsawStructure.settingsCodec(instance),
+    public static final Codec<MVSGenericNetherJigsawStructure> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            MVSGenericNetherJigsawStructure.settingsCodec(instance),
             StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
             Codec.intRange(0, 30).fieldOf("size").forGetter(structure -> structure.size),
             Codec.INT.optionalFieldOf("min_y_allowed").forGetter(structure -> structure.minYAllowed),
@@ -43,25 +43,25 @@ public class MVSMVSGenericNetherJigsawStructure extends MVSGenericJigsawStructur
             Codec.intRange(0, 100).optionalFieldOf("ledge_offset_y").forGetter(structure -> structure.ledgeOffsetY),
             StringRepresentable.fromEnum(LAND_SEARCH_DIRECTION::values).fieldOf("land_search_direction").forGetter(structure -> structure.searchDirection),
             Codec.BOOL.fieldOf("use_bounding_box_hack").orElse(false).forGetter(structure -> structure.useBoundingBoxHack)
-    ).apply(instance, MVSMVSGenericNetherJigsawStructure::new));
+    ).apply(instance, MVSGenericNetherJigsawStructure::new));
 
     public final Optional<Integer> ledgeOffsetY;
     public final LAND_SEARCH_DIRECTION searchDirection;
 
-    public MVSMVSGenericNetherJigsawStructure(Structure.StructureSettings config,
-                                              Holder<StructureTemplatePool> startPool,
-                                              int size,
-                                              Optional<Integer> minYAllowed,
-                                              Optional<Integer> maxYAllowed,
-                                              Optional<Integer> allowedYRangeFromStart,
-                                              HeightProvider startHeight,
-                                              boolean cannotSpawnInLiquid,
-                                              Optional<Integer> biomeRadius,
-                                              HashSet<ResourceLocation> poolsThatIgnoreBoundaries,
-                                              Optional<Integer> maxDistanceFromCenter,
-                                              Optional<Integer> ledgeOffsetY,
-                                              LAND_SEARCH_DIRECTION searchDirection,
-                                              boolean useBoundingBoxHack) {
+    public MVSGenericNetherJigsawStructure(Structure.StructureSettings config,
+                                        Holder<StructureTemplatePool> startPool,
+                                        int size,
+                                        Optional<Integer> minYAllowed,
+                                        Optional<Integer> maxYAllowed,
+                                        Optional<Integer> allowedYRangeFromStart,
+                                        HeightProvider startHeight,
+                                        boolean cannotSpawnInLiquid,
+                                        Optional<Integer> biomeRadius,
+                                        HashSet<ResourceLocation> poolsThatIgnoreBoundaries,
+                                        Optional<Integer> maxDistanceFromCenter,
+                                        Optional<Integer> ledgeOffsetY,
+                                        LAND_SEARCH_DIRECTION searchDirection,
+                                        boolean useBoundingBoxHack) {
         super(config,
                 startPool,
                 size,
@@ -139,6 +139,6 @@ public class MVSMVSGenericNetherJigsawStructure extends MVSGenericJigsawStructur
 
     @Override
     public StructureType<?> type() {
-        return MVSStructures.GENERIC_NETHER_JIGSAW_STRUCTURE;
+        return MVSStructures.MVS_GENERIC_NETHER_JIGSAW_STRUCTURE.get();
     }
 }

@@ -1,11 +1,11 @@
 package com.finndog.mvs.misc.structurepiececounter;
 
 import com.finndog.mvs.MVSMain;
+import com.finndog.mvs.modinit.MVSConditionsRegistry;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
-import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -13,13 +13,17 @@ import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
-public class StructurePieceCountsManager extends SimpleJsonResourceReloadListener implements IdentifiableResourceReloadListener {
+public class StructurePieceCountsManager extends SimpleJsonResourceReloadListener {
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().setLenient().disableHtmlEscaping().excludeFieldsWithoutExposeAnnotation().create();
+    public final static StructurePieceCountsManager STRUCTURE_PIECE_COUNTS_MANAGER = new StructurePieceCountsManager();
+
     private Map<ResourceLocation, List<StructurePieceCountsObj>> StructureToPieceCountsObjs = new HashMap<>();
-    private final ResourceLocation STRUCTURE_PIECE_COUNT_MANAGER_ID = new ResourceLocation(MVSMain.MODID, "structure_piece_count_manager");
     private final Map<ResourceLocation, Map<ResourceLocation, RequiredPieceNeeds>> cachedRequirePiecesMap = new HashMap<>();
     private final Map<ResourceLocation, Map<ResourceLocation, Integer>> cachedMaxCountPiecesMap = new HashMap<>();
 
@@ -33,16 +37,18 @@ public class StructurePieceCountsManager extends SimpleJsonResourceReloadListene
         for(int i = piecesSpawnCounts.size() - 1; i >= 0; i--) {
             StructurePieceCountsObj entry = piecesSpawnCounts.get(i);
             if(entry.alwaysSpawnThisMany != null && entry.neverSpawnMoreThanThisMany != null && entry.alwaysSpawnThisMany > entry.neverSpawnMoreThanThisMany) {
-                throw new Exception("Error: Found " + entry.nbtPieceName + " entry has alwaysSpawnThisMany greater than neverSpawnMoreThanThisMany which is invalid.");
+                throw new Exception("Repurposed Structures Error: Found " + entry.nbtPieceName + " entry has alwaysSpawnThisMany greater than neverSpawnMoreThanThisMany which is invalid.");
             }
             if(entry.condition != null) {
-                Optional<Supplier<Boolean>> optionalSupplier = JSONConditionsRegistry.MVS_JSON_CONDITIONS_REGISTRY.getOptional(new ResourceLocation(entry.condition));
-                optionalSupplier.ifPresentOrElse(condition -> {
-                    if(!condition.get()) {
+                Supplier<Boolean> supplier = MVSConditionsRegistry.MVS_JSON_CONDITIONS_REGISTRY.lookup().get(new ResourceLocation(entry.condition));
+                if (supplier != null) {
+                    if(!supplier.get()) {
                         piecesSpawnCounts.remove(entry);
                     }
-                },
-                () -> MVSMain.LOGGER.error("MVS Error: Found {} entry has a condition that does not exist. Extra info: {}", entry.nbtPieceName, fileIdentifier));
+                }
+                else {
+                    MVSMain.LOGGER.error("MVS Error: Found {} entry has a condition that does not exist. Extra info: {}", entry.nbtPieceName, fileIdentifier);
+                }
             }
         }
         return piecesSpawnCounts;
@@ -56,7 +62,7 @@ public class StructurePieceCountsManager extends SimpleJsonResourceReloadListene
                 mapBuilder.put(fileIdentifier, getStructurePieceCountsObjs(fileIdentifier, jsonElement));
             }
             catch (Exception e) {
-                MVSMain.LOGGER.error("MVS Error: Couldn't parse rs_pieces_spawn_counts file {} - JSON looks like: {}", fileIdentifier, jsonElement, e);
+                MVSMain.LOGGER.error("MVS Error: Couldn't parse mvs_pieces_spawn_counts file {} - JSON looks like: {}", fileIdentifier, jsonElement, e);
             }
         });
         this.StructureToPieceCountsObjs = mapBuilder;
@@ -70,7 +76,7 @@ public class StructurePieceCountsManager extends SimpleJsonResourceReloadListene
                 this.StructureToPieceCountsObjs.computeIfAbsent(structureRL, rl -> new ArrayList<>()).addAll(getStructurePieceCountsObjs(structureRL, jsonElement));
             }
             catch (Exception e) {
-                MVSMain.LOGGER.error("MVS Error: Couldn't parse rs_pieces_spawn_counts file {} - JSON looks like: {}", structureRL, jsonElement, e);
+                MVSMain.LOGGER.error("MVS Error: Couldn't parse mvs_pieces_spawn_counts file {} - JSON looks like: {}", structureRL, jsonElement, e);
             }
         });
     }
@@ -129,10 +135,5 @@ public class StructurePieceCountsManager extends SimpleJsonResourceReloadListene
         public int getMinDistanceFromCenter() {
             return minDistanceFromCenter;
         }
-    }
-
-    @Override
-    public ResourceLocation getFabricId() {
-        return STRUCTURE_PIECE_COUNT_MANAGER_ID;
     }
 }

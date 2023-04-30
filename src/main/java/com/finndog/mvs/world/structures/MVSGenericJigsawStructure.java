@@ -11,6 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.QuartPos;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.ChunkPos;
@@ -115,7 +116,7 @@ public class MVSGenericJigsawStructure extends Structure {
                 MVS: maxYAllowed cannot be less than minYAllowed.
                 Please correct this error as there's no way to spawn this structure properly
                     Structure pool of problematic structure: %s
-            """.formatted(startPool.value().getName()));
+            """.formatted(startPool.value()));
         }
     }
 
@@ -214,7 +215,7 @@ public class MVSGenericJigsawStructure extends Structure {
                 context,
                 this.startPool,
                 this.size,
-                context.registryAccess().registryOrThrow(Registry.STRUCTURE_REGISTRY).getKey(this),
+                context.registryAccess().registryOrThrow(Registries.STRUCTURE).getKey(this),
                 blockpos,
                 this.useBoundingBoxHack,
                 this.projectStartToHeightmap,
@@ -354,7 +355,7 @@ public class MVSGenericJigsawStructure extends Structure {
 
     @Override
     public StructureType<?> type() {
-        return MVSStructures.GENERIC_JIGSAW_STRUCTURE;
+        return MVSStructures.MVS_GENERIC_JIGSAW_STRUCTURE.get();
     }
 
     public enum BURYING_TYPE implements StringRepresentable {

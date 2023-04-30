@@ -25,6 +25,7 @@ public class MinusEightPlacement extends PlacementModifier {
 
 	@Override
 	public PlacementModifierType<?> type() {
-		return MVSPlacements.MINUS_EIGHT_PLACEMENT;
+		return MVSPlacements.MINUS_EIGHT_PLACEMENT.get();
 	}
 }
+

@@ -34,7 +34,7 @@ public class LegacyOceanBottomSinglePoolElement extends SinglePoolElement {
     }
 
     public StructurePoolElementType<?> getType() {
-        return MVSStructurePieces.LEGACY_OCEAN_BOTTOM;
+        return MVSStructurePieces.LEGACY_OCEAN_BOTTOM.get();
     }
 
     public String toString() {
