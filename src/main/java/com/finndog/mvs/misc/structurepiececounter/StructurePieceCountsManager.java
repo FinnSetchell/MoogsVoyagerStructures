@@ -28,7 +28,7 @@ public class StructurePieceCountsManager extends SimpleJsonResourceReloadListene
     private final Map<ResourceLocation, Map<ResourceLocation, Integer>> cachedMaxCountPiecesMap = new HashMap<>();
 
     public StructurePieceCountsManager() {
-        super(GSON, "rs_pieces_spawn_counts");
+        super(GSON, "mvs_pieces_spawn_counts");
     }
 
     @MethodsReturnNonnullByDefault
@@ -37,7 +37,7 @@ public class StructurePieceCountsManager extends SimpleJsonResourceReloadListene
         for(int i = piecesSpawnCounts.size() - 1; i >= 0; i--) {
             StructurePieceCountsObj entry = piecesSpawnCounts.get(i);
             if(entry.alwaysSpawnThisMany != null && entry.neverSpawnMoreThanThisMany != null && entry.alwaysSpawnThisMany > entry.neverSpawnMoreThanThisMany) {
-                throw new Exception("Repurposed Structures Error: Found " + entry.nbtPieceName + " entry has alwaysSpawnThisMany greater than neverSpawnMoreThanThisMany which is invalid.");
+                throw new Exception("MVS Error: Found " + entry.nbtPieceName + " entry has alwaysSpawnThisMany greater than neverSpawnMoreThanThisMany which is invalid.");
             }
             if(entry.condition != null) {
                 Supplier<Boolean> supplier = MVSConditionsRegistry.MVS_JSON_CONDITIONS_REGISTRY.lookup().get(new ResourceLocation(entry.condition));

@@ -16,7 +16,7 @@ public final class StructurePieceCountsAdditionsMerger {
 
     // Needed for detecting the correct files, ignoring file extension, and what JSON parser to use for parsing the files
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().setLenient().disableHtmlEscaping().create();
-    private static final String DATA_TYPE = "rs_pieces_spawn_counts_additions";
+    private static final String DATA_TYPE = "mvs_pieces_spawn_counts_additions";
     private static final int FILE_SUFFIX_LENGTH = ".json".length();
 
     /**
