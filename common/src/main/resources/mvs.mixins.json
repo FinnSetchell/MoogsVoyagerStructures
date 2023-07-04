@@ -1,0 +1,31 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "com.finndog.mvs.mixin",
+    "refmap": "${mod_id}.refmap.json",
+    "compatibilityLevel": "JAVA_17",
+    "mixins": [
+        "resources.NamespaceResourceManagerAccessor",
+        "resources.ReloadableResourceManagerImplAccessor",
+        "structures.ListPoolElementAccessor",
+        "structures.LocateCommandMixin",
+        "structures.PoolElementStructurePieceAccessor",
+        "structures.SinglePoolElementAccessor",
+        "structures.StructurePieceAccessor",
+        "structures.StructurePoolAccessor",
+        "structures.StructureProcessorAccessor",
+        "structures.StructureTemplateManagerAccessor",
+        "structures.StructureTemplateMixin",
+        "structures.TemplateAccessor",
+        "world.WorldGenRegionAccessor"
+    ],
+    "client": [
+        "blocks.StructureBlockScreenMixin"
+    ],
+    "server": [
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}
+
