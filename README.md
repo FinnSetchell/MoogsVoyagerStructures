@@ -1,75 +1,25 @@
-![banner](https://www.bisecthosting.com/images/CF/MVS/BH_NU_HEADER.png)
+# MultiLoader Template
 
----
+This project provides a Gradle project template that can compile mods for both Forge and Fabric using a common sourceset. This project does not require any third party libraries or dependencies. If you have any questions or want to discuss the project join our [Discord](https://discord.myceliummod.network).
 
-[![Discord](https://img.shields.io/discord/869218732650688543?color=9033af&label=DISCORD&style=for-the-badge)](https://discord.com/invite/S5nffJbuvA) [![](https://img.shields.io/badge/TOTAL-80%20STRUCTURES-9033AF?style=for-the-badge)](https://github.com/FinnSetchell/MoogsVanillaStructuresV2/wiki) [![GitHub Sponsors](https://img.shields.io/github/sponsors/finnsetchell?color=9033af&style=for-the-badge)](https://github.com/sponsors/FinnSetchell) [![Twitter Follow](https://img.shields.io/twitter/follow/MoogsMods?color=9033af&style=for-the-badge)](https://twitter.com/MoogsMods)
+## Getting Started
 
-[![](https://img.shields.io/badge/My-projects-9033af?style=for-the-badge&logo=curseforge)](https://www.curseforge.com/members/finndog_123/projects)
+## IntelliJ IDEA
+This guide will show how to import the MultiLoader Template into IntelliJ IDEA. The setup process is roughly equivalent to setting up Forge and Fabric independently and should be very familiar to anyone who has worked with their MDKs.
 
----
+1. Clone or download this repository to your computer.
+2. Configure the project by editing the `group`, `mod_name`, `mod_author`, and `mod_id` properties in the `gradle.properties` file. You will also need to change the `rootProject.name`  property in `settings.gradle`, this should match the folder name of your project, or else IDEA may complain.
+3. Open the template's root folder as a new project in IDEA. This is the folder that contains this README file and the gradlew executable.
+4. If your default JVM/JDK is not Java 17 you will encounter an error when opening the project. This error is fixed by going to `File > Settings > Build, Execution, Deployment > Build Tools > Gradle > Gradle JVM`and changing the value to a valid Java 17 JVM. You will also need to set the Project SDK to Java 17. This can be done by going to `File > Project Structure > Project SDK`. Once both have been set open the Gradle tab in IDEA and click the refresh button to reload the project.
+5. Open the Gradle tab in IDEA if it has not already been opened. Navigate to `Your Project > Common > Tasks > vanilla gradle > decompile`. Run this task to decompile Minecraft.
+6. Open the Gradle tab in IDEA if it has not already been opened. Navigate to `Your Project > Forge > Tasks > forgegradle runs > genIntellijRuns`. Run this task to set up run configurations for Forge.
+7. Open your Run/Debug Configurations. Under the Application category there should now be options to run Forge and Fabric projects. Select one of the client options and try to run it.
+8. Assuming you were able to run the game in step 7 your workspace should now be set up.
 
-![Overview](https://www.bisecthosting.com/images/CF/MVS/BH_NU_BANNER1.png)
+### Eclipse
+While it is possible to use this template in Eclipse it is not recommended. During the development of this template multiple critical bugs and quirks related to Eclipse were found at nearly every level of the required build tools. While we continue to work with these tools to report and resolve issues support for projects like these are not there yet. For now Eclipse is considered unsupported by this project. The development cycle for build tools is notoriously slow so there are no ETAs available.
 
----
+## Development Guide
+When using this template the majority of your mod is developed in the Common project. The Common project is compiled against the vanilla game and is used to hold code that is shared between the different loader-specific versions of your mod. The Common project has no knowledge or access to ModLoader specific code, apis, or concepts. Code that requires something from a specific loader must be done through the project that is specific to that loader, such as the Forge or Fabric project.
 
-**FEEDBACK**
-
-Please comment any ideas you may have to improve this mod. Any and all feedback is greatly appreciated :)
-
-**FORGE AND FABRIC** 
-
-Look for files marked with **\[FORGE\]** or **\[FABRIC\]**.   
-***Fabric** mods are marked with **BETA** so that they show up on the side, but they are actually **RELEASE's***
-
-**ABOUT**
-
-Moogs Voyager Structures brings life, fun and variety to your Minecraft world! Explore awesome new structures made with vanilla blocks and entities, and discover loot, enemies, and villagers along the way. This mod is compatible with any modpack and keeps the vanilla feel of the game!
-
-**Config pack**
-
-[link](https://www.curseforge.com/minecraft/texture-packs/mvs-moogs-voyager-structure-config-pack)
-
-A datapack you can use to configure the mod.
-
-**REQUIRED ON CLIENT AND SERVER**
-
-1. simply download the version you need  
-2. then add it to your mods folder  
-It does not require any settings to be changed for it and should work with all mods
-
----
-
-![features](https://www.bisecthosting.com/images/CF/MVS/BH_NU_BANNER2.png)![collage](https://imgur.com/I9lNEvl.png)
-
----
-
-![showcase](https://www.bisecthosting.com/images/CF/MVS/BH_NU_BANNER4.png)
-
----
-
-**If you have any modpacks/videos using this mod that you want featured here, then message me on discord!**
-
-**VIDEOS:** 
-
-  
-
- 
-
-**MODPACKS**
-
-see all modpacks [here](https://www.modpackindex.com/modpack/finder?included_mods=37802 "here")
-
----
-
-![](https://www.bisecthosting.com/images/CF/MVS/BH_NU_BANNER3.png)
-
----
-
-**The best and fastest way to get replies is to join our [discord server](https://discord.gg/S5nffJbuvA)**
-
-[**![discord](https://i.imgur.com/sfAmR3Y.png)**](https://discord.gg/S5nffJbuvA "discord invite")
-
----
-
-[![serverImage](https://i.imgur.com/kMtqORw.png)](https://moogsmodded.store.playerlands.com/ "serverShop")  
-[![BHsponser](https://www.bisecthosting.com/images/CF/MVS/BH_NU_PROMO.png)](https://bisecthosting.com/moogsmods)
+Loader specific projects such as the Forge and Fabric project are used to load the Common project into the game. These projects also define code that is specific to that loader. Loader specific projects can access all of the code in the Common project. It is important to remember that the Common project can not access code from loader specific projects.
