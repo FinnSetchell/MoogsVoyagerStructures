@@ -4,11 +4,12 @@ plugins {
     id 'maven-publish'
     id 'fabric-loom'
 }
+architectury {
+    platformSetupLoomIde()
+    fabric()
+}
 base {
     archivesName = "${mod_name}-fabric-${minecraft_version}"
-}
-architectury {
-    fabric()
 }
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
