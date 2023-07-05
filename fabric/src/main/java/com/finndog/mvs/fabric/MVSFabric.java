@@ -9,7 +9,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.server.packs.PackType;
 
-public class RepurposedStructuresFabric implements ModInitializer {
+public class MVSFabric implements ModInitializer {
 
     @Override
     public void onInitialize() {

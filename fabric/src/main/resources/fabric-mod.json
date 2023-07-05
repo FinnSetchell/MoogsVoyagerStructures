@@ -1,27 +1,26 @@
 {
     "schemaVersion": 1,
     "id": "mvs",
-    "version": "${version}",
-    "name": "${mod_name}",
+    "version": "4.0-1.20.0",
+    "name": "Moog's Voyager Structures",
     "description": "80+ structures made with vanilla blocks and entities bringing life to your world! Discover loot, enemies, & villagers along the way!",
     "authors": [
-        "${mod_author}"
+        "FinnDog"
     ],
     "contact": {
         "homepage": "https://www.curseforge.com/minecraft/mc-mods/moogs-voyager-structures",
         "sources": "https://github.com/FinnSetchell/MoogsVoyagerStructures"
     },
     "license": "MIT",
-    "icon": "assets/mvs/icon.png",
+    "icon": "icon.png",
     "environment": "*",
     "entrypoints": {
         "main": [
-            "com.finndog.mvs.MVSFabric"
+            "com.finndog.mvs.fabric.MVSFabric"
         ]
     },
     "mixins": [
-        "mvs.mixins.json",
-        "mvs.fabric.mixins.json"
+        "mvs-fabric.mixins.json"
     ],
     "depends": {
         "fabricloader": ">=0.14",
