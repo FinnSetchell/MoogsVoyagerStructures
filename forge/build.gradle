@@ -4,11 +4,14 @@ plugins {
     id 'net.minecraftforge.gradle'
     id 'org.spongepowered.mixin'
 }
+
+architectury {
+    platformSetupLoomIde()
+    forge()
+}
+
 base {
     archivesName = "${mod_name}-forge-${minecraft_version}"
-}
-architectury {
-    forge()
 }
 mixin {
     add(sourceSets.main, "${mod_id}.refmap.json")
