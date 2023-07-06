@@ -1,0 +1,12 @@
+CREDITS
+A huge thanks to TelepathicGrunt for his amazing work for structure mods. I used his TutorialMod
+(https://github.com/TelepathicGrunt/StructureTutorialMod) when I started developing this mod and
+have moved to using and modifying the RepurposedStructures mod.
+RS: https://github.com/TelepathicGrunt/RepurposedStructures/tree/1.20-Arch
+RS License: https://github.com/TelepathicGrunt/RepurposedStructures/blob/1.20-Arch/LICENSE
+
+Secondly, a huge thanks to my past and present builders listed below: (Discord usernames)
+- .olver.
+- tfa120
+- beeb0i
+- bossminotaur
