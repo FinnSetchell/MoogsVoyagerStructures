@@ -13,8 +13,8 @@ import net.minecraft.world.level.levelgen.structure.StructureType;
 public final class MVSStructures {
     public static final ResourcefulRegistry<StructureType<?>> STRUCTURE_TYPE = ResourcefulRegistries.create(BuiltInRegistries.STRUCTURE_TYPE, MVSCommon.MODID);
 
-    public static RegistryEntry<StructureType<GenericJigsawStructure>> GENERIC_JIGSAW_STRUCTURE = STRUCTURE_TYPE.register("generic_jigsaw_structure", () -> () -> GenericJigsawStructure.CODEC);
-    public static RegistryEntry<StructureType<GenericNetherJigsawStructure>> GENERIC_NETHER_JIGSAW_STRUCTURE = STRUCTURE_TYPE.register("generic_nether_jigsaw_structure", () -> () -> GenericNetherJigsawStructure.CODEC);
+    public static RegistryEntry<StructureType<GenericJigsawStructure>> GENERIC_JIGSAW_STRUCTURE = STRUCTURE_TYPE.register("mvs_generic_jigsaw_structure", () -> () -> GenericJigsawStructure.CODEC);
+    public static RegistryEntry<StructureType<GenericNetherJigsawStructure>> GENERIC_NETHER_JIGSAW_STRUCTURE = STRUCTURE_TYPE.register("mvs_generic_nether_jigsaw_structure", () -> () -> GenericNetherJigsawStructure.CODEC);
 }
 
 

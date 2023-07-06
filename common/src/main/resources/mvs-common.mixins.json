@@ -20,7 +20,6 @@
         "world.WorldGenRegionAccessor"
     ],
     "client": [
-        "blocks.StructureBlockScreenMixin"
     ],
     "server": [
     ],

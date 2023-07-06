@@ -199,7 +199,7 @@ public class PieceLimitedJigsawManager {
             if(piece instanceof PoolElementStructurePiece) {
                 StructurePoolElement poolElement = ((PoolElementStructurePiece)piece).getElement();
                 if(poolElement instanceof SinglePoolElement) {
-                    ResourceLocation pieceID = ((SinglePoolElementAccessor) poolElement).repurposedstructures_getTemplate().left().orElse(null);
+                    ResourceLocation pieceID = ((SinglePoolElementAccessor) poolElement).mvs_getTemplate().left().orElse(null);
                     if(counter.containsKey(pieceID)) {
                         counter.put(pieceID, counter.get(pieceID) - 1);
                     }
@@ -285,7 +285,7 @@ public class PieceLimitedJigsawManager {
 
                 // Only continue if we are using the jigsaw pattern registry and if it is not empty
                 if (!(poolOptional.isPresent() && (poolOptional.get().size() != 0 || Objects.equals(jigsawBlockPool, Pools.EMPTY.location())))) {
-                    MVSCommon.LOGGER.warn("Moog's Voyager Structures: Empty or nonexistent pool: {} which is being called from {}", jigsawBlockPool, pieceBlueprint instanceof SinglePoolElement ? ((SinglePoolElementAccessor) pieceBlueprint).repurposedstructures_getTemplate().left().get() : "not a SinglePoolElement class");
+                    MVSCommon.LOGGER.warn("Moog's Voyager Structures: Empty or nonexistent pool: {} which is being called from {}", jigsawBlockPool, pieceBlueprint instanceof SinglePoolElement ? ((SinglePoolElementAccessor) pieceBlueprint).mvs_getTemplate().left().get() : "not a SinglePoolElement class");
                     continue;
                 }
 
@@ -310,7 +310,7 @@ public class PieceLimitedJigsawManager {
 
                 // Process the pool pieces, randomly choosing different pieces from the pool to spawn
                 if (depth != this.maxDepth) {
-                    StructurePoolElement generatedPiece = this.processList(new ArrayList<>(((StructurePoolAccessor)poolOptional.get()).repurposedstructures_getRawTemplates()), doBoundaryAdjustments, jigsawBlock, jigsawBlockTargetPos, pieceMinY, jigsawBlockPos, octreeToUse, piece, depth, targetPieceBoundsTop, heightLimitView, false);
+                    StructurePoolElement generatedPiece = this.processList(new ArrayList<>(((StructurePoolAccessor)poolOptional.get()).mvs_getRawTemplates()), doBoundaryAdjustments, jigsawBlock, jigsawBlockTargetPos, pieceMinY, jigsawBlockPos, octreeToUse, piece, depth, targetPieceBoundsTop, heightLimitView, false);
                     if (generatedPiece != null) continue; // Stop here since we've already generated the piece
                 }
 
@@ -320,7 +320,7 @@ public class PieceLimitedJigsawManager {
                     ResourceLocation fallBackPoolRL = poolRegistry.getKey(jigsawBlockFallback.value());
                     ignoreBounds = poolsThatIgnoreBounds.contains(fallBackPoolRL);
                 }
-                this.processList(new ArrayList<>(((StructurePoolAccessor)jigsawBlockFallback.value()).repurposedstructures_getRawTemplates()), doBoundaryAdjustments, jigsawBlock, jigsawBlockTargetPos, pieceMinY, jigsawBlockPos, octreeToUse, piece, depth, targetPieceBoundsTop, heightLimitView, ignoreBounds);
+                this.processList(new ArrayList<>(((StructurePoolAccessor)jigsawBlockFallback.value()).mvs_getRawTemplates()), doBoundaryAdjustments, jigsawBlock, jigsawBlockTargetPos, pieceMinY, jigsawBlockPos, octreeToUse, piece, depth, targetPieceBoundsTop, heightLimitView, ignoreBounds);
             }
         }
 
@@ -369,7 +369,7 @@ public class PieceLimitedJigsawManager {
                     for (int i = 0; i < candidatePieces.size(); i++) {
                         Pair<StructurePoolElement, Integer> candidatePiecePair = candidatePieces.get(i);
                         StructurePoolElement candidatePiece = candidatePiecePair.getFirst();
-                        if (candidatePiece instanceof SinglePoolElement && ((SinglePoolElementAccessor) candidatePiece).repurposedstructures_getTemplate().left().get().equals(pieceNeededToSpawn.get())) { // Condition 1
+                        if (candidatePiece instanceof SinglePoolElement && ((SinglePoolElementAccessor) candidatePiece).mvs_getTemplate().left().get().equals(pieceNeededToSpawn.get())) { // Condition 1
                             if (depth >= Math.min(maxDepth - 1, this.requiredPieces.get(pieceNeededToSpawn.get()).getMinDistanceFromCenter())) { // Condition 3
                                 // All conditions are met. Use required piece  as chosen piece.
                                 chosenPiecePair = candidatePiecePair;
@@ -408,7 +408,7 @@ public class PieceLimitedJigsawManager {
                 // This logic is my own additional logic - vanilla does not offer this behavior.
                 ResourceLocation pieceName = null;
                 if(candidatePiece instanceof SinglePoolElement) {
-                    pieceName = ((SinglePoolElementAccessor) candidatePiece).repurposedstructures_getTemplate().left().get();
+                    pieceName = ((SinglePoolElementAccessor) candidatePiece).mvs_getTemplate().left().get();
                     if (this.currentPieceCounts.containsKey(pieceName) && this.maximumPieceCounts.containsKey(pieceName)) {
                         if (this.currentPieceCounts.get(pieceName) >= this.maximumPieceCounts.get(pieceName)) {
                             // Remove this piece from the list of candidates and retry.
@@ -435,7 +435,7 @@ public class PieceLimitedJigsawManager {
                                 ResourceLocation candidateTargetPool = new ResourceLocation(pieceCandidateJigsawBlock.nbt().getString("pool"));
                                 Optional<StructureTemplatePool> candidateTargetPoolOptional = this.poolRegistry.getOptional(candidateTargetPool);
                                 if (candidateTargetPoolOptional.isEmpty()) {
-                                    MVSCommon.LOGGER.warn("Moog's Voyager Structures: Non-existent child pool attempted to be spawned: {} which is being called from {}. Let Moog's Voyager Structures dev (FinnDog) know about this log entry.", candidateTargetPool, candidatePiece instanceof SinglePoolElement ? ((SinglePoolElementAccessor) candidatePiece).repurposedstructures_getTemplate().left().get() : "not a SinglePoolElement class");
+                                    MVSCommon.LOGGER.warn("Moog's Voyager Structures: Non-existent child pool attempted to be spawned: {} which is being called from {}. Let Moog's Voyager Structures dev (FinnDog) know about this log entry.", candidateTargetPool, candidatePiece instanceof SinglePoolElement ? ((SinglePoolElementAccessor) candidatePiece).mvs_getTemplate().left().get() : "not a SinglePoolElement class");
                                 }
                                 int tallestCandidateTargetFallbackPieceHeight = candidateTargetPoolOptional.map((c) -> c.getFallback().value().getMaxSize(context.structureTemplateManager())).orElse(0);
                                 int tallestCandidateTargetPoolPieceHeight = candidateTargetPoolOptional.map((c) -> c.getMaxSize(context.structureTemplateManager())).orElse(0);

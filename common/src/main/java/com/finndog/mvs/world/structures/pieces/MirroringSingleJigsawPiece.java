@@ -49,7 +49,7 @@ public class MirroringSingleJigsawPiece extends SinglePoolElement {
     protected final Mirror mirror;
 
     public MirroringSingleJigsawPiece(SinglePoolElement singleJigsawPiece, Mirror mirror) {
-        this(((SinglePoolElementAccessor)singleJigsawPiece).repurposedstructures_getTemplate(), ((SinglePoolElementAccessor)singleJigsawPiece).repurposedstructures_getProcessors(), singleJigsawPiece.getProjection(), mirror);
+        this(((SinglePoolElementAccessor)singleJigsawPiece).mvs_getTemplate(), ((SinglePoolElementAccessor)singleJigsawPiece).mvs_getProcessors(), singleJigsawPiece.getProjection(), mirror);
     }
 
     protected MirroringSingleJigsawPiece(Either<ResourceLocation, StructureTemplate> locationTemplateEither, Holder<StructureProcessorList> processorListSupplier, StructureTemplatePool.Projection placementBehaviour, Mirror mirror) {

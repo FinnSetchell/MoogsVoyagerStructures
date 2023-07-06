@@ -241,8 +241,8 @@ public final class GeneralUtils {
     public static List<InputStream> getAllFileStreams(ResourceManager resourceManager, ResourceLocation fileID) throws IOException {
         List<InputStream> fileStreams = new ArrayList<>();
 
-        FallbackResourceManager namespaceResourceManager = ((ReloadableResourceManagerImplAccessor) resourceManager).repurposedstructures_getNamespacedManagers().get(fileID.getNamespace());
-        List<FallbackResourceManager.PackEntry> allResourcePacks = ((NamespaceResourceManagerAccessor) namespaceResourceManager).repurposedstructures_getFallbacks();
+        FallbackResourceManager namespaceResourceManager = ((ReloadableResourceManagerImplAccessor) resourceManager).mvs_getNamespacedManagers().get(fileID.getNamespace());
+        List<FallbackResourceManager.PackEntry> allResourcePacks = ((NamespaceResourceManagerAccessor) namespaceResourceManager).mvs_getFallbacks();
 
         // Find the file with the given id and add its filestream to the list
         for (FallbackResourceManager.PackEntry packEntry : allResourcePacks) {

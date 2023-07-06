@@ -10,5 +10,5 @@ import java.util.List;
 @Mixin(ListPoolElement.class)
 public interface ListPoolElementAccessor {
     @Accessor("elements")
-    List<StructurePoolElement> repurposedstructures_getElements();
+    List<StructurePoolElement> mvs_getElements();
 }

@@ -21,16 +21,16 @@ public interface StructurePoolAccessor {
     }
 
     @Accessor("rawTemplates")
-    List<Pair<StructurePoolElement, Integer>> repurposedstructures_getRawTemplates();
+    List<Pair<StructurePoolElement, Integer>> mvs_getRawTemplates();
 
     @Mutable
     @Accessor("rawTemplates")
-    void repurposedstructures_setRawTemplates(List<Pair<StructurePoolElement, Integer>> elementCounts);
+    void mvs_setRawTemplates(List<Pair<StructurePoolElement, Integer>> elementCounts);
 
     @Accessor("templates")
-    ObjectArrayList<StructurePoolElement> repurposedstructures_getTemplates();
+    ObjectArrayList<StructurePoolElement> mvs_getTemplates();
 
     @Mutable
     @Accessor("templates")
-    void repurposedstructures_setTemplates(ObjectArrayList<StructurePoolElement> elements);
+    void mvs_setTemplates(ObjectArrayList<StructurePoolElement> elements);
 }

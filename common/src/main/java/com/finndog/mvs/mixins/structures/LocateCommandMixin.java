@@ -41,7 +41,7 @@ public class LocateCommandMixin {
             cancellable = true,
             require = 0
     )
-    private static void repurposedstructures_increaseLocateRadius(CommandSourceStack commandSourceStack,
+    private static void mvs_increaseLocateRadius(CommandSourceStack commandSourceStack,
                                                                   ResourceOrTagKeyArgument.Result<Structure> result,
                                                                   CallbackInfoReturnable<Integer> cir,
                                                                   Registry<Structure> registry,

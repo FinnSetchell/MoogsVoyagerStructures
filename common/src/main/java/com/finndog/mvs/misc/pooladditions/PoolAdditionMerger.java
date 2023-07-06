@@ -49,7 +49,7 @@ public final class PoolAdditionMerger {
      * Call this at mod init so we can subscribe our pool merging to run at server startup as that's when the dynamic registry exists.
      */
     public static void mergeAdditionPools(final ServerGoingToStartEvent event) {
-        ResourceManager resourceManager = ((StructureTemplateManagerAccessor) event.getServer().getStructureManager()).repurposedstructures_getResourceManager();
+        ResourceManager resourceManager = ((StructureTemplateManagerAccessor) event.getServer().getStructureManager()).mvs_getResourceManager();
         Map<ResourceLocation, List<JsonElement>> poolAdditionJSON = GeneralUtils.getAllDatapacksJSONElement(resourceManager, GSON, DATA_TYPE, FILE_SUFFIX_LENGTH);
         parsePoolsAndBeginMerger(poolAdditionJSON, event.getServer().registryAccess(),  event.getServer().getStructureManager());
     }
@@ -91,23 +91,23 @@ public final class PoolAdditionMerger {
      */
     private static void mergeIntoExistingPool(AdditionalStructureTemplatePool feedingPool, StructureTemplatePool gluttonyPool, StructureTemplateManager structureTemplateManager) {
         // Make new copies of lists as the originals are immutable lists and we want to make sure our changes only stays with this pool element
-        ObjectArrayList<StructurePoolElement> elements = new ObjectArrayList<>(((StructurePoolAccessor) gluttonyPool).repurposedstructures_getTemplates());
-        List<Pair<StructurePoolElement, Integer>> elementCounts = new ArrayList<>(((StructurePoolAccessor) gluttonyPool).repurposedstructures_getRawTemplates());
+        ObjectArrayList<StructurePoolElement> elements = new ObjectArrayList<>(((StructurePoolAccessor) gluttonyPool).mvs_getTemplates());
+        List<Pair<StructurePoolElement, Integer>> elementCounts = new ArrayList<>(((StructurePoolAccessor) gluttonyPool).mvs_getRawTemplates());
 
-        elements.addAll(((StructurePoolAccessor) feedingPool).repurposedstructures_getTemplates());
-        elementCounts.addAll(((StructurePoolAccessor) feedingPool).repurposedstructures_getRawTemplates());
+        elements.addAll(((StructurePoolAccessor) feedingPool).mvs_getTemplates());
+        elementCounts.addAll(((StructurePoolAccessor) feedingPool).mvs_getRawTemplates());
 
         // Helps people know if they typoed their merger pool's nbt file paths
         for(StructurePoolElement element : elements) {
             if(element instanceof SinglePoolElement singlePoolElement) {
-                Optional<ResourceLocation> pieceRL = ((SinglePoolElementAccessor)singlePoolElement).repurposedstructures_getTemplate().left();
+                Optional<ResourceLocation> pieceRL = ((SinglePoolElementAccessor)singlePoolElement).mvs_getTemplate().left();
                 if(pieceRL.isEmpty()) continue;
                 checkIfPieceExists(feedingPool, structureTemplateManager, pieceRL.get());
             }
             else if(element instanceof ListPoolElement listPoolElement) {
-                for(StructurePoolElement listElement : ((ListPoolElementAccessor)listPoolElement).repurposedstructures_getElements()) {
+                for(StructurePoolElement listElement : ((ListPoolElementAccessor)listPoolElement).mvs_getElements()) {
                     if(listElement instanceof SinglePoolElement singlePoolElement) {
-                        Optional<ResourceLocation> pieceRL = ((SinglePoolElementAccessor) singlePoolElement).repurposedstructures_getTemplate().left();
+                        Optional<ResourceLocation> pieceRL = ((SinglePoolElementAccessor) singlePoolElement).mvs_getTemplate().left();
                         if (pieceRL.isEmpty()) continue;
                         checkIfPieceExists(feedingPool, structureTemplateManager, pieceRL.get());
                     }
@@ -116,14 +116,14 @@ public final class PoolAdditionMerger {
         }
 
 
-        ((StructurePoolAccessor) gluttonyPool).repurposedstructures_setTemplates(elements);
-        ((StructurePoolAccessor) gluttonyPool).repurposedstructures_setRawTemplates(elementCounts);
+        ((StructurePoolAccessor) gluttonyPool).mvs_setTemplates(elements);
+        ((StructurePoolAccessor) gluttonyPool).mvs_setRawTemplates(elementCounts);
     }
 
     private static void checkIfPieceExists(AdditionalStructureTemplatePool feedingPool, StructureTemplateManager structureTemplateManager, ResourceLocation pieceRL) {
         ResourceLocation resourcelocation = new ResourceLocation(pieceRL.getNamespace(), "structures/" + pieceRL.getPath() + ".nbt");
         try {
-            InputStream inputstream = ((StructureTemplateManagerAccessor) structureTemplateManager).repurposedstructures_getResourceManager().open(resourcelocation);
+            InputStream inputstream = ((StructureTemplateManagerAccessor) structureTemplateManager).mvs_getResourceManager().open(resourcelocation);
             if (inputstream.available() == 0 || inputstream.read(new byte[1]) == -1) {
                 MVSCommon.LOGGER.error("(Moog's Voyager Structures POOL MERGER) Found an entry in {} that points to the non-existent nbt file called {}", feedingPool.name, pieceRL);
             }
