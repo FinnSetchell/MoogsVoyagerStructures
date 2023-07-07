@@ -159,12 +159,7 @@ public final class PoolAdditionMerger {
         protected final ResourceLocation name;
 
         public AdditionalStructureTemplatePool(ResourceLocation name, Holder<StructureTemplatePool> fallback, List<ExpandedPoolEntry> rawTemplatesWithConditions) {
-            super(fallback, rawTemplatesWithConditions.stream().filter(triple -> {
-                if(triple.condition().isPresent()) {
-                    MVSCommon.LOGGER.error("Moog's Voyager Structures Error: Found {} entry has a condition that does not exist. Extra info: {}", name, fallback);
-                }
-                return true;
-            }).map(triple -> Pair.of(triple.poolElement(), triple.weight())).collect(Collectors.toList()));
+            super(fallback, rawTemplatesWithConditions.stream().map(triple -> Pair.of(triple.poolElement(), triple.weight())).collect(Collectors.toList()));
             this.rawTemplatesWithConditions = rawTemplatesWithConditions;
             this.name = name;
         }
