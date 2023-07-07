@@ -1,7 +1,7 @@
 {
     "schemaVersion": 1,
     "id": "mvs",
-    "version": "${version}",
+    "version": "${version}-fabric",
     "name": "Moog's Voyager Structures",
     "description": "80+ structures made with vanilla blocks and entities bringing life to your world! Discover loot, enemies, & villagers along the way!",
     "authors": [
@@ -20,12 +20,13 @@
         ]
     },
     "mixins": [
-        "mvs-fabric.mixins.json"
+        "mvs-fabric.mixins.json",
+        "mvs-common.mixins.json"
     ],
     "depends": {
         "fabricloader": ">=0.14",
-        "fabric": "*",
-        "minecraft": "1.20",
+        "fabric": ">=0.83.0",
+        "minecraft": ">=1.20",
         "java": ">=17"
     },
     "suggests": {

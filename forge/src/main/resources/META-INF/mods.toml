@@ -4,7 +4,7 @@ license = "GNU Lesser General Public License v3.0" # Review your options at http
 #issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
 [[mods]] #mandatory
 modId = "mvs" #mandatory
-version = "4.0-1.20.0" #mandatory
+version = "${version}-forge" #mandatory
 displayName = "Moog's Voyager Structures" #mandatory
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional (see https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/)
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional (displayed in the mod UI)
