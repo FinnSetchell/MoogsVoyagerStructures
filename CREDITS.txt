@@ -16,7 +16,7 @@ RS: https://github.com/TelepathicGrunt/RepurposedStructures/tree/1.20-Arch
 RS License: https://github.com/TelepathicGrunt/RepurposedStructures/blob/1.20-Arch/LICENSE
 
 Builders:
-A huge thanks to my past and present (paid) builders listed below: (Discord usernames)
+A huge thanks to my past and present builders listed below: (Discord usernames)
 - .olver.
 - tfa120
 - beeb0i

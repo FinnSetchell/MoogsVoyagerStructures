@@ -138,7 +138,7 @@ public class PieceLimitedJigsawManager {
                                     -------------------------------------------------------------------
                                     Moog's Voyager Structures: Failed to create valid structure with all required pieces starting from this pool file: {}. Required pieces failed to generate the required amount are: {}
                                       This can happen if a structure has a required piece but the structure size is set too low.
-                                      However, this is most likely caused by a structure unable to spawn properly due to hitting the world's min y or max y build thresholds or a broken RS datapack.
+                                      However, this is most likely caused by a structure unable to spawn properly due to hitting the world's min y or max y build thresholds or a broken MVS datapack.
                                       Try teleporting to: {} and see if the structure generated fine with the required structure piece or if it is indeed missing it.
                                       Please report the issue to Moog's Voyager Structures's dev with latest.log file if the structure is not cut off by world min/max y build thresholds.
                                             
