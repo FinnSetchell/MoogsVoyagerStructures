@@ -1,0 +1,18 @@
+{
+  "structures":[
+    {
+      "structure": "mvs:nature/small_diorite_rock",
+      "weight": 1
+    }
+  ],
+  "placement": {
+
+    "type": "mvs:advanced_random_spread",
+
+    "salt": 100923845,
+
+    "spacing": 39,
+
+    "separation": 26
+  }
+}
