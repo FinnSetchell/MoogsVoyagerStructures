@@ -28,6 +28,25 @@
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
       }
+    },
+    {
+      // How likely out of all the element for this one to be chosen.
+      "weight": 1,
+      "element": {
+
+        // The Identifier of the nbt file itself of the structure piece.
+        // Note, this will automatically check into the 'structures' folder for the nbt file.
+        // The final path would look like 'resources/data/structure_tutorial/structures/run_down_house_left_side.nbt'
+        "location": "mvs:nature/small_stone_rock_2",
+
+        // Specifies to run this processor list json for the above nbt file when placing it in the world
+        // Processor lists are great for randomizing blocks and making structures appear more natural!
+        // Note, this will automatically check into the 'worldgen/processor_list' folder for the json file.
+        // The final path would look like 'resources/data/structure_tutorial/worldgen/processor_list/randomize_stonebrick.json'
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
     }
   ]
 }
