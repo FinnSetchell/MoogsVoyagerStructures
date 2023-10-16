@@ -9,10 +9,10 @@
 
     "type": "mvs:advanced_random_spread",
 
-    "salt": 283394585,
+    "salt": 100928374,
 
-    "spacing": 24,
+    "spacing": 28,
 
-    "separation": 28
+    "separation": 24
   }
 }
