@@ -1,7 +1,7 @@
 {
   "structures":[
     {
-      "structure": "mvs:dark_oak_trunk",
+      "structure": "mvs:dead_tree/dark_oak_trunk",
       "weight": 1
     }
   ],

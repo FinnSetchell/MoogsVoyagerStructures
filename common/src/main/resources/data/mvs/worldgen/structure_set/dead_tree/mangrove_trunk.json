@@ -1,7 +1,7 @@
 {
   "structures":[
     {
-      "structure": "mvs:mangrove_trunk",
+      "structure": "mvs:dead_tree/mangrove_trunk",
       "weight": 1
     }
   ],

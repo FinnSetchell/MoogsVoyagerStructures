@@ -1,7 +1,7 @@
 {
   "structures":[
     {
-      "structure": "mvs:spruce",
+      "structure": "mvs:dead_tree/spruce",
       "weight": 1
     }
   ],

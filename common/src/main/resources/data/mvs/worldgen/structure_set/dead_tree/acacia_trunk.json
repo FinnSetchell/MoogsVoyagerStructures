@@ -1,7 +1,7 @@
 {
   "structures":[
     {
-      "structure": "mvs:acacia_trunk",
+      "structure": "mvs:dead_tree/acacia_trunk",
       "weight": 1
     }
   ],

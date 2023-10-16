@@ -1,7 +1,7 @@
 {
   "structures":[
     {
-      "structure": "mvs:jungle",
+      "structure": "mvs:dead_tree/jungle",
       "weight": 1
     }
   ],
