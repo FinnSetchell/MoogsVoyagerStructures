@@ -17,6 +17,20 @@
 
         "element_type": "minecraft:single_pool_element"
       }
+    },
+    {
+
+      "weight": 1,
+      "element": {
+
+        "location": "mvs:dead_tree/birch_trunk",
+
+        "processors": "minecraft:empty",
+
+        "projection": "rigid",
+
+        "element_type": "minecraft:single_pool_element"
+      }
     }
   ]
 }
