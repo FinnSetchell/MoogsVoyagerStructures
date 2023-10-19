@@ -72,7 +72,7 @@ public final class PoolAdditionMerger {
                 catch (Exception e) {
                     MVSCommon.LOGGER.error("""
 
-                            Moog's End Structures: Pool Addition json failed to be parsed.
+                            Moog's Voyager Structures: Pool Addition json failed to be parsed.
                             This is usually due to using a mod compat datapack without the other mod being on.
                             Entry failed to be resolved: %s
                             Registry being used: %s
@@ -121,12 +121,12 @@ public final class PoolAdditionMerger {
         try {
             InputStream inputstream = ((StructureTemplateManagerAccessor) structureTemplateManager).mvs_getResourceManager().open(resourcelocation);
             if (inputstream.available() == 0 || inputstream.read(new byte[1]) == -1) {
-                MVSCommon.LOGGER.error("(Moog's End Structures POOL MERGER) Found an entry in {} that points to the non-existent nbt file called {}", feedingPool.getName(), pieceRL);
+                MVSCommon.LOGGER.error("(Moog's Voyager Structures POOL MERGER) Found an entry in {} that points to the non-existent nbt file called {}", feedingPool.getName(), pieceRL);
             }
             inputstream.close();
         }
         catch (Throwable filenotfoundexception) {
-            MVSCommon.LOGGER.error("(Moog's End Structures POOL MERGER) Found an entry in {} that points to the non-existent nbt file called {}", feedingPool.getName(), pieceRL);
+            MVSCommon.LOGGER.error("(Moog's Voyager Structures POOL MERGER) Found an entry in {} that points to the non-existent nbt file called {}", feedingPool.getName(), pieceRL);
         }
     }
 
@@ -134,7 +134,7 @@ public final class PoolAdditionMerger {
      * Log out the pool that failed to be parsed and what the error is.
      */
     private static void logBadData(ResourceLocation poolPath, String mvssageString) {
-        MVSCommon.LOGGER.error("(Moog's End Structures POOL MERGER) Failed to parse {} additions file. Error is: {}", poolPath, mvssageString);
+        MVSCommon.LOGGER.error("(Moog's Voyager Structures POOL MERGER) Failed to parse {} additions file. Error is: {}", poolPath, mvssageString);
     }
     private static class AdditionalStructureTemplatePool extends StructureTemplatePool {
         private static final Codec<ExpandedPoolEntry> EXPANDED_POOL_ENTRY_CODEC = RecordCodecBuilder.create(instance -> instance.group(

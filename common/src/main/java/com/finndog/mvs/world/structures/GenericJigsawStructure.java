@@ -106,7 +106,7 @@ public class GenericJigsawStructure extends Structure {
 
         if (maxYAllowed.isPresent() && minYAllowed.isPresent() && maxYAllowed.get() < minYAllowed.get()) {
             throw new RuntimeException("""
-                Moog's End Structures: maxYAllowed cannot be less than minYAllowed.
+                Moog's Voyager Structures: maxYAllowed cannot be less than minYAllowed.
                 Please correct this error as there's no way to spawn this structure properly
                     Structure pool of problematic structure: %s
             """.formatted(startPool.value()));

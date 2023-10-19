@@ -271,7 +271,7 @@ public final class GeneralUtils {
                         }
                         else {
                             MVSCommon.LOGGER.error(
-                                    "(Moog's End Structures {} MERGER) Couldn't load data file {} from {} as it's null or empty",
+                                    "(Moog's Voyager Structures {} MERGER) Couldn't load data file {} from {} as it's null or empty",
                                     dataType,
                                     fileID,
                                     fileIDWithExtension);
@@ -281,7 +281,7 @@ public final class GeneralUtils {
             }
             catch (IllegalArgumentException | IOException | JsonParseException exception) {
                 MVSCommon.LOGGER.error(
-                        "(Moog's End Structures {} MERGER) Couldn't parse data file {} from {}",
+                        "(Moog's Voyager Structures {} MERGER) Couldn't parse data file {} from {}",
                         dataType,
                         fileID,
                         fileIDWithExtension,
