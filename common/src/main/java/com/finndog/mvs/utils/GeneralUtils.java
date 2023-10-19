@@ -7,12 +7,17 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.core.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.FrontAndTop;
+import net.minecraft.core.Vec3i;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.FallbackResourceManager;
+import net.minecraft.server.packs.resources.IoSupplier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.Mth;
@@ -99,7 +104,7 @@ public final class GeneralUtils {
 
     public static ItemStack enchantRandomly(RandomSource random, ItemStack itemToEnchant, float chance) {
         if(random.nextFloat() < chance) {
-            List<Enchantment> list = Registry.ENCHANTMENT.stream().filter(Enchantment::isDiscoverable)
+            List<Enchantment> list = BuiltInRegistries.ENCHANTMENT.stream().filter(Enchantment::isDiscoverable)
                     .filter((enchantmentToCheck) -> enchantmentToCheck.canEnchant(itemToEnchant)).toList();
             if(!list.isEmpty()) {
                 Enchantment enchantment = list.get(random.nextInt(list.size()));
@@ -178,7 +183,7 @@ public final class GeneralUtils {
     }
 
     private static boolean isReplaceableByStructures(BlockState blockState) {
-        return blockState.isAir() || !blockState.getMaterial().isLiquid() /* FIXME || blockState.is(BlockTags.REPLACEABLE_BY_TREES)*/;
+        return blockState.isAir() || !blockState.getMaterial().isLiquid() || blockState.getMaterial().isReplaceable();
     }
 
     //////////////////////////////////////////////
@@ -229,7 +234,11 @@ public final class GeneralUtils {
         for (FallbackResourceManager.PackEntry packEntry : allResourcePacks) {
             PackResources resourcePack = packEntry.resources();
             if (resourcePack != null) {
-                fileStreams.add(resourcePack.getResource(PackType.SERVER_DATA, fileID));
+                IoSupplier<InputStream> IoSupplier = resourcePack.getResource(PackType.SERVER_DATA, fileID);
+                if (IoSupplier != null) {
+                    InputStream inputStream = IoSupplier.get();
+                    fileStreams.add(inputStream);
+                }
             }
         }
 
@@ -271,7 +280,7 @@ public final class GeneralUtils {
                         }
                         else {
                             MVSCommon.LOGGER.error(
-                                    "(Moog's End Structures {} MERGER) Couldn't load data file {} from {} as it's null or empty",
+                                    "(Moog's Voyager Structures {} MERGER) Couldn't load data file {} from {} as it's null or empty",
                                     dataType,
                                     fileID,
                                     fileIDWithExtension);
@@ -281,7 +290,7 @@ public final class GeneralUtils {
             }
             catch (IllegalArgumentException | IOException | JsonParseException exception) {
                 MVSCommon.LOGGER.error(
-                        "(Moog's End Structures {} MERGER) Couldn't parse data file {} from {}",
+                        "(Moog's Voyager Structures {} MERGER) Couldn't parse data file {} from {}",
                         dataType,
                         fileID,
                         fileIDWithExtension,

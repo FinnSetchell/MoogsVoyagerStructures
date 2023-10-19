@@ -30,7 +30,7 @@ public class BoxOctree {
 
     private void subdivide() {
         if(!childrenOctants.isEmpty()) {
-            throw new UnsupportedOperationException("Moog's End Structures - Tried to subdivide when there are already children octants.");
+            throw new UnsupportedOperationException("Moog's Voyager Structures - Tried to subdivide when there are already children octants.");
         }
 
         int halfXSize = size.getX()/2;

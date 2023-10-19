@@ -19,12 +19,12 @@ Join our community here: https://discord.gg/S5nffJbuvA
 [[dependencies.mes]] #optional
 modId="forge"
 mandatory=true
-versionRange="[41,)"
+versionRange="[44.0.18,)"
 ordering = "NONE" # The order that this dependency should load in relation to your mod, required to be either 'BEFORE' or 'AFTER' if the dependency is not mandatory
 side = "BOTH" # Side this dependency is applied on - 'BOTH', 'CLIENT' or 'SERVER'
 [[dependencies.mes]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.19,1.19.2]"
+versionRange="[1.19.3,1.20)"
 ordering = "NONE"
 side = "BOTH"
