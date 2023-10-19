@@ -3,15 +3,12 @@ package com.finndog.mvs.world.structures.placements;
 import com.finndog.mvs.modinit.MVSStructurePlacementType;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderSet;
-import net.minecraft.core.RegistryCodecs;
-import net.minecraft.core.Vec3i;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.*;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.chunk.ChunkGeneratorStructureState;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
+import net.minecraft.world.level.levelgen.RandomState;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.structure.StructureSet;
 import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadStructurePlacement;
@@ -60,7 +57,7 @@ public class AdvancedRandomSpread extends RandomSpreadStructurePlacement {
 
         if (spacing <= separation) {
             throw new RuntimeException("""
-                Moog's Voyager Structures: Spacing cannot be less or equal to separation.
+                Repurposed Structures: Spacing cannot be less or equal to separation.
                 Please correct this error as there's no way to spawn this structure properly
                     Spacing: %s
                     Separation: %s.
@@ -92,12 +89,12 @@ public class AdvancedRandomSpread extends RandomSpreadStructurePlacement {
     }
 
     @Override
-    public boolean isStructureChunk(ChunkGeneratorStructureState chunkGeneratorStructureState, int i, int j) {
-        if (!super.isStructureChunk(chunkGeneratorStructureState, i, j)) {
+    public boolean isStructureChunk(ChunkGenerator chunkGenerator, RandomState randomState, long l, int i, int j) {
+        if (!super.isStructureChunk(chunkGenerator, randomState, l, i, j)) {
             return false;
         }
         else {
-            return this.superExclusionZone.isEmpty() || !this.superExclusionZone.get().isPlacementForbidden(chunkGeneratorStructureState, i, j);
+            return this.superExclusionZone.isEmpty() || !this.superExclusionZone.get().isPlacementForbidden(chunkGenerator, randomState, l, i, j);
         }
     }
 
@@ -114,7 +111,7 @@ public class AdvancedRandomSpread extends RandomSpreadStructurePlacement {
     }
 
     @Override
-    protected boolean isPlacementChunk(ChunkGeneratorStructureState chunkGeneratorStructureState, int x, int z) {
+    protected boolean isPlacementChunk(ChunkGenerator chunkGenerator, RandomState randomState, long l, int x, int z) {
         if (minDistanceFromWorldOrigin.isPresent()) {
             int xBlockPos = x * 16;
             int zBlockPos = z * 16;
@@ -125,7 +122,7 @@ public class AdvancedRandomSpread extends RandomSpreadStructurePlacement {
             }
         }
 
-        ChunkPos chunkpos = this.getPotentialStructureChunk(chunkGeneratorStructureState.getLevelSeed(), x, z);
+        ChunkPos chunkpos = this.getPotentialStructureChunk(l, x, z);
         return chunkpos.x == x && chunkpos.z == z;
     }
 
@@ -136,14 +133,14 @@ public class AdvancedRandomSpread extends RandomSpreadStructurePlacement {
 
     public record SuperExclusionZone(HolderSet<StructureSet> otherSet, int chunkCount, Optional<Integer> allowedChunkCount) {
         public static final Codec<SuperExclusionZone> CODEC = RecordCodecBuilder.create(builder -> builder.group(
-                RegistryCodecs.homogeneousList(Registries.STRUCTURE_SET, StructureSet.DIRECT_CODEC).fieldOf("other_set").forGetter(SuperExclusionZone::otherSet),
+                RegistryCodecs.homogeneousList(Registry.STRUCTURE_SET_REGISTRY, StructureSet.DIRECT_CODEC).fieldOf("other_set").forGetter(SuperExclusionZone::otherSet),
                 Codec.intRange(1, Integer.MAX_VALUE).fieldOf("chunk_count").forGetter(SuperExclusionZone::chunkCount),
                 Codec.intRange(1, Integer.MAX_VALUE).optionalFieldOf("allowed_chunk_count").forGetter(SuperExclusionZone::allowedChunkCount)
         ).apply(builder, SuperExclusionZone::new));
 
-        boolean isPlacementForbidden(ChunkGeneratorStructureState chunkGeneratorStructureState, int l, int j) {
+        boolean isPlacementForbidden(ChunkGenerator chunkGenerator, RandomState randomState, long l, int i, int j) {
             for (Holder<StructureSet> holder : this.otherSet) {
-                if (chunkGeneratorStructureState.hasStructureChunkInRange(holder, l, j, this.chunkCount)) {
+                if (chunkGenerator.hasStructureChunkInRange(holder, randomState, l,  i, j, this.chunkCount)) {
                     return true;
                 }
             }
@@ -151,7 +148,7 @@ public class AdvancedRandomSpread extends RandomSpreadStructurePlacement {
             if (this.allowedChunkCount.isPresent() && this.allowedChunkCount.get() > this.chunkCount) {
                 boolean isAnyInRange = false;
                 for (Holder<StructureSet> holder : this.otherSet) {
-                    if (chunkGeneratorStructureState.hasStructureChunkInRange(holder, l, j, this.allowedChunkCount.get())) {
+                    if (chunkGenerator.hasStructureChunkInRange(holder, randomState, l,  i, j, this.allowedChunkCount.get())) {
                         isAnyInRange = true;
                     }
                 }
@@ -159,7 +156,6 @@ public class AdvancedRandomSpread extends RandomSpreadStructurePlacement {
                     return false;
                 }
             }
-
             return false;
         }
     }

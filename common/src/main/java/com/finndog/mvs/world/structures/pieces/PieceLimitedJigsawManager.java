@@ -9,12 +9,7 @@ import com.finndog.mvs.utils.GeneralUtils;
 import com.finndog.mvs.world.structures.GenericJigsawStructure;
 import com.google.common.collect.Queues;
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
-import net.minecraft.core.QuartPos;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.*;
 import net.minecraft.data.worldgen.Pools;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
@@ -29,24 +24,12 @@ import net.minecraft.world.level.levelgen.structure.PoolElementStructurePiece;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
-import net.minecraft.world.level.levelgen.structure.pools.EmptyPoolElement;
-import net.minecraft.world.level.levelgen.structure.pools.JigsawJunction;
-import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
-import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
-import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
+import net.minecraft.world.level.levelgen.structure.pools.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.phys.AABB;
 import org.apache.commons.lang3.mutable.MutableObject;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.function.BiConsumer;
 
 /**
@@ -75,7 +58,7 @@ public class PieceLimitedJigsawManager {
             BiConsumer<StructurePiecesBuilder, List<PoolElementStructurePiece>> structureBoundsAdjuster
     ) {
         // Get jigsaw pool registry
-        Registry<StructureTemplatePool> jigsawPoolRegistry = context.registryAccess().registryOrThrow(Registries.TEMPLATE_POOL);
+        Registry<StructureTemplatePool> jigsawPoolRegistry = context.registryAccess().registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY);
 
         // Get a random orientation for the starting piece
         WorldgenRandom random = new WorldgenRandom(new LegacyRandomSource(0L));
@@ -85,8 +68,8 @@ public class PieceLimitedJigsawManager {
         // Get starting pool
         StructureTemplatePool startPool = startPoolHolder.value();
         if(startPool.size() == 0) {
-            MVSCommon.LOGGER.warn("Moog's Voyager Structures: Empty or nonexistent start pool in structure: {}  Crash is imminent", structureID);
-            throw new RuntimeException("Moog's Voyager Structures: Empty or nonexistent start pool in structure: " + structureID + " Crash is imminent");
+            MVSCommon.LOGGER.warn("Moog's End Structures: Empty or nonexistent start pool in structure: {}  Crash is imminent", structureID);
+            throw new RuntimeException("Moog's End Structures: Empty or nonexistent start pool in structure: " + structureID + " Crash is imminent");
         }
 
         // Grab a random starting piece from the start pool. This is just the piece design itself, without rotation or position information.
@@ -136,11 +119,11 @@ public class PieceLimitedJigsawManager {
                             """
                                             
                                     -------------------------------------------------------------------
-                                    Moog's Voyager Structures: Failed to create valid structure with all required pieces starting from this pool file: {}. Required pieces failed to generate the required amount are: {}
+                                    Moog's End Structures: Failed to create valid structure with all required pieces starting from this pool file: {}. Required pieces failed to generate the required amount are: {}
                                       This can happen if a structure has a required piece but the structure size is set too low.
-                                      However, this is most likely caused by a structure unable to spawn properly due to hitting the world's min y or max y build thresholds or a broken MVS datapack.
+                                      However, this is most likely caused by a structure unable to spawn properly due to hitting the world's min y or max y build thresholds or a broken mvs datapack.
                                       Try teleporting to: {} and see if the structure generated fine with the required structure piece or if it is indeed missing it.
-                                      Please report the issue to Moog's Voyager Structures's dev with latest.log file if the structure is not cut off by world min/max y build thresholds.
+                                      Please report the issue to Moog's End Structures's dev with latest.log file if the structure is not cut off by world min/max y build thresholds.
                                             
                                     """,
                             jigsawPoolRegistry.getKey(startPool), Arrays.toString(currentPieceCounter.entrySet().stream().filter(entry -> entry.getValue() > 0).toArray()), new BlockPos(pieceCenterX, pieceCenterY, pieceCenterZ));
@@ -275,22 +258,22 @@ public class PieceLimitedJigsawManager {
 
             for (StructureTemplate.StructureBlockInfo jigsawBlock : pieceJigsawBlocks) {
                 // Gather jigsaw block information
-                Direction direction = JigsawBlock.getFrontFacing(jigsawBlock.state());
-                BlockPos jigsawBlockPos = jigsawBlock.pos();
+                Direction direction = JigsawBlock.getFrontFacing(jigsawBlock.state);
+                BlockPos jigsawBlockPos = jigsawBlock.pos;
                 BlockPos jigsawBlockTargetPos = jigsawBlockPos.relative(direction);
 
                 // Get the jigsaw block's piece pool
-                ResourceLocation jigsawBlockPool = new ResourceLocation(jigsawBlock.nbt().getString("pool"));
+                ResourceLocation jigsawBlockPool = new ResourceLocation(jigsawBlock.nbt.getString("pool"));
                 Optional<StructureTemplatePool> poolOptional = this.poolRegistry.getOptional(jigsawBlockPool);
 
                 // Only continue if we are using the jigsaw pattern registry and if it is not empty
                 if (!(poolOptional.isPresent() && (poolOptional.get().size() != 0 || Objects.equals(jigsawBlockPool, Pools.EMPTY.location())))) {
-                    MVSCommon.LOGGER.warn("Moog's Voyager Structures: Empty or nonexistent pool: {} which is being called from {}", jigsawBlockPool, pieceBlueprint instanceof SinglePoolElement ? ((SinglePoolElementAccessor) pieceBlueprint).mvs_getTemplate().left().get() : "not a SinglePoolElement class");
+                    MVSCommon.LOGGER.warn("Moog's End Structures: Empty or nonexistent pool: {} which is being called from {}", jigsawBlockPool, pieceBlueprint instanceof SinglePoolElement ? ((SinglePoolElementAccessor) pieceBlueprint).mvs_getTemplate().left().get() : "not a SinglePoolElement class");
                     continue;
                 }
 
                 // Get the jigsaw block's fallback pool (which is a part of the pool's JSON)
-                Holder<StructureTemplatePool> jigsawBlockFallback = poolOptional.get().getFallback();
+                ResourceLocation fallBackPoolRL = poolOptional.get().getFallback();
 
                 // Adjustments for if the target block position is inside the current piece
                 boolean isTargetInsideCurrentPiece = pieceBoundingBox.isInside(jigsawBlockTargetPos);
@@ -315,13 +298,13 @@ public class PieceLimitedJigsawManager {
                 }
 
                 // Process the fallback pieces in the event none of the pool pieces work
+                StructureTemplatePool jigsawBlockFallback = poolRegistry.get(fallBackPoolRL);
+
                 boolean ignoreBounds = false;
                 if(poolsThatIgnoreBounds != null) {
-                    ResourceLocation fallBackPoolRL = poolRegistry.getKey(jigsawBlockFallback.value());
                     ignoreBounds = poolsThatIgnoreBounds.contains(fallBackPoolRL);
                 }
-                this.processList(new ArrayList<>(((StructurePoolAccessor)jigsawBlockFallback.value()).mvs_getRawTemplates()), doBoundaryAdjustments, jigsawBlock, jigsawBlockTargetPos, pieceMinY, jigsawBlockPos, octreeToUse, piece, depth, targetPieceBoundsTop, heightLimitView, ignoreBounds);
-            }
+                this.processList(new ArrayList<>(((StructurePoolAccessor)jigsawBlockFallback).mvs_getRawTemplates()), doBoundaryAdjustments, jigsawBlock, jigsawBlockTargetPos, pieceMinY, jigsawBlockPos, octreeToUse, piece, depth, targetPieceBoundsTop, heightLimitView, ignoreBounds);            }
         }
 
         /**
@@ -428,16 +411,16 @@ public class PieceLimitedJigsawManager {
                     int candidateHeightAdjustments;
                     if (doBoundaryAdjustments && tempCandidateBoundingBox.getYSpan() <= 16) {
                         candidateHeightAdjustments = candidateJigsawBlocks.stream().mapToInt((pieceCandidateJigsawBlock) -> {
-                            if (!tempCandidateBoundingBox.isInside(pieceCandidateJigsawBlock.pos().relative(JigsawBlock.getFrontFacing(pieceCandidateJigsawBlock.state())))) {
+                            if (!tempCandidateBoundingBox.isInside(pieceCandidateJigsawBlock.pos.relative(JigsawBlock.getFrontFacing(pieceCandidateJigsawBlock.state)))) {
                                 return 0;
                             }
                             else {
-                                ResourceLocation candidateTargetPool = new ResourceLocation(pieceCandidateJigsawBlock.nbt().getString("pool"));
+                                ResourceLocation candidateTargetPool = new ResourceLocation(pieceCandidateJigsawBlock.nbt.getString("pool"));
                                 Optional<StructureTemplatePool> candidateTargetPoolOptional = this.poolRegistry.getOptional(candidateTargetPool);
                                 if (candidateTargetPoolOptional.isEmpty()) {
-                                    MVSCommon.LOGGER.warn("Moog's Voyager Structures: Non-existent child pool attempted to be spawned: {} which is being called from {}. Let Moog's Voyager Structures dev (FinnDog) know about this log entry.", candidateTargetPool, candidatePiece instanceof SinglePoolElement ? ((SinglePoolElementAccessor) candidatePiece).mvs_getTemplate().left().get() : "not a SinglePoolElement class");
+                                    MVSCommon.LOGGER.warn("Moog's End Structures: Non-existent child pool attempted to be spawned: {} which is being called from {}. Let Moog's Voyager Structures dev (FinnDog) know about this log entry.", candidateTargetPool, candidatePiece instanceof SinglePoolElement ? ((SinglePoolElementAccessor) candidatePiece).mvs_getTemplate().left().get() : "not a SinglePoolElement class");
                                 }
-                                int tallestCandidateTargetFallbackPieceHeight = candidateTargetPoolOptional.map((c) -> c.getFallback().value().getMaxSize(context.structureTemplateManager())).orElse(0);
+                                int tallestCandidateTargetFallbackPieceHeight = candidateTargetPoolOptional.map((c) -> this.poolRegistry.get(c.getFallback()).getMaxSize(context.structureTemplateManager())).orElse(0);
                                 int tallestCandidateTargetPoolPieceHeight = candidateTargetPoolOptional.map((c) -> c.getMaxSize(context.structureTemplateManager())).orElse(0);
                                 return Math.max(tallestCandidateTargetPoolPieceHeight, tallestCandidateTargetFallbackPieceHeight);
                             }
@@ -450,7 +433,7 @@ public class PieceLimitedJigsawManager {
                     // Check for each of the candidate's jigsaw blocks for a match
                     for (StructureTemplate.StructureBlockInfo candidateJigsawBlock : candidateJigsawBlocks) {
                         if (GeneralUtils.canJigsawsAttach(jigsawBlock, candidateJigsawBlock)) {
-                            BlockPos candidateJigsawBlockPos = candidateJigsawBlock.pos();
+                            BlockPos candidateJigsawBlockPos = candidateJigsawBlock.pos;
                             BlockPos candidateJigsawBlockRelativePos = new BlockPos(jigsawBlockTargetPos.getX() - candidateJigsawBlockPos.getX(), jigsawBlockTargetPos.getY() - candidateJigsawBlockPos.getY(), jigsawBlockTargetPos.getZ() - candidateJigsawBlockPos.getZ());
 
                             // Get the bounding box for the piece, offset by the relative position difference
@@ -464,7 +447,7 @@ public class PieceLimitedJigsawManager {
                             // Determine how much the candidate jigsaw block is off in the y direction.
                             // This will be needed to offset the candidate piece so that the jigsaw blocks line up properly.
                             int candidateJigsawBlockRelativeY = candidateJigsawBlockPos.getY();
-                            int candidateJigsawYOffsetNeeded = jigsawBlockRelativeY - candidateJigsawBlockRelativeY + JigsawBlock.getFrontFacing(jigsawBlock.state()).getStepY();
+                            int candidateJigsawYOffsetNeeded = jigsawBlockRelativeY - candidateJigsawBlockRelativeY + JigsawBlock.getFrontFacing(jigsawBlock.state).getStepY();
 
                             // Determine how much we need to offset the candidate piece itself in order to have the jigsaw blocks aligned.
                             // Depends on if the placement of both pieces is rigid or not

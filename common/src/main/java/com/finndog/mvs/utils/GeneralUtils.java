@@ -7,29 +7,19 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.FrontAndTop;
-import net.minecraft.core.Vec3i;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.FallbackResourceManager;
-import net.minecraft.server.packs.resources.IoSupplier;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelHeightAccessor;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.NoiseColumn;
-import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.JigsawBlock;
@@ -40,20 +30,11 @@ import net.minecraft.world.level.levelgen.RandomState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
-import net.minecraft.world.level.storage.loot.LootDataType;
 import net.minecraft.world.level.storage.loot.LootTable;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -104,7 +85,7 @@ public final class GeneralUtils {
 
                 // Exit early if facing open space opposite of wall
                 mutable.move(facing.getOpposite(), 2);
-                if(!blockView.getBlockState(mutable).isSolid()) {
+                if(blockView.getBlockState(mutable).getMaterial().isSolid()) {
                     break;
                 }
             }
@@ -118,7 +99,7 @@ public final class GeneralUtils {
 
     public static ItemStack enchantRandomly(RandomSource random, ItemStack itemToEnchant, float chance) {
         if(random.nextFloat() < chance) {
-            List<Enchantment> list = BuiltInRegistries.ENCHANTMENT.stream().filter(Enchantment::isDiscoverable)
+            List<Enchantment> list = Registry.ENCHANTMENT.stream().filter(Enchantment::isDiscoverable)
                     .filter((enchantmentToCheck) -> enchantmentToCheck.canEnchant(itemToEnchant)).toList();
             if(!list.isEmpty()) {
                 Enchantment enchantment = list.get(random.nextInt(list.size()));
@@ -197,7 +178,7 @@ public final class GeneralUtils {
     }
 
     private static boolean isReplaceableByStructures(BlockState blockState) {
-        return blockState.isAir() || !blockState.getFluidState().isEmpty() || blockState.is(BlockTags.REPLACEABLE_BY_TREES);
+        return blockState.isAir() || !blockState.getMaterial().isLiquid() /* FIXME || blockState.is(BlockTags.REPLACEABLE_BY_TREES)*/;
     }
 
     //////////////////////////////////////////////
@@ -218,9 +199,9 @@ public final class GeneralUtils {
 
     // More optimized with checking if the jigsaw blocks can connect
     public static boolean canJigsawsAttach(StructureTemplate.StructureBlockInfo jigsaw1, StructureTemplate.StructureBlockInfo jigsaw2) {
-        FrontAndTop prop1 = jigsaw1.state().getValue(JigsawBlock.ORIENTATION);
-        FrontAndTop prop2 = jigsaw2.state().getValue(JigsawBlock.ORIENTATION);
-        String joint = jigsaw1.nbt().getString("joint");
+        FrontAndTop prop1 = jigsaw1.state.getValue(JigsawBlock.ORIENTATION);
+        FrontAndTop prop2 = jigsaw2.state.getValue(JigsawBlock.ORIENTATION);
+        String joint = jigsaw1.nbt.getString("joint");
         if(joint.isEmpty()) {
             joint = prop1.front().getAxis().isHorizontal() ? "aligned" : "rollable";
         }
@@ -228,7 +209,7 @@ public final class GeneralUtils {
         boolean isRollable = joint.equals("rollable");
         return prop1.front() == prop2.front().getOpposite() &&
                 (isRollable || prop1.top() == prop2.top()) &&
-                jigsaw1.nbt().getString("target").equals(jigsaw2.nbt().getString("name"));
+                jigsaw1.nbt.getString("target").equals(jigsaw2.nbt.getString("name"));
     }
 
     //////////////////////////////////////////////
@@ -248,11 +229,7 @@ public final class GeneralUtils {
         for (FallbackResourceManager.PackEntry packEntry : allResourcePacks) {
             PackResources resourcePack = packEntry.resources();
             if (resourcePack != null) {
-                IoSupplier<InputStream> IoSupplier = resourcePack.getResource(PackType.SERVER_DATA, fileID);
-                if (IoSupplier != null) {
-                    InputStream inputStream = IoSupplier.get();
-                    fileStreams.add(inputStream);
-                }
+                fileStreams.add(resourcePack.getResource(PackType.SERVER_DATA, fileID));
             }
         }
 
@@ -294,7 +271,7 @@ public final class GeneralUtils {
                         }
                         else {
                             MVSCommon.LOGGER.error(
-                                    "(Moog's Voyager Structures {} MERGER) Couldn't load data file {} from {} as it's null or empty",
+                                    "(Moog's End Structures {} MERGER) Couldn't load data file {} from {} as it's null or empty",
                                     dataType,
                                     fileID,
                                     fileIDWithExtension);
@@ -304,7 +281,7 @@ public final class GeneralUtils {
             }
             catch (IllegalArgumentException | IOException | JsonParseException exception) {
                 MVSCommon.LOGGER.error(
-                        "(Moog's Voyager Structures {} MERGER) Couldn't parse data file {} from {}",
+                        "(Moog's End Structures {} MERGER) Couldn't parse data file {} from {}",
                         dataType,
                         fileID,
                         fileIDWithExtension,
@@ -319,11 +296,11 @@ public final class GeneralUtils {
 
     public static boolean isInvalidLootTableFound(MinecraftServer minecraftServer, Map.Entry<ResourceLocation, ResourceLocation> entry) {
         boolean invalidLootTableFound = false;
-        if(minecraftServer.getLootData().getLootTable(entry.getKey()) == LootTable.EMPTY) {
+        if(minecraftServer.getLootTables().get(entry.getKey()) == LootTable.EMPTY) {
             MVSCommon.LOGGER.error("Unable to find loot table key: {}", entry.getKey());
             invalidLootTableFound = true;
         }
-        if(minecraftServer.getLootData().getLootTable(entry.getValue()) == LootTable.EMPTY) {
+        if(minecraftServer.getLootTables().get(entry.getValue()) == LootTable.EMPTY) {
             MVSCommon.LOGGER.error("Unable to find loot table value: {}", entry.getValue());
             invalidLootTableFound = true;
         }
@@ -332,7 +309,7 @@ public final class GeneralUtils {
 
     public static boolean isMissingLootImporting(MinecraftServer minecraftServer, Set<ResourceLocation> tableKeys) {
         AtomicBoolean invalidLootTableFound = new AtomicBoolean(false);
-        minecraftServer.getLootData().getKeys(LootDataType.TABLE).forEach(rl -> {
+        minecraftServer.getLootTables().getIds().forEach(rl -> {
             if(rl.getNamespace().equals(MVSCommon.MODID) && !tableKeys.contains(rl)) {
                 if(rl.getPath().contains("mansions") && rl.getPath().contains("storage")) {
                     return;

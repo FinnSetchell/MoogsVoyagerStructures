@@ -7,7 +7,7 @@ import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
+import net.minecraft.commands.arguments.ResourceOrTagLocationArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
@@ -35,19 +35,15 @@ public class LocateCommandMixin {
      * @author - TelepathicGrunt
      */
     @Inject(
-            method = "locateStructure(Lnet/minecraft/commands/CommandSourceStack;Lnet/minecraft/commands/arguments/ResourceOrTagKeyArgument$Result;)I",
+            method = "locateStructure",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/chunk/ChunkGenerator;findNearestMapStructure(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/HolderSet;Lnet/minecraft/core/BlockPos;IZ)Lcom/mojang/datafixers/util/Pair;", ordinal = 0),
             locals = LocalCapture.CAPTURE_FAILSOFT,
             cancellable = true,
             require = 0
     )
-    private static void mvs_increaseLocateRadius(CommandSourceStack commandSourceStack,
-                                                                  ResourceOrTagKeyArgument.Result<Structure> result,
-                                                                  CallbackInfoReturnable<Integer> cir,
-                                                                  Registry<Structure> registry,
-                                                                  HolderSet<Structure> holderSet,
-                                                                  BlockPos blockPos,
-                                                                  ServerLevel serverLevel) throws CommandSyntaxException {
+    private static void mvs_increaseLocateRadius(CommandSourceStack commandSourceStack, ResourceOrTagLocationArgument.Result<Structure> result,
+                                                 CallbackInfoReturnable<Integer> cir, Registry<Structure> registry, HolderSet<Structure> holderSet,
+                                                 BlockPos blockPos, ServerLevel serverLevel) throws CommandSyntaxException {
         if(holderSet.stream().anyMatch(configuredStructureFeatureHolder -> configuredStructureFeatureHolder.is(MVSTags.LARGER_LOCATE_SEARCH))) {
             int increasedSearchRadius = 2000;
             Stopwatch stopwatch = Stopwatch.createStarted(Util.TICKER);
@@ -57,7 +53,7 @@ public class LocateCommandMixin {
                 throw ERROR_STRUCTURE_NOT_FOUND.create(result.asPrintable());
             }
             else {
-                cir.setReturnValue(LocateCommand.showLocateResult(commandSourceStack, result, blockPos, pair, "commands.locate.structure.success", false, stopwatch.elapsed()));
+                cir.setReturnValue(LocateCommand.showLocateResult(commandSourceStack, result, blockPos, pair, "commands.locate.structure.success", false));
             }
         }
     }
