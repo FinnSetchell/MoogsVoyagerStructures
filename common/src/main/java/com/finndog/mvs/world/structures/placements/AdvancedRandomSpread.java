@@ -52,8 +52,8 @@ public class AdvancedRandomSpread extends RandomSpreadStructurePlacement {
                                 Optional<Integer> minDistanceFromWorldOrigin
     ) {
         super(locationOffset, frequencyReductionMethod, frequency, salt, exclusionZone, spacing, separation, spreadType);
-        this.spacing = spacing;
-        this.separation = separation;
+        this.spacing = (int)Math.round(spacing * 1.65);
+        this.separation = (int)Math.round(separation * 1.65);
         this.spreadType = spreadType;
         this.minDistanceFromWorldOrigin = minDistanceFromWorldOrigin;
         this.superExclusionZone = superExclusionZone;
