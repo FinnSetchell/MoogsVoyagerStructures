@@ -1,8 +1,6 @@
 package com.finndog.mvs.utils;
 
 import com.finndog.mvs.MVSCommon;
-import com.finndog.mvs.mixins.resources.NamespaceResourceManagerAccessor;
-import com.finndog.mvs.mixins.resources.ReloadableResourceManagerImplAccessor;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
@@ -14,10 +12,7 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.packs.PackResources;
-import net.minecraft.server.packs.PackType;
-import net.minecraft.server.packs.resources.FallbackResourceManager;
-import net.minecraft.server.packs.resources.IoSupplier;
+import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.GsonHelper;
@@ -86,32 +81,6 @@ public final class GeneralUtils {
     public static boolean isFullCube(BlockGetter world, BlockPos pos, BlockState state) {
         if(state == null) return false;
         return IS_FULLCUBE_MAP.computeIfAbsent(state, (stateIn) -> Block.isShapeFullBlock(stateIn.getOcclusionShape(world, pos)));
-    }
-
-    //////////////////////////////
-
-    // Helper method to make chests always face away from walls
-    public static BlockState orientateChest(ServerLevelAccessor blockView, BlockPos blockPos, BlockState blockState) {
-        BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
-        Direction wallDirection = blockState.getValue(HorizontalDirectionalBlock.FACING);
-
-        for(Direction facing : Direction.Plane.HORIZONTAL) {
-            mutable.set(blockPos).move(facing);
-
-            // Checks if wall is in this side
-            if (isFullCube(blockView, mutable, blockView.getBlockState(mutable))) {
-                wallDirection = facing;
-
-                // Exit early if facing open space opposite of wall
-                mutable.move(facing.getOpposite(), 2);
-                if(!blockView.getBlockState(mutable).isSolid()) {
-                    break;
-                }
-            }
-        }
-
-        // Make chest face away from wall
-        return blockState.setValue(HorizontalDirectionalBlock.FACING, wallDirection.getOpposite());
     }
 
     //////////////////////////////////////////////
@@ -234,33 +203,6 @@ public final class GeneralUtils {
     //////////////////////////////////////////////
 
     /**
-     * Obtains all of the file streams for all files found in all datapacks with the given id.
-     *
-     * @return - Filestream list of all files found with id
-     */
-    public static List<InputStream> getAllFileStreams(ResourceManager resourceManager, ResourceLocation fileID) throws IOException {
-        List<InputStream> fileStreams = new ArrayList<>();
-
-        FallbackResourceManager namespaceResourceManager = ((ReloadableResourceManagerImplAccessor) resourceManager).mvs_getNamespacedManagers().get(fileID.getNamespace());
-        List<FallbackResourceManager.PackEntry> allResourcePacks = ((NamespaceResourceManagerAccessor) namespaceResourceManager).mvs_getFallbacks();
-
-        // Find the file with the given id and add its filestream to the list
-        for (FallbackResourceManager.PackEntry packEntry : allResourcePacks) {
-            PackResources resourcePack = packEntry.resources();
-            if (resourcePack != null) {
-                IoSupplier<InputStream> IoSupplier = resourcePack.getResource(PackType.SERVER_DATA, fileID);
-                if (IoSupplier != null) {
-                    InputStream inputStream = IoSupplier.get();
-                    fileStreams.add(inputStream);
-                }
-            }
-        }
-
-        // Return filestream of all files matching id path
-        return fileStreams;
-    }
-
-    /**
      * Will grab all JSON objects from all datapacks's folder that is specified by the dataType parameter.
      *
      * @return - A map of paths (identifiers) to a list of all JSON elements found under it from all datapacks.
@@ -270,17 +212,17 @@ public final class GeneralUtils {
         int dataTypeLength = dataType.length() + 1;
 
         // Finds all JSON files paths within the pool_additions folder. NOTE: this is just the path rn. Not the actual files yet.
-        for (ResourceLocation fileIDWithExtension : resourceManager.listResources(dataType, (fileString) -> fileString.toString().endsWith(".json")).keySet()) {
-            String identifierPath = fileIDWithExtension.getPath();
+        for (Map.Entry<ResourceLocation, List<Resource>> resourceStackEntry : resourceManager.listResourceStacks(dataType, (fileString) -> fileString.toString().endsWith(".json")).entrySet()) {
+            String identifierPath = resourceStackEntry.getKey().getPath();
             ResourceLocation fileID = new ResourceLocation(
-                    fileIDWithExtension.getNamespace(),
+                    resourceStackEntry.getKey().getNamespace(),
                     identifierPath.substring(dataTypeLength, identifierPath.length() - fileSuffixLength));
 
             try {
                 // getAllFileStreams will find files with the given ID. This part is what will loop over all matching files from all datapacks.
-                for (InputStream fileStream : GeneralUtils.getAllFileStreams(resourceManager, fileIDWithExtension)) {
+                for (Resource resource : resourceStackEntry.getValue()) {
+                    InputStream fileStream = resource.open();
                     try (Reader bufferedReader = new BufferedReader(new InputStreamReader(fileStream, StandardCharsets.UTF_8))) {
-
                         // Get the JSON from the file
                         JsonElement countsJSONElement = GsonHelper.fromJson(gson, bufferedReader, (Class<? extends JsonElement>) JsonElement.class);
                         if (countsJSONElement != null) {
@@ -297,7 +239,7 @@ public final class GeneralUtils {
                                     "(Moog's Voyager Structures {} MERGER) Couldn't load data file {} from {} as it's null or empty",
                                     dataType,
                                     fileID,
-                                    fileIDWithExtension);
+                                    resourceStackEntry);
                         }
                     }
                 }
@@ -307,7 +249,7 @@ public final class GeneralUtils {
                         "(Moog's Voyager Structures {} MERGER) Couldn't parse data file {} from {}",
                         dataType,
                         fileID,
-                        fileIDWithExtension,
+                        resourceStackEntry,
                         exception);
             }
         }
