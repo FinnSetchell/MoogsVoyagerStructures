@@ -213,17 +213,6 @@
         {
           "type": "minecraft:empty",
           "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:sentry_armor_trim_smithing_template",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": 2,
-              "add": false
-            }
-          ]
         }
       ]
     }
