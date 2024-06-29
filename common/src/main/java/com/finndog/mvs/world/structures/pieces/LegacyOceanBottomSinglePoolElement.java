@@ -3,6 +3,7 @@ package com.finndog.mvs.world.structures.pieces;
 import com.finndog.mvs.modinit.MVSStructurePieces;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
@@ -17,7 +18,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
 public class LegacyOceanBottomSinglePoolElement extends SinglePoolElement {
-    public static final Codec<LegacyOceanBottomSinglePoolElement> CODEC = RecordCodecBuilder.create(
+    public static final MapCodec<LegacyOceanBottomSinglePoolElement> CODEC = RecordCodecBuilder.mapCodec(
             (legacyOceanBottomSinglePoolElementInstance) -> legacyOceanBottomSinglePoolElementInstance
                     .group(templateCodec(), processorsCodec(), projectionCodec())
                     .apply(legacyOceanBottomSinglePoolElementInstance, LegacyOceanBottomSinglePoolElement::new));

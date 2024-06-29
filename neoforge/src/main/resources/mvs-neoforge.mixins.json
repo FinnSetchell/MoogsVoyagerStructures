@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.telepathicgrunt.repurposedstructures.mixins.neoforge",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "structures.StructurePoolMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

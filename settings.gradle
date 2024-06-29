@@ -2,7 +2,7 @@ pluginManagement {
     repositories {
         maven { url "https://maven.fabricmc.net/" }
         maven { url "https://maven.architectury.dev/" }
-        maven { url "https://maven.minecraftforge.net/" }
+        maven { url "https://files.minecraftforge.net/maven/" }
         gradlePluginPortal()
     }
 }
@@ -11,4 +11,4 @@ pluginManagement {
 rootProject.name = 'MoogsVoyagerStructures'
 include("common")
 include("fabric")
-include("forge")
+include("neoforge")

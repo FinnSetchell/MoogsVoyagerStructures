@@ -2,6 +2,7 @@ package com.finndog.mvs.world.structures.placements;
 
 import com.finndog.mvs.modinit.MVSStructurePlacementType;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
@@ -21,7 +22,7 @@ import net.minecraft.world.level.levelgen.structure.placement.StructurePlacement
 import java.util.Optional;
 
 public class AdvancedRandomSpread extends RandomSpreadStructurePlacement {
-    public static final Codec<AdvancedRandomSpread> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+    public static final MapCodec<AdvancedRandomSpread> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
             Vec3i.offsetCodec(16).optionalFieldOf("locate_offset", Vec3i.ZERO).forGetter(AdvancedRandomSpread::locateOffset),
             FrequencyReductionMethod.CODEC.optionalFieldOf("frequency_reduction_method", FrequencyReductionMethod.DEFAULT).forGetter(AdvancedRandomSpread::frequencyReductionMethod),
             Codec.floatRange(0.0F, 1.0F).optionalFieldOf("frequency", 1.0F).forGetter(AdvancedRandomSpread::frequency),

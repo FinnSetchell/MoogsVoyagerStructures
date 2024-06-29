@@ -4,6 +4,7 @@ import com.finndog.mvs.mixins.structures.SinglePoolElementAccessor;
 import com.finndog.mvs.modinit.MVSStructurePieces;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.Util;
@@ -32,7 +33,7 @@ import java.util.List;
 import java.util.function.Function;
 
 public class MirroringSingleJigsawPiece extends SinglePoolElement {
-    public static final Codec<MirroringSingleJigsawPiece> CODEC = RecordCodecBuilder.create((jigsawPieceInstance) ->
+    public static final MapCodec<MirroringSingleJigsawPiece> CODEC = RecordCodecBuilder.mapCodec((jigsawPieceInstance) ->
             jigsawPieceInstance.group(
                     templateCodec(),
                     processorsCodec(),

@@ -1,7 +1,7 @@
 package com.finndog.mvs.world.placements;
 
 import com.finndog.mvs.modinit.MVSPlacements;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 
 public class SnapToLowerNonAirPlacement extends PlacementModifier {
 	private static final SnapToLowerNonAirPlacement INSTANCE = new SnapToLowerNonAirPlacement();
-	public static final Codec<SnapToLowerNonAirPlacement> CODEC = Codec.unit(() -> INSTANCE);
+	public static final MapCodec<SnapToLowerNonAirPlacement> CODEC = MapCodec.unit(() -> INSTANCE);
 
 	public static SnapToLowerNonAirPlacement snapToLowerNonAir() {
 		return INSTANCE;

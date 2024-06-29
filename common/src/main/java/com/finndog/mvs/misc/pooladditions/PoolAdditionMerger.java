@@ -151,7 +151,7 @@ public final class PoolAdditionMerger {
 
         public static final Codec<AdditionalStructureTemplatePool> DIRECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 ResourceLocation.CODEC.fieldOf("name").forGetter(structureTemplatePool -> structureTemplatePool.name),
-                ExtraCodecs.lazyInitializedCodec(StructurePoolAccessor.getCODEC_REFERENCE()::getValue).fieldOf("fallback").forGetter(StructureTemplatePool::getFallback),
+                Codec.lazyInitialized(StructurePoolAccessor.getCODEC_REFERENCE()::getValue).fieldOf("fallback").forGetter(StructureTemplatePool::getFallback),
                 EXPANDED_POOL_ENTRY_CODEC.listOf().fieldOf("elements").forGetter(structureTemplatePool -> structureTemplatePool.rawTemplatesWithConditions)
         ).apply(instance, AdditionalStructureTemplatePool::new));
 

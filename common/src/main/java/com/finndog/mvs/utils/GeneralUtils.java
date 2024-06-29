@@ -257,49 +257,4 @@ public final class GeneralUtils {
         return map;
     }
 
-    ////////////////////////////
-
-    public static boolean isInvalidLootTableFound(MinecraftServer minecraftServer, Map.Entry<ResourceLocation, ResourceLocation> entry) {
-        boolean invalidLootTableFound = false;
-        if(minecraftServer.getLootData().getLootTable(entry.getKey()) == LootTable.EMPTY) {
-            MVSCommon.LOGGER.error("Unable to find loot table key: {}", entry.getKey());
-            invalidLootTableFound = true;
-        }
-        if(minecraftServer.getLootData().getLootTable(entry.getValue()) == LootTable.EMPTY) {
-            MVSCommon.LOGGER.error("Unable to find loot table value: {}", entry.getValue());
-            invalidLootTableFound = true;
-        }
-        return invalidLootTableFound;
-    }
-
-    public static boolean isMissingLootImporting(MinecraftServer minecraftServer, Set<ResourceLocation> tableKeys) {
-        AtomicBoolean invalidLootTableFound = new AtomicBoolean(false);
-        minecraftServer.getLootData().getKeys(LootDataType.TABLE).forEach(rl -> {
-            if(rl.getNamespace().equals(MVSCommon.MODID) && !tableKeys.contains(rl)) {
-                if(rl.getPath().contains("mansions") && rl.getPath().contains("storage")) {
-                    return;
-                }
-
-                if(rl.getPath().contains("monuments")) {
-                    return;
-                }
-
-                if(rl.getPath().contains("dispensers/temples/wasteland_lava")) {
-                    return;
-                }
-
-                if(rl.getPath().contains("lucky_pool")) {
-                    return;
-                }
-
-                if(rl.getPath().contains("archaeology")) {
-                    return;
-                }
-
-                MVSCommon.LOGGER.error("No loot importing found for: {}", rl);
-                invalidLootTableFound.set(true);
-            }
-        });
-        return invalidLootTableFound.get();
-    }
 }

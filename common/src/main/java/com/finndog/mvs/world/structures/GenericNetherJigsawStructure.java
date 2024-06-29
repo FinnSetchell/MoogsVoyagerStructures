@@ -4,6 +4,7 @@ import com.finndog.mvs.modinit.MVSStructures;
 import com.finndog.mvs.utils.GeneralUtils;
 import com.google.common.collect.Maps;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -27,7 +28,7 @@ import java.util.Optional;
 
 public class GenericNetherJigsawStructure extends GenericJigsawStructure {
 
-    public static final Codec<GenericNetherJigsawStructure> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final MapCodec<GenericNetherJigsawStructure> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             GenericNetherJigsawStructure.settingsCodec(instance),
             StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
             Codec.intRange(0, 30).fieldOf("size").forGetter(structure -> structure.size),

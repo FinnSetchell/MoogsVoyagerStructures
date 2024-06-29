@@ -1,11 +1,11 @@
-package com.finndog.mvs.modinit.registry.forge;
+package com.finndog.mvs.modinit.registry.neoforge;
 
 import com.finndog.mvs.modinit.registry.CustomRegistryLookup;
 import com.finndog.mvs.modinit.registry.ResourcefulRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraftforge.registries.NewRegistryEvent;
-import net.minecraftforge.registries.RegistryBuilder;
+import net.neoforged.neoforge.registries.NewRegistryEvent;
+import net.neoforged.neoforge.registries.RegistryBuilder;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -14,16 +14,16 @@ import java.util.function.Supplier;
 
 public class ResourcefulRegistriesImpl {
 
-    private static final List<CustomRegistryInfo<?>> CUSTOM_REGISTRIES = new ArrayList<>();
+    private static final List<CustomRegistryInfo<?, ?>> CUSTOM_REGISTRIES = new ArrayList<>();
 
     public static <T> ResourcefulRegistry<T> create(Registry<T> registry, String id) {
-        return new ForgeResourcefulRegistry<>(registry.key(), id);
+        return new NeoForgeResourcefulRegistry<>(registry, id);
     }
 
-    public static <T, K extends Registry<T>> Pair<Supplier<CustomRegistryLookup<T>>, ResourcefulRegistry<T>> createCustomRegistryInternal(String modId, ResourceKey<K> key, boolean save, boolean sync, boolean allowModification) {
-        CustomRegistryInfo<T> info = new CustomRegistryInfo<>(new LateSupplier<>(), key, save, sync, allowModification);
+    public static <T, R extends T, K extends Registry<T>> Pair<Supplier<CustomRegistryLookup<T, R>>, ResourcefulRegistry<T>> createCustomRegistryInternal(String modId, ResourceKey<K> key, boolean save, boolean sync, boolean allowModification) {
+        CustomRegistryInfo<T, R> info = new CustomRegistryInfo<>(new LateSupplier<>(), key, save, sync, allowModification);
         CUSTOM_REGISTRIES.add(info);
-        return Pair.of(info.lookup(), new ForgeResourcefulRegistry<>(key, modId));
+        return Pair.of(info.lookup(), new NeoForgeResourcefulRegistry<>(key, modId));
     }
 
     public static void onRegisterForgeRegistries(NewRegistryEvent event) {
@@ -48,8 +48,8 @@ public class ResourcefulRegistriesImpl {
         }
     }
 
-    public record CustomRegistryInfo<T>(
-            LateSupplier<CustomRegistryLookup<T>> lookup,
+    public record CustomRegistryInfo<T, K extends T>(
+            LateSupplier<CustomRegistryLookup<T, K>> lookup,
             ResourceKey<? extends Registry<T>> key,
             boolean save,
             boolean sync,
@@ -57,16 +57,13 @@ public class ResourcefulRegistriesImpl {
     ) {
 
         public void build(NewRegistryEvent event) {
-            lookup.set(new ForgeCustomRegistry<>(event.create(getBuilder())));
+            lookup.set(new NeoForgeCustomRegistry<>(event.create(getBuilder())));
         }
 
         public RegistryBuilder<T> getBuilder() {
-            RegistryBuilder<T> builder = new RegistryBuilder<>();
-            builder.setName(key.location());
-            if (!save) builder.disableSaving();
-            if (!sync) builder.disableSync();
-            if (allowModification) builder.allowModification();
-            return builder;
+            return new RegistryBuilder<>(key)
+                    .disableRegistrationCheck()
+                    .sync(sync);
         }
     }
 }

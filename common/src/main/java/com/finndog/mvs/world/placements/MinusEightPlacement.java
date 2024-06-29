@@ -1,7 +1,7 @@
 package com.finndog.mvs.world.placements;
 
 import com.finndog.mvs.modinit.MVSPlacements;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.placement.PlacementContext;
@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 public class MinusEightPlacement extends PlacementModifier {
 	private static final MinusEightPlacement INSTANCE = new MinusEightPlacement();
-	public static final Codec<MinusEightPlacement> CODEC = Codec.unit(() -> INSTANCE);
+	public static final MapCodec<MinusEightPlacement> CODEC = MapCodec.unit(() -> INSTANCE);
 
 	public static MinusEightPlacement subtractedEight() {
 		return INSTANCE;
