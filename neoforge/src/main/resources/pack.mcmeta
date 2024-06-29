@@ -1,7 +1,0 @@
-{
-    "pack": {
-        "description": "Moog's Voyager Structures",
-        "pack_format": 26,
-        "supported_formats": [0, 1000000]
-    }
-}
