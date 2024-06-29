@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 public final class MVSConditionsRegistry {
     private MVSConditionsRegistry() {}
 
-    public static final ResourceKey<Registry<Supplier<Boolean>>> MVS_JSON_CONDITIONS_KEY = ResourceKey.createRegistryKey(new ResourceLocation(MVSCommon.MODID, "json_conditions"));
+    public static final ResourceKey<Registry<Supplier<Boolean>>> MVS_JSON_CONDITIONS_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(MVSCommon.MODID, "json_conditions"));
     public static final CustomRegistry<Supplier<Boolean>> MVS_JSON_CONDITIONS_REGISTRY = CustomRegistry.of(MVSCommon.MODID, MVS_JSON_CONDITIONS_KEY, false, false, true);
     public static final RegistryEntry<Supplier<Boolean>> ALWAYS_TRUE = MVS_JSON_CONDITIONS_REGISTRY.register("always_true", () -> () -> true);
     public static final RegistryEntry<Supplier<Boolean>> ALWAYS_FALSE = MVS_JSON_CONDITIONS_REGISTRY.register("always_false", () -> () -> true);

@@ -13,7 +13,6 @@
         "structures.StructurePoolAccessor",
         "structures.StructureProcessorAccessor",
         "structures.StructureTemplateManagerAccessor",
-        "structures.StructureTemplateMixin",
         "structures.TemplateAccessor"
     ],
     "client": [

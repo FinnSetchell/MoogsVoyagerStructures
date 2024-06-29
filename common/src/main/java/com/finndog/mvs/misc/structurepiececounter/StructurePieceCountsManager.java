@@ -86,7 +86,7 @@ public class StructurePieceCountsManager extends SimpleJsonResourceReloadListene
             if(structurePieceCountsObjs != null) {
                 structurePieceCountsObjs.forEach(entry -> {
                     if (entry.alwaysSpawnThisMany != null)
-                        requirePiecesMap.put(new ResourceLocation(entry.nbtPieceName), new RequiredPieceNeeds(entry.alwaysSpawnThisMany, entry.minimumDistanceFromCenterPiece != null ? entry.minimumDistanceFromCenterPiece : 0));
+                        requirePiecesMap.put(ResourceLocation.tryParse(entry.nbtPieceName), new RequiredPieceNeeds(entry.alwaysSpawnThisMany, entry.minimumDistanceFromCenterPiece != null ? entry.minimumDistanceFromCenterPiece : 0));
                 });
             }
             cachedRequirePiecesMap.put(structureRL, requirePiecesMap);
@@ -107,7 +107,7 @@ public class StructurePieceCountsManager extends SimpleJsonResourceReloadListene
             if(structurePieceCountsObjs != null) {
                 structurePieceCountsObjs.forEach(entry -> {
                     if(entry.neverSpawnMoreThanThisMany != null)
-                        maxCountPiecesMap.put(new ResourceLocation(entry.nbtPieceName), entry.neverSpawnMoreThanThisMany);
+                        maxCountPiecesMap.put(ResourceLocation.tryParse(entry.nbtPieceName), entry.neverSpawnMoreThanThisMany);
                 });
             }
             cachedMaxCountPiecesMap.put(structureRL, maxCountPiecesMap);

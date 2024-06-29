@@ -2,6 +2,7 @@ package com.finndog.mvs.world.structures;
 
 import com.finndog.mvs.modinit.MVSStructures;
 import com.finndog.mvs.utils.GeneralUtils;
+import com.finndog.mvs.world.structures.codecs.YRangeAllowance;
 import com.google.common.collect.Maps;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -18,6 +19,8 @@ import net.minecraft.world.level.levelgen.structure.PoolElementStructurePiece;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
+import net.minecraft.world.level.levelgen.structure.structures.JigsawStructure;
+import net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -32,9 +35,7 @@ public class GenericNetherJigsawStructure extends GenericJigsawStructure {
             GenericNetherJigsawStructure.settingsCodec(instance),
             StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
             Codec.intRange(0, 30).fieldOf("size").forGetter(structure -> structure.size),
-            Codec.INT.optionalFieldOf("min_y_allowed").forGetter(structure -> structure.minYAllowed),
-            Codec.INT.optionalFieldOf("max_y_allowed").forGetter(structure -> structure.maxYAllowed),
-            Codec.intRange(1, 1000).optionalFieldOf("allowed_y_range_from_start").forGetter(structure -> structure.allowedYRangeFromStart),
+            YRangeAllowance.CODEC.optionalFieldOf("y_allowance").forGetter(structure -> structure.yAllowance),
             HeightProvider.CODEC.fieldOf("start_height").forGetter(structure -> structure.startHeight),
             Codec.BOOL.fieldOf("cannot_spawn_in_liquid").orElse(false).forGetter(structure -> structure.cannotSpawnInLiquid),
             Codec.intRange(1, 100).optionalFieldOf("valid_biome_radius_check").forGetter(structure -> structure.biomeRadius),
@@ -42,7 +43,8 @@ public class GenericNetherJigsawStructure extends GenericJigsawStructure {
             Codec.intRange(1, 128).optionalFieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter),
             Codec.intRange(0, 100).optionalFieldOf("ledge_offset_y").forGetter(structure -> structure.ledgeOffsetY),
             StringRepresentable.fromEnum(LAND_SEARCH_DIRECTION::values).fieldOf("land_search_direction").forGetter(structure -> structure.searchDirection),
-            Codec.BOOL.fieldOf("use_bounding_box_hack").orElse(false).forGetter(structure -> structure.useBoundingBoxHack)
+            Codec.BOOL.fieldOf("use_bounding_box_hack").orElse(false).forGetter(structure -> structure.useBoundingBoxHack),
+            LiquidSettings.CODEC.optionalFieldOf("liquid_settings", JigsawStructure.DEFAULT_LIQUID_SETTINGS).forGetter(structure -> structure.liquidSettings)
     ).apply(instance, GenericNetherJigsawStructure::new));
 
     public final Optional<Integer> ledgeOffsetY;
@@ -51,9 +53,7 @@ public class GenericNetherJigsawStructure extends GenericJigsawStructure {
     public GenericNetherJigsawStructure(StructureSettings config,
                                         Holder<StructureTemplatePool> startPool,
                                         int size,
-                                        Optional<Integer> minYAllowed,
-                                        Optional<Integer> maxYAllowed,
-                                        Optional<Integer> allowedYRangeFromStart,
+                                        Optional<YRangeAllowance> yAllowance,
                                         HeightProvider startHeight,
                                         boolean cannotSpawnInLiquid,
                                         Optional<Integer> biomeRadius,
@@ -61,13 +61,12 @@ public class GenericNetherJigsawStructure extends GenericJigsawStructure {
                                         Optional<Integer> maxDistanceFromCenter,
                                         Optional<Integer> ledgeOffsetY,
                                         LAND_SEARCH_DIRECTION searchDirection,
-                                        boolean useBoundingBoxHack) {
+                                        boolean useBoundingBoxHack,
+                                        LiquidSettings liquidSettings) {
         super(config,
             startPool,
             size,
-            minYAllowed,
-            maxYAllowed,
-            allowedYRangeFromStart,
+            yAllowance,
             startHeight,
             Optional.empty(),
             cannotSpawnInLiquid,
@@ -77,7 +76,8 @@ public class GenericNetherJigsawStructure extends GenericJigsawStructure {
             poolsThatIgnoreBoundaries,
             maxDistanceFromCenter,
             Optional.empty(),
-            useBoundingBoxHack);
+            useBoundingBoxHack,
+            liquidSettings);
 
         this.ledgeOffsetY = ledgeOffsetY;
         this.searchDirection = searchDirection;

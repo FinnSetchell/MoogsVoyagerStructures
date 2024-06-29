@@ -121,7 +121,7 @@ public final class PoolAdditionMerger {
     }
 
     private static void checkIfPieceExists(AdditionalStructureTemplatePool feedingPool, StructureTemplateManager structureTemplateManager, ResourceLocation pieceRL) {
-        ResourceLocation resourcelocation = new ResourceLocation(pieceRL.getNamespace(), "structures/" + pieceRL.getPath() + ".nbt");
+        ResourceLocation resourcelocation = ResourceLocation.fromNamespaceAndPath(pieceRL.getNamespace(), "structures/" + pieceRL.getPath() + ".nbt");
         try {
             InputStream inputstream = ((StructureTemplateManagerAccessor) structureTemplateManager).mvs_getResourceManager().open(resourcelocation);
             if (inputstream.available() == 0 || inputstream.read(new byte[1]) == -1) {

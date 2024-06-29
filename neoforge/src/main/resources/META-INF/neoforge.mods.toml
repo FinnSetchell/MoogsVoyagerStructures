@@ -28,4 +28,4 @@ license="https://github.com/FinnSetchell/MoogsVoyagerStructures/blob/1.20-MultiL
 [[dependencies.mvs]]
     modId="minecraft"
     type="required"
-    versionRange="[1.20.5,)"
+    versionRange="[1.21,)"

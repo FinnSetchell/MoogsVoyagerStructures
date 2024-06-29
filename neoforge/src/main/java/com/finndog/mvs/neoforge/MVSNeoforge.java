@@ -20,10 +20,14 @@ import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 @Mod(MVSCommon.MODID)
 public class MVSNeoforge {
 
+    public static IEventBus modEventBusTempHolder = null;
+
     public MVSNeoforge(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(EventPriority.NORMAL, ResourcefulRegistriesImpl::onRegisterForgeRegistries);
 
+        modEventBusTempHolder = modEventBus;
         MVSCommon.init();
+        modEventBusTempHolder = null;
 
         modEventBus.addListener(MVSNeoforge::onSetup);
 

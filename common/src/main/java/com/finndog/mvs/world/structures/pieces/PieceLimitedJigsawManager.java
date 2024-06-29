@@ -34,6 +34,7 @@ import net.minecraft.world.level.levelgen.structure.pools.JigsawJunction;
 import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
+import net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.phys.AABB;
 import org.apache.commons.lang3.mutable.MutableObject;
@@ -72,6 +73,7 @@ public class PieceLimitedJigsawManager {
             Set<ResourceLocation> poolsThatIgnoreBounds,
             Optional<Integer> maxDistanceFromCenter,
             Optional<GenericJigsawStructure.BURYING_TYPE> buryingType,
+            LiquidSettings liquidSettings,
             BiConsumer<StructurePiecesBuilder, List<PoolElementStructurePiece>> structureBoundsAdjuster
     ) {
         // Get jigsaw pool registry
@@ -103,7 +105,8 @@ public class PieceLimitedJigsawManager {
                 startPos,
                 startPieceBlueprint.getGroundLevelDelta(),
                 rotation,
-                startPieceBlueprint.getBoundingBox(context.structureTemplateManager(), startPos, rotation)
+                startPieceBlueprint.getBoundingBox(context.structureTemplateManager(), startPos, rotation),
+                liquidSettings
         );
 
         // Store center position of starting piece's bounding box
@@ -147,6 +150,21 @@ public class PieceLimitedJigsawManager {
                     break;
                 }
 
+                //reroll start piece
+                PoolElementStructurePiece startPieceToUse = startPiece;
+                if (attempts > 0) {
+                    StructurePoolElement startPieceBlueprintNew = startPool.getRandomTemplate(random);
+                    startPieceToUse = new PoolElementStructurePiece(
+                            context.structureTemplateManager(),
+                            startPieceBlueprintNew,
+                            startPiece.getPosition(),
+                            startPieceBlueprintNew.getGroundLevelDelta(),
+                            startPiece.getRotation(),
+                            startPieceBlueprintNew.getBoundingBox(context.structureTemplateManager(), startPiece.getPosition(), startPiece.getRotation()),
+                            liquidSettings
+                    );
+                }
+
                 components.clear();
                 components.add(startPiece); // Add start piece to list of pieces
 
@@ -167,7 +185,8 @@ public class PieceLimitedJigsawManager {
                             requiredPieces,
                             buryingType.isEmpty() ? maxY : Integer.MAX_VALUE,
                             buryingType.isEmpty() ? minY : Integer.MIN_VALUE,
-                            poolsThatIgnoreBounds);
+                            poolsThatIgnoreBounds,
+                            liquidSettings);
                     assembler.availablePieces.addLast(startPieceEntry);
 
                     while (!assembler.availablePieces.isEmpty()) {
@@ -224,6 +243,8 @@ public class PieceLimitedJigsawManager {
         private final int maxY;
         private final int minY;
         private final Set<ResourceLocation> poolsThatIgnoreBounds;
+        private final LiquidSettings liquidSettings;
+
 
         public Assembler(ResourceLocation structureID,
                          Registry<StructureTemplatePool> poolRegistry,
@@ -234,7 +255,8 @@ public class PieceLimitedJigsawManager {
                          Map<ResourceLocation, StructurePieceCountsManager.RequiredPieceNeeds> requiredPieces,
                          int maxY,
                          int minY,
-                         Set<ResourceLocation> poolsThatIgnoreBounds
+                         Set<ResourceLocation> poolsThatIgnoreBounds,
+                         LiquidSettings liquidSettings
         ) {
             this.poolRegistry = poolRegistry;
             this.maxDepth = maxDepth;
@@ -248,6 +270,7 @@ public class PieceLimitedJigsawManager {
             this.requiredPieces = requiredPieces == null ? new HashMap<>() : new HashMap<>(requiredPieces);
             this.maximumPieceCounts = new HashMap<>(StructurePieceCountsManager.STRUCTURE_PIECE_COUNTS_MANAGER.getMaximumCountForPieces(structureID));
             this.poolsThatIgnoreBounds = poolsThatIgnoreBounds;
+            this.liquidSettings = liquidSettings;
 
             // pieceCounts will keep track of how many of the pieces we are checking were spawned
             this.currentPieceCounts = new HashMap<>();
@@ -280,7 +303,7 @@ public class PieceLimitedJigsawManager {
                 BlockPos jigsawBlockTargetPos = jigsawBlockPos.relative(direction);
 
                 // Get the jigsaw block's piece pool
-                ResourceLocation jigsawBlockPool = new ResourceLocation(jigsawBlock.nbt().getString("pool"));
+                ResourceLocation jigsawBlockPool = ResourceLocation.tryParse(jigsawBlock.nbt().getString("pool"));
                 Optional<StructureTemplatePool> poolOptional = this.poolRegistry.getOptional(jigsawBlockPool);
 
                 // Only continue if we are using the jigsaw pattern registry and if it is not empty
@@ -432,7 +455,7 @@ public class PieceLimitedJigsawManager {
                                 return 0;
                             }
                             else {
-                                ResourceLocation candidateTargetPool = new ResourceLocation(pieceCandidateJigsawBlock.nbt().getString("pool"));
+                                ResourceLocation candidateTargetPool = ResourceLocation.tryParse(pieceCandidateJigsawBlock.nbt().getString("pool"));
                                 Optional<StructureTemplatePool> candidateTargetPoolOptional = this.poolRegistry.getOptional(candidateTargetPool);
                                 if (candidateTargetPoolOptional.isEmpty()) {
                                     MVSCommon.LOGGER.warn("Moog's Voyager Structures: Non-existent child pool attempted to be spawned: {} which is being called from {}. Let Moog's Voyager Structures dev (FinnDog) know about this log entry.", candidateTargetPool, candidatePiece instanceof SinglePoolElement ? ((SinglePoolElementAccessor) candidatePiece).mvs_getTemplate().left().get() : "not a SinglePoolElement class");
@@ -527,7 +550,8 @@ public class PieceLimitedJigsawManager {
                                         adjustedCandidateJigsawBlockRelativePos,
                                         groundLevelDelta,
                                         rotation,
-                                        adjustedCandidateBoundingBox
+                                        adjustedCandidateBoundingBox,
+                                        liquidSettings
                                 );
 
                                 // Determine actual y-value for the new jigsaw block
