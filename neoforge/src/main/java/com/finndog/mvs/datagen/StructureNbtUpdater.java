@@ -1,9 +1,9 @@
-package com.finndog.repurposedstructures.datagen;
+package com.finndog.mvs.datagen;
 
 import com.google.common.hash.Hashing;
 import com.mojang.datafixers.DataFixer;
 import com.mojang.datafixers.DataFixerUpper;
-import com.finndog.repurposedstructures.RepurposedStructures;
+import com.finndog.mvs.MVSCommon;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
@@ -68,7 +68,7 @@ public class StructureNbtUpdater implements DataProvider {
         CompoundTag inputNBT = NbtIo.readCompressed(resource.open(), NbtAccounter.unlimitedHeap());
         CompoundTag converted = updateNBT(inputNBT);
         if (!converted.equals(inputNBT)) {
-            RepurposedStructures.LOGGER.info("Found outdated NBT file: {}", loc);
+            MVSCommon.LOGGER.info("Found outdated NBT file: {}", loc);
             Class<? extends DataFixer> fixerClass = DataFixers.getDataFixer().getClass();
             if (!fixerClass.equals(DataFixerUpper.class)) {
                 throw new RuntimeException("Structures are not up to date, but unknown data fixer is in use: " + fixerClass.getName());

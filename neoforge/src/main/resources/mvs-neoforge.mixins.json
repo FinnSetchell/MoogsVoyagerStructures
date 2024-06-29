@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "com.telepathicgrunt.repurposedstructures.mixins.neoforge",
+  "package": "com.finndog.mvs.mixins.neoforge",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "structures.StructurePoolMixin"

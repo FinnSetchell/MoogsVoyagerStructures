@@ -1,8 +1,8 @@
-package com.finndog.repurposedstructures.modinit.registry.neoforge;
+package com.finndog.mvs.modinit.registry.neoforge;
 
-import com.finndog.repurposedstructures.modinit.registry.RegistryEntries;
-import com.finndog.repurposedstructures.modinit.registry.RegistryEntry;
-import com.finndog.repurposedstructures.modinit.registry.ResourcefulRegistry;
+import com.finndog.mvs.modinit.registry.RegistryEntries;
+import com.finndog.mvs.modinit.registry.RegistryEntry;
+import com.finndog.mvs.modinit.registry.ResourcefulRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;

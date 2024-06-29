@@ -20,7 +20,7 @@ public class ResourcefulRegistriesImpl {
         return new NeoForgeResourcefulRegistry<>(registry, id);
     }
 
-    public static <T, R extends T, K extends Registry<T>> Pair<Supplier<CustomRegistryLookup<T, R>>, ResourcefulRegistry<T>> createCustomRegistryInternal(String modId, ResourceKey<K> key, boolean save, boolean sync, boolean allowModification) {
+    public static <T, R extends T, K extends Registry<T>> Pair<Supplier<CustomRegistryLookup<T>>, ResourcefulRegistry<T>> createCustomRegistryInternal(String modId, ResourceKey<K> key, boolean save, boolean sync, boolean allowModification) {
         CustomRegistryInfo<T, R> info = new CustomRegistryInfo<>(new LateSupplier<>(), key, save, sync, allowModification);
         CUSTOM_REGISTRIES.add(info);
         return Pair.of(info.lookup(), new NeoForgeResourcefulRegistry<>(key, modId));
@@ -49,7 +49,7 @@ public class ResourcefulRegistriesImpl {
     }
 
     public record CustomRegistryInfo<T, K extends T>(
-            LateSupplier<CustomRegistryLookup<T, K>> lookup,
+            LateSupplier<CustomRegistryLookup<T>> lookup,
             ResourceKey<? extends Registry<T>> key,
             boolean save,
             boolean sync,

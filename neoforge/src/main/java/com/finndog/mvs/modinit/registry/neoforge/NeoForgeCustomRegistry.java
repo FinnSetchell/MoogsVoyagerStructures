@@ -1,6 +1,6 @@
-package com.finndog.repurposedstructures.modinit.registry.neoforge;
+package com.finndog.mvs.modinit.registry.neoforge;
 
-import com.finndog.repurposedstructures.modinit.registry.CustomRegistryLookup;
+import com.finndog.mvs.modinit.registry.CustomRegistryLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.stream.Collectors;
 
-public class NeoForgeCustomRegistry<T, K extends T> implements CustomRegistryLookup<T, K> {
+public class NeoForgeCustomRegistry<T, K extends T> implements CustomRegistryLookup<T> {
 
     private final Registry<T> registry;
 
