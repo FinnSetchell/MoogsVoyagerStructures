@@ -1,0 +1,30 @@
+modLoader="javafml" #mandatory
+loaderVersion="[2,)" #mandatory
+issueTrackerURL="https://github.com/FinnSetchell/MoogsVoyagerStructures/issues" #optional
+license="GNU Lesser General Public License v3.0"
+
+[[mods]] #mandatory
+modId="mvs" #mandatory
+logoFile= "assets/mvs/icon.png"
+logoBlur=false
+version="${version}" #mandatory
+displayName="Moog's Voyager Structures" #mandatory
+displayURL="https://www.curseforge.com/minecraft/mc-mods/moogs-voyager-structures"
+authors="FinnDog"
+credits="Thanks to Olver, the main builder as well as TelepathicGrunt for their structure mod template and rs!"
+description = '''lots of structures made with vanilla blocks and entities bringing life to your world!
+Discover loot, enemies, & villagers along the way!
+
+Join our community here: https://discord.gg/S5nffJbuvA
+''' #mandatory (Supports multiline text)
+
+[[mixins]]
+    config = "mvs-neoforge.mixins.json"
+
+[[mixins]]
+    config = "mvs-common.mixins.json"
+
+[[dependencies.mvs]]
+    modId="minecraft"
+    type="required"
+    versionRange="[1.20.4,)"
