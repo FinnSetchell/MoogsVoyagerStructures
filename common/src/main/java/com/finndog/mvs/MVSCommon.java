@@ -4,7 +4,6 @@ import com.finndog.mvs.events.lifecycle.RegisterReloadListenerEvent;
 import com.finndog.mvs.events.lifecycle.ServerGoingToStartEvent;
 import com.finndog.mvs.events.lifecycle.ServerGoingToStopEvent;
 import com.finndog.mvs.events.lifecycle.SetupEvent;
-import com.finndog.mvs.misc.pooladditions.PoolAdditionMerger;
 import com.finndog.mvs.modinit.*;
 import com.finndog.mvs.utils.AsyncLocator;
 import org.apache.logging.log4j.LogManager;
@@ -35,7 +34,6 @@ public class MVSCommon {
     }
 
     private static void serverAboutToStart(final ServerGoingToStartEvent event) {
-        PoolAdditionMerger.mergeAdditionPools(event);
 
         AsyncLocator.handleServerAboutToStartEvent();
     }
