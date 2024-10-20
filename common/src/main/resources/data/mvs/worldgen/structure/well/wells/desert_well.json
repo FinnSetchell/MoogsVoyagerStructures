@@ -4,6 +4,7 @@
   "size": 1,
   "biomes": "#mvs:has_structure/desert_biomes",
   "project_start_to_heightmap": "WORLD_SURFACE_WG",
+  "liquid_settings": "ignore_waterlogging",
 
   "step": "surface_structures",
   "terrain_adaptation": "beard_thin",
